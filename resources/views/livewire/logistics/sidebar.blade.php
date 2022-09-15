@@ -15,7 +15,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Top Navigation</a>
+                        <a href="{{route('requests')}}" class="nav-link">Request List</a>
                     </li>
                 </ul>
             </li>
