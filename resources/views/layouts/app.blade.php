@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -34,12 +35,6 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
-        <!-- Preloader -->
-        {{-- <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
-        </div> --}}
-
         <!-- Navbar -->
         @include('layouts.topbar')
         <!-- /.navbar -->
@@ -114,12 +109,19 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    
     @stack('modals')
     
     @livewireScripts
     
     @stack('scripts')
-    {{-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> --}}
+    <script>
+        window.addEventListener('close-modal', event => {
+            $('#createModal').modal('hide');
+            $('#leaveModal').modal('close');
+        })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 
     <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>

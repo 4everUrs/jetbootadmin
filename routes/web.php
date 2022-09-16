@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Inventory;
+
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\Logistics\Procurement\Requestlists;
+
+use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +34,11 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function(){
 Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
     Route::view('dashboard','livewire.logistics.dashboard')->name('logistics');
     Route::get('procurement/requests',Requestlists::class)->name('requests');
+    
 });
 
 //Finance Routes
-Route::prefix('finance')->middleware('auth','isFInance')->group(function(){
+Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
 });
 
@@ -47,4 +50,5 @@ Route::prefix('core')->middleware('auth','isCore')->group(function(){
 //HR Routes
 Route::prefix('hr')->middleware('auth','isHr')->group(function(){
     Route::view('dashboard','livewire.hr.dashboard')->name('hr');
+    Route::get('leavemangement',Leavedata::class)->name('leave');
 });

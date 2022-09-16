@@ -4,7 +4,6 @@
             {{ __('Request Lists') }}
         </h2>
     </x-slot>
-    <x-modal></x-modal>
     <div class="card">
         <div class="card-body">
             <button class="btn btn-success" data-toggle="modal" data-target="#createModal">Add new Request</button>
