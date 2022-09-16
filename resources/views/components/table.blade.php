@@ -16,7 +16,7 @@
     </div>
     
     <div class="card-body table-responsive p-0">
-        <table class="table table-head-fixed text-nowrap table-striped table-hover">
+        <table class="table table-head-fixed text-nowrap table-striped table-hover table-bordered">
            {{$slot}}
         </table>
     </div>

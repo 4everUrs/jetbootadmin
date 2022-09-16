@@ -17,9 +17,9 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="mb-3">
-                    <x-jet-label value="{{ __('username') }}" />
+                    <x-jet-label value="{{ __('Username') }}" />
 
-                    <x-jet-input class="{{ $errors->has('username') ? 'is-invalid' : '' }}" type="username"
+                    <x-jet-input class="{{ $errors->has('username') ? 'is-invalid' : '' }}" type="Username"
                                  name="username" :value="old('username')" required />
                     <x-jet-input-error for="username"></x-jet-input-error>
                 </div>

@@ -8,16 +8,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('leave')}}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
-                    <p>Procurement</p>
-                    <i class="right fas fa-angle-left"></i>
+                    <p>Leave Management</p>
+                    
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Top Navigation</a>
-                    </li>
-                </ul>
+        
             </li>
         </ul>
     </nav>
