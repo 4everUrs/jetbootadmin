@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -35,7 +36,7 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
 });
 
 //Finance Routes
-Route::prefix('finance')->middleware('auth','isFInance')->group(function(){
+Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
 });
 
