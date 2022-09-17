@@ -1,5 +1,5 @@
 @props(['id','title','function'])
-<div> 
+
    <div wire:ignore.self class="modal fade" id="{{$id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -12,12 +12,12 @@
                 </div>
                 <div class="modal-body">
                     {{$slot}}
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button wire:click="{{$function}}" class="btn btn-primary">Save changes</button>
+                    <button wire:click="{{$function}}" class="btn btn-primary" data-dismiss="modal">Submit</button>
                 </div>
             </div>
         </div>
     </div>
-</div>

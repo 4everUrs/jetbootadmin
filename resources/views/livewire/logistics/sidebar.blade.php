@@ -27,7 +27,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Inventory</a>
+                        <a href="{{route('inventory')}}" class="nav-link">Inventory</a>
                     </li>
                 </ul>
             </li>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\Logistics\Procurement\Requestlists;
-
+use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 
 /*
@@ -34,7 +34,7 @@ Route::prefix('admin')->middleware('auth','isAdmin')->group(function(){
 Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
     Route::view('dashboard','livewire.logistics.dashboard')->name('logistics');
     Route::get('procurement/requests',Requestlists::class)->name('requests');
-    
+    Route::get('warehouse/inventory',Inventory::class)->name('inventory');
 });
 
 //Finance Routes
