@@ -7,7 +7,9 @@
     
     <div class="card">
         <div class="card-body">
-            <a data-toggle="modal" data-target="#create" class="btn btn-success">Add new item</a>
+            <a data-toggle="modal" data-target="#create" class="btn btn-success">Add new item
+                <i class="fas fa-box nav-icon"></i>
+            </a>
             <x-table head="Inventory">
                 <thead>
                     <th>No</th>

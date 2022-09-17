@@ -23,7 +23,7 @@ class Requestlists extends Component
     public function render()
     {
         return view('livewire.logistics.procurement.requestlists',[
-            'requests' => ProcurementRequest::paginate(3),
+            'requests' => ProcurementRequest::orderBy('id','desc')->paginate(5),
         ]);
     }
     public function saveData()
@@ -33,11 +33,23 @@ class Requestlists extends Component
         ProcurementRequest::create($validatedData);
         $this->resetInput();
     }
+    public function approve($id)
+    {
+        $request = ProcurementRequest::find($id);
+        if($request->status == 'Approved'){
+            toastr()->addWarning('Data is already approved');
+        }
+        else{
+            $request->status = 'Approved';
+            $request->save();
+            toastr()->addSuccess('Data update successfully');
+        }
+        
+    }
 
     public function resetInput()
     {
         $this->origin = null;
-        $this->content = null;
-        
+        $this->content = null;  
     }
 }

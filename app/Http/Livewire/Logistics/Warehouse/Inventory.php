@@ -10,30 +10,33 @@ class Inventory extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $code, $description, $quantity, $status = 'Pending' , $item_id;
-     protected $rules = [
+
+    public $code, $description, $quantity, $status = 'Continue' , $item_id;
+
+    protected $rules = [
         'code' => 'required|min:3',
         'description' => 'required|string',
         'quantity' => 'required|integer',
         'status' => 'required|string',
     ];
-     public function updated($fields)
+    public function updated($fields)
     {
         $this->validateOnly($fields);
     }
     public function render()
     {
         return view('livewire.logistics.warehouse.inventory',[
-            'items' => Stock::paginate(5),
+            'items' => Stock::orderBy('id','desc')->paginate(3),
         ]);
     }
+
     public function saveItem(){
         $validatedData = $this->validate();
-
         Stock::create($validatedData);
         toastr()->addSuccess('Data added successfully');
         $this->resetInput();
     }
+
     public function updateItem()
     {
         $validatedData = $this->validate();

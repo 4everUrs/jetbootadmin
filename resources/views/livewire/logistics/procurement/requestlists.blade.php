@@ -13,7 +13,8 @@
                     <th>From.</th>
                     <th>Content.</th>
                     <th>Status.</th>
-                    <th>Action.</th>
+                    <th>Date</th>
+                    <th class="text-center">Action.</th>
                 </thead>
                 <tbody>
                     @forelse ($requests as $request)
@@ -22,8 +23,9 @@
                             <td>{{$request->origin}}</td>
                             <td>{{$request->content}}</td>
                             <td>{{$request->status}}</td>
-                            <td>
-                                <button class="btn btn-primary">Edit</button>
+                            <td>{{$request->created_at}}</td>
+                            <td class="text-center">
+                                <button wire:click="approve({{$request->id}})"  class="btn btn-primary">Approve</button>
                             </td>
                         </tr>                        
                     @empty
@@ -33,7 +35,9 @@
                     @endforelse
                 </tbody>
             </x-table>
+           <div class="mt-3 float-right">
             {{ $requests->links() }}
+           </div>
         </div>
     </div>
 </div>
