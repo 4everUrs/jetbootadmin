@@ -29,4 +29,12 @@ class Expensess extends Component
             'expenses'=>Expenses::get(),
         ]);
     }
+    public function savedata()
+    {
+        
+        $data=$this->validate();
+        Expenses::create($data);
+        toastr()->addSuccess('Expenses Successfully Added');
+        $this->dispatchBrowserEvent('close-modal');
+    }
 }

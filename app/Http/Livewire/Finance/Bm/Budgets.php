@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Finance\Bm;
 
 use Livewire\Component;
 use App\Models\Transaction;
-use App\Models\Expenses;
 use Livewire\WithPagination;
 
 class Budgets extends Component
@@ -20,6 +19,7 @@ class Budgets extends Component
         'description' => 'required|string',
         'status' => 'required|string'
     ];
+    
      public function updated($fields)
     {
         $this->validateOnly($fields);
@@ -28,8 +28,7 @@ class Budgets extends Component
 
     {
         return view('livewire.finance.bm.budgets',[
-            'transactions'=>Transaction::get(),
-            'expenses'=>Expenses::get(),
+            'transactions'=>Transaction::get(),   
         ]);
 
     }
