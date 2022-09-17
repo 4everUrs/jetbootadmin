@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -7,6 +8,7 @@ use App\Http\Livewire\Logistics\Procurement\Requestlists;
 use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
 use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
+use App\Http\Livewire\Finance\Bm\Budgets;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,8 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
 //Finance Routes
 Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
+    Route::get('finance/budgets',Budgets::class)->name('transaction');
+ 
 });
 
 //Core Routes
