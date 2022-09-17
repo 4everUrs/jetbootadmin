@@ -15,7 +15,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button wire:click="{{$function}}" class="btn btn-primary">Save changes</button>
+                    <button wire:click="{{$function}}" data-dismiss="modal"class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>

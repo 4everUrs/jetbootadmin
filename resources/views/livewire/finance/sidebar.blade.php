@@ -10,13 +10,14 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
-                    <p>Procurement</p>
+                    <p>Budget Management</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Top Navigation</a>
+                        <a href="{{route('transaction')}}" class="nav-link">Transaction</a>
                     </li>
+                    
                 </ul>
             </li>
         </ul>
