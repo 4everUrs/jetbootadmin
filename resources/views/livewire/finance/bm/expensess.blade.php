@@ -35,7 +35,9 @@
                 @endforelse
             </tbody>
         </x-table>
-
+        <div class="mt-3 float-right">
+            {{$expenses->links()}}
+        </div>
     </div>
 
 </div>
@@ -52,6 +54,7 @@
                 </select>
                 <label>Category</label>
                 <select wire:model="ecategory"class="form-control">
+                    <option>Select Category</option>
                     <option>Food</option>
                     <option>Transportation </option>
                     <option>Office Supplies</option>
@@ -65,9 +68,9 @@
             <div class="col">
                 <label>Amount</label>
                 <input wire:model="eamount" type="number" class="form-control">
-
                 <label>Account</label>
                 <select wire:model="eaccount"class="form-control">
+                    <option>Select Account</option>
                     <option>CASH</option>
                     <option>ACCOUNT </option>
                     <option>CARD</option>

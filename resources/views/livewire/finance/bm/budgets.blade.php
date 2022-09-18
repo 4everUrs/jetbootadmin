@@ -9,42 +9,45 @@
 <div class="card-body">
     <button class="btn btn-success" data-toggle="modal" data-target="#create"><i class="fa fa-file"></i> New Request Budget</button>
     <x-table head="History of Budget Requests">
-    <thead >
-        <th>Originated Dept</th>
-        <th>Category</th>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>Account</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Action</th>
-    </thead>
-    <tbody>
-        @forelse($transactions as $transaction)
-        <tr>
-            <td>{{$transaction->originated}}</td>
-            <td>{{$transaction->category}}</td>
-            <td>{{$transaction->created_at}}</td>
-            <td>{{$transaction->amount}}</td>
-            <td>{{$transaction->account}}</td>
-            <td>{{$transaction->description}}</td>
-            <td>{{$transaction->status}}</td>
-            <td>
-            <button class="btn btn-success">View</button>
-            </td>
-        </tr>
-        @empty
-        <tr>
-            <td class="text-center" colspan="8">"Unlisted Records"</td>
-        </tr>
-        @endforelse
-    </tbody>
-</x-table>
+        <thead >
+            <th>Originated Dept</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            @forelse($transactions as $transaction)
+            <tr>
+                <td>{{$transaction->originated}}</td>
+                <td>{{$transaction->category}}</td>
+                <td>{{$transaction->created_at}}</td>
+                <td>{{$transaction->amount}}</td>
+                <td>{{$transaction->account}}</td>
+                <td>{{$transaction->description}}</td>
+                <td>{{$transaction->status}}</td>
+                <td>
+                <button class="btn btn-success">View</button>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td class="text-center" colspan="8">"Unlisted Records"</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </x-table>
+    <div class="mt-3 float-right">
+        {{$transactions->links()}}
+    </div>
+</div>
+
+</div>
+
 @livewire("finance.bm.expensess")
-
-</div>
-
-</div>
 
 <!--pop up form budget request-->
 
