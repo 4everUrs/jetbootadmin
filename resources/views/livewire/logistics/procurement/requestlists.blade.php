@@ -6,7 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button class="btn btn-success" data-toggle="modal" data-target="#createModal">Add new Request</button>
+            <button class="btn btn-success" data-toggle="modal" data-target="#showModal">Add new Request</button>
             <x-table head="Request Lists">
                 <thead>
                     <th>No.</th>
@@ -40,4 +40,16 @@
            </div>
         </div>
     </div>
+    <x-modal id="showModal" title="Send a Request" function="saveRequest">
+        <div class="form-group">
+            <label>Type</label>
+            <select wire:model="type" class="form-control">
+                <option>Select type</option>
+                <option>Supplier</option>
+                <option>Contractor</option>
+            </select>
+            <label>Message</label>
+            <textarea wire:model="message" class="form-control"></textarea>
+        </div>
+    </x-modal>
 </div>
