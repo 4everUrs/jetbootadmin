@@ -28,7 +28,7 @@ class Budgets extends Component
 
     {
         return view('livewire.finance.bm.budgets',[
-            'transactions'=>Transaction::get(),   
+            'transactions'=>Transaction::orderBy('id','desc')->paginate(5),   
         ]);
 
     }
@@ -37,7 +37,16 @@ class Budgets extends Component
         $data=$this->validate();
         Transaction::create($data);
         toastr()->addSuccess('Budget Request Successfully Added');
+        $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
+    }
+    public function resetInput(){
+        $this->originated =null;
+        $this->category =null;
+        $this->amount =null;
+        $this->account =null;
+        $this->description =null;
+        $this->status =null;
     }
     
 }
