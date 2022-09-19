@@ -44,8 +44,9 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
 //Finance Routes
 Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
-    Route::get('finance/budgets',Budgets::class)->name('transaction');
- 
+    
+   
+    
 });
 
 //Core Routes

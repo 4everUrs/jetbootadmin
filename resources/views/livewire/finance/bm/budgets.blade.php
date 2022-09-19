@@ -7,7 +7,7 @@
 
 <div class="card">
 <div class="card-body">
-    <button class="btn btn-success" data-toggle="modal" data-target="#create"><i class="fa fa-file"></i> New Request Budget</button>
+    <button class="btn btn-success" data-toggle="modal" data-target="#create"><i class="fa fa-file"></i> Add Records</button>
     <x-table head="History of Budget Requests">
     <thead >
         <th>Originated Dept</th>

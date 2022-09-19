@@ -18,8 +18,13 @@
                         <a href="{{route('transaction')}}" class="nav-link">Transaction</a>
                     </li>
                     
+                                        
+                    
+                        
+                    
+                    
                 </ul>
-            </li>
+            </li> 
         </ul>
     </nav>
 </div>
