@@ -17,6 +17,12 @@
                     <li class="nav-item">
                         <a href="{{route('requests')}}" class="nav-link">Request List</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('suppliers')}}" class="nav-link">Suppliers List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('po')}}" class="nav-link">Purchase Order</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">

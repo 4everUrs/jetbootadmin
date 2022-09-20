@@ -9,6 +9,8 @@ use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
 use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 use App\Http\Livewire\Finance\Bm\Budgets;
+use App\Http\Livewire\Logistics\Procurement\Supplierslists;
+use App\Http\Livewire\Logistics\Procurement\Purchaseorder;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,8 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
     Route::get('procurement/requests',Requestlists::class)->name('requests');
     Route::get('warehouse/inventory',Inventory::class)->name('inventory');
     Route::get('warehouse/requests',Requestslist::class)->name('requestlists');
+    Route::get('procurement/suppliers',Supplierslists::class)->name('suppliers');
+    Route::get('procurement/purchaseorder',Purchaseorder::class)->name('po');
 });
 
 //Finance Routes
