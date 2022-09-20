@@ -25,7 +25,7 @@
                             <td>{{$recieved->origin}}</td>
                             <td>{{$recieved->type}}</td>
                             <td>{{$recieved->message}}</td>
-                            <td>{{$recieved->created_at}}</td>
+                            <td>{{Carbon\Carbon::parse($recieved->created_at)->toFormattedDateString()}}</td>
                             <td>{{$recieved->status}}</td>
                             <td>
                                 <button class="btn btn-primary">Grant </button>

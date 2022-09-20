@@ -13,7 +13,8 @@
                     <th>From.</th>
                     <th>Content.</th>
                     <th>Status.</th>
-                    <th>Date</th>
+                    <th>Date Requested</th>
+                    <th>Date Granted</th>
                     <th class="text-center">Action.</th>
                 </thead>
                 <tbody>
@@ -23,7 +24,8 @@
                             <td>{{$request->origin}}</td>
                             <td>{{$request->content}}</td>
                             <td>{{$request->status}}</td>
-                            <td>{{$request->created_at}}</td>
+                            <td>{{Carbon\Carbon::parse($request->create_at)->toFormattedDateString()}}</td>
+                            <td>{{Carbon\Carbon::parse($request->updated_at)->toFormattedDateString()}}</td>
                             <td class="text-center">
                                 <button wire:click="approve({{$request->id}})"  class="btn btn-primary">Approve</button>
                             </td>
