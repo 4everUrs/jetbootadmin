@@ -17,7 +17,9 @@
                     <li class="nav-item">
                         <a href="{{route('transaction')}}" class="nav-link">Transaction</a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a href="{{route('requestlists')}}" class="nav-link">Request lists</a>
+                    </li>
                                         
                     
                         

@@ -7,21 +7,24 @@
 
 <div class="card">
 <div class="card-body">
-    <button class="btn btn-success" data-toggle="modal" data-target="#create"><i class="fa fa-file"></i> Add Records</button>
+    <a wire:click="loadModal" class="btn btn-success">Add Requests</a>
+    
     <x-table head="History of Budget Requests">
         <thead >
+            <th>No.</th>
             <th>Originated Dept</th>
             <th>Category</th>
             <th>Date</th>
             <th>Amount</th>
             <th>Account</th>
             <th>Description</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>Status</th> 
+            <th class="text-center">Action</th>
         </thead>
         <tbody>
             @forelse($transactions as $transaction)
             <tr>
+                <td>{{$transaction->id}}</td>
                 <td>{{$transaction->originated}}</td>
                 <td>{{$transaction->category}}</td>
                 <td>{{$transaction->created_at}}</td>
@@ -29,13 +32,14 @@
                 <td>{{$transaction->account}}</td>
                 <td>{{$transaction->description}}</td>
                 <td>{{$transaction->status}}</td>
-                <td>
-                <button class="btn btn-success">View</button>
+                <td class="text-center" >
+                    <button wire:click="update({{$transaction->id}})"  class="btn btn-primary"> Edit </button>
+                    <button wire:click="delete({{$transaction->id}})"  class="btn btn-danger"> Delete </button>
                 </td>
             </tr>
             @empty
             <tr>
-                <td class="text-center" colspan="8">"Unlisted Records"</td>
+                <td class="text-center" colspan="9">"Unlisted Records"</td>
             </tr>
             @endforelse
         </tbody>
@@ -48,48 +52,154 @@
 </div>
 
 @livewire("finance.bm.expensess")
-
 <!--pop up form budget request-->
 
-<x-modal id="create" title="Request Budget Form" function="savedata">
-    <div class="form-group">
-        <div class="row">
-            <div class="col">
-                <label>Select Originated Dept.</label>
-                <select wire:model="originated" class="form-control">
-                    <option>HR DEPT</option>
-                    <option>LOGISTICS DEPT</option>
-                    <option>CORE</option>
-                    <option>FINANCE</option>
-                </select>
-                <label>Category</label>
-                <select wire:model="category"class="form-control">
-                    <option>Operating budget</option>
-                    <option>Financial budget </option>
-                    <option>Cash Budget </option>
-                    <option>Labor Budget</option>
-                    <option>Strategic Plan</option>
-                </select>
+<x-jet-dialog-modal wire:model="addBudget">
+    <x-slot name="title">
+        {{ __('Add RequestBudget') }}
+    </x-slot>
+    
+    <x-slot name="content">
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <label>Select Originated Dept.</label>
+                    <select class="form-control" wire:model="originated">
+                        <option>HR DEPT</option>
+                        <option>LOGISTICS DEPT</option>
+                        <option>CORE</option>
+                        <option>FINANCE</option>
+                    </select>
+                    @error('originated') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    
+                    <label>Category</label>
+                    <select  class="form-control" wire:model="category">
+                        <option>Operating budget</option>
+                        <option>Financial budget </option>
+                        <option>Cash Budget </option>
+                        <option>Labor Budget</option>
+                        <option>Strategic Plan</option>
+                    </select>
+                    @error('category') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                </div>
+                <div class="col">
+                    <label>Amount</label>
+                    <input type="number" class="form-control" wire:model="amount"  >
+                    @error('ammount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    
+                    <label>Account</label>
+                    <select class="form-control" wire:model="account">
+                        <option>CASH</option>
+                        <option>ACCOUNT </option>
+                        <option>CARD</option>
+                    </select>
+                    @error('account') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                </div>
             </div>
-            <div class="col">
-                <label>Amount</label>
-                <input wire:model="amount" type="number" class="form-control">
-
-                <label>Account</label>
-                <select wire:model="account"class="form-control">
-                    <option>CASH</option>
-                    <option>ACCOUNT </option>
-                    <option>CARD</option>
-                </select>
-            </div>
+                <label>Description</label>
+                <textarea class="form-control" wire:model="description"> </textarea>
+                @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+            
         </div>
-            <label>Description</label>
-            <textarea wire:model="description"class="form-control">   
-            </textarea>
     </div>
-        
-</x-modal>
-<!--pop up form budget request-->
+    </x-slot>
+    <x-slot name="footer">
+        <x-jet-secondary-button wire:click="$toggle('addBudget')" wire:loading.attr="disabled">
+            {{ __('Cancel') }}
+        </x-jet-secondary-button>
+
+        <x-jet-button class="ms-2" wire:click="addBudget" wire:loading.attr="disabled">
+            {{ __('Update Request Budget') }}
+        </x-jet-button>
+    </x-slot>
+
+</x-jet-dialog-modal>
+
+<!--update modal-->
+<x-jet-dialog-modal wire:model="updateItem">
+    <x-slot name="title">
+        {{ __('Update Request Record') }}
+    </x-slot>
+
+    <x-slot name="content">
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <label>Select Originated Dept.</label>
+                    <select class="form-control" wire:model="originated">
+                        <option>HR DEPT</option>
+                        <option>LOGISTICS DEPT</option>
+                        <option>CORE</option>
+                        <option>FINANCE</option>
+                    </select>
+                    @error('originated') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    
+                    <label>Category</label>
+                    <select  class="form-control" wire:model="category">
+                        <option>Operating budget</option>
+                        <option>Financial budget </option>
+                        <option>Cash Budget </option>
+                        <option>Labor Budget</option>
+                        <option>Strategic Plan</option>
+                    </select>
+                    @error('category') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                </div>
+                <div class="col">
+                    <label>Amount</label>
+                    <input type="number" class="form-control" wire:model="amount"  >
+                    @error('ammount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    
+                    <label>Account</label>
+                    <select class="form-control" wire:model="account">
+                        <option>CASH</option>
+                        <option>ACCOUNT </option>
+                        <option>CARD</option>
+                    </select>
+                    @error('account') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                </div>
+            </div>
+                <label>Description</label>
+                <textarea class="form-control" wire:model="description"> </textarea>
+                @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+            
+        </div>
+    </div>
+    </x-slot>
+
+    <x-slot name="footer">
+        <x-jet-secondary-button wire:click="$toggle('updateItem')" wire:loading.attr="disabled">
+            {{ __('Cancel') }}
+        </x-jet-secondary-button>
+        <x-jet-button class="ms-2" wire:click="updateItem" wire:loading.attr="disabled">
+            {{ __('Update Item') }}
+        </x-jet-button>
+
+    </x-slot>
+</x-jet-dialog-modal>
+<!--update modal-->
+
+<!--delete modal-->
+
+<x-jet-dialog-modal wire:model="deleteRequest">
+    <x-slot name="title">
+        {{ __('Delete') }}
+    </x-slot>
+    <x-slot name="content">
+    <h4>Are you sure to Delete this item?</h4>
+    </x-slot>
+
+    <x-slot name="footer">
+    <x-jet-button class="ms-2" wire:click="deleteRequest" wire:loading.attr="disabled">
+            {{ __('Delete Request') }}
+     </x-jet-button>
+    </x-slot>
+
+</x-jet-dialog-modal>
+<!--update modal-->
+
+
+
+
 
 
 </div>

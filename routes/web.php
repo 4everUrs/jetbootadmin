@@ -9,7 +9,7 @@ use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
 use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 use App\Http\Livewire\Finance\Bm\Budgets;
-
+use App\Http\Livewire\Finance\Bm\Requestedlist;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,9 +44,11 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
 //Finance Routes
 Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
+    Route::get('budgets',Budgets::class)->name('transaction');
+    Route::get('requestedlist',Requestedlist::class)->name('requestlists');
     
    
-    
+       
 });
 
 //Core Routes
