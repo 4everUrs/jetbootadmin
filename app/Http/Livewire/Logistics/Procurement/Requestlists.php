@@ -4,17 +4,20 @@ namespace App\Http\Livewire\Logistics\Procurement;
 
 use Livewire\Component;
 use App\Models\ProcurementRequest;
+use App\Models\Recieved;
 use Livewire\WithPagination;
 
 class Requestlists extends Component
 {
-    public $origin, $content, $status = "Pending";
+    public $origin = 'Procurement', $message, $status = "Pending", $type;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
      protected $rules = [
-        'origin' => 'required|min:6',
-        'content' => 'required|string',
+        'origin' => 'required|string',
+        'type' => 'required|string',
+        'message' => 'required|string',
         'status' => 'required|string'
+        
     ];
      public function updated($fields)
     {
@@ -29,7 +32,7 @@ class Requestlists extends Component
     public function saveData()
     {
        $validatedData = $this->validate();
-
+        
         ProcurementRequest::create($validatedData);
         $this->resetInput();
     }
@@ -45,6 +48,16 @@ class Requestlists extends Component
             toastr()->addSuccess('Data update successfully');
         }
         
+    }
+   
+    public function saveRequest()
+    {
+        
+        $validatedData = $this->validate();
+        
+        Recieved::create($validatedData);
+        toastr()->addSuccess('Data update successfully');
+        $this->resetInput();
     }
 
     public function resetInput()
