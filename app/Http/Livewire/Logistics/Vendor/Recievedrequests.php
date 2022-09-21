@@ -12,4 +12,8 @@ class Recievedrequests extends Component
             'recieveds'=>Recieved::get(),
         ]);
     }
+    public function grantrequest()
+    {
+        dd('message');
+    }
 }

@@ -6,7 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <x-table head="Request">
+            <x-table head="Request Lists">
                 <thead>
                     <th>No.</th>
                     <th>Origin</th>
@@ -28,7 +28,8 @@
                             <td>{{$recieved->created_at}}</td>
                             <td>{{$recieved->status}}</td>
                             <td>
-                                <button class="btn btn-primary">Grant </button>
+                                <button class="btn btn-primary">Approve</button>
+                                <button data-toggle="modal" data-target="#show" class="btn btn-primary">Post</button>
                             </td>
 
                         </tr>
@@ -41,4 +42,6 @@
             </x-table>
         </div>
     </div>
+    
+        
 </div>
