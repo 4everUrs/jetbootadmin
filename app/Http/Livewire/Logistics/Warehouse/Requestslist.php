@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\RequestList;
 use App\Models\ProcurementRequest;
 use Livewire\WithPagination;
+use Carbon\Carbon;
 
 class Requestslist extends Component
 {
@@ -36,12 +37,16 @@ class Requestslist extends Component
         
         if($this->destination == "Procurement"){
             ProcurementRequest::create($validated);
+            toastr()->addSuccess('Request send successfully');
+             $this->resetInput();
+        }
+        elseif($this->destination == "Fleet Management"){
             toastr()->addSuccess('Data update successfully');
              $this->resetInput();
         }
         else{
-            RequestList::create($validated);
-            toastr()->addSuccess('Data update successfully');
+            
+            toastr()->addError('Please fill up correctly');
             $this->resetInput();
         }
     }
