@@ -7,12 +7,30 @@
     <div class="card">
         <div class="card-body">
             <button wire:click = "showmodal"class="btn btn-primary">Add Post</button>
-                    
-                     
+              
+            <x-table head="Post Table"> 
 
-                    
+               
+            <thead>
+                <th>Title</th>
+                <th>Requirements</th>
+                <th>Date Posted</th>
+            </thead>
+             <tbody>
+                @forelse($posts as $post)
+                 <tr>
+                    <td>{{$post->title}}</td>
+                    <td>{{$post->requirements}}</td>
+                    <td>{{Carbon\Carbon::parse($post->created_at)->toFormattedDateString()}}</td>
+                 </tr>
+                @empty
 
-           
+                @endforelse 
+
+            </tbody>    
+
+            </x-table>   
+                               
         </div>
          
     </div>
@@ -24,8 +42,9 @@
             <div class="form-group">
                 <label>Type</label>
                 <select wire:model="title" class="form-control">
-                    <option >Supplier</option>
-                    <option >Contractor</option>
+                    <option>Select here</option>
+                    <option>Supplier</option>
+                    <option>Contractor</option>
                 </select>
                 <label >Requirements</label>
                 <textarea wire:model="requirements" class="form-control"></textarea>
@@ -36,7 +55,7 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-button class="ms-2" wire:click="savepost" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" wire:click="savePost" wire:loading.attr="disabled">
                 {{ __('Post') }}
             </x-jet-button>
         </x-slot>

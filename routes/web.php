@@ -13,6 +13,7 @@ use App\Http\Livewire\Logistics\Procurement\Supplierslists;
 use App\Http\Livewire\Logistics\Procurement\Purchaseorder;
 use App\Http\Livewire\Logistics\Vendor\Recievedrequests;
 use App\Http\Livewire\Logistics\Vendor\Supplierposting;
+use App\Http\Livewire\Logistics\Vendor\Supplierlist;
 
 use App\Http\Livewire\Finance\Bm\Requestedlist;
 /*
@@ -48,6 +49,7 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
     Route::get('procurement/purchaseorder',Purchaseorder::class)->name('po');
     Route::get('vendor/recievedrequests',RecievedRequests::class)->name('recievedrequests');
     Route::get('vendor/supplierposting',Supplierposting::class)->name('supplierposting');
+    Route::get('vendor/supplierlist',Supplierlist::class)->name('supplierlist');
 });
 
 //Finance Routes

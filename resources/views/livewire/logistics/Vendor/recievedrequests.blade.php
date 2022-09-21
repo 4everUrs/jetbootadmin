@@ -28,7 +28,6 @@
                             <td>{{Carbon\Carbon::parse($recieved->created_at)->toFormattedDateString()}}</td>
                             <td>{{$recieved->status}}</td>
                             <td>
-                                <button class="btn btn-primary">Approve</button>
                                 <button data-toggle="modal" data-target="#show" class="btn btn-primary">Post</button>
                             </td>
 
@@ -43,5 +42,4 @@
         </div>
     </div>
     
-        
 </div>
