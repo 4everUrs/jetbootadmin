@@ -110,27 +110,20 @@
     </div>
     <!-- ./wrapper -->
     
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
+    <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     @stack('modals')
     
     @livewireScripts
     
     @stack('scripts')
-    
-    <script>
-        $('#leaveModal').on('shown.bs.modal', function () {
-        $('#leaveModal').trigger('focus')
-        })
-        window.addEventListener('close-modal', event => {
-            $('#createModal').modal('hide');
-            $('#leaveModal').modal('close');
-        })
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-
-    <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>

@@ -40,8 +40,7 @@
             {{$datas->links()}}
         </div>
     </div>
-   
-        <div wire:ignore.self class="modal fade" id="leaveModal" tabindex="-1" role="dialog"
+          <div wire:ignore.self class="modal fade" id="leaveModal" tabindex="-1" role="dialog"
             aria-labelledby="leaveModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -72,9 +71,16 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button wire:click="saveRecord" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                        <button wire:click="saveRecord" id="leaveModal" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
+        @push('scripts')
+        <script>
+            window.addEventListener('close-modal', event => {
+                $('#leaveModal').modal('hide')
+            })
+        </script>
+        @endpush
 </div>

@@ -11,6 +11,7 @@ use Carbon\Carbon;
 class Requestlists extends Component
 {
     public $origin = 'Procurement', $message, $status = "Pending", $type;
+    public $requestModal = false;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
      protected $rules = [
@@ -32,8 +33,8 @@ class Requestlists extends Component
     }
     public function saveData()
     {
-       $validatedData = $this->validate();
-        
+        $validatedData = $this->validate();
+        dd($validatedData);
         ProcurementRequest::create($validatedData);
         $this->resetInput();
     }
@@ -59,11 +60,16 @@ class Requestlists extends Component
         Recieved::create($validatedData);
         toastr()->addSuccess('Data update successfully');
         $this->resetInput();
+        $this->requestModal = false;
     }
 
     public function resetInput()
     {
         $this->origin = null;
         $this->content = null;  
+    }
+    public function loadModal()
+    {
+        $this->requestModal = true;
     }
 }

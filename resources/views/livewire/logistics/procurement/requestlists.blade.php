@@ -6,7 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button class="btn btn-success" data-toggle="modal" data-target="#showModal">Add new Request</button>
+            <button class="btn btn-success" wire:click="loadModal">Add new Request</button>
             <x-table head="Request Lists">
                 <thead>
                     <th>No.</th>
@@ -42,16 +42,37 @@
            </div>
         </div>
     </div>
-    <x-modal id="showModal" title="Send a Request" function="saveRequest">
-        <div class="form-group">
-            <label>Type</label>
-            <select wire:model="type" class="form-control">
-                <option>Select type</option>
-                <option>Supplier</option>
-                <option>Contractor</option>
-            </select>
-            <label>Message</label>
-            <textarea wire:model="message" class="form-control"></textarea>
-        </div>
-    </x-modal>
+    <x-jet-dialog-modal wire:model="requestModal">
+        <x-slot name="title">
+            {{ __('Send a Request') }}
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label>Type</label>
+                <select wire:model="type" class="form-control">
+                    <option>Select type</option>
+                    <option>Supplier</option>
+                    <option>Contractor</option>
+                </select>
+                @error('type') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <div class="hidden">
+                    <label>Message</label>
+                    <textarea wire:model="message" class="form-control"></textarea>
+                    @error('message') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                </div>
+                
+            </div>
+        </x-slot>
+    
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('requestModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="saveRequest" wire:loading.attr="disabled">
+                {{ __('add new Item') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+    
 </div>
