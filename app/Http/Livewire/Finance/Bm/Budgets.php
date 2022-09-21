@@ -13,7 +13,7 @@ class Budgets extends Component
     public $addBudget= false;
     public $updateItem= false;
     public $deleteItem= false;
-    
+    public $deleteRequest = false; // wire:model for delete modal no declare so i declare.
     
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -41,40 +41,36 @@ class Budgets extends Component
 
     public function loadModal(){
         $this->addBudget= true;
-       
-        
     }
 
     public function addBudgets()
     {
-        $this->addBudget= true;
+        // $this->addBudget= true; // no need na i declare dito to kasi tinatawag mo na sya sa loadModal
         
         $data=$this->validate();
         Transaction::create($data);
         toastr()->addSuccess('Budget Request Successfully Added');
         $this->resetInput();
-        $this->dispatchBrowserEvent('close-modal');
+        // $this->dispatchBrowserEvent('close-modal'); no need na to kasi di naman nag wowork to.
+        $this->addBudget = false; //ito trigger close ng modal after mag submit
     }
    
-    public function deleteItems()
+    public function deleteItem()
     {
-       
         Transaction::find($this->transaction_id)->destroy($this->transaction_id);
-         toastr()->addSuccess('Data deleted successfully');
+        toastr()->addSuccess('Data deleted successfully');
         $this->resetInput();
+        $this->deleteRequest= false;
     }
     public function delete($id)
     {
-        $this->transaction_id = $id;
-        $this->deleteRequest= true;
+        $this->deleteRequest= true; //tigger to open delete modal
+        $this->transaction_id = $id; // setting transaction_id to id from selected item
     }
-    
-       
     
     public function updateItems($id)
     {
         $this->updateItem= true;
-
         $transaction_id = Transaction::find($id);
         $this->transaction_id = $id;
         $this->originated =$transaction_id->originated;
@@ -83,8 +79,17 @@ class Budgets extends Component
         $this->account =$transaction_id->account;
         $this->description =$transaction_id->description;
         $this->status =$transaction_id->status;
-      
     }
+
+    public function mainUpdateFunction()
+    {
+        $validatedData = $this->validate(); //getting all validated input data from form
+        Transaction::find($this->transaction_id)->update($validatedData); // update database base on validateddata and insert into database with transaction_id
+        $this->resetInput(); // clear all variables
+        toastr()->addSuccess('Data update successfully'); // notification
+        $this->updateItem = false; // trigger to close modal
+    }
+   
 
     public function resetInput()
     {

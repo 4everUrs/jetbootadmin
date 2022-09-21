@@ -33,7 +33,8 @@
                 <td>{{$transaction->description}}</td>
                 <td>{{$transaction->status}}</td>
                 <td class="text-center" >
-                    <button wire:click="update({{$transaction->id}})"  class="btn btn-primary"> Edit </button>
+                    {{--wala kang update function pero meron kang updateItems function sa class rename ko nalang --}}
+                    <button wire:click="updateItems({{$transaction->id}})"  class="btn btn-primary"> Edit </button>
                     <button wire:click="delete({{$transaction->id}})"  class="btn btn-danger"> Delete </button>
                 </td>
             </tr>
@@ -60,55 +61,53 @@
     </x-slot>
     
     <x-slot name="content">
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <label>Select Originated Dept.</label>
-                    <select class="form-control" wire:model="originated">
-                        <option>HR DEPT</option>
-                        <option>LOGISTICS DEPT</option>
-                        <option>CORE</option>
-                        <option>FINANCE</option>
-                    </select>
-                    @error('originated') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                    
-                    <label>Category</label>
-                    <select  class="form-control" wire:model="category">
-                        <option>Operating budget</option>
-                        <option>Financial budget </option>
-                        <option>Cash Budget </option>
-                        <option>Labor Budget</option>
-                        <option>Strategic Plan</option>
-                    </select>
-                    @error('category') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                </div>
-                <div class="col">
-                    <label>Amount</label>
-                    <input type="number" class="form-control" wire:model="amount"  >
-                    @error('ammount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                    
-                    <label>Account</label>
-                    <select class="form-control" wire:model="account">
-                        <option>CASH</option>
-                        <option>ACCOUNT </option>
-                        <option>CARD</option>
-                    </select>
-                    @error('account') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                </div>
-            </div>
-                <label>Description</label>
-                <textarea class="form-control" wire:model="description"> </textarea>
-                @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+        <div class="row form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
+            <div class="col">
+                <label>Select Originated Dept.</label>
+                <select class="form-control" wire:model="originated">
+                    <option>HR DEPT</option>
+                    <option>LOGISTICS DEPT</option>
+                    <option>CORE</option>
+                    <option>FINANCE</option>
+                </select>
+                @error('originated') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
             
+                <label>Category</label>
+                <select class="form-control" wire:model="category">
+                    <option>Operating budget</option>
+                    <option>Financial budget </option>
+                    <option>Cash Budget </option>
+                    <option>Labor Budget</option>
+                    <option>Strategic Plan</option>
+                </select>
+                @error('category') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+            </div>
+            <div class="col">
+                <label>Amount</label>
+                <input type="number" class="form-control" wire:model="amount">
+                @error('ammount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+            
+                <label>Account</label>
+                <select class="form-control" wire:model="account">
+                    <option>CASH</option>
+                    <option>ACCOUNT </option>
+                    <option>CARD</option>
+                </select>
+                @error('account') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+            </div>
         </div>
-    </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" wire:model="description"> </textarea>
+            @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+        </div>
     </x-slot>
     <x-slot name="footer">
         <x-jet-secondary-button wire:click="$toggle('addBudget')" wire:loading.attr="disabled">
             {{ __('Cancel') }}
         </x-jet-secondary-button>
-
-        <x-jet-button class="ms-2" wire:click="addBudget" wire:loading.attr="disabled">
+        {{--wire:click function dito sa button hindi match sa function sa class--}}
+        <x-jet-button class="ms-2" wire:click="addBudgets" wire:loading.attr="disabled">
             {{ __('Update Request Budget') }}
         </x-jet-button>
     </x-slot>
@@ -122,55 +121,54 @@
     </x-slot>
 
     <x-slot name="content">
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <label>Select Originated Dept.</label>
-                    <select class="form-control" wire:model="originated">
-                        <option>HR DEPT</option>
-                        <option>LOGISTICS DEPT</option>
-                        <option>CORE</option>
-                        <option>FINANCE</option>
-                    </select>
-                    @error('originated') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                    
-                    <label>Category</label>
-                    <select  class="form-control" wire:model="category">
-                        <option>Operating budget</option>
-                        <option>Financial budget </option>
-                        <option>Cash Budget </option>
-                        <option>Labor Budget</option>
-                        <option>Strategic Plan</option>
-                    </select>
-                    @error('category') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                </div>
-                <div class="col">
-                    <label>Amount</label>
-                    <input type="number" class="form-control" wire:model="amount"  >
-                    @error('ammount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                    
-                    <label>Account</label>
-                    <select class="form-control" wire:model="account">
-                        <option>CASH</option>
-                        <option>ACCOUNT </option>
-                        <option>CARD</option>
-                    </select>
-                    @error('account') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                </div>
+        <div class="row form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
+            <div class="col">
+                <label>Select Originated Dept.</label>
+                <select class="form-control" wire:model="originated">
+                    <option>HR DEPT</option>
+                    <option>LOGISTICS DEPT</option>
+                    <option>CORE</option>
+                    <option>FINANCE</option>
+                </select>
+                @error('originated') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+        
+                <label>Category</label>
+                <select class="form-control" wire:model="category">
+                    <option>Operating budget</option>
+                    <option>Financial budget </option>
+                    <option>Cash Budget </option>
+                    <option>Labor Budget</option>
+                    <option>Strategic Plan</option>
+                </select>
+                @error('category') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
             </div>
-                <label>Description</label>
-                <textarea class="form-control" wire:model="description"> </textarea>
-                @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-            
+            <div class="col">
+                <label>Amount</label>
+                <input type="number" class="form-control" wire:model="amount">
+                @error('ammount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+        
+                <label>Account</label>
+                <select class="form-control" wire:model="account">
+                    <option>CASH</option>
+                    <option>ACCOUNT </option>
+                    <option>CARD</option>
+                </select>
+                @error('account') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+            </div>
         </div>
-    </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" wire:model="description"> </textarea>
+            @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+        </div>
     </x-slot>
 
     <x-slot name="footer">
         <x-jet-secondary-button wire:click="$toggle('updateItem')" wire:loading.attr="disabled">
             {{ __('Cancel') }}
         </x-jet-secondary-button>
-        <x-jet-button class="ms-2" wire:click="updateItem" wire:loading.attr="disabled">
+        {{--wala kang main function para makapag update ng database--}}
+        <x-jet-button class="ms-2" wire:click="mainUpdateFunction" wire:loading.attr="disabled">
             {{ __('Update Item') }}
         </x-jet-button>
 
@@ -189,7 +187,8 @@
     </x-slot>
 
     <x-slot name="footer">
-    <x-jet-button class="ms-2" wire:click="deleteRequest" wire:loading.attr="disabled">
+        {{--wrong function calling --}}
+    <x-jet-button class="ms-2" wire:click="deleteItem" wire:loading.attr="disabled">
             {{ __('Delete Request') }}
      </x-jet-button>
     </x-slot>
