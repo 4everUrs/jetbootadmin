@@ -32,7 +32,7 @@ class Inventory extends Component
         return view('livewire.logistics.warehouse.inventory',[
             'items' => Stock::orderBy('id','desc')->paginate(3),
         ]);
-    }
+    }  
 
     public function saveItem(){
         $validatedData = $this->validate();

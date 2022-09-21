@@ -40,6 +40,7 @@
             <label>Send to:</label>
             <select wire:model="destination" class="form-control">
                 <option>Select Option</option>
+                <option>Select Destination</option>
                 <option>Procurement</option>
                 <option>Fleet Management</option>
             </select>

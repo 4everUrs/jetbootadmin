@@ -14,6 +14,7 @@ use App\Http\Livewire\Logistics\Procurement\Purchaseorder;
 use App\Http\Livewire\Logistics\Vendor\Recievedrequests;
 use App\Http\Livewire\Logistics\Vendor\Supplierposting;
 
+use App\Http\Livewire\Finance\Bm\Requestedlist;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,8 +53,11 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
 //Finance Routes
 Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
-    Route::get('finance/budgets',Budgets::class)->name('transaction');
- 
+    Route::get('budgets',Budgets::class)->name('transaction');
+    Route::get('requestedlist',Requestedlist::class)->name('requestlists');
+    
+   
+       
 });
 
 //Core Routes
