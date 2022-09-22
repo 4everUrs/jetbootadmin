@@ -8,10 +8,10 @@ class Supplierposting extends Component
 {
     public $title, $requirements;
     protected $rules = [
-        'title' => 'string',
-        'requirements' => 'string',
-        
+        'title' => 'required|string',
+        'requirements' => 'required|string'
     ];
+   
      public function updated($fields)
     {
         $this->validateOnly($fields);
@@ -28,11 +28,15 @@ class Supplierposting extends Component
     }
 
     public function savepost(){
-
             $validateddata = $this->validate();
-    
             Post::create($validateddata);
+            toastr()->addWarning('Successfully Posted');
+            $this->resetInput();
             $this-> postmodal=false;
+    }
+    public function resetInput(){
+        $this->title = null;
+        $this->requirements = null;
     }
 }
 

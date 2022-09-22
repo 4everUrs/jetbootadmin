@@ -28,8 +28,7 @@
                             <td>{{Carbon\Carbon::parse($recieved->created_at)->toFormattedDateString()}}</td>
                             <td>{{$recieved->status}}</td>
                             <td>
-                                <button class="btn btn-primary">Approve</button>
-                                <button data-toggle="modal" data-target="#show" class="btn btn-primary">Post</button>
+                                <button wire:click="grant({{$recieved->id}})" class="btn btn-primary">Post</button>
                             </td>
 
                         </tr>
@@ -42,6 +41,32 @@
             </x-table>
         </div>
     </div>
-    
+    <x-jet-dialog-modal wire:model="postModal">
+        <x-slot name="title">
+            {{ __('Recieved Requests') }}
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label>Type</label>
+                <select wire:model="title" class="form-control">
+                    <option>Select Type</option>
+                    <option>Supplier</option>
+                    <option>Contractor</option>
+                </select>
+                <label>Requirements</label>
+                <textarea wire:model="requirements" class="form-control"></textarea>
+
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('postModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+        
+            <x-jet-button class="ms-2" wire:click="savePost" wire:loading.attr="disabled">
+                {{ __('Save Post') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
         
 </div>
