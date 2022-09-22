@@ -7,7 +7,7 @@
 
 <div class="card">
 <div class="card-body">
-    <a wire:click="loadModal" class="btn btn-success">Add Requests</a>
+    <a wire:click="loadModalRequest" class="btn btn-success">Add Requests</a>
     
     <x-table head="History of Budget Requests">
         <thead >
@@ -169,7 +169,7 @@
         </x-jet-secondary-button>
         {{--wala kang main function para makapag update ng database--}}
         <x-jet-button class="ms-2" wire:click="mainUpdateFunction" wire:loading.attr="disabled">
-            {{ __('Update Item') }}
+            {{ __('Update Request BUdget') }}
         </x-jet-button>
 
     </x-slot>
