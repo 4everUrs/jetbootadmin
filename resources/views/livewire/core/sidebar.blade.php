@@ -65,6 +65,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('applicantreport')}}" class="nav-link">Applicant Report</a>
+                        <a href="{{route('clientreport')}}" class="nav-link">Client Report</a>
                     </li>
                 </ul>
             </li>
@@ -100,7 +101,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('placementfee')}}" class="nav-link">Placement Fee</a>
+                        <a href="{{route('placementfee')}}" class="nav-link">Local</a>
                     </li>
                 </ul>
             </li>
@@ -124,7 +125,8 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('contract')}}" class="nav-link">Terms & Conditions</a>
+                        <a href="{{route('contract')}}" class="nav-link">Agency Contract Agreement Form</a>
+                        <a href="{{route('agreement')}}" class="nav-link">Clients Agreement List</a>
                     </li>
                 </ul>
             </li>
