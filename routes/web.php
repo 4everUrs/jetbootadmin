@@ -70,7 +70,7 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
 Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
     Route::get('budgets',Budgets::class)->name('transaction');
-    Route::get('requestedlist',Requestedlist::class)->name('requestlists');
+    Route::get('requestedlist',Requestedlist::class)->name('requestlists1');
     
    
        
