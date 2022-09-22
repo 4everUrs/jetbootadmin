@@ -6,22 +6,22 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Contact</th>
-                    <th>Address</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Core</td>
-                        <td>core@gmail.com</td>
-                        <td>09123456780</td>
-                        <td>Quezon City</td>
-                    </tr>
-                </tbody>
-            </table>
+           <x-table head="List of Applicants">
+            <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Address</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Core</td>
+                    <td>core@gmail.com</td>
+                    <td>09123456780</td>
+                    <td>Quezon City</td>
+                </tr>
+            </tbody>
+           </x-table>
         </div>
     </div>
     <div class="card">
