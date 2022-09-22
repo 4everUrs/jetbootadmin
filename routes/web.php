@@ -25,7 +25,12 @@ use App\Http\Livewire\Core\Cacm\Agreement;
 
 
 
+use App\Http\Livewire\Logistics\Procurement\Supplierslists;
+use App\Http\Livewire\Logistics\Procurement\Purchaseorder;
+use App\Http\Livewire\Logistics\Vendor\Recievedrequests;
+use App\Http\Livewire\Logistics\Vendor\Supplierposting;
 
+use App\Http\Livewire\Finance\Bm\Requestedlist;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,13 +60,20 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
     Route::get('procurement/requests',Requestlists::class)->name('requests');
     Route::get('warehouse/inventory',Inventory::class)->name('inventory');
     Route::get('warehouse/requests',Requestslist::class)->name('requestlists');
+    Route::get('procurement/suppliers',Supplierslists::class)->name('suppliers');
+    Route::get('procurement/purchaseorder',Purchaseorder::class)->name('po');
+    Route::get('vendor/recievedrequests',RecievedRequests::class)->name('recievedrequests');
+    Route::get('vendor/supplierposting',Supplierposting::class)->name('supplierposting');
 });
 
 //Finance Routes
 Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
-    Route::get('finance/budgets',Budgets::class)->name('transaction');
- 
+    Route::get('budgets',Budgets::class)->name('transaction');
+    Route::get('requestedlist',Requestedlist::class)->name('requestlists');
+    
+   
+       
 });
 
 //Core Routes

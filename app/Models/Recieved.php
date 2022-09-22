@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Expenses extends Model
+class Recieved extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'eoriginated', 'ecategory', 'eamount','eaccount', 'edescription', 'estatus'
+        'origin', 'message', 'status','type',
     ];
 }

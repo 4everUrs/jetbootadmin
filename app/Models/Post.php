@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Expenses extends Model
+class Post extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'eoriginated', 'ecategory', 'eamount','eaccount', 'edescription', 'estatus'
+        'title', 'requirments',
     ];
 }
