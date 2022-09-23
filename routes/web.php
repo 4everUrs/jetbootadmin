@@ -20,6 +20,7 @@ use App\Http\Livewire\Core\Pjm\Jobvacancy;
 use App\Http\Livewire\Core\Ppm\Paymentfee;
 use App\Http\Livewire\Core\Pm\Placementfee;
 use App\Http\Livewire\Core\Cm\Clientdata;
+use App\Http\Livewire\Core\Cm\Joblist;
 use App\Http\Livewire\Core\Cacm\Contract;
 use App\Http\Livewire\Core\Cacm\Agreement;
 
@@ -90,6 +91,7 @@ Route::prefix('core')->middleware('auth','isCore')->group(function(){
     Route::get('ppm/paymentfee',Paymentfee::class)->name('paymentfee');
     Route::get('pm/placementfee',Placementfee::class)->name('placementfee');
     Route::get('cm/clientdata',Clientdata::class)->name('clientdata');
+    Route::get('cm/joblist',Joblist::class)->name('joblist');
     Route::get('cacm/contract',Contract::class)->name('contract');
     Route::get('cacm/agreement',Agreement::class)->name('agreement');
     

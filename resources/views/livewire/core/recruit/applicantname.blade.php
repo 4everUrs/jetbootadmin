@@ -24,28 +24,6 @@
            </x-table>
         </div>
     </div>
-    <div class="card">
-        <div class="card-body">
-            <label>Name</label>
-            <form action="" class="form-group">
-                <input class="form-control" type="text" name="" id="">
-            </form>
-            <label>Email</label>
-            <form action="" class="form-group">
-                <input class="form-control" type="string" email="" id="">
-            </form>
-            <label>Contact</label>
-            <form action="" class="form-group">
-                <input class="form-control" type="string" contact="" id="">
-            </form>
-            <label>Address</label>
-            <form action="" class="form-group">
-                <input class="form-control" type="string" address="" id="">
-            </form>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-success">Submit</button>
-    <button type="alert" class="btn btn-danger">Cancel</button>
-    <br><br><br>
+    
     
 </div>

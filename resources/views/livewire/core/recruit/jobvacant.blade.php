@@ -4,20 +4,18 @@
             {{ __('List of Job Vacancy') }}
         </h2>
     </x-slot>
-    <form action="">
-        <div class="modal-body">
-            <div class="mb-3">
-                <label>Job Vacancy</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label>Job Applicant</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label>Job Recruit</label>
-                <input type="text" class="form-control">
-            </div>
+    <div class="card">
+        <div class="card-body">
+           <x-table head="">
+            <thead>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Job Details</th>
+                <th>Action</th>
+
+               
+            </thead>
+           </x-table>
         </div>
-    </form>
+    </div>
 </div>

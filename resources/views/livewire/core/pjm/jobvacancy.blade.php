@@ -4,20 +4,18 @@
             {{ __('List of Job Vacancies') }}
         </h2>
     </x-slot>
-    <div class="card" style="margin-right:500px">
+    <div class="card">
         <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <th>Job Vacancies</th>
-                   
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        
-                    </tr>
-                </tbody>
-            </table>
+           <x-table head="Job Vacancies">
+            <thead>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+           </x-table>
         </div>
     </div>
 </div>
