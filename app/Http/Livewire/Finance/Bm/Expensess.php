@@ -8,12 +8,12 @@ use Livewire\WithPagination;
 
 class Expensess extends Component
 {
-    public $eoriginated ,$ecategory ,$eamount,$eaccount,$edescription,$estatus='ongoing',$expense_id;
+    public $eoriginated ,$ecategory ,$eamount,$eaccount,$edescription,$estatus='ongoing',$eexpense_id;
     
-    public $addRequest= false;
-    public $updateItem= false;
+    public $addExpense= false;
+    public $updateExpenseItem= false;
     public $deleteItem= false;
-    public $deleteRequest = false;
+    public $deleteExpense = false;
     
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -35,9 +35,14 @@ class Expensess extends Component
             'expenses'=>Expenses::orderBy('id','desc')->paginate(5),
         ]);
     }
-    public function loadModalRequest()
+    public function expensescreate()
     {
+        
         $this->addExpense= true;
+    }
+    public function loadDeleteModal($id){
+        $this->deleteExpense = true;
+        $this->eexpense_id = $id;
     }
 
     public function addExpenses()
@@ -47,41 +52,44 @@ class Expensess extends Component
         Expenses::create($data);
         toastr()->addSuccess('Expenses Successfully Added');
         $this->resetInput();
-        $this->addExpense= true;
+        $this->addExpense= false;
     }
 
-    public function deleteItem()
+    public function deleteExpenseItems()
     {
-        Expenses::find($this->expense_id)->destroy($this->expense_id);
+       
+        Expenses::find($this->eexpense_id)->destroy($this->eexpense_id);
         toastr()->addSuccess('Data deleted successfully');
         $this->resetInput();
-        $this->deleteRequest= false;
+        $this->deleteExpense= false;
     }
     public function delete($id)
     {
         $this->deleteRequest= true; //tigger to open delete modal
         $this->expense_id = $id; // setting transaction_id to id from selected item
     }
-    public function updateItems($id)
+    public function updateExpenseItems($id)
     {
-        $this->updateItem= true;
-        $expense_id = Expenses::find($id);
-        $this->expense_id = $id;
-        $this->originated =$expense_id->originated;
-        $this->category =$expense_id->category;
-        $this->amount =$expense_id->amount;
-        $this->account =$expense_id->account;
-        $this->description =$expense_id->description;
-        $this->status =$expense_id->status;
+        $this->eexpense_id = $id;
+       
+        $this->updateExpenseItem= true;
+
+        $expense = Expenses::find($id);
+        
+        $this->eoriginated = $expense->eoriginated;
+        $this->ecategory = $expense->ecategory;
+        $this->eamount = $expense->eamount;
+        $this->eaccount = $expense->eaccount;
+        $this->edescription = $expense->edescription;
     }
 
     public function mainUpdateFunction()
     {
         $validatedData = $this->validate(); //getting all validated input data from form
-        Expenses::find($this->expense_id)->update($validatedData); // update database base on validateddata and insert into database with transaction_id
+        Expenses::find($this->eexpense_id)->update($validatedData); // update database base on validateddata and insert into database with transaction_id
         $this->resetInput(); // clear all variables
         toastr()->addSuccess('Data update successfully'); // notification
-        $this->updateItem = false; // trigger to close modal
+        $this->updateExpenseItem = false; // trigger to close modal
     }
     public function resetInput()
     {

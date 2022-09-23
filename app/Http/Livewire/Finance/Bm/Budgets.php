@@ -39,7 +39,7 @@ class Budgets extends Component
 
     }
 
-    public function loadModal(){
+    public function loadModalRequest(){
         $this->addBudget= true;
     }
 
@@ -55,8 +55,9 @@ class Budgets extends Component
         $this->addBudget = false; //ito trigger close ng modal after mag submit
     }
    
-    public function deleteItem()
+    public function deleteBudgetItem()
     {
+        
         Transaction::find($this->transaction_id)->destroy($this->transaction_id);
         toastr()->addSuccess('Data deleted successfully');
         $this->resetInput();
@@ -64,8 +65,11 @@ class Budgets extends Component
     }
     public function delete($id)
     {
-        $this->deleteRequest= true; //tigger to open delete modal
+        
+        //tigger to open delete modal
         $this->transaction_id = $id; // setting transaction_id to id from selected item
+         $this->deleteRequest= true;
+        
     }
     
     public function updateItems($id)
