@@ -15,7 +15,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('transaction')}}" class="nav-link"><i class="fas fa-rotate"></i>Transaction</a>
+                        <a href="{{route('transaction')}}" class="nav-link"><i class="fas   fa-rotate"></i>Transaction</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('requestlists')}}" class="nav-link">Request lists</a>
@@ -23,19 +23,9 @@
                 </ul>
             </li> 
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-file-invoice"></i>
-                    <p>  AP & AR</p>
-                    <i class="right fas fa-angle-left"></i>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        
-                        <a href="#" class="nav-link"><i class="fas fa-receipt"></i> ACCOUNT PAYABLE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-money-check"></i> ACCOUNT RECEIVABLE</a>
-                    </li>
+               
+                    
+                    
                 </ul>
             </li> 
         </ul>
