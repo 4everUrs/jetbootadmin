@@ -28,8 +28,8 @@
                     <td>{{$expense->edescription}}</td>
                     <td>{{$expense->estatus}}</td>
                     <td class="text-center">
-                        <button wire:click="updateItems({{$expense->id}})"  class="btn btn-primary"> Edit </button>
-                    <button wire:click="delete({{$expense->id}})"  class="btn btn-danger"> Delete </button>
+                        <button wire:click="updateExpenseItems({{$expense->id}})"  class="btn btn-primary"> Edit </button>
+                    <button wire:click="loadDeleteModal({{$expense->id}})"  class="btn btn-danger"> Delete </button>
                     </td>
                 </tr>
                 @empty
@@ -86,10 +86,13 @@
                 </select>
                 @error('eammount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
             </div>
-            <div class="form-group"></div>
+            
+            
+        </div>
+        <div class="form-group">
             <label>Description</label>
-            <textarea wire:model="edescription"class="form-control">   
-            </textarea>
+            <textarea wire:model="edescription" class="form-control">
+                                    </textarea>
             @error('edescription') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
         </div>
     </x-slot>
@@ -109,7 +112,7 @@
 <!--pop up form EXPENSES-->
 
 <!--UPDATE MODAL-->
-<x-jet-dialog-modal wire:model="updateItem">
+<x-jet-dialog-modal wire:model="updateExpenseItem">
     <x-slot name="title">
         {{ __('Update Expenses Record') }}
     </x-slot>
@@ -147,10 +150,11 @@
                     </select>
                     @error('eammount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                 </div>
-                <div class="form-group"></div>
+            </div>
+            <div class="form-group">
                 <label>Description</label>
-                <textarea wire:model="edescription"class="form-control">   
-                </textarea>
+                <textarea wire:model="edescription" class="form-control">
+                                                </textarea>
                 @error('edescription') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
             </div>
         </x-slot>
@@ -170,7 +174,7 @@
 
 
 <!--delete modal-->
-<x-jet-dialog-modal wire:model="deleteRequest">
+<x-jet-dialog-modal wire:model="deleteExpense">
     <x-slot name="title">
         {{ __('Delete') }}
     </x-slot>
@@ -180,7 +184,7 @@
 
     <x-slot name="footer">
         {{--wrong function calling --}}
-    <x-jet-button class="ms-2" wire:click="deleteItem" wire:loading.attr="disabled">
+    <x-jet-button class="ms-2" wire:click="deleteExpenseItems" wire:loading.attr="disabled">
             {{ __('Delete Expenses') }}
      </x-jet-button>
     </x-slot>

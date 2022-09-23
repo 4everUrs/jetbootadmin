@@ -52,7 +52,8 @@
 
 </div>
 
-@livewire("finance.bm.expensess")
+
+
 <!--pop up form budget request-->
 
 <x-jet-dialog-modal wire:model="addBudget">
@@ -189,17 +190,13 @@
 
     <x-slot name="footer">
         {{--wrong function calling --}}
-    <x-jet-button class="ms-2" wire:click="deleteItem" wire:loading.attr="disabled">
+    <x-jet-button class="ms-2" wire:click="deleteBudgetItem" wire:loading.attr="disabled">
             {{ __('Delete Request') }}
      </x-jet-button>
     </x-slot>
 
 </x-jet-dialog-modal>
 <!--update modal-->
-
-
-
-
-
-
+{{-- @livewire("finance.bm.expensess") --}}
+<livewire:finance.bm.expensess>
 </div>
