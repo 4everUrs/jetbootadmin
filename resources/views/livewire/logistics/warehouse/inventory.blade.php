@@ -4,7 +4,7 @@
             {{ __('Inventory') }}
         </h2>
     </x-slot>
-    <div class="card">
+    <div  class="card ">
         <div class="card-body">
             {{--show modal--}}
             <a wire:click="loadModal" class="btn btn-success">Add new item

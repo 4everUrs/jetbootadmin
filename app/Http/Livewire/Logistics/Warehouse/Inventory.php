@@ -16,6 +16,7 @@ class Inventory extends Component
     public $addItem = false;
     public $deleteModal = false;
     public $updateModal = false;
+    public $table = false;
 
     protected $rules = [
         'code' => 'required|min:3',

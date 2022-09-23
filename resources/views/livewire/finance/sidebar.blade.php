@@ -18,7 +18,7 @@
                         <a href="{{route('transaction')}}" class="nav-link"><i class="fas fa-rotate"></i>Transaction</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('requestlists')}}" class="nav-link">Request lists</a>
+                        <a href="{{route('requestedlists')}}" class="nav-link">Request lists</a>
                     </li>
                 </ul>
             </li> 
