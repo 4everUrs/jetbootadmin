@@ -12,6 +12,7 @@
                 <th>Email</th>
                 <th>Contact</th>
                 <th>Address</th>
+                <th>Action</th>
             </thead>
             <tbody>
                 <tr>

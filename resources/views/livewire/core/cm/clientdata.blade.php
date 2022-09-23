@@ -55,7 +55,7 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
     
-            <x-jet-button class="ms-2" wire:click="saveClient" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" wire:click="saveclient" wire:loading.attr="disabled">
                 {{ __('Confirm') }}
             </x-jet-button>
         </x-slot>

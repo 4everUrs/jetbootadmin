@@ -11,10 +11,26 @@
                 <th>No.</th>
                 <th>Name</th>
                 <th>Job Details</th>
+                <th>Location</th>
                 <th>Action</th>
 
                
             </thead>
+            <tbody>
+                @forelse($vacants as $vacant)
+                <tr>
+                    <td>{{$vacant->id}}</td>
+                    <td>{{$vacant->name}}</td>
+                    <td>{{$vacant->details}}</td>
+                    <td>{{$vacant->location}}</td>
+                    <td>
+                        <button class="btn btn-primary">Submit</button>
+                    </td>
+                </tr>
+                @empty
+
+                @endforelse
+            </tbody>
            </x-table>
         </div>
     </div>

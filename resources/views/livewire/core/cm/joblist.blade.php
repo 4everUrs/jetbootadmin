@@ -22,16 +22,18 @@
     </div>
     <x-jet-dialog-modal wire:model="showModal">
         <x-slot name="title">
-            {{ __('Create job') }}
+            {{ __('Create Job') }}
             
         </x-slot>
         <x-slot name="content">
             <div class="form-group">
                 <label for="">Job Name</label>
-                <input class="form-control" type="text">
+                <input wire:model="name"class="form-control" type="text">
                 <br>
                 <label for="">Job Details</label>
-                <textarea class="form-control" rows="2"></textarea>
+                <textarea wire:model="details"class="form-control" rows="2"></textarea>
+                <label for="">Location</label>
+                <input wire:model="location"class="form-control" type="text">
             </div>
         </x-slot>
         <x-slot name="footer">

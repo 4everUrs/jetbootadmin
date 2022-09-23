@@ -114,7 +114,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('clientdata')}}" class="nav-link">Client List</a>
-                        <a href="{{route('joblist')}}" class="nav-link">Job List</a>
+                        <a href="{{route('joblist')}}" class="nav-link">Create Job</a>
                     </li>
                 </ul>
             </li>
