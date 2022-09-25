@@ -9,8 +9,8 @@ class Clientdata extends Component
     public $showClient = false;
     public $name,$email,$location;
     protected $rules = [
-        'name' => 'required|string',
-        'email' => 'required|string',
+        'name' => 'required|string|min:6',
+        'email' => ['required','email'],
         'location' => 'required|string'
         
         

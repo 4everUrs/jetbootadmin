@@ -7,14 +7,18 @@ use App\Models\Vacant;
 class Joblist extends Component
 {
     public $showModal = false;
-    public $name,$details,$location;
-    protected $rules = [
-        'name' => 'required|string',
-        'details' => 'required|string',
-        'location' => 'required|string'
+    public $name,$position,$salary,$details,$location;
+    protected function rules()
+    {
+        return [
+            'name' => 'required|string|min:6',
+            'position' => 'required|string',
+            'salary' => 'required|string',
+            'details' => 'required|string',
+            'location' => 'required|string'
         
-        
-    ];
+        ];
+    }
      public function updated($fields)
     {
         $this->validateOnly($fields);

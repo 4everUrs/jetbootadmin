@@ -9,7 +9,9 @@
            <x-table head="">
             <thead>
                 <th>No.</th>
-                <th>Name</th>
+                <th>Company Name</th>
+                <th>Position</th>
+                <th>Monthly Salary</th>
                 <th>Job Details</th>
                 <th>Location</th>
                 <th>Action</th>
@@ -21,6 +23,8 @@
                 <tr>
                     <td>{{$vacant->id}}</td>
                     <td>{{$vacant->name}}</td>
+                    <td>{{$vacant->position}}</td>
+                    <td>{{$vacant->salary}}</td>
                     <td>{{$vacant->details}}</td>
                     <td>{{$vacant->location}}</td>
                     <td>

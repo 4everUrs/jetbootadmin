@@ -27,13 +27,25 @@
         </x-slot>
         <x-slot name="content">
             <div class="form-group">
-                <label for="">Job Name</label>
+                <label for="">Company Name</label>
                 <input wire:model="name"class="form-control" type="text">
+                @error('name') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
+                <label for="">Position</label>
+                <input wire:model="position"class="form-control" type="text">
+                @error('position') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
+                <label for="">Monthly Salary</label>
+                <input wire:model="salary"class="form-control" type="text">
+                @error('salary') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Job Details</label>
                 <textarea wire:model="details"class="form-control" rows="2"></textarea>
+                @error('details') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
                 <label for="">Location</label>
                 <input wire:model="location"class="form-control" type="text">
+                @error('location') <span class="text-danger">{{$message}}</span> @enderror
             </div>
         </x-slot>
         <x-slot name="footer">

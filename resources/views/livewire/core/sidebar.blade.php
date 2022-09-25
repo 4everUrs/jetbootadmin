@@ -17,6 +17,7 @@
                     <li class="nav-item">
                         <a href="{{route('applicantname')}}" class="nav-link">List of Applicant</a>
                         <a href="{{route('jobvacant')}}" class="nav-link">List of Job Vacancy</a>
+                        <a href="{{route('denied')}}" class="nav-link">List of Denied?</a>
                     </li>
                 </ul>
             </li>
@@ -28,7 +29,8 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('jobcandidate')}}" class="nav-link">Job Candidates</a>
+                        <a href="{{route('jobcandidate')}}" class="nav-link">List of Applicant</a>
+                        <a href="#" class="nav-link">Applicant Record</a>
                     </li>
                 </ul>
             </li>

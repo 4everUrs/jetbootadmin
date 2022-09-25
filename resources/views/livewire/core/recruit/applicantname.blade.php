@@ -1,25 +1,27 @@
 <div>
     <x-slot name="header">
-        <h2 class="h4 font-weight-bold" style="margin-left:350px">
-         {{ __('List of Applicant') }}
+        <h2 class="h3 font-weight-bold" style="margin-left:290px">
+         {{ __('List of Applicants') }}
         </h2>
     </x-slot>
     <div class="card">
         <div class="card-body">
-           <x-table head="List of Applicants">
+           <x-table head="">
             <thead>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Contact</th>
-                <th>Address</th>
-                <th>Action</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Contact</th>
+                <th class="text-center">Address</th>
+                <th class="text-center">Action</th>
             </thead>
             <tbody>
                 <tr>
-                    <td>Core</td>
-                    <td>core@gmail.com</td>
-                    <td>09123456780</td>
-                    <td>Quezon City</td>
+                    <td class="text-center">Core</td>
+                    <td class="text-center">core@gmail.com</td>
+                    <td class="text-center">09123456780</td>
+                    <td class="text-center">Quezon City</td>
+                    <td class="text-center"><button type="text" class="btn btn-primary">Approved</button>
+                    <button type="alert" class="btn btn-danger">Denied</button></td>
                 </tr>
             </tbody>
            </x-table>

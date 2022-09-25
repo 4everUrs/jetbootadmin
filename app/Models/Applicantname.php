@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Applicantname extends Model
 {
     use HasFactory;
-    
+    protected $fillable = [
+        'name', 'email', 'contact', 'address',
+    ];
 }

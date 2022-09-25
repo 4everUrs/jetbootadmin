@@ -9,6 +9,6 @@ class Joblist extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'details', 'location',
+        'name', 'position', 'salary', 'details', 'location',
     ];
 }

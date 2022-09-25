@@ -11,6 +11,7 @@ use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 use App\Http\Livewire\Finance\Bm\Budgets;
 use App\Http\Livewire\Core\Recruit\Applicantname;
 use App\Http\Livewire\Core\Recruit\Jobvacant;
+use App\Http\Livewire\Core\Recruit\Denied;
 use App\Http\Livewire\Core\Am\Jobcandidate;
 use App\Http\Livewire\Core\Nhb\Onboarding;
 use App\Http\Livewire\Core\Em\Employeedata;
@@ -82,6 +83,7 @@ Route::prefix('core')->middleware('auth','isCore')->group(function(){
     Route::view('dashboard','livewire.core.dashboard')->name('core');
     Route::get('recruit/applicantname',Applicantname::class)->name('applicantname');
     Route::get('recruit/jobvacant',Jobvacant::class)->name('jobvacant');
+    Route::get('recruit/denied',Denied::class)->name('denied');
     Route::get('am/jobcandidate',Jobcandidate::class)->name('jobcandidate');
     Route::get('nhb/onboarding',Onboarding::class)->name('onboarding');
     Route::get('em/employeedata',Employeedata::class)->name('employeedata');

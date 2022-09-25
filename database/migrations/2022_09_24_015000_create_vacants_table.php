@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('vacants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('position');
+            $table->string('salary');
             $table->string('details');
             $table->string('location');
             $table->timestamps();
