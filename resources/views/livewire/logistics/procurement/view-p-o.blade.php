@@ -277,7 +277,7 @@
                     <th>
                         <h1>Purchase Order</h1>
                         
-                        {{-- <h4>P.O No.:{{$po->po_id}}</h4> --}}
+                        <h4>P.O No.:{{$po->po_id}}</h4>
                     </th>
                 </tr>
             </table>
@@ -292,10 +292,10 @@
                 <tbody>
                     <tr>
                         <td style="width:50%">
-                            {{-- Name:{{$supplier->name}}<br />
+                            Name:{{$supplier->name}}<br />
                             Location:{{$supplier->address}}<br />
                             Email:{{$supplier->email}}<br />
-                            Contact:{{$supplier->phone}}<br /> --}}
+                            Contact:{{$supplier->phone}}<br />
                         </td>
                         <td style="width:50%">
                             Tech-Trendz Services<br />

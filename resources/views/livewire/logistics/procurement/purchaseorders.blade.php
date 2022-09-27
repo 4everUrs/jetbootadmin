@@ -130,7 +130,7 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
         
-            <x-jet-button class="ms-2" wire:click="#" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" wire:click="download({{$po->id}})" wire:loading.attr="disabled">
                 {{ __('Download') }}
             </x-jet-button>
         

@@ -22,7 +22,7 @@ class Purchaseorders extends Component
     public $itemContainer =[];
     public $preview=[];
     public $subtotal;
-
+    public $idk;
     
 
     protected $rules = [
@@ -112,9 +112,10 @@ class Purchaseorders extends Component
 
     public function showPoView($id)
     {
+        
         $this->emit('passId',$id);
         $this->poView=true;
-
+        $this->idk = $id;
         // $this->itemSelector= $id;
         // $supplier = PurchaseOrder::find($id);
         // $this->supplierSelector = $supplier->supplier_id;
@@ -124,6 +125,7 @@ class Purchaseorders extends Component
 
     public function download($id)
     {
-       return redirect()->route('download',['id'=>$id]);
+    
+       return redirect()->route('download',['id'=>$this->idk]);
     }
 }
