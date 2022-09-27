@@ -8,19 +8,19 @@
         <div class="card-body">
             <x-table head="Suppliers Lists">
                 <thead>
-                    <th>No</th>
                     <th>Company Name</th>
-                    <th>Description</th>
-                    <th>Date</th>
+                    <th>Company Address</th>
+                    <th>Company Phone</th>
+                    <th>Company Email</th>
                     <th>Status</th>
                 </thead>
                 <tbody>
                     @forelse ($suppliers as $supplier)
                         <tr>
-                            <td>{{$supplier->id}}</td>
                             <td>{{$supplier->name}}</td>
-                            <td>{{$supplier->description}}</td>
-                            <td>{{$supplier->create_at}}</td>
+                            <td>{{$supplier->address}}</td>
+                            <td>{{$supplier->phone}}</td>
+                            <td>{{$supplier->email}}</td>
                             <td>{{$supplier->status}}</td>
                         </tr>
                     @empty

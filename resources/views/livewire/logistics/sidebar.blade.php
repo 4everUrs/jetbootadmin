@@ -7,7 +7,7 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>Procurement</p>
@@ -53,7 +53,20 @@
                         </li>
                     </ul>
                 </li>
-            </li>s
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>Asset Management</p>
+                        <i class="right fas fa-angle-left"></i>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Recieved Requests</a>
+                            <a href="#" class="nav-link">Supplier Posting</a>
+                        </li>
+                    </ul>
+                </li>
+            </li>
         </ul>
     </nav>
 </div>

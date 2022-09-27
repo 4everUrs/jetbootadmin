@@ -4,15 +4,18 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PDFController;
+use App\Http\Livewire\Logistics\Procurement\PurchaseItems;
 use App\Http\Livewire\Logistics\Procurement\Requestlists;
 use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
 use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 use App\Http\Livewire\Finance\Bm\Budgets;
 use App\Http\Livewire\Logistics\Procurement\Supplierslists;
-use App\Http\Livewire\Logistics\Procurement\Purchaseorder;
+use App\Http\Livewire\Logistics\Procurement\Purchaseorders;
 use App\Http\Livewire\Logistics\Vendor\Recievedrequests;
 use App\Http\Livewire\Logistics\Vendor\Supplierposting;
+
 
 use App\Http\Livewire\Finance\Bm\Requestedlist;
 /*
@@ -45,9 +48,16 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
     Route::get('warehouse/inventory',Inventory::class)->name('inventory');
     Route::get('warehouse/requests',Requestslist::class)->name('requestlists');
     Route::get('procurement/suppliers',Supplierslists::class)->name('suppliers');
-    Route::get('procurement/purchaseorder',Purchaseorder::class)->name('po');
+    Route::get('procurement/purchaseorder',Purchaseorders::class)->name('po');
     Route::get('vendor/recievedrequests',RecievedRequests::class)->name('recievedrequests');
     Route::get('vendor/supplierposting',Supplierposting::class)->name('supplierposting');
+
+    Route::get('procurement/po/view/{id}',PurchaseItems::class)->name('poView');
+
+    Route::get('procurement/po/view/{id}',[PDFController::class,'index'])->name('pdf');
+    Route::get('procurement/po/download/{id}',[PDFController::class,'downloadPdf'])->name('download');
+    
+   
 });
 
 //Finance Routes

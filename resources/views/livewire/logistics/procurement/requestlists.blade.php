@@ -51,7 +51,7 @@
                 <label>Type</label>
                 <select wire:model="type" class="form-control">
                     <option>Select type</option>
-                    <option>Supplier</option>
+                    <option value="1">Supplier</option>
                     <option>Contractor</option>
                 </select>
                 @error('type') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
@@ -62,6 +62,7 @@
                 </div>
                 
             </div>
+            
         </x-slot>
     
         <x-slot name="footer">

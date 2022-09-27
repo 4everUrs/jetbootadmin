@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('origin');
+        Schema::create('purchase_orders', function (Blueprint $table) {
+            $table->id();
+            $table->string('supplier_id');
+            $table->string('supplier_name');
+            $table->string('po_id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('purchase_orders');
     }
 };
