@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Post;
 class Supplierposting extends Component
 {
-    public $title, $requirements;
+    public $title, $requirements, $origin;
     protected $rules = [
         'title' => 'required|string',
         'requirements' => 'required|string'
@@ -20,7 +20,9 @@ class Supplierposting extends Component
     public function render()
 
     {
-        return view('livewire.logistics.vendor.supplierposting');
+        return view('livewire.logistics.vendor.supplierposting',[
+            'posts'=>Post::get(),
+        ]);
 
     }
     public function showmodal(){
@@ -28,6 +30,8 @@ class Supplierposting extends Component
     }
 
     public function savepost(){
+    
+
             $validateddata = $this->validate();
             Post::create($validateddata);
             toastr()->addWarning('Successfully Posted');

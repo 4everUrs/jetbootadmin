@@ -50,6 +50,7 @@
                         <li class="nav-item">
                             <a href="{{route('recievedrequests')}}" class="nav-link">Recieved Requests</a>
                             <a href="{{route('supplierposting')}}" class="nav-link">Supplier Posting</a>
+                            <a href="{{route('supplierlist')}}" class="nav-link">Supplier List</a>
                         </li>
                     </ul>
                 </li>

@@ -19,6 +19,8 @@ class Recievedrequests extends Component
     {
         $this->validateOnly($fields);
     }
+    
+
     public function render()
     {
         return view('livewire.logistics.vendor.recievedrequests', [
@@ -43,4 +45,7 @@ class Recievedrequests extends Component
         
         $this->postModal = false;
     }
+        
+    
+
 }
