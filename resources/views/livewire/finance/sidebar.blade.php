@@ -45,7 +45,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Journal Entry</a>
+                        <a href="{{route('journal')}}" class="nav-link">Journal Entry</a>
                     </li>
                 </ul>
             </li>
