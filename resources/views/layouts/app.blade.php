@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -21,7 +21,7 @@
     <!-- JQVMap -->
     <link rel="stylesheet" href="{{asset('plugins/jqvmap/jqvmap.min.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+    
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Daterange picker -->
@@ -29,7 +29,7 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
     @livewireStyles
-    
+    @yield('style')
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
@@ -110,27 +110,22 @@
     </div>
     <!-- ./wrapper -->
     
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="{{asset('dist/js/adminlte.js')}}"></script>
+    
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
+    <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     @stack('modals')
     
     @livewireScripts
     
     @stack('scripts')
-    
-    <script>
-        $('#leaveModal').on('shown.bs.modal', function () {
-        $('#leaveModal').trigger('focus')
-        })
-        window.addEventListener('close-modal', event => {
-            $('#createModal').modal('hide');
-            $('#leaveModal').modal('close');
-        })
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-
-    <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
@@ -155,7 +150,7 @@
 
     <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 
-    <script src="{{asset('dist/js/adminlte.js')}}"></script>
+    
 
     <script src="{{asset('dist/js/pages/dashboard.js')}}"></script> 
 </body>

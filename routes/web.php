@@ -4,11 +4,20 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PDFController;
+use App\Http\Livewire\Logistics\Procurement\PurchaseItems;
 use App\Http\Livewire\Logistics\Procurement\Requestlists;
 use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
 use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 use App\Http\Livewire\Finance\Bm\Budgets;
+use App\Http\Livewire\Logistics\Procurement\Supplierslists;
+use App\Http\Livewire\Logistics\Procurement\Purchaseorders;
+use App\Http\Livewire\Logistics\Vendor\Recievedrequests;
+use App\Http\Livewire\Logistics\Vendor\Supplierposting;
+use App\Http\Livewire\Logistics\Vendor\Supplierlist;
+
+
 use App\Http\Livewire\Finance\Bm\Requestedlist;
 use App\Http\Livewire\Finance\Bm\Journals;
 
@@ -42,14 +51,30 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
     Route::get('procurement/requests',Requestlists::class)->name('requests');
     Route::get('warehouse/inventory',Inventory::class)->name('inventory');
     Route::get('warehouse/requests',Requestslist::class)->name('requestlists');
+    Route::get('procurement/suppliers',Supplierslists::class)->name('suppliers');
+    Route::get('procurement/purchaseorder',Purchaseorders::class)->name('po');
+    Route::get('vendor/recievedrequests',RecievedRequests::class)->name('recievedrequests');
+    Route::get('vendor/supplierposting',Supplierposting::class)->name('supplierposting');
+
+    Route::get('procurement/po/view/{id}',PurchaseItems::class)->name('poView');
+
+    Route::get('procurement/po/view/{id}',[PDFController::class,'index'])->name('pdf');
+    Route::get('procurement/po/download/{id}',[PDFController::class,'downloadPdf'])->name('download');
+    Route::get('vendor/supplierlist',Supplierlist::class)->name('supplierlist');
 });
 
 //Finance Routes
 Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
     Route::get('budgets',Budgets::class)->name('transaction');
+<<<<<<< HEAD
     Route::get('requestedlist',Requestedlist::class)->name('requestlist');
     Route::get('journals',Journals::class)->name('journal');
+=======
+    Route::get('requestedlist',Requestedlist::class)->name('requestedlists');
+    
+   
+>>>>>>> 3c7b06b80f8c47a9e61dfa5581befb3dd8ab8119
        
 });
 
