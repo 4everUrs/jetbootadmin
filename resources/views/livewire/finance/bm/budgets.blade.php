@@ -157,6 +157,7 @@
                 @error('account') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
             </div>
         </div>
+        
         <div class="form-group">
             <label>Description</label>
             <textarea class="form-control" wire:model="description"> </textarea>

@@ -91,6 +91,7 @@ class Expensess extends Component
         toastr()->addSuccess('Data update successfully'); // notification
         $this->updateExpenseItem = false; // trigger to close modal
     }
+    
     public function resetInput()
     {
         $this->expense_id =null;
