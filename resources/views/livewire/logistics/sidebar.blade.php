@@ -62,7 +62,20 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Recieved Requests</a>
+                            <a href="#" class="nav-link">....</a>
+                            <a href="#" class="nav-link">.....</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>Project Management</p>
+                        <i class="right fas fa-angle-left"></i>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">List of Project</a>
                             <a href="#" class="nav-link">Supplier Posting</a>
                         </li>
                     </ul>

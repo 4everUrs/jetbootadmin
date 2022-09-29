@@ -23,7 +23,6 @@ class Purchaseorders extends Component
     public $preview=[];
     public $subtotal;
     public $idk;
-    
 
     protected $rules = [
         'itemContainer.*.qty' => 'required|integer',
@@ -33,9 +32,7 @@ class Purchaseorders extends Component
 
     public function render()
     {
-        
         $this->subtotal;
-        
         return view('livewire.logistics.procurement.purchaseorders',[
             'puchase_orders' => PurchaseOrder::orderBy('id','desc')
             ->paginate(5),
@@ -45,6 +42,7 @@ class Purchaseorders extends Component
     public function addRow()
     {   
        $this->itemContainer[] = ['qty','item','cost'];
+       
     }
     public function removeRow($index){
         
@@ -68,6 +66,7 @@ class Purchaseorders extends Component
             $this->preview[] = ['qty'=>$item['qty'],'item'=>$item['item'],'cost'=>$item['cost'],'totalcost'=>$this->totalCost[] = $item['qty'] * $item['cost']];
             $this->subtotal += $item['qty']*$item['cost'];
         }
+        $this->dispatchBrowserEvent('showButton');
         
     }
     

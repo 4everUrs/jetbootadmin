@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light fixed">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light fixed" id="topbar">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -116,6 +116,14 @@
                     @csrf
                 </form>
                 
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" onclick="darkmode()" class="nav-link" id="dark">
+                <i class="fas fa-moon" ></i>
+            </a>
+            <a href="#" onclick="light()" class="nav-link d-none" id="light">
+                <i class="fas fa-sun" ></i>
             </a>
         </li>
     </ul>

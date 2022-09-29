@@ -33,7 +33,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed" id="boody">
     <div class="wrapper">
         <!-- Navbar -->
         @include('layouts.topbar')
@@ -110,7 +110,34 @@
     </div>
     <!-- ./wrapper -->
     
-    
+    <script>
+        window.addEventListener('showButton', event => {
+        var element = document.getElementById("createButton");
+        var review = document.getElementById("reviewButton");
+        element.classList.remove("d-none");
+        review.classList.add("d-none");
+    })
+        function darkmode() {
+            var body = document.getElementById("boody");
+            var topbar = document.getElementById('topbar');
+            var moon = document.getElementById('dark');
+            var sun = document.getElementById('light');
+            sun.classList.remove('d-none');
+            moon.classList.add('d-none');
+            body.classList.add("dark-mode");
+            topbar.classList.add('bg-dark');
+        }
+        function light() {
+            var body = document.getElementById("boody");
+            var topbar = document.getElementById('topbar');
+            var moon = document.getElementById('dark');
+            var sun = document.getElementById('light');
+            sun.classList.add('d-none');
+            moon.classList.remove('d-none');
+            body.classList.remove("dark-mode");
+            topbar.classList.remove('bg-dark');
+        }
+    </script>
     
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>

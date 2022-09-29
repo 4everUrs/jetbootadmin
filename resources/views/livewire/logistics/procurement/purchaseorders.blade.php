@@ -36,6 +36,7 @@
             </div>
         </div>
     </div>
+
     <x-jet-dialog-modal wire:model="poModal" maxWidth="lg">
         <x-slot name="title">
             {{ __('Create a Purchase Order') }}
@@ -106,9 +107,9 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <button wire:click="total" class="btn btn-success">Review</button>
+            <button wire:click="total" class="btn btn-success" id="reviewButton">REVIEW</button>
         
-            <x-jet-button class="ms-2" wire:click="createPO" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2 d-none" id="createButton"  wire:click="createPO" wire:loading.attr="disabled">
                 {{ __('Create P.O') }}
             </x-jet-button>
 
@@ -136,5 +137,5 @@
         
         </x-slot>
     </x-jet-dialog-modal>
-    
+
 </div>

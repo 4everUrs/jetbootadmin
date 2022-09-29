@@ -12,6 +12,7 @@ use PDF;
 class PDFController extends Controller
 {
     public $purchaseOrderId, $supplier_id, $po_id;
+    public $filename;
 
     public function __construct(Request $request){
         $this->purchaseOrderId = $request->id;
@@ -35,6 +36,7 @@ class PDFController extends Controller
         return view ('livewire.logistics.procurement.po',$this->getData());
     }
     public function downloadPdf(Request $request){
+        $this->filename = 'po'.$this->po_id.'.pdf';
         
         $data =[
             'items'=>PurchaseOrder::findOrFail($this->purchaseOrderId)->getItem,
@@ -42,6 +44,6 @@ class PDFController extends Controller
             'supplier' => Supplier::find($this->supplier_id),
         ];
          $pdf = PDF::loadView('livewire.logistics.procurement.po',$data);
-         return $pdf->download('purchase-order.pdf');
+         return $pdf->download($this->filename);
     }
 }
