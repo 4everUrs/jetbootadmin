@@ -11,7 +11,6 @@
                     <th>No.</th>
                     <th>Origin</th>
                     <th>Type</th>
-                    <th>Message</th>
                      <th>Data Posted</th>
                      <th>Status</th>
                      <th>Actiom</th>
@@ -24,17 +23,16 @@
                             <td>{{$recieved->id}}</td>
                             <td>{{$recieved->origin}}</td>
                             <td>{{$recieved->type}}</td>
-                            <td>{{$recieved->message}}</td>
-                            <td>{{Carbon\Carbon::parse($recieved->created_at)->toFormattedDateString()}}</td>
+                            <td>{{Carbon\Carbon::parse($recieved->updated_at)->toFormattedDateString()}}</td>
                             <td>{{$recieved->status}}</td>
-                            <td>
-                                <button wire:click="grant({{$recieved->id}})" class="btn btn-primary">Post</button>
+                            <td class="text-center">
+                                <button wire:click="loadModal({{$recieved->id}})" class="btn btn-primary">View</button>
                             </td>
 
                         </tr>
                     @empty
                         <tr>
-                            <td class="text-center"colspan="7"> no record found</td>
+                            <td class="text-center"colspan="6"> no record found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -43,19 +41,18 @@
     </div>
     <x-jet-dialog-modal wire:model="postModal">
         <x-slot name="title">
-            {{ __('Recieved Requests') }}
+            {{ __('Post') }}
         </x-slot>
         <x-slot name="content">
             <div class="form-group">
-                <label>Type</label>
-                <select wire:model="title" class="form-control">
-                    <option>Select Type</option>
-                    <option>Supplier</option>
-                    <option>Contractor</option>
-                </select>
-                <label>Requirements</label>
-                <textarea wire:model="requirements" class="form-control"></textarea>
-
+                <label>Type:</label>
+                <br><p class="badge badge-success">{{$data->type}}</p><br>
+                <label>Description:</label>
+                <p>{{$data->description}}</p>
+                <label>Requirements:</label>
+                @foreach ($datas as $data)
+                    <li>{{$data->requirements}}</li>
+                @endforeach
             </div>
         </x-slot>
         <x-slot name="footer">
@@ -63,7 +60,7 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
         
-            <x-jet-button class="ms-2" wire:click="savePost" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" wire:click="savePost({{$recieved->id}})" wire:loading.attr="disabled">
                 {{ __('Save Post') }}
             </x-jet-button>
         </x-slot>

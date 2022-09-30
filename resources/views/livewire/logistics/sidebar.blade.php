@@ -48,8 +48,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('recievedrequests')}}" class="nav-link">Recieved Requests</a>
-                            <a href="{{route('supplierposting')}}" class="nav-link">Supplier Posting</a>
+                            <a href="{{route('recievedrequests')}}" class="nav-link">Requests</a>
+                            <a href="{{route('supplierposting')}}" class="nav-link">Posting</a>
+                            <a href="{{route('supplierposting')}}" class="nav-link">Bidders</a>
                             <a href="{{route('supplierlist')}}" class="nav-link">Supplier List</a>
                         </li>
                     </ul>

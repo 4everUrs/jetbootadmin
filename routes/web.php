@@ -67,14 +67,8 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
 Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
     Route::view('dashboard','livewire.finance.dashboard')->name('finance');
     Route::get('budgets',Budgets::class)->name('transaction');
-<<<<<<< HEAD
     Route::get('requestedlist',Requestedlist::class)->name('requestlist');
     Route::get('journals',Journals::class)->name('journal');
-=======
-    Route::get('requestedlist',Requestedlist::class)->name('requestedlists');
-    
-   
->>>>>>> 3c7b06b80f8c47a9e61dfa5581befb3dd8ab8119
        
 });
 

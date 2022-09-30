@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('supplier_id');
             $table->string('supplier_name');
             $table->string('po_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

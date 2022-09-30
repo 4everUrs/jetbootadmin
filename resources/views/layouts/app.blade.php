@@ -57,6 +57,7 @@
                     </div>
                     <div class="info">
                         <a href="{{route('profile.show')}}" class="d-block">{{ Auth::user()->name }}</a>
+                        
                     </div>
                 </div>
                 @if (Auth::user()->current_team_id == '1')

@@ -32,7 +32,7 @@
                         </tr>                        
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center">No Record Found</td>
+                            <td colspan="7" class="text-center">No Record Found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -51,15 +51,23 @@
                 <label>Type</label>
                 <select wire:model="type" class="form-control">
                     <option>Select type</option>
-                    <option value="1">Supplier</option>
+                    <option>Supplier</option>
                     <option>Contractor</option>
+                    <option>Buyer</option>
                 </select>
                 @error('type') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                <div class="hidden">
-                    <label>Message</label>
-                    <textarea wire:model="message" class="form-control"></textarea>
-                    @error('message') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                </div>
+                    <label>Description</label>
+                    <textarea wire:model="description" class="form-control"></textarea>
+                    @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+
+                    <label class="mt-2">Requirements <button wire:click="addRow" class="btn btn-success btn-sm">Add Row</button></label>
+                    @foreach ($requirements  as $index => $requirement)
+                        <div class="input-group mt-2">
+                          <input wire:model="requirements.{{$index}}.req" class="form-control mr-2" placeholder="Requirement {{$index + 1}}">
+                            <button wire:click="removeRow({{$index}})" class="btn btn-sm btn-danger">Remove</button>
+                        </div>
+                    @endforeach
+               
                 
             </div>
             

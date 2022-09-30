@@ -10,7 +10,11 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'requirements','origin',
+        'type', 'description','recieved_id','origin'
        
     ];
+    function getRequirements()
+    {
+        return $this->hasMany('App\Models\PostRequirement');
+    }
 }

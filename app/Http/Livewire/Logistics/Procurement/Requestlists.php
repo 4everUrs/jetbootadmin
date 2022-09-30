@@ -5,19 +5,21 @@ namespace App\Http\Livewire\Logistics\Procurement;
 use Livewire\Component;
 use App\Models\ProcurementRequest;
 use App\Models\Recieved;
+use App\Models\PostRequirement;
 use Livewire\WithPagination;
 use Carbon\Carbon;
 
 class Requestlists extends Component
 {
-    public $origin = 'Procurement', $message, $status = "Pending", $type;
+    public $origin = 'Procurement', $description, $status = "Pending", $type;
     public $requestModal = false;
+    public $requirements = [];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
      protected $rules = [
         'origin' => 'required|string',
         'type' => 'required|string',
-        'message' => 'required|string',
+        'description' => 'required|string',
         'status' => 'required|string'
         
     ];
@@ -25,14 +27,25 @@ class Requestlists extends Component
     {
         $this->validateOnly($fields);
     }
+    public function addRow()
+    {
+        $this->requirements[] = [''];
+    }
+    public function removeRow($index){
+        
+        unset($this->requirements[$index]);
+        $this->requirements = array_values($this->requirements);
+    }
     public function render()
     {
+        $this->requirements;
         return view('livewire.logistics.procurement.requestlists',[
             'requests' => ProcurementRequest::orderBy('id','desc')->paginate(5),
         ]);
     }
     public function saveData()
     {
+        
         $validatedData = $this->validate();
         dd($validatedData);
         ProcurementRequest::create($validatedData);
@@ -56,8 +69,16 @@ class Requestlists extends Component
     {
         
         $validatedData = $this->validate();
-        
         Recieved::create($validatedData);
+        $recieved_id = Recieved::latest('id')->first();
+        
+        foreach($this->requirements as $index => $requirement){
+            PostRequirement::create([
+                'recieved_id' => $recieved_id->id,
+                'origin' => 'Procurement',
+                'requirements' => $requirement['req'],
+            ]);
+        }
         toastr()->addSuccess('Data update successfully');
         $this->resetInput();
         $this->requestModal = false;

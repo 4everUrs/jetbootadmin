@@ -8,7 +8,9 @@ use App\Models\Post;
 class Recievedrequests extends Component
 {
     public $postModal = false;
-    public $title, $requirements, $origin, $selected_id;
+    public $title, $requirements=[], $origin, $selected_id = '1';
+    
+    
     protected $rules = [
         'title' => 'required|string',
         'requirements' => 'required|string',
@@ -25,19 +27,28 @@ class Recievedrequests extends Component
     {
         return view('livewire.logistics.vendor.recievedrequests', [
             'recieveds'=>Recieved::get(),
+            'data' => Recieved::find($this->selected_id),
+            'datas' => Recieved::find($this->selected_id)->getRequirements,
+            
         ]);
     }
-    public function grant($id)
+    public function loadModal($id)
     {
-        $this->postModal = true;
         $this->selected_id = $id;
-        $post = Recieved::find($id);
-        $this->origin = $post->origin;
         
+        $this->postModal = true;
     }
+    
     public function savePost(){
-        $validatedData = $this->validate();
-        Post::create($validatedData);
+        
+        $data = Recieved::find($this->selected_id);
+        
+        Post::create([
+            'origin' => $data->origin,
+            'recieved_id' => $this->selected_id,
+            'type' => $data->type,
+            'description' =>$data->description,
+        ]);
 
         $post = Recieved::find($this->selected_id);
         $post->status = 'Posted';

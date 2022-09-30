@@ -26,6 +26,7 @@ class ViewPO extends Component
 
     public function render()
     {
+
         return view('livewire.logistics.procurement.view-p-o',[
             'items' => PurchaseOrder::findOrFail($this->po_id)->getItem,
             'po' => PurchaseOrder::find($this->po_id),

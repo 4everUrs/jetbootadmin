@@ -6,22 +6,23 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click = "showmodal"class="btn btn-primary">Add Post</button>
-              
-            <x-table head="Post Table"> 
 
-               
+            <x-table head="Post Table">    
             <thead>
-                <th>Title</th>
-                <th>Requirements</th>
+                <th>Type</th>
+                <th>Description</th>
                 <th>Date Posted</th>
+                <th>Action</th>
             </thead>
              <tbody>
                 @forelse($posts as $post)
                  <tr>
-                    <td>{{$post->title}}</td>
-                    <td>{{$post->requirements}}</td>
+                    <td>{{$post->type}}</td>
+                    <td>{{$post->description}}</td>
                     <td>{{Carbon\Carbon::parse($post->created_at)->toFormattedDateString()}}</td>
+                    <td class="text-center">
+                        <button class="btn btn-danger">Remove</button>
+                    </td>
                  </tr>
                 @empty
 
