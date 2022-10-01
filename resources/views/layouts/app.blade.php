@@ -112,6 +112,18 @@
     <!-- ./wrapper -->
     
     <script>
+        window.addEventListener('showButton', event => {
+        var element = document.getElementById("createButton");
+        var review = document.getElementById("reviewButton");
+        element.classList.remove("d-none");
+        review.classList.add("d-none");
+        })
+        window.addEventListener('vendor-form', event => {
+        var vendor = document.getElementById('vendor');
+        var content = document.getElementById('content');
+        content.classList.add('d-none');
+        vendor.classList.remove('d-none');
+        })
        /** add active class and stay opened when selected */
         var url = window.location;
         const allLinks = document.querySelectorAll('.nav-item a');
@@ -124,18 +136,7 @@
         currentLink[0].closest(".nav-treeview").style.display = "block";
         currentLink[0].closest(".has-treeview").classList.add("active");
         }
-        window.addEventListener('showButton', event => {
-        var element = document.getElementById("createButton");
-        var review = document.getElementById("reviewButton");
-        element.classList.remove("d-none");
-        review.classList.add("d-none");
-    })
-        window.addEventListener('vendor-form', event => {
-            var vendor = document.getElementById('vendor');
-            var content = document.getElementById('content');
-            content.classList.add('d-none');
-            vendor.classList.remove('d-none');
-    })
+        
         function darkmode() {
             var body = document.getElementById("boody");
             var topbar = document.getElementById('topbar');

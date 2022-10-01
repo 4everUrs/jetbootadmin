@@ -59,16 +59,16 @@
                     @foreach ($itemContainer as $index => $product)
                        <div class="row">
                             <div class="col mt-2">
-                                <input placeholder="Item" name="itemContainer[{{$index}}][item]" wire:model.defer="itemContainer.{{$index}}.item" class="form-control" style="width: 300px" type="text">
+                                <input required placeholder="Item" name="itemContainer[{{$index}}][item]" wire:model.defer="itemContainer.{{$index}}.item" class="form-control" style="width: 300px" type="text">
                                 @error('supplier_id') <span class="text-danger">{{ $message }}</span><br> @enderror
                             </div>
                             <div class="col mt-2">
-                                <input placeholder="Quantity" name="itemContainer[{{$index}}][qty]" wire:model.defer="itemContainer.{{$index}}.qty" class="form-control mr-2" type="number">
+                                <input required placeholder="Quantity" name="itemContainer[{{$index}}][qty]" wire:model.defer="itemContainer.{{$index}}.qty" class="form-control mr-2" type="number">
                                 @error('supplier_id') <span class="text-danger">{{ $message }}</span><br> @enderror
                             </div>
                             <div class="col mt-2">
                                 <div class="input-group">
-                                    <input placeholder="Cost per piece" name="itemContainer[{{$index}}][cost]" wire:model.defer="itemContainer.{{$index}}.cost" type="number" class="form-control">
+                                    <input required placeholder="Cost per piece" name="itemContainer[{{$index}}][cost]" wire:model.defer="itemContainer.{{$index}}.cost" type="number" class="form-control">
                                     @error('supplier_id') <span class="text-danger">{{ $message }}</span><br> @enderror
                                     <button wire:click="removeRow({{$index}})" class="btn btn-small btn-danger float-right mx-2">Delete</button>
                                 </div>

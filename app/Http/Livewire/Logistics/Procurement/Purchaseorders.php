@@ -62,6 +62,8 @@ class Purchaseorders extends Component
     }
     
     public function total(){
+        $this->subtotal = null;
+        $this->preview = [];
         foreach($this->itemContainer as $item){
             $this->preview[] = ['qty'=>$item['qty'],'item'=>$item['item'],'cost'=>$item['cost'],'totalcost'=>$this->totalCost[] = $item['qty'] * $item['cost']];
             $this->subtotal += $item['qty']*$item['cost'];
