@@ -8,12 +8,15 @@ use Livewire\WithPagination;
 
 class Journals extends Component
 {
-    public $jdescription,$jdebit,$jcredit,$jencoded ='admin',$journal_id;
+    public $jdescription,$jdebit,$jcredit,$jencoded,$journal_id;
     
-    public $addJournal= false;
-    public $updateItem= false;
-    public $deleteItem= false;
-    public $deleteRequest = false; // wire:model for delete modal no declare so i declare.
+    
+    public $addLiability= false;
+    public $updateLiability= false;
+    public $deleteLiability= false;
+    public $deleteLiabilities= false;
+
+     // wire:model for delete modal no declare so i declare.
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -32,21 +35,71 @@ class Journals extends Component
 
     public function render()
     {
+      
         return view('livewire.finance.bm.journals',[
             'journal_entries'=>JournalEntry::orderBy('id','desc')->paginate(3),   
         ]);
     }
 
-    public function loadModalJournal(){
-        $this->addJournal= true;
+    public function loadingJournal(){
+        $this->addLiability= true;
     }
 
     
 
+    public function addLiabilities()
+    {
+        $data=$this->validate();
+        JournalEntry::create($data);
+        toastr()->addSuccess('Liabilities Successfully Added');
+        $this->addLiability = false; 
+    }
+
+    public function deleteliabilities()
+    {
+        
+        JournalEntry::find($this->journal_id)->destroy($this->journal_id);
+        toastr()->addSuccess('Record deleted successfully');
+        $this->resetInput();
+        $this->deleteLiability= false;
+    }
+    public function delete($id)
+    {
+        
+        //tigger to open delete modal
+        $this->journal_id = $id; // setting transaction_id to id from selected item
+         $this->deleteLiability= true;
+        
+    }
+
+    public function updateLiability($id){
+        $this->updateLiability=true;
+        $journal_id = $id;
+        $this->journal_id = $id;
+        $this->jdescription =$journal_id->jdescription;
+        $this->jcredit =$journal_id->jcredit;
+        $this->jdebit =$journal_id->jdedit;
+        $this->jencoded =$journal_id->jencoded;
+    }
+
+    public function updateLiabilities(){
+        $validatedData = $this->validate(); 
+        JournalEntry::find($this->$journal_id)->update($validatedData);
+        $this->resetLiability();
+        toastr()->updateLiability=false;
+    }
+
     
+    public function resetLiability(){
+        $this->journal_id =null;
+        $this->jdescription =null;
+        $this->jcredit =null;
+        $this->jdebit =null;
+        $this->jencoded = 'ADMIN';
 
 
-    
+    }
+
 
     
 }

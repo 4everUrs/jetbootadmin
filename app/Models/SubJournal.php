@@ -5,10 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JournalEntry extends Model
+class SubJournal extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'jdescription', 'jdebit', 'jcredit','jencoded'
-    ]; 
 }

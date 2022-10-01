@@ -45,6 +45,7 @@
             @endforelse
         </tbody>
     </x-table>
+    
     <div class="mt-3 float-right">
         {{$transactions->links()}}
     </div>
@@ -56,7 +57,7 @@
 
 <!--pop up form budget request-->
 
-<x-jet-dialog-modal wire:model="addBudget">
+<x-jet-dialog-modal wire:model="addBudget" maxWidth="xl" >
     <x-slot name="title">
         {{ __('Add RequestBudget') }}
     </x-slot>
@@ -198,5 +199,6 @@
 </x-jet-dialog-modal>
 <!--update modal-->
 {{-- @livewire("finance.bm.expensess") --}}
+
 <livewire:finance.bm.expensess>
 </div>

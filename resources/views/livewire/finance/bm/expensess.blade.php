@@ -48,7 +48,7 @@
 <!--EXPENSES TABLE-->
 
 <!--pop up form EXPENSES-->
-<x-jet-dialog-modal wire:model="addExpense">
+<x-jet-dialog-modal wire:model="addExpense" maxWidth="xl">
     <x-slot name="title">
         {{ __('Add RequestBudget') }}
     </x-slot>
