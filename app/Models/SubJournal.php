@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SubJournal extends Model
 {
     use HasFactory;
+     protected $fillable = [
+        'jdescription', 'jdebit', 'jcredit','jencoded','journal_id'
+    ]; 
 }

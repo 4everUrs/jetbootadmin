@@ -11,7 +11,7 @@
             <a wire:click="loadingJournal" class="btn btn-success">Add Journal Entry</a>
             
             <x-table head="History of Liabilities">
-                <thead >
+                 <thead >
                     <th>No.</th>
                     <th>Date</th>
                     <th>Description</th>

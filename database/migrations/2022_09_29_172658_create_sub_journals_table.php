@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('sub_journals', function (Blueprint $table) {
             $table->id();
+            $table->string('jdescription');
+            $table->integer('jcredit');
+            $table->integer('jdebit');
+            $table->string('jencoded');
+            $table->integer('journal_id');
             $table->timestamps();
         });
     }

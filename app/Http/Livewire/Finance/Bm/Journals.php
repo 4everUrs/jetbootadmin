@@ -4,11 +4,13 @@ namespace App\Http\Livewire\Finance\Bm;
 
 use Livewire\Component;
 use App\Models\JournalEntry;
+use App\Models\SubJournal;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Journals extends Component
 {
-    public $jdescription,$jdebit,$jcredit,$jencoded,$journal_id;
+    public $jdescription,$jdebit,$jcredit,$jencoded,$journal_id ='1';
     
     
     public $addLiability= false;
@@ -20,24 +22,14 @@ class Journals extends Component
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    protected $rules = [
-        'jdescription' => 'required|string',
-        'jdebit' => 'required|integer',
-        'jcredit' => 'required|integer',
-        'jencoded' => 'required|string',
-       
-    ];
-
-    public function updated($fields)
-    {
-        $this->validateOnly($fields);
+    public function mount(){
+        $this->jencoded = Auth::user()->name;
     }
-
     public function render()
     {
       
         return view('livewire.finance.bm.journals',[
-            'journal_entries'=>JournalEntry::orderBy('id','desc')->paginate(3),   
+            'journal_entries'=>SubJournal::orderBy('id','desc')->paginate(3),   
         ]);
     }
 
@@ -49,10 +41,17 @@ class Journals extends Component
 
     public function addLiabilities()
     {
-        $data=$this->validate();
-        JournalEntry::create($data);
+        $data=$this->validate([
+            'jdescription' => 'required|string',
+            'jdebit'    => 'required|integer',
+            'jcredit'   => 'required|integer',
+            'jencoded'  => 'required|string',
+            'journal_id'    => 'required|integer'
+        ]);
+        SubJournal::create($data);
         toastr()->addSuccess('Liabilities Successfully Added');
         $this->addLiability = false; 
+        $this->resetLiability();
     }
 
     public function deleteliabilities()
@@ -96,8 +95,6 @@ class Journals extends Component
         $this->jcredit =null;
         $this->jdebit =null;
         $this->jencoded = 'ADMIN';
-
-
     }
 
 
