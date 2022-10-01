@@ -36,14 +36,18 @@ class PDFController extends Controller
         return view ('livewire.logistics.procurement.po',$this->getData());
     }
     public function downloadPdf(Request $request){
-        $this->filename = 'po'.$this->po_id.'.pdf';
+
+        $this->filename = 'po'.$this->po_id.'.pdf'; // setting up filename no need to copy this. make your own.
         
+        // making variable for storing all data gathared from database;
         $data =[
             'items'=>PurchaseOrder::findOrFail($this->purchaseOrderId)->getItem,
             'po'=>PurchaseOrder::findOrFail($this->purchaseOrderId),
             'supplier' => Supplier::find($this->supplier_id),
         ];
-         $pdf = PDF::loadView('livewire.logistics.procurement.po',$data);
-         return $pdf->download($this->filename);
+
+
+         $pdf = PDF::loadView('livewire.logistics.procurement.po',$data); // storing the view file with data in $pdf
+         return $pdf->download($this->filename); //downloading function of dompdf
     }
 }
