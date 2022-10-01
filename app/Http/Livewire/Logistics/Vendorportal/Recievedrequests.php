@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Logistics\Vendor;
+namespace App\Http\Livewire\Logistics\Vendorportal;
 
 use Livewire\Component;
 use App\Models\Recieved;
@@ -25,7 +25,7 @@ class Recievedrequests extends Component
 
     public function render()
     {
-        return view('livewire.logistics.vendor.recievedrequests', [
+        return view('livewire.logistics.vendorportal.recievedrequests', [
             'recieveds'=>Recieved::get(),
             'data' => Recieved::find($this->selected_id),
             'datas' => Recieved::find($this->selected_id)->getRequirements,

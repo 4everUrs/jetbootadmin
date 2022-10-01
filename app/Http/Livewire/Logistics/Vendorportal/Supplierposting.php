@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Logistics\Vendor;
+namespace App\Http\Livewire\Logistics\Vendorportal;
 
 use Livewire\Component;
 use App\Models\Post;
@@ -20,7 +20,7 @@ class Supplierposting extends Component
     public function render()
 
     {
-        return view('livewire.logistics.vendor.supplierposting',[
+        return view('livewire.logistics.vendorportal.supplierposting',[
             'posts'=>Post::get(),
         ]);
 

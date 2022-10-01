@@ -13,9 +13,9 @@ use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 use App\Http\Livewire\Finance\Bm\Budgets;
 use App\Http\Livewire\Logistics\Procurement\Supplierslists;
 use App\Http\Livewire\Logistics\Procurement\Purchaseorders;
-use App\Http\Livewire\Logistics\Vendor\Recievedrequests;
-use App\Http\Livewire\Logistics\Vendor\Supplierposting;
-use App\Http\Livewire\Logistics\Vendor\Supplierlist;
+use App\Http\Livewire\Logistics\Vendorportal\Recievedrequests;
+use App\Http\Livewire\Logistics\Vendorportal\Supplierposting;
+use App\Http\Livewire\Logistics\Vendorportal\Supplierlist;
 
 
 use App\Http\Livewire\Finance\Bm\Requestedlist;

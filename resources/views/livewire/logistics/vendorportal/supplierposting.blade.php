@@ -7,35 +7,35 @@
     <div class="card">
         <div class="card-body">
 
-            <x-table head="Post Table">    
-            <thead>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Date Posted</th>
-                <th>Action</th>
-            </thead>
-             <tbody>
-                @forelse($posts as $post)
-                 <tr>
-                    <td>{{$post->type}}</td>
-                    <td>{{$post->description}}</td>
-                    <td>{{Carbon\Carbon::parse($post->created_at)->toFormattedDateString()}}</td>
-                    <td class="text-center">
-                        <button class="btn btn-danger">Remove</button>
-                    </td>
-                 </tr>
-                @empty
+            <x-table head="Post Table">
+                <thead>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Date Posted</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    @forelse($posts as $post)
+                    <tr>
+                        <td>{{$post->type}}</td>
+                        <td>{{$post->description}}</td>
+                        <td>{{Carbon\Carbon::parse($post->created_at)->toFormattedDateString()}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-danger">Remove</button>
+                        </td>
+                    </tr>
+                    @empty
 
-                @endforelse 
+                    @endforelse
 
-            </tbody>    
+                </tbody>
 
-            </x-table>   
-                               
+            </x-table>
+
         </div>
-         
+
     </div>
-    <x-jet-dialog-modal wire:model="postmodal"> 
+    <x-jet-dialog-modal wire:model="postmodal">
         <x-slot name="title">
             {{ __('Supplier posting') }}
         </x-slot>
@@ -47,7 +47,7 @@
                     <option>Supplier</option>
                     <option>Contractor</option>
                 </select>
-                <label >Requirements</label>
+                <label>Requirements</label>
                 <textarea wire:model="requirements" class="form-control"></textarea>
             </div>
         </x-slot>
@@ -60,5 +60,5 @@
                 {{ __('Post') }}
             </x-jet-button>
         </x-slot>
-     </x-jet-dialog-modal>
+    </x-jet-dialog-modal>
 </div>
