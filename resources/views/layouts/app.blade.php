@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
     @livewireStyles
     @yield('style')
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed" id="boody">
@@ -112,11 +112,29 @@
     <!-- ./wrapper -->
     
     <script>
+       /** add active class and stay opened when selected */
+        var url = window.location;
+        const allLinks = document.querySelectorAll('.nav-item a');
+        const currentLink = [...allLinks].filter(e => {
+        return e.href == url;
+        });
+        
+        if (currentLink.length > 0) { //this filter because some links are not from menu
+        currentLink[0].classList.add("active");
+        currentLink[0].closest(".nav-treeview").style.display = "block";
+        currentLink[0].closest(".has-treeview").classList.add("active");
+        }
         window.addEventListener('showButton', event => {
         var element = document.getElementById("createButton");
         var review = document.getElementById("reviewButton");
         element.classList.remove("d-none");
         review.classList.add("d-none");
+    })
+        window.addEventListener('vendor-form', event => {
+            var vendor = document.getElementById('vendor');
+            var content = document.getElementById('content');
+            content.classList.add('d-none');
+            vendor.classList.remove('d-none');
     })
         function darkmode() {
             var body = document.getElementById("boody");
@@ -140,7 +158,7 @@
         }
     </script>
     
-    
+    <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
     
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>

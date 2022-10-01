@@ -6,7 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <a data-toggle="modal" data-target="#sendRequest" class="btn btn-primary">Send Request</a>
+            <a  wire:click="showModal"class="btn btn-primary">Send Request</a>
             <x-table head="Request List Table">
                 <thead>
                     <th>No.</th>
@@ -35,17 +35,51 @@
             </x-table>
         </div>
     </div>
-    <x-modal id="sendRequest" title="Send a request" function="sendRequest">
-        <div class="form-group">
-            <label>Send to:</label>
-            <select wire:model="destination" class="form-control">
-                <option>Select Option</option>
-                <option>Select Destination</option>
-                <option>Procurement</option>
-                <option>Fleet Management</option>
-            </select>
-            <label>Content</label>
-            <textarea wire:model="content" class="form-control"></textarea>
-        </div>
-    </x-modal>
+   <x-jet-dialog-modal wire:model="requestModal">
+        <x-slot name="title">
+            {{__('Send Request')}}
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label>Send to:</label>
+                <select wire:model="destination" class="form-control">
+                    <option>Select Destination</option>
+                    <option value="1">Procurement</option>
+                    <option value="2">Fleet Management</option>
+                    <option value="3">Vendor Portal</option>
+                </select>
+                <div class="form-group d-none" id="vendor">
+                    <label>Item</label>
+                    <input wire:model="item_name" type="text" class="form-control">
+                    @error('item') <span class="text-danger">{{ $message }}</span><br> @enderror
+                    <label>Condition</label>
+                    <input wire:model="condition" type="text" class="form-control">
+                    @error('condition') <span class="text-danger">{{ $message }}</span><br> @enderror
+                    <label>Description</label>
+                    <textarea wire:model="description" class="form-control"></textarea>
+                    @error('description') <span class="text-danger">{{ $message }}</span><br> @enderror
+                    <label>Amount</label>
+                    <input wire:model="amount" type="number" class="form-control">
+                    @error('amount') <span class="text-danger">{{ $message }}</span><br> @enderror
+                    <label>Photo</label>
+                    <input wire:model="file_name" type="file" class="form-control">
+                    @error('file_name') <span class="text-danger">{{ $message }}</span><br> @enderror
+                </div>
+                <div class="form-group" id="content">
+                    <label>Content</label>
+                    <textarea wire:model="content" class="form-control"></textarea>
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('requestModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+        
+            <x-jet-button class="ms-2" id="createButton" wire:click="saveItem" wire:loading.attr="disabled">
+                {{ __('Send') }}
+            </x-jet-button>
+        
+        </x-slot>
+   </x-jet-dialog-modal>
 </div>

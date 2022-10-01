@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="#" class="nav-link">
+                <a href="#procurement" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>Procurement</p>
                     <i class="right fas fa-angle-left"></i>
