@@ -18,12 +18,8 @@ return new class extends Migration
                
             $table->id();
             $table->timestamps();
-            $table->string('jdescription');
-            $table->integer('jcredit');
-            $table->integer('jdebit');
             $table->string('jencoded');
             
-          
             });
 
 

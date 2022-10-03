@@ -11,25 +11,46 @@ use Illuminate\Support\Facades\Auth;
 class Journals extends Component
 {
     public $jdescription,$jdebit,$jcredit,$jencoded,$journal_id ='1';
-    
-    
+    public $preview = [];
+    public $grandtotal;
+    public $childData = [];
     public $addLiability= false;
     public $updateLiability= false;
     public $deleteLiability= false;
     public $deleteLiabilities= false;
+   
 
      // wire:model for delete modal no declare so i declare.
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+    
     public function mount(){
-        $this->jencoded = Auth::user()->name;
+
+    
+    //    $test = JournalEntry::find(3)->getChildData;
+    //    dd($test);
+
     }
     public function render()
     {
-      
+        $this->preview;
+        $this->grandtotal;
+        $temp = JournalEntry::all();
+ 
+        foreach($temp as $index => $temps)
+        {
+            $this->childData [] = JournalEntry::find($index+1)->getChildData;
+           
+        }
+ 
+        $this->childData;
+       
+    //    dd($this->childData[0]);
+
         return view('livewire.finance.bm.journals',[
-            'journal_entries'=>SubJournal::orderBy('id','desc')->paginate(3),   
+            'journal_entries'=>JournalEntry::orderBy('id','desc')->paginate(3), 
+              
         ]);
     }
 
@@ -37,21 +58,37 @@ class Journals extends Component
         $this->addLiability= true;
     }
 
+    public function saveRecord()
+    {
+        $this->preview[] = [
+            'jdescription' => $this->jdescription,
+            'jdebit' => $this->jdebit,
+            'jcredit' => $this->jcredit,
+        ];
+       $this->grandtotal += $this->jdebit + $this->jcredit;
+       $this->resetLiability();
+    }
     
-
     public function addLiabilities()
     {
-        $data=$this->validate([
-            'jdescription' => 'required|string',
-            'jdebit'    => 'required|integer',
-            'jcredit'   => 'required|integer',
-            'jencoded'  => 'required|string',
-            'journal_id'    => 'required|integer'
+    
+        JournalEntry::create([
+            'jencoded' => Auth::user()->name,
         ]);
-        SubJournal::create($data);
-        toastr()->addSuccess('Liabilities Successfully Added');
-        $this->addLiability = false; 
+
+        $temp = JournalEntry::latest('id')->first();
+        foreach($this->preview as $index => $prev)
+        {
+            SubJournal::create([
+                'jdescription' => $prev['jdescription'],
+                'jdebit' => $prev['jdebit'],
+                'jcredit' => $prev['jcredit'],
+                'journal_entry_id' => $temp->id,
+            ]);
+        }
+        toastr()->addSuccess('Record added successfully');
         $this->resetLiability();
+       
     }
 
     public function deleteliabilities()

@@ -9,7 +9,7 @@
         <div class="card-body">
 
             <a wire:click="loadingJournal" class="btn btn-success">Add Journal Entry</a>
-
+           
             <x-table head="History of Liabilities">
                  <thead >
                 <thead>
@@ -23,13 +23,37 @@
                 </thead>
 
                 <tbody>
-                    @forelse($journal_entries as $journal_entry)
+                    @forelse($journal_entries as $key => $journal_entry)
                     <tr>
                         <td>{{$journal_entry->id}}</td>
                         <td>{{$journal_entry->created_at}}</td>
-                        <td>{{$journal_entry->jdescription}}</td>
-                        <td>{{$journal_entry->jdebit}}</td>
-                        <td>{{$journal_entry->jcredit}}</td>
+                        <td>
+                            {{-- <table class="table table-striped">
+                               @foreach ($childData[$key] as $index => $sub)
+                                   <tr>
+                                        <td>{{$childData[$key][$index]->jdescription}}</td>
+                                   </tr>
+                               @endforeach
+                            </table> --}}
+                        </td>  
+                        <td>
+                            {{-- <table class="table table-striped">
+                                @foreach ($childData[$key]  as $index => $sub)
+                                   <tr>
+                                        <td>{{$childData[$key][$index]->jdebit}}</td>
+                                   </tr>
+                               @endforeach
+                             </table> --}}
+                        </td>  
+                        <td>
+                            {{-- <table class="table table-striped">
+                                @foreach ($childData[$key]  as $index => $sub)
+                                   <tr>
+                                        <td>{{$childData[$key][$index]->jcredit}}</td>
+                                   </tr>
+                               @endforeach
+                             </table> --}}
+                        </td>  
                         <td>{{$journal_entry->jencoded}}</td>
 
                         <td class="text-center">
@@ -65,15 +89,15 @@
                 <div class="row mb-4">
                     <div class="col">
                         <label>Category</label>
-                        <select class="form-control">
-                            <option>Operating budget</option>
-                            <option>Financial budget </option>
-                            <option>Cash Budget </option>
-                            <option>Labor Budget</option>
-                            <option>Strategic Plan</option>
+                        <select wire:model="jdescription" class="form-control">
+                            <option>Select Option</option>
+                            <option value="Operating Budget">Operating budget</option>
+                            <option value="Financial Budget">Financial budget </option>
+                            <option value="Cash Budget">Cash Budget </option>
+                            <option value="Labor Budget">Labor Budget</option>
+                            <option value="Strategic Plan">Strategic Plan</option>
                         </select>
-                        <label>Description</label>
-                        <textarea wire:model="jdescription" class="form-control"></textarea>
+                       
                     </div>
                     <div class="col">
                         <label>Debit</label>
@@ -82,16 +106,33 @@
                         <input wire:model="jcredit" class="form-control" type="number">
                     </div>
                 </div>
+                <button wire:click="saveRecord" class="btn btn-dark mb-2">ADD</button>
                 <table class="table table-hovered">
                     <thead>
-                        <th>No.</th>
+                    
                         <th>Description</th>
                         <th>Debit</th>
                         <th>Credit</th>
+                        <th class="text-center">Action</th>
                     </thead>
                     <tbody>
-
+                        @foreach ($preview as $index => $prev)
+                            <tr>
+                                <td>{{$prev['jdescription']}}</td>
+                                <td>{{$prev['jdebit']}}</td>
+                                <td>{{$prev['jcredit']}}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-danger btn-sm">Remove</button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">Total:</td>
+                            <td >{{$grandtotal}}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </x-slot>
