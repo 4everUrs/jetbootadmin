@@ -59,11 +59,21 @@
                     <label>Description</label>
                     <textarea wire:model="description" class="form-control"></textarea>
                     @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-
+                    <label>Price Range</label>
+                    <div class="input-group">         
+                        <input wire:model="start" class="form-control mr-2" type="number" placeholder="Starting">
+                        @error('start')<span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                        <input wire:model="end" class="form-control ml-2" type="number" placeholder="Ending">
+                        @error('end') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    </div>
+                    <label>Location</label>
+                    <input wire:model="location" class="form-control" type="text">
+                    @error('location') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                     <label class="mt-2">Requirements <button wire:click="addRow" class="btn btn-success btn-sm">Add Row</button></label>
                     @foreach ($requirements  as $index => $requirement)
                         <div class="input-group mt-2">
                           <input wire:model="requirements.{{$index}}.req" class="form-control mr-2" placeholder="Requirement {{$index + 1}}">
+                          @error('requirements') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <button wire:click="removeRow({{$index}})" class="btn btn-sm btn-danger">Remove</button>
                         </div>
                     @endforeach
@@ -79,7 +89,7 @@
             </x-jet-secondary-button>
     
             <x-jet-button class="ms-2" wire:click="saveRequest" wire:loading.attr="disabled">
-                {{ __('add new Item') }}
+                {{ __('Send Request') }}
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>

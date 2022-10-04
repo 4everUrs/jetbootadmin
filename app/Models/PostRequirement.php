@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PostRequirement extends Model
 {
     use HasFactory;
-    protected $fillable =['recieved_id','requirements','origin'];
+    protected $fillable =['recieved_id','requirements','origin','post_id'];
 }

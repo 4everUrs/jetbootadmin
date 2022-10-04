@@ -42,11 +42,14 @@ class Recievedrequests extends Component
     public function savePost(){
         
         $data = Recieved::find($this->selected_id);
-        
+
         Post::create([
             'origin' => $data->origin,
             'recieved_id' => $this->selected_id,
             'type' => $data->type,
+            'start' => $data->start,
+            'end' => $data->end,
+            'location' => $data->location,
             'description' =>$data->description,
         ]);
 

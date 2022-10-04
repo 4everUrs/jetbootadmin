@@ -18,7 +18,11 @@ return new class extends Migration
             $table->string('origin');
             $table->string('type');
             $table->string('description');
+            $table->integer('start');
+            $table->integer('end');
+            $table->string('location');
             $table->string('status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

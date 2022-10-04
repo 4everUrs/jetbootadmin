@@ -9,7 +9,7 @@ class Recieved extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'origin', 'description', 'status','type',
+        'origin', 'description', 'status','type','start','end','location'
     ];
     function getRequirements()
     {

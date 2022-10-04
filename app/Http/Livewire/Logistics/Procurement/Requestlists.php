@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class Requestlists extends Component
 {
-    public $origin = 'Procurement', $description, $status = "Pending", $type;
+    public $origin = 'Procurement', $description, $status = "Pending", $type, $start, $end, $location;
     public $requestModal = false;
     public $requirements = [];
     use WithPagination;
@@ -20,7 +20,10 @@ class Requestlists extends Component
         'origin' => 'required|string',
         'type' => 'required|string',
         'description' => 'required|string',
-        'status' => 'required|string'
+        'status' => 'required|string',
+        'start' => 'required|integer',
+        'end' => 'required|integer',
+        'location' => 'required|string'
         
     ];
      public function updated($fields)
@@ -47,7 +50,7 @@ class Requestlists extends Component
     {
         
         $validatedData = $this->validate();
-        dd($validatedData);
+        
         ProcurementRequest::create($validatedData);
         $this->resetInput();
     }
@@ -69,12 +72,14 @@ class Requestlists extends Component
     {
         
         $validatedData = $this->validate();
+        
         Recieved::create($validatedData);
         $recieved_id = Recieved::latest('id')->first();
         
         foreach($this->requirements as $index => $requirement){
             PostRequirement::create([
                 'recieved_id' => $recieved_id->id,
+                'post_id' => $recieved_id->id,
                 'origin' => 'Procurement',
                 'requirements' => $requirement['req'],
             ]);
@@ -88,6 +93,9 @@ class Requestlists extends Component
     {
         $this->origin = null;
         $this->content = null;  
+        $this->start = null;
+        $this->end = null;
+        $this->requirements = [];
     }
     public function loadModal()
     {

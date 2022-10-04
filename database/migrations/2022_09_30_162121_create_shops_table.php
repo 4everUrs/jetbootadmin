@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('condition');
             $table->string('description');
             $table->integer('amount');
-            $table->string('file_name');
+            $table->string('thumbnail');
+            $table->string('status');
+            $table->string('origin');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -19,14 +19,20 @@ class RecievedSeeder extends Seeder
             'origin'=>'Project Management',
             'type'=>'Contractor',
             'description' => 'fake description',
-            'status' => 'Pending'
+            'status' => 'Pending',
+            'start' => '1000',
+            'end' => '5000',
+            'location' => 'Valenzuela'
             
         ],
         [
             'origin'=>'Procurement',
             'type'=>'Supplier',
             'description' => 'fake description',
-            'status' => 'Pending'
+            'status' => 'Pending',
+            'start' => '1000',
+            'end' => '10000',
+            'location' => 'Laguna'
         ]
     ]);
     }

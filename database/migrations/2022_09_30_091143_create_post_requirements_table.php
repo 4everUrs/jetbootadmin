@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('post_requirements', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('recieved_id');
+            $table->unsignedInteger('post_id');
             $table->string('origin');
             $table->string('requirements');
             $table->timestamps();

@@ -9,39 +9,66 @@ use Livewire\WithPagination;
 use Carbon\Carbon;
 use Livewire\WithFileUploads;
 use App\Models\Shop;
+use App\Models\Image;
+use App\Models\VendorShop;
+use Illuminate\Support\Facades\Storage;
 
 class Requestslist extends Component
 {
     public $origin = 'Warehouse', $content, $status = 'Pending';
     public $destination;
     public $requestModal = false;
+    public $images =[];
+    public $fileCounter = [];
+    public $displayImage;
+    public $thumbnail;
+    
+    
 
     public $item_name, $condition, $description, $amount, $file_name;
 
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
-     protected $rules = [
+
+    protected $listeners = ['postAdded' => 'listing'];
+
+    protected $rules = [
         'origin' => 'required|min:6',
         'content' => 'required|string',
         'status' => 'required|string'
     ];
+
+    public function addRow()
+    {
+        $this->fileCounter[] = ['1'];
+    }
+    public function removeRow($index)
+    {
+         unset($this->fileCounter[$index]);
+    }
      public function updated($fields)
     {
         $this->validateOnly($fields);
     }
     public function render()
     {
+        $this->fileCounter;
         if($this->destination == '3'){
             $this->dispatchBrowserEvent('vendor-form');
         }
         return view('livewire.logistics.warehouse.requestslist',[
             'requests' => RequestList::get(),
+            
         ]);
     }
-
+    public function listing($selected_id)
+    {
+       dd('test');
+    }
     public function showModal()
     {
+        
         $this->requestModal = true;
     }
 
@@ -76,16 +103,22 @@ class Requestslist extends Component
         }
         elseif($this->destination == '3')
         {
-            
+           
             $validatedData = $this->validate([
                 'item_name' => 'required|string',
                 'condition' => 'required|string',
                 'description' => 'required|string',
                 'amount' => 'required|integer',
-                'file_name' => 'image'
+                'status' => 'required|string',
+                'origin' => 'required|string',
+                'thumbnail' => 'required|image'
             ]);
-            $validatedData['file_name'] = $this->file_name->store('shop','public');
+            $validatedData['thumbnail'] = $this->thumbnail->store('shop','do');
             Shop::create($validatedData);
+            if(!empty($this->images)){
+                $this->saveImages();
+            }
+            
             toastr()->addSuccess('Request Success sent!.');
             $this->resetInput();
             $this->requestModal = false;
@@ -94,6 +127,23 @@ class Requestslist extends Component
             dd('error');
         }
     }
+    public function saveImages()
+    {
+            $temp = Shop::latest('id')->first();
+            
+            $this->validate([
+                'images.*' => 'image|max:1024', // 1MB Max
+            ]);
+            foreach($this->images as $image)
+            {
+                Image::create([
+                    'shop_id' => $temp->id,
+                    'vendor_shop_id' => $temp->id,
+                    'file_name' => $image->store('shop','do'),
+                ]);
+            }
+    }
+    
     public function resetInput()
     {
         $this->origin = null;
@@ -103,6 +153,7 @@ class Requestslist extends Component
         $this->description = null;
         $this->amount = null;
         $this->file_name = null;
+        $this->status = null;
         
     }
 }

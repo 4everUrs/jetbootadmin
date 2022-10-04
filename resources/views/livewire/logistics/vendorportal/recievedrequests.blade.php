@@ -11,6 +11,8 @@
                     <th>No.</th>
                     <th>Origin</th>
                     <th>Type</th>
+                    <th>Bidding Range</th>
+                    <th>Location</th>   
                     <th>Data Posted</th>
                     <th>Status</th>
                     <th>Actiom</th>
@@ -23,6 +25,8 @@
                         <td>{{$recieved->id}}</td>
                         <td>{{$recieved->origin}}</td>
                         <td>{{$recieved->type}}</td>
+                        <td>@money($recieved->start) - @money($recieved->end)</td>
+                        <td>{{$recieved->location}}</td>
                         <td>{{Carbon\Carbon::parse($recieved->updated_at)->toFormattedDateString()}}</td>
                         <td>{{$recieved->status}}</td>
                         <td class="text-center">
@@ -50,10 +54,16 @@
                 <p class="badge badge-success">{{$data->type}}</p><br>
                 <label>Description:</label>
                 <p>{{$data->description}}</p>
+                <label>Bidding Range:</label><br>
+                @money($recieved->start) - @money($recieved->end)<br>
+                <label>Location:</label><br>
+                {{$data->location}}<br>
                 <label>Requirements:</label>
                 @foreach ($datas as $data)
                 <li>{{$data->requirements}}</li>
                 @endforeach
+                
+
             </div>
         </x-slot>
         <x-slot name="footer">
