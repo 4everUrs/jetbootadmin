@@ -1,12 +1,12 @@
 <div>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Wait') }}
+            {{ __('') }}
         </h2>
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="loadModal" type="create" class="btn btn-success">Create New Job</button>
+            <button wire:click="loadModal" type="create" class="btn btn-success"><i class='fa fa-plus'></i> Add New Job</button>
             <thead>
                 <th></th>
     
@@ -36,7 +36,7 @@
                 @error('position') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Monthly Salary</label>
-                <input wire:model="salary"class="form-control" type="text">
+                <input wire:model="salary"class="form-control" type="number">
                 @error('salary') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Job Details</label>
@@ -49,11 +49,11 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('showModal')" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$toggle('showModal')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
     
-            <x-jet-button class="ms-2" wire:click="saveRequest" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" wire:click="saveRequest" wire:loading.attr="disabled"><i class='fa fa-check'></i>
                 {{ __('Confirm') }}
             </x-jet-button>
         </x-slot>

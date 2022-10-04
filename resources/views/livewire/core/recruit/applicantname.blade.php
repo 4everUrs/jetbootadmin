@@ -8,21 +8,29 @@
         <div class="card-body">
            <x-table head="">
             <thead>
+                <th class="text-center">No.</th>
                 <th class="text-center">Name</th>
+                <th class="text-center">Position</th>
                 <th class="text-center">Email</th>
-                <th class="text-center">Contact</th>
-                <th class="text-center">Address</th>
-                <th class="text-center">Action</th>
+                <th class="text-center">Phone Number</th>
+                <th class="text-center">Location</th>
+                <th class="text-center">Status</th>
+                
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center">Core</td>
-                    <td class="text-center">core@gmail.com</td>
-                    <td class="text-center">09123456780</td>
-                    <td class="text-center">Quezon City</td>
-                    <td class="text-center"><button type="text" class="btn btn-primary">Approved</button>
-                    <button type="alert" class="btn btn-danger">Denied</button></td>
-                </tr>
+              @forelse ($jobs as $job)
+                  <tr>
+                    <td>{{$job->id}}</td>
+                    <td>{{$job->name}}</td>
+                    <td>{{$job->position}}</td>
+                    <td>{{$job->email}}</td>
+                    <td>{{$job->phone}}</td>
+                    <td>{{$job->location}}</td>
+                    <td>{{$job->status}}</td>
+                  </tr>
+              @empty
+                  
+              @endforelse
             </tbody>
            </x-table>
         </div>

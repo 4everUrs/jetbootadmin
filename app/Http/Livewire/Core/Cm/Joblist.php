@@ -19,7 +19,7 @@ class Joblist extends Component
         
         ];
     }
-     public function updated($fields)
+    public function updated($fields)
     {
         $this->validateOnly($fields);
     }
@@ -30,7 +30,17 @@ class Joblist extends Component
     public function saveRequest(){
         $validateddata=$this->validate();
         Vacant::create($validateddata);
+        toastr()->addSuccess('New Job Created Successfully.');
+        $this->resetInput();
         $this->showModal = false;
+    }
+    public function resetInput()
+    {
+        $this->name = '';
+        $this->position = '';  
+        $this->salary = '';  
+        $this->details = '';  
+        $this->location = '';  
     }
     public function loadModal(){
         $this->showModal = true;

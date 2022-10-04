@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('applicantnames', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('position');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('location');
+            $table->string('status');
+            $table->string('resume');
             $table->timestamps();
         });
     }

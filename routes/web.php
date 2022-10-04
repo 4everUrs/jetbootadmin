@@ -9,8 +9,8 @@ use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
 use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 use App\Http\Livewire\Finance\Bm\Budgets;
+use App\Http\Livewire\Core\Recruit\Addclient;
 use App\Http\Livewire\Core\Recruit\Applicantname;
-use App\Http\Livewire\Core\Recruit\Jobvacant;
 use App\Http\Livewire\Core\Recruit\Denied;
 use App\Http\Livewire\Core\Am\Jobcandidate;
 use App\Http\Livewire\Core\Nhb\Onboarding;
@@ -81,8 +81,8 @@ Route::prefix('finance')->middleware('auth','isFinance')->group(function(){
 //Core Routes
 Route::prefix('core')->middleware('auth','isCore')->group(function(){
     Route::view('dashboard','livewire.core.dashboard')->name('core');
+    Route::get('recruit/addclient',Addclient::class)->name('addclient');
     Route::get('recruit/applicantname',Applicantname::class)->name('applicantname');
-    Route::get('recruit/jobvacant',Jobvacant::class)->name('jobvacant');
     Route::get('recruit/denied',Denied::class)->name('denied');
     Route::get('am/jobcandidate',Jobcandidate::class)->name('jobcandidate');
     Route::get('nhb/onboarding',Onboarding::class)->name('onboarding');
@@ -96,6 +96,7 @@ Route::prefix('core')->middleware('auth','isCore')->group(function(){
     Route::get('cm/joblist',Joblist::class)->name('joblist');
     Route::get('cacm/contract',Contract::class)->name('contract');
     Route::get('cacm/agreement',Agreement::class)->name('agreement');
+    Route::get('joblisting',JobList::class)->name('joblisting');
     
     
 });

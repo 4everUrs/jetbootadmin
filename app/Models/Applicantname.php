@@ -9,6 +9,6 @@ class Applicantname extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'email', 'contact', 'address',
+        'name', 'email', 'location','status',
     ];
 }

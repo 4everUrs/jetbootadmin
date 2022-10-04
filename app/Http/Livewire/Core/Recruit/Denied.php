@@ -8,6 +8,6 @@ class Denied extends Component
 {
     public function render()
     {
-        return view('livewire.core.recruit.denied');
+        return view('livewire.core.recruit.denied');      
     }
 }
