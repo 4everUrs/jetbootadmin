@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Core\Recruit;
 
 use App\Models\ApplicantForm;
+use App\Models\ApplicantList;
 use Livewire\Component;
 
 
@@ -28,5 +29,29 @@ class Applicantname extends Component
         return view('livewire.core.recruit.applicantname',[
             'jobs' => ApplicantForm::all(),
         ]);
+    }
+    public function approve($id)
+    {
+       $job = ApplicantForm::find($id);
+       ApplicantList::create([
+            'name' => $job->name,
+            'position' => $job->position,
+            'email' => $job->email,
+            'phone' => $job->phone,
+            'location' => $job->location,
+            'resume_file' => $job->resume_file
+       ]);
+       if($job->status == 'Approved'){
+            flash()->addWarning('Data is already approved');
+       }
+       else{
+            $job->status = 'Approved';
+            $job->save();
+            flash()->addSuccess('Data Approved Successfully');
+        }
+    }
+    public function denied($id)
+    {
+        $job = ApplicantForm::find($id);
     }
 }

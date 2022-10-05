@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('applicant_forms', function (Blueprint $table) {
+        Schema::create('applicant_lists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('position');
             $table->string('email');
             $table->string('phone');
             $table->string('location');
-            $table->string('status');
             $table->string('resume_file');
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applicant_forms');
+        Schema::dropIfExists('applicant_lists');
     }
 };
