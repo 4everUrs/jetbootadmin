@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Leave extends Model
+class Compensation extends Model
 {
     use HasFactory;
-    protected $fillable =[
-        'name', 'type', 'position', 'reason', 'datestart', 'dateend', 'status'
-
-    ];
 }

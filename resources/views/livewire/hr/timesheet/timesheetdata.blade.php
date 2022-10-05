@@ -1,22 +1,20 @@
 <div>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Leave Management') }}
+            {{ __('Timesheet') }}
         </h2>
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button data-toggle="modal" data-target="#leaveModal" class="btn btn-success">Add Record</button>
-            <x-table head="Leave Management">
+            <button data-toggle="modal" data-target="#timesheetModal" class="btn btn-success">Add Record</button>
+            <x-table head="Timesheet Management">
                 <thead>
                     <th>No.</th>
                     <th>Name</th>
-                    <th>Type</th>
                     <th>Position </th>
-                    <th>Reason</th>
-                    <th>Date Start</th>
-                    <th>Date end</th>
-                    <th>Status</th>
+                    <th>Date from</th>
+                    <th>Date to</th>
+                    <th>Total Hours</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
@@ -24,19 +22,17 @@
                         <tr>
                             <td>{{$data->id}}</td>
                             <td>{{$data->name}}</td>
-                            <td>{{$data->type}}</td>
                             <td>{{$data->position}}</td>
-                            <td>{{$data->reason}}</td>
-                            <td>{{$data->datestart}}</td>
-                            <td>{{$data->datestart}}</td>
-                            <td>{{$data->status}}</td>
+                            <td>{{$data->datefrom}}</td>
+                            <td>{{$data->dateto}}</td>
+                            <td>{{$data->totalhours}}</td>
                             <td>
                                 <button class="btn btn-primary">View</button>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="text-center">No record found nigga!</td>
+                            <td colspan="8" class="text-center">No record found nigga!</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -45,12 +41,12 @@
         </div>
     </div>
    
-        <div wire:ignore.self class="modal fade" id="leaveModal" tabindex="-1" role="dialog"
-            aria-labelledby="leaveModalLabel" aria-hidden="true">
+        <div wire:ignore.self class="modal fade" id="timesheetModal" tabindex="-1" role="dialog"
+            aria-labelledby="timesheetModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="leaveModalLabel">Add new Record</h5>
+                        <h5 class="modal-title" id="timesheetModalLabel">Add new Record</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -60,27 +56,18 @@
                             <label>Name</label>
                             <input wire:model="name" class="form-control">
                             @error('name') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Type</label>
-                            <select wire:model="type" class="form-control">
-                                <option></option>
-                                <option>Vacational Leave</option>
-                                <option>Sick Leave</option>
-                                <option>Maternity Leave</option>
-                                <option>Parental Leave</option>
-                            </select>
-                            @error('type') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Position</label>
                             <input wire:model="position" class="form-control">
                             @error('position') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Reason</label>
-                            <input wire:model="reason" class="form-control">
-                            @error('reason') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Date Start</label>
-                            <input wire:model="datestart" class="form-control">
-                            @error('datestart') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Date End</label>
-                            <input wire:model="dateend" class="form-control">
-                            @error('dateend') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Date From</label>
+                            <input wire:model="datefrom" class="form-control">
+                            @error('datefrom') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Date To</label>
+                            <input wire:model="dateto" class="form-control">
+                            @error('dateto') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Total Hours</label>
+                            <input wire:model="totalhours" class="form-control">
+                            @error('totalhours') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             
                         </div>
                     </div>
@@ -92,4 +79,3 @@
             </div>
         </div>
 </div>
-    

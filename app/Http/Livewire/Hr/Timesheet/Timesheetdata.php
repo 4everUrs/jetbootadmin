@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Http\Livewire\Hr\Leavemanagement;
+namespace App\Http\Livewire\Hr\Timesheet;
 
 use Livewire\Component;
-use App\Models\Leave;
+use App\Models\Timesheet;
 use Livewire\WithPagination;
 
-class Leavedata extends Component
+
+class Timesheetdata extends Component
 {
-    public $name, $type, $position, $reason, $datestart, $dateend , $status = 'Pending';
-    public $leaveModal = false;
+    public $name, $position, $datefrom, $dateto, $totalhours;
+    public $timesheetModal = false;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $rules = [
         'name' => 'required|string',
-        'type' => 'required|string',
         'position' => 'required|string',
-        'reason' => 'required|string',
-        'datestart' => 'required|string',
-        'dateend' => 'required|string',
-        'status' => 'required|string'
+        'datefrom' => 'required|string',
+        'dateto' => 'required|string',
+        'totalhours' => 'required|string'
     ];
      public function updated($fields)
     {
@@ -27,24 +26,22 @@ class Leavedata extends Component
     }
     public function render()
     {
-        return view('livewire.hr.leavemanagement.leavedata',[
-            'datas' => Leave::paginate(6),
+        return view('livewire.hr.timesheet.timesheetdata',[
+            'datas' => Timesheet::paginate(6),
         ]);
     }
     public function saveRecord(){
         $validatedData = $this->validate();
-        Leave::create($validatedData);
+        Timesheet::create($validatedData);
         $this->resetInput();
         toastr()->addSuccess('Data added successfully');
         $this->dispatchBrowserEvent('close-modal');
     }
     public function resetInput(){
         $this->name = null;
-        $this->type = null;
         $this->position = null;
-        $this->reason = null;
-        $this->datestart = null;
-        $this->dateend = null;
+        $this->datefrom = null;
+        $this->dateto= null;
+        $this->totalhours = null;
     }
-    
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Hr\Leavemanagement;
+namespace App\Http\Livewire\Hr\Core;
 
+use App\Models\Core;
 use Livewire\Component;
-use App\Models\Leave;
 use Livewire\WithPagination;
 
-class Leavedata extends Component
+class Coredata extends Component
 {
     public $name, $type, $position, $reason, $datestart, $dateend , $status = 'Pending';
-    public $leaveModal = false;
+    public $CoreModal = false;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $rules = [
@@ -21,19 +21,20 @@ class Leavedata extends Component
         'dateend' => 'required|string',
         'status' => 'required|string'
     ];
-     public function updated($fields)
+    public function updated($fields)
     {
         $this->validateOnly($fields);
     }
+
     public function render()
     {
-        return view('livewire.hr.leavemanagement.leavedata',[
-            'datas' => Leave::paginate(6),
+        return view('livewire.hr.core.coredata',[
+            'datas' => Core::paginate(6),
         ]);
     }
     public function saveRecord(){
         $validatedData = $this->validate();
-        Leave::create($validatedData);
+        Core::create($validatedData);
         $this->resetInput();
         toastr()->addSuccess('Data added successfully');
         $this->dispatchBrowserEvent('close-modal');
@@ -46,5 +47,6 @@ class Leavedata extends Component
         $this->datestart = null;
         $this->dateend = null;
     }
-    
+
+
 }
