@@ -8,22 +8,33 @@
         <div class="card-body">
            <x-table head="List of Applicant">
             <thead>
+                <th class="text-center">No.</th>
                 <th class="text-center">Name</th>
+                <th class="text-center">Position</th>
                 <th class="text-center">Email</th>
-                <th class="text-center">Contact</th>
-                <th class="text-center">Address</th>
+                <th class="text-center">Phone</th>
+                <th class="text-center">Location</th>
+                <th class="text-center">Resume</th>
                 <th class="text-center">Action</th>
 
                
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center">Core</td>
-                    <td class="text-center">core@gmail.com</td>
-                    <td class="text-center">09123456780</td>
-                    <td class="text-center">Quezon City</td>
+                @forelse ($jobs as $job)
+                  <tr>
+                    <td class="text-center">{{$job->id}}</td>
+                    <td class="text-center">{{$job->name}}</td>
+                    <td class="text-center">{{$job->position}}</td>
+                    <td class="text-center">{{$job->email}}</td>
+                    <td class="text-center">{{$job->phone}}</td>
+                    <td class="text-center">{{$job->location}}</td>
+                    <td class="text-center">{{$job->resume_file}}</td>
                     
-                </tr>
+                    
+                  </tr>
+              @empty
+                  
+              @endforelse
             </tbody>
            </x-table>
         </div>

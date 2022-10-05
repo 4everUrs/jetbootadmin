@@ -15,18 +15,22 @@
                 <th class="text-center">Phone Number</th>
                 <th class="text-center">Location</th>
                 <th class="text-center">Status</th>
-                
+                <th class="text-center">Action</th>
             </thead>
             <tbody>
               @forelse ($jobs as $job)
                   <tr>
-                    <td>{{$job->id}}</td>
-                    <td>{{$job->name}}</td>
-                    <td>{{$job->position}}</td>
-                    <td>{{$job->email}}</td>
-                    <td>{{$job->phone}}</td>
-                    <td>{{$job->location}}</td>
-                    <td>{{$job->status}}</td>
+                    <td class="text-center">{{$job->id}}</td>
+                    <td class="text-center">{{$job->name}}</td>
+                    <td class="text-center">{{$job->position}}</td>
+                    <td class="text-center">{{$job->email}}</td>
+                    <td class="text-center">{{$job->phone}}</td>
+                    <td class="text-center">{{$job->location}}</td>
+                    <td class="text-center">{{$job->status}}</td>
+                    <td class="text-center">
+                        <button wire:click="approve({{$job->id}})" class="btn btn-primary">Approve</button>
+                        <button wire:click="denied({{$job->id}})" class="btn btn-danger">Denied</button>
+                    </td>
                   </tr>
               @empty
                   
