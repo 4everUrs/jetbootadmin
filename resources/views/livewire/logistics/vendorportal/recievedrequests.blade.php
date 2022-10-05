@@ -36,7 +36,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td class="text-center" colspan="6"> no record found</td>
+                        <td class="text-center" colspan="8"> no record found</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -51,19 +51,22 @@
             <div class="form-group">
                 <label>Type:</label>
                 <br>
-                <p class="badge badge-success">{{$data->type}}</p><br>
-                <label>Description:</label>
-                <p>{{$data->description}}</p>
-                <label>Bidding Range:</label><br>
-                @money($recieved->start) - @money($recieved->end)<br>
-                <label>Location:</label><br>
-                {{$data->location}}<br>
-                <label>Requirements:</label>
-                @foreach ($datas as $data)
-                <li>{{$data->requirements}}</li>
-                @endforeach
+               @if (!empty($data))
+                   <p class="badge badge-success">{{$data->type}}</p><br>
+                    <label>Description:</label>
+                    <p>{{$data->description}}</p>
+                    <label>Bidding Range:</label><br>
+                    @money($recieved->start) - @money($recieved->end)<br>
+                    <label>Location:</label><br>
+                    {{$data->location}}<br>
+               @endif
+                @if (!empty($datas))
+                    <label>Requirements:</label>
+                        @foreach ($datas as $data)
+                        <li>{{$data->requirements}}</li>
+                        @endforeach
+                @endif
                 
-
             </div>
         </x-slot>
         <x-slot name="footer">
@@ -71,9 +74,11 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-button class="ms-2" wire:click="savePost({{$recieved->id}})" wire:loading.attr="disabled">
-                {{ __('Save Post') }}
-            </x-jet-button>
+           @if (!empty($recieveds))
+               <x-jet-button class="ms-2" wire:click="savePost" wire:loading.attr="disabled">
+                    {{ __('Save Post') }}
+                </x-jet-button>
+           @endif
         </x-slot>
     </x-jet-dialog-modal>
 

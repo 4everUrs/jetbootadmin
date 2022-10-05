@@ -10,8 +10,9 @@ use PDF;
 
 class ViewPO extends Component
 {
-    public $po_id = '1';
-    public $supplier_id ='1';
+    public $po_id ;
+    public $supplier_id;
+    public $items,$po,$supplier;
     protected $listeners =[
         'passId' => 'getId',
         'download'=>'download',
@@ -26,24 +27,15 @@ class ViewPO extends Component
 
     public function render()
     {
+        if(!empty($this->po_id)){
+            $this->items = PurchaseOrder::findOrFail($this->po_id)->getItem;
+            $this->po =PurchaseOrder::find($this->po_id);
+        }
+        if(!empty($this->supplier_id)){
+            $this->supplier = Supplier::findorFail($this->supplier_id);
+        }
+        return view('livewire.logistics.procurement.view-p-o');
+    }
 
-        return view('livewire.logistics.procurement.view-p-o',[
-            'items' => PurchaseOrder::findOrFail($this->po_id)->getItem,
-            'po' => PurchaseOrder::find($this->po_id),
-            'supplier' => Supplier::findorFail($this->supplier_id),
-        ]);
-    }
-    public function mount(){
-        
-    }
-    public function download()
-    {
-        $data = [
-            'items' => PurchaseOrder::findOrFail($this->po_id)->getItem,
-            'po' => PurchaseOrder::find($this->po_id),
-            'supplier' => Supplier::findorFail($this->supplier_id),
-        ];
-        $pdf = PDF::loadView('livewire.logistics.procurement.view-p-o',$data);
-        return $pdf->download('purchase-order.pdf');
-    }
+
 }

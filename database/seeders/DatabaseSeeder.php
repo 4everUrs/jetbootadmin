@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(TeamSeeder::class);
         $this->call(AdminSeeder::class);
-        $this->call(SupplierSeeder::class);
-        $this->call(PoItemSeeder::class);
-        $this->call(PoSeeder::class);
-        $this->call(RequirementSeeder::class);
-        $this->call(RecievedSeeder::class);
+        // $this->call(SupplierSeeder::class);
+        // $this->call(PoItemSeeder::class);
+        // $this->call(PoSeeder::class);
+        // $this->call(RequirementSeeder::class);
+        // $this->call(RecievedSeeder::class);
     }
 }

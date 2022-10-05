@@ -276,8 +276,10 @@
                     </th>
                     <th>
                         <h1>Purchase Order</h1>
+                        @if (!empty($po))
+                            <h4>P.O No.:{{$po->po_id}}</h4>
+                        @endif
                         
-                        <h4>P.O No.:{{$po->po_id}}</h4>
                     </th>
                 </tr>
             </table>
@@ -292,10 +294,13 @@
                 <tbody>
                     <tr>
                         <td style="width:50%">
-                            Name:{{$supplier->name}}<br />
-                            Location:{{$supplier->address}}<br />
-                            Email:{{$supplier->email}}<br />
-                            Contact:{{$supplier->phone}}<br />
+                            @if (!empty($supplier))
+                                Name:{{$supplier->name}}<br />
+                                Location:{{$supplier->address}}<br />
+                                Email:{{$supplier->email}}<br />
+                                Contact:{{$supplier->phone}}<br />
+                            @endif
+                            
                         </td>
                         <td style="width:50%">
                             Tech-Trendz Services<br />
@@ -317,16 +322,19 @@
     
                 </thead>
                 <tbody>
-                    @forelse ($items as $item)
-                    <tr>
-                        <td>{{$item->qty}}</td>
-                        <td>{{$item->item}}</td>
-                        <td>{{$item->cost}}</td>
-                        <td>{{$item->totalcost}}</td>
-                    </tr>
-                    @empty
-    
-                    @endforelse
+                    @if (!empty($items))
+                        @forelse ($items as $item)
+                            <tr>
+                                <td>{{$item->qty}}</td>
+                                <td>{{$item->item}}</td>
+                                <td>{{$item->cost}}</td>
+                                <td>{{$item->totalcost}}</td>
+                            </tr>
+                        @empty
+                        
+                        @endforelse
+                    @endif
+                   
                 </tbody>
                 <tfoot>
                     <tr>

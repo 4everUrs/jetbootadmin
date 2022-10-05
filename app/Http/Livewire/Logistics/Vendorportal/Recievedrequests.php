@@ -8,7 +8,8 @@ use App\Models\Post;
 class Recievedrequests extends Component
 {
     public $postModal = false;
-    public $title, $requirements=[], $origin, $selected_id = '1';
+    public $title, $requirements=[], $origin, $selected_id;
+    public $data,$datas;
     
     
     protected $rules = [
@@ -25,11 +26,13 @@ class Recievedrequests extends Component
 
     public function render()
     {
-        return view('livewire.logistics.vendorportal.recievedrequests', [
-            'recieveds'=>Recieved::get(),
-            'data' => Recieved::find($this->selected_id),
-            'datas' => Recieved::find($this->selected_id)->getRequirements,
-            
+        if(!empty($this->selected_id)){
+            $this->data = Recieved::find($this->selected_id);
+            $this->datas = Recieved::find($this->selected_id)->getRequirements;
+        }
+       
+        return view('livewire.logistics.vendorportal.recievedrequests',[
+            'recieveds' => Recieved::get(),
         ]);
     }
     public function loadModal($id)

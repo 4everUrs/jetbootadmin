@@ -17,6 +17,7 @@ use App\Http\Livewire\Logistics\Vendorportal\Recievedrequests;
 use App\Http\Livewire\Logistics\Vendorportal\Supplierposting;
 use App\Http\Livewire\Logistics\Vendorportal\Supplierlist;
 use App\Http\Livewire\Logistics\Vendorportal\Disposal;
+use App\Http\Livewire\Logistics\Vendorportal\Bidders;
 
 
 use App\Http\Livewire\Finance\Bm\Requestedlist;
@@ -63,6 +64,7 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
     Route::get('procurement/po/download/{id}',[PDFController::class,'downloadPdf'])->name('download');
     Route::get('vendor/supplierlist',Supplierlist::class)->name('supplierlist');
     Route::get('vendor/disposal',Disposal::class)->name('disposal');
+    Route::get('vendor/bidders',Bidders::class)->name('bidders');
 });
 
 //Finance Routes

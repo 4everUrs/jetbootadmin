@@ -131,9 +131,11 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
         
-            <x-jet-button class="ms-2" wire:click="download({{$po->id}})" wire:loading.attr="disabled">
-                {{ __('Download') }}
-            </x-jet-button>
+            @if (!empty($po))
+                <x-jet-button class="ms-2" wire:click="download({{$po->id}})" wire:loading.attr="disabled">
+                    {{ __('Download') }}
+                </x-jet-button>
+            @endif
         
         </x-slot>
     </x-jet-dialog-modal>
