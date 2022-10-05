@@ -70,6 +70,8 @@
                 @livewire('core.sidebar')
                 @elseif (Auth::user()->current_team_id == '5')
                 @livewire('hr.sidebar')
+                @elseif (Auth::user()->current_team_id == '6')
+                @livewire('logistics.sidebars.procurement')
                 @endif
             </div>
             <!-- /.sidebar -->
