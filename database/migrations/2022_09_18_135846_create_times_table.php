@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('position');
             $table->string('department');
-            $table->string('timein')->useCurrent();
+            $table->string('timein');
             $table->string('timeout');
-            $table->string('date')->useCurrent();
+            $table->string('date');
             $table->string('status');
             $table->timestamps();
         });

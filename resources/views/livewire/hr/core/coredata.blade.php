@@ -10,22 +10,22 @@
             <x-table head="Core Human Capital">
                 <thead>
                     <th>No.</th>
-                    <th>Item</th>
-                    <th>Purchase Date</th>
-                    <th>Purchase By</th>
-                    <th>Amount</th>
-                    <th>Paid By</th>
+                    <th>Name</th>
+                    <th>Work Experience</th>
+                    <th>Skills</th>
+                    <th>Qualification</th>
+                    <th>Education Background</th>
                     <th>Status</th>
-                    <th>View</th>
                 </thead>
                 <tbody>
                     @forelse ($datas as $data)
                         <tr>
                             <td>{{$data->id}}</td>
-                            <td>{{$data->item}}</td>
-                            <td>{{$data->purchasedate}}</td>
-                            <td>{{$data->purchaseby}}</td>
-                            <td>{{$data->amount}}</td>
+                            <td>{{$data->name}}</td>
+                            <td>{{$data->work}}</td>
+                            <td>{{$data->skill}}</td>
+                            <td>{{$data->qualification}}</td>
+                            <td>{{$data->education}}</td>
                             <td>{{$data->paidby}}</td>
                             <td>{{$data->status}}</td>
                             <td>
@@ -34,7 +34,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center">No record found nigga!</td>
+                            <td colspan="7" class="text-center">No record found nigga!</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -55,21 +55,21 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Item</label>
-                            <input wire:model="item" class="form-control">
-                            @error('item') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Purchase Date</label>
-                            <input wire:model="purchasedate" class="form-control">
-                            @error('purchasedate') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Purchase By</label>
-                            <input wire:model="purchaseby" class="form-control">
-                            @error('purchaseby') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Amount</label>
-                            <input wire:model="amount" class="form-control">
-                            @error('amount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Paid By</label>
-                            <input wire:model="paidby" class="form-control">
-                            @error('paidby') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Name</label>
+                            <input wire:model="name" class="form-control">
+                            @error('name') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Work Experience</label>
+                            <input wire:model="work" class="form-control">
+                            @error('work') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Skills</label>
+                            <input wire:model="skill" class="form-control">
+                            @error('skill') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Qualification</label>
+                            <input wire:model="qualification" class="form-control">
+                            @error('qualification') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Educational Background</label>
+                            <input wire:model="education" class="form-control">
+                            @error('education') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Status</label>
                             <input wire:model="status" class="form-control">
                             @error('status') <span class="alert text-danger">{{ $message }}<br /></span> @enderror

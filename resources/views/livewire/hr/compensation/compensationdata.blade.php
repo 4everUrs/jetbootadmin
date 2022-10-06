@@ -10,24 +10,24 @@
             <x-table head="Compensation Planning">
                 <thead>
                     <th>No.</th>
-                    <th>Item</th>
-                    <th>Purchase Date</th>
-                    <th>Purchase By</th>
-                    <th>Amount</th>
-                    <th>Paid By</th>
-                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Base Pay</th>
+                    <th>Benefits</th>
+                    <th>Insentives</th>
+                    <th>Insurance</th>
                     <th>View</th>
                 </thead>
                 <tbody>
                     @forelse ($datas as $data)
                         <tr>
                             <td>{{$data->id}}</td>
-                            <td>{{$data->item}}</td>
-                            <td>{{$data->purchasedate}}</td>
-                            <td>{{$data->purchaseby}}</td>
-                            <td>{{$data->amount}}</td>
-                            <td>{{$data->paidby}}</td>
-                            <td>{{$data->status}}</td>
+                            <td>{{$data->name}}</td>
+                            <td>{{$data->position}}</td>
+                            <td>{{$data->basepay}}</td>
+                            <td>{{$data->benefits}}</td>
+                            <td>{{$data->insentives}}</td>
+                            <td>{{$data->insurance}}</td>
                             <td>
                                 <button class="btn btn-primary">View</button>
                             </td>
@@ -55,24 +55,24 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Item</label>
-                            <input wire:model="item" class="form-control">
-                            @error('item') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Purchase Date</label>
-                            <input wire:model="purchasedate" class="form-control">
-                            @error('purchasedate') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Purchase By</label>
-                            <input wire:model="purchaseby" class="form-control">
-                            @error('purchaseby') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Amount</label>
-                            <input wire:model="amount" class="form-control">
-                            @error('amount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Paid By</label>
-                            <input wire:model="paidby" class="form-control">
-                            @error('paidby') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            <label>Status</label>
-                            <input wire:model="status" class="form-control">
-                            @error('status') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Name</label>
+                            <input wire:model="name" class="form-control">
+                            @error('name') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Position</label>
+                            <input wire:model="position" class="form-control">
+                            @error('position') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Basepay</label>
+                            <input wire:model="basepay" class="form-control">
+                            @error('basepay') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Benefits</label>
+                            <input wire:model="benefits" class="form-control">
+                            @error('benefits') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Insentives</label>
+                            <input wire:model="insentives" class="form-control">
+                            @error('insentives') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Insurance</label>
+                            <input wire:model="insurance" class="form-control">
+                            @error('insurance') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             
                         </div>
                     </div>

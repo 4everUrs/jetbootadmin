@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Compensation extends Model
 {
     use HasFactory;
+    protected $fillable =[
+        'name', 'position', 'basepay', 'benefits', 'insentives','insurance',
+    ];
 }

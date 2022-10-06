@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('cores', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('work');
+            $table->string('skill');
+            $table->string('qualification');
+            $table->string('education');
+            $table->string('status');
             $table->timestamps();
         });
     }

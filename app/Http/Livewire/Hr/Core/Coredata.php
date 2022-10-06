@@ -8,17 +8,16 @@ use Livewire\WithPagination;
 
 class Coredata extends Component
 {
-    public $name, $type, $position, $reason, $datestart, $dateend , $status = 'Pending';
+    public $name, $work, $skill, $qualification, $education , $status = 'available';
     public $CoreModal = false;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $rules = [
         'name' => 'required|string',
-        'type' => 'required|string',
-        'position' => 'required|string',
-        'reason' => 'required|string',
-        'datestart' => 'required|string',
-        'dateend' => 'required|string',
+        'work' => 'required|string',
+        'skill' => 'required|string',
+        'qualification' => 'required|string',
+        'education' => 'required|string',
         'status' => 'required|string'
     ];
     public function updated($fields)
@@ -41,11 +40,11 @@ class Coredata extends Component
     }
     public function resetInput(){
         $this->name = null;
-        $this->type = null;
-        $this->position = null;
-        $this->reason = null;
-        $this->datestart = null;
-        $this->dateend = null;
+        $this->work = null;
+        $this->skill = null;
+        $this->qualification = null;
+        $this->education = null;
+        $this->status = null;
     }
 
 

@@ -9,17 +9,17 @@ use Livewire\WithPagination;
 class Compensationdata extends Component
 {
 
-        public $item, $purchasedate, $purchaseby, $amount, $paidby, $status = 'pending';
+        public $name, $position, $basepay, $benefits, $insentives, $insurance;
         public $compensationModal = false;
         use WithPagination;
         protected $paginationTheme = 'bootstrap';
         protected $rules = [
-            'item' => 'required|string',
-            'purchasedate' => 'required|string',
-            'purchaseby' => 'required|string',
-            'amount' => 'required|string',
-            'paidby' => 'required|string',
-            'status' => 'required|string'
+            'name' => 'required|string',
+            'position' => 'required|string',
+            'basepay' => 'required|string',
+            'benefits' => 'required|string',
+            'insentives' => 'required|string',
+            'insurance' => 'required|string'
         ];
     
         public function updated($fields)
@@ -41,12 +41,12 @@ class Compensationdata extends Component
         $this->dispatchBrowserEvent('close-modal');
     }
     public function resetInput(){
-        $this->item = null;
-        $this->purchasedate = null;
-        $this->purchaseby = null;
-        $this->amount= null;
-        $this->paidby = null;
-        $this->status = null;
+        $this->name = null;
+        $this->position = null;
+        $this->basepay = null;
+        $this->benefits= null;
+        $this->insentives = null;
+        $this->insurance = null;
     }
 
 
