@@ -39,8 +39,10 @@ class LoginController extends Controller
             return redirect()->route('logistics');
         } elseif (Auth::user()->current_team_id >= 15 && Auth::user()->current_team_id <= 19) {
             return redirect()->route('finance');
-        } elseif (Auth::user()->current_team_id >= 20) {
+        } elseif (Auth::user()->current_team_id >= 20 && Auth::user()->current_team_id <= 28) {
             return redirect()->route('core');
+        } elseif (Auth::user()->current_team_id >= 29 && Auth::user()->current_team_id <= 37) {
+            return redirect()->route('hr');
         }
     }
 }
