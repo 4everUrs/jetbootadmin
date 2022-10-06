@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TimeInController;
 use App\Http\Livewire\Logistics\Procurement\Requestlists;
 use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
@@ -33,6 +34,11 @@ use App\Models\Core;
 
 Route::get('/', function () {
     return redirect('/login');
+});
+
+
+Route::middleware('auth')->group(function(){
+    Route::get('timein',[TimeInController::class,'timein'])->name('timein');
 });
 
 //Login Routes

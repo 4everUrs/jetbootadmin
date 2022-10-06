@@ -12,7 +12,10 @@ use Livewire\WithPagination;
 class Timedata extends Component
 {
     public $name, $position, $department, $timein, $timeout, $date, $status;
-    public $timeModal = false;
+    public $addRecord = false;
+    public $viewModal = false;
+    
+    public $data;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -31,10 +34,29 @@ class Timedata extends Component
     {
         $this->validateOnly($fields);
     }
+    public function showModal()
+    {
+        $this->addRecord = true;
+    }
+    public function saveData()
+    {
+        $validatedData = $this->validate();
+        Time::create($validatedData);
+        $this->resetInput();
+        toastr()->addSuccess('Data added successfully');
+        $this->addRecord = false;
+    }
     public function render()
     {
+        $this->data;
         return view('livewire.hr.timeaattendance.timedata',[
             'datas' => Time::paginate(6),]);
+    }
+    public function viewData($id){
+        
+        $this->viewModal = true;
+        $this->data = Time::find($id);
+        $this->name = $this->data->name;
     }
     public function saveRecord(){
         $validatedData = $this->validate();
