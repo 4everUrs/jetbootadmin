@@ -42,11 +42,14 @@ Route::middleware('auth')->group(function(){
 });
 
 //Login Routes
-Route::get('/redirects',[LoginController::class, 'login']);
+Route::get('/redirects', [LoginController::class, 'login']);
+Route::get('/staff', [LoginController::class, 'staff'])->name('staff');
+Route::get('/manager', [LoginController::class, 'manager'])->name('manager');
 
 //Admin Routes
-Route::prefix('admin')->middleware('auth','isAdmin')->group(function(){
-    Route::view('dashboard','livewire.admin.dashboard')->name('dashboard');
+Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function () {
+    Route::view('dashboard', 'livewire.admin.dashboard')->name('dashboard');
+    Route::get('users', UsersList::class)->name('users');
 });
 
 //Logistics Routes
