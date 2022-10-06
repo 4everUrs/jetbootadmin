@@ -9,17 +9,55 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                     {{--Budget Management --}}
+                    <i class="fas fa-calculator"></i>
                     <p>Budget Management</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('transaction')}}" class="nav-link">Transaction</a>
+                        <a href="{{route('transaction')}}" class="nav-link"><i class="fas fa-rotate"></i>Transaction</a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a href="{{route('requestlist')}}" class="nav-link">Request lists</a>
+                        
+                    </li>
+                </ul>
+            </li> 
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    {{--DISBURSEMENT --}}
+                    <i class="fas fa-calculator"></i>
+                    <p>Disubursement</p>
+                    <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="" class="nav-link"></i>Requests</a>
+                    </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    {{--AP & AR  --}}
+                    <i class="fas fa-calculator"></i>
+                    <p>AP & AR</p>
+                    <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('journal')}}" class="nav-link">Journal Entry</a>
+                    </li>
+                </ul>
+            </li>
+           
+           
+            
+               
+                    
+                    
+                </ul>
+            </li> 
         </ul>
     </nav>
 </div>

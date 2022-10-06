@@ -17,11 +17,10 @@ class FinanceMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role_id == '0' || Auth::user()->department_id == '3'){
+        if (Auth::user()->role_id == '0' || Auth::user()->current_team_id == '3' || Auth::user()->current_team_id >= 15 && Auth::user()->current_team_id <= 19) {
             return $next($request);
-        }
-        else{
-            abort (403, 'Just kidding find your way');
+        } else {
+            abort(403, 'Just kidding find your way');
         }
     }
 }

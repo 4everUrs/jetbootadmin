@@ -80,5 +80,5 @@ Route::prefix('hr')->middleware('auth','isHr')->group(function(){
     Route::get('analytics',Analyticdata::class)->name('analytics');
     Route::get('time',Timedata::class)->name('time');
     Route::get('compensation',Compensationdata::class)->name('compensation');
-    Route::get('core',Coredata::class)->name('core');
+    Route::get('corehuman',Coredata::class)->name('corehuman');
 });
