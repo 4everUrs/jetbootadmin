@@ -98,10 +98,6 @@ Route::prefix('finance')->middleware('auth', 'isFinance')->group(function () {
     Route::get('journals', Journals::class)->name('journal');
 });
 
-//Core Routes
-Route::prefix('core')->middleware('auth', 'isCore')->group(function () {
-    Route::view('dashboard', 'livewire.core.dashboard')->name('core');
-});
 
 //HR Routes
 Route::prefix('hr')->middleware('auth', 'isHr')->group(function () {
