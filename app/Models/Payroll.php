@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ApplicantForm extends Model
+class Payroll extends Model
 {
     use HasFactory;
-    protected $fillable=[
-        'name','position','email','phone','location','company','status','resume_file'
+    protected $fillabe = [
+        'name', 'attendance', 'salary', 'contribution', 'placement'
     ];
 }

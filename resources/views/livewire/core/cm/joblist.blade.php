@@ -6,11 +6,8 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="loadModal" type="create" class="btn btn-success"><i class='fa fa-plus'></i> Add New Job</button>
-            <thead>
-                <th></th>
-    
-            </thead>
+            <button wire:click="loadModal" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Add New Job</button>
+            
             <tbody>
                 <tr>
                     <td></td>
@@ -20,6 +17,16 @@
            
         </div>
     </div>
+    <br>
+    <x-table head="">
+        <thead>
+            <th>No.</th>
+            <th>Company Name</th>
+            <th>Collection</th>
+            <th>Status</th>
+
+        </thead>
+    </x-table>
     <x-jet-dialog-modal wire:model="showModal">
         <x-slot name="title">
             {{ __('Create Job') }}
