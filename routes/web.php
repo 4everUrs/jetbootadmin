@@ -2,7 +2,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PDFController;
 use App\Http\Livewire\Admin\UsersList;
@@ -28,9 +27,6 @@ use App\Http\Livewire\Core\Cm\Clientdata;
 use App\Http\Livewire\Core\Cm\Joblist;
 use App\Http\Livewire\Core\Cacm\Contract;
 use App\Http\Livewire\Core\Cacm\Agreement;
-
-
-
 use App\Http\Livewire\Logistics\Procurement\Supplierslists;
 use App\Http\Livewire\Logistics\Procurement\Purchaseorders;
 use App\Http\Livewire\Logistics\Vendorportal\Recievedrequests;
@@ -110,12 +106,6 @@ Route::prefix('finance')->middleware('auth', 'isFinance')->group(function () {
     Route::get('journals', Journals::class)->name('journal');
 });
 
-
-//HR Routes
-Route::prefix('hr')->middleware('auth', 'isHr')->group(function () {
-    Route::view('dashboard', 'livewire.hr.dashboard')->name('hr');
-    Route::get('leavemangement', Leavedata::class)->name('leave');
-});
 
 //Core Routes
 Route::prefix('core')->middleware('auth', 'isCore')->group(function () {
