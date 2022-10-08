@@ -128,7 +128,7 @@
     </div>
     <!-- ./wrapper -->
     
-    {{-- <script>
+    <script>
         window.addEventListener('showButton', event => {
         var element = document.getElementById("createButton");
         var review = document.getElementById("reviewButton");
@@ -174,14 +174,14 @@
             body.classList.remove("dark-mode");
             topbar.classList.remove('bg-dark');
         }
-    </script> --}}
+    </script>
     @stack('modals')
     
     @livewireScripts
     
     @stack('scripts')
     
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
     
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="{{asset('dist/js/adminlte.js')}}"></script>
@@ -214,7 +214,7 @@
 
     <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 
-    <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>  --}}
+    <script src="{{asset('dist/js/pages/dashboard.js')}}"></script> 
 </body>
 
 </html>
