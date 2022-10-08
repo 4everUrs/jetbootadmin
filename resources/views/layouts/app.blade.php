@@ -181,7 +181,7 @@
     
     @stack('scripts')
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
     
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="{{asset('dist/js/adminlte.js')}}"></script>
@@ -198,7 +198,7 @@
 
     <script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
 
-    {{-- <script src="{{asset('plugins/sparklines/sparkline.js')}}"></script> --}}
+    <script src="{{asset('plugins/sparklines/sparkline.js')}}"></script>
 
     <script src="{{asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
     <script src="{{asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
@@ -214,7 +214,7 @@
 
     <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 
-    <script src="{{asset('dist/js/pages/dashboard.js')}}"></script> 
+    <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>  --}}
 </body>
 
 </html>
