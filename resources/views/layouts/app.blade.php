@@ -29,7 +29,7 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
     @livewireStyles
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed" id="boody">
@@ -128,7 +128,7 @@
     </div>
     <!-- ./wrapper -->
     
-    <script>
+    {{-- <script>
         window.addEventListener('showButton', event => {
         var element = document.getElementById("createButton");
         var review = document.getElementById("reviewButton");
@@ -174,7 +174,7 @@
             body.classList.remove("dark-mode");
             topbar.classList.remove('bg-dark');
         }
-    </script>
+    </script> --}}
     @stack('modals')
     
     @livewireScripts
