@@ -29,8 +29,7 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
     @livewireStyles
-    @yield('style')
-    
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed" id="boody">
@@ -176,21 +175,21 @@
             topbar.classList.remove('bg-dark');
         }
     </script>
+    @stack('modals')
     
+    @livewireScripts
+    
+    @stack('scripts')
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="{{asset('dist/js/adminlte.js')}}"></script>
     
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 
     <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-    @stack('modals')
     
-    @livewireScripts
-    
-    @stack('scripts')
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
@@ -214,8 +213,6 @@
     <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
 
     <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-
-    
 
     <script src="{{asset('dist/js/pages/dashboard.js')}}"></script> 
 </body>
