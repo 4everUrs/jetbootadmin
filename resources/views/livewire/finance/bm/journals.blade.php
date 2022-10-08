@@ -11,7 +11,7 @@
             <a wire:click="loadingJournal" class="btn btn-success">Add Journal Entry</a>
            
             <x-table head="History of Liabilities">
-                 <thead >
+            
                 <thead>
                     <th>No.</th>
                     <th>Date</th>
@@ -23,57 +23,50 @@
                 </thead>
 
                 <tbody>
-                    @forelse($journal_entries as $key => $journal_entry)
+                  @foreach ($journal_entries as $entry)
                     <tr>
-                        <td>{{$journal_entry->id}}</td>
-                        <td>{{$journal_entry->created_at}}</td>
+                        <td>{{$entry->id}}</td>
+                        <td>{{Carbon\Carbon::parse($entry->created_at)->toFormattedDateString()}}</td>
                         <td>
-                            {{-- <table class="table table-striped">
-                               @foreach ($childData[$key] as $index => $sub)
-                                   <tr>
-                                        <td>{{$childData[$key][$index]->jdescription}}</td>
-                                   </tr>
-                               @endforeach
-                            </table> --}}
-                        </td>  
+                           <table class="table">
+                                @foreach ($entry->subjournal as $subjournal)
+                                    <tr>
+                                        <td>{{$subjournal->jdescription}}</td>
+                                    </tr>
+                                @endforeach
+                           </table>
+                        </td>
                         <td>
-                            {{-- <table class="table table-striped">
-                                @foreach ($childData[$key]  as $index => $sub)
-                                   <tr>
-                                        <td>{{$childData[$key][$index]->jdebit}}</td>
-                                   </tr>
-                               @endforeach
-                             </table> --}}
-                        </td>  
+                           <table class="table">
+                                @foreach ($entry->subjournal as $subjournal)
+                                    <tr>
+                                        <td>{{$subjournal->jdebit}}</td>
+                                    </tr>
+                                @endforeach
+                           </table>
+                        </td>
                         <td>
-                            {{-- <table class="table table-striped">
-                                @foreach ($childData[$key]  as $index => $sub)
-                                   <tr>
-                                        <td>{{$childData[$key][$index]->jcredit}}</td>
-                                   </tr>
-                               @endforeach
-                             </table> --}}
-                        </td>  
-                        <td>{{$journal_entry->jencoded}}</td>
-
-                        <td class="text-center">
-
-                            <button wire:click="updateLiabilities({{$journal_entry->id}})" class="btn btn-primary"> Edit
-                            </button>
-                            <button wire:click="delete({{$journal_entry->id}})" class="btn btn-danger"> Delete </button>
-
+                           <table class="table">
+                                @foreach ($entry->subjournal as $subjournal)
+                                    <tr>
+                                        <td>{{$subjournal->jcredit}}</td>
+                                    </tr>
+                                @endforeach
+                           </table>
+                        </td>
+                        <td>{{$entry->jencoded}}</td>
+                        <td>
+                            <button wire:click="viewModal({{$entry->id}})" class="btn btn-primary btn-sm">View</button>
+                            <button wire:click="updateLiability({{$entry->id}})" class="btn btn-success btn-sm">Edit</button>
                         </td>
                     </tr>
-                    @empty
-                    <tr>
-                        <td class="text-center" colspan="7">"Unlisted Records"</td>
-                    </tr>
-                    @endforelse
+                      
+                  @endforeach
                 </tbody>
             </x-table>
 
             <div class="mt-3 float-right">
-                {{$journal_entries->links()}}
+                {{-- {{$journal_entries->links()}} --}}
             </div>
         </div>
     </div>
@@ -155,41 +148,66 @@
             {{ __('Update Liability Record') }}
         </x-slot>
         <x-slot name="content">
-            <div class="row form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
-                <div class="col">
-                    <label>Account</label>
-                    <select class="form-control" wire:model="jdescription">
-
-                        <option>Select Option</option>
-                        <option>CASH</option>
-                        <option>ACCOUNT RECEIVABLE </option>
-                        <option>INVENTORY</option>
-                        <option>VEHICLES</option>
-                    </select>
-                    @error('jdescription') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-
-                    <label>Amount</label><br>
-
-                    <label>Debit</label>
-                    <input type="number" class="form-control" wire:model="jdebit"><br>
-
-
-                    <label>Credit</label>
-                    <input type="number" class="form-control" wire:model="jcredit"><br>
-
-
+            <div class="form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
+                <div class="row mb-4">
+                    <div class="col">
+                        <label>Category</label>
+                        <select wire:model="jdescription" class="form-control">
+                            <option>Select Option</option>
+                            <option value="Operating Budget">Operating budget</option>
+                            <option value="Financial Budget">Financial budget </option>
+                            <option value="Cash Budget">Cash Budget </option>
+                            <option value="Labor Budget">Labor Budget</option>
+                            <option value="Strategic Plan">Strategic Plan</option>
+                        </select>
+                       
+                    </div>
+                    <div class="col">
+                        <label>Debit</label>
+                        <input wire:model="jdebit" class="form-control" type="number">
+                        <label>Credit</label>
+                        <input wire:model="jcredit" class="form-control" type="number">
+                    </div>
                 </div>
+                <button wire:click="saveSub" class="btn btn-dark mb-2">SAVE</button>
+                <table class="table table-hovered">
+                    <thead>
+                    
+                        <th>Description</th>
+                        <th>Debit</th>
+                        <th>Credit</th>
+                        <th class="text-center">Action</th>
+                    </thead>
+                    <tbody>
+                     @if (!empty($subjournalData))
+                        @foreach ($subjournalData as $data)
+                            <tr>
+                                <td>{{$data->jdescription}}</td>
+                                <td>{{$data->jdebit}}</td>
+                                <td>{{$data->jcredit}}</td>
+                                <td class="text-center">
+                                    <button wire:click="editSub({{$data->id}})" class="btn btn-primary">Edit</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                     @endif
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">Total:</td>
+                            <td >{{$grandtotal}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </x-slot>
 
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('updateLiability')" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
+                {{ __('Close') }}
             </x-jet-secondary-button>
             {{--wire:click function dito sa button hindi match sa function sa class--}}
-            <x-jet-button class="ms-2" wire:click="updateLiabilities" wire:loading.attr="disabled">
-                {{ __('Update Records') }}
-            </x-jet-button>
+            
         </x-slot>
     </x-jet-dialog-modal>
     {{--update liability--}}
@@ -213,5 +231,42 @@
     </x-jet-dialog-modal>
     {{--delete liability--}}
 
+    <x-jet-dialog-modal wire:model="viewRecord" maxWidth="xl">
+        <x-slot name="title">
+            {{ __('Update Liability Record') }}
+        </x-slot>
+        <x-slot name="content">
+            <table class="table table-striped">
+                <thead>
+                    <th>No</th>
+                    <th>Description</th>
+                    <th>Credit</th>
+                    <th>Debit</th>
+                </thead>
+                <tbody>
+                    @if (!empty($subjournalData))
+                    @foreach ($subjournalData as $data)
+                    <tr>
+                        <td>{{$data->id}}</td>
+                        <td>{{$data->jdescription}}</td>
+                        <td>{{$data->jcredit}}</td>
+                        <td>{{$data->jdebit}}</td>
+                    </tr>
+                @endforeach
+                    @endif
+                   
+                </tbody>
+            </table>
+        </x-slot>
 
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('viewRecord')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+            {{--wire:click function dito sa button hindi match sa function sa class--}}
+            <x-jet-button class="ms-2" wire:click="updateLiabilities" wire:loading.attr="disabled">
+                {{ __('Update Records') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>

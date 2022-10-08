@@ -21,18 +21,21 @@
                     <li class="nav-item">
                         <a href="{{route('requestlist')}}" class="nav-link">Request lists</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('allocatebudget')}}" class="nav-link">Budget Allocation</a>
+                    </li>
                 </ul>
             </li> 
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     {{--DISBURSEMENT --}}
                     <i class="fas fa-calculator"></i>
-                    <p>Disubursement</p>
+                    <p>Disbursement</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link"></i>Disbursement</a>
+                        <a href="{{route('moneyTransaction')}}" class="nav-link"></i>Budget Transaction</a>
                     </li>
                 </ul>
             </li>
@@ -47,6 +50,26 @@
                     <li class="nav-item">
                         <a href="{{route('journal')}}" class="nav-link">Journal Entry</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('generalledge')}}"class="nav-link">General Ledger</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('bsheets')}}"class="nav-link">Balance Sheets</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="fas fa-calculator"></i>
+                    <p>Collection</p>
+                    <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('collects')}}" class="nav-link">Earnings</a>
+                    </li>
+                    
                 </ul>
             </li>
            

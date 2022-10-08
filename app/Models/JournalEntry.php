@@ -9,9 +9,9 @@ class JournalEntry extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'jdescription', 'jdebit', 'jcredit','jencoded','journal_entry_id'
+        'jdescription', 'jdebit', 'jcredit','jencoded','journal_entry_id','created_at'
     ]; 
-    function getChildData()
+    function subjournal()
     {
         return $this->hasMany('App\Models\SubJournal');
     }
