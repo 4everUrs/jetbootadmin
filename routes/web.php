@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PDFController;
 use App\Http\Livewire\Admin\UsersList;
 use App\Http\Livewire\Logistics\Procurement\PurchaseItems;
+use App\Http\Controllers\TimeInController;
 use App\Http\Livewire\Logistics\Procurement\Requestlists;
 use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
@@ -38,12 +39,18 @@ use App\Http\Livewire\Logistics\Vendorportal\Supplierlist;
 use App\Http\Livewire\Logistics\Vendorportal\Disposal;
 use App\Http\Livewire\Logistics\Vendorportal\Bidders;
 use App\Http\Livewire\Logistics\Vendorportal\Buyers;
-
-
-
 use App\Http\Livewire\Finance\Bm\Requestedlist;
 use App\Http\Livewire\Finance\Bm\Journals;
-
+use App\Http\Livewire\Hr\Claimreimburse\Claimdata;
+use App\Http\Livewire\Hr\Compensation\Compensationdata;
+use App\Http\Livewire\Hr\Core\Coredata;
+use App\Http\Livewire\Hr\Hr\Analyticdata;
+use App\Http\Livewire\Hr\Payroll\Paydata;
+use App\Http\Livewire\Hr\Shiftschedule\Shiftdata;
+use App\Http\Livewire\Hr\Timeaattendance\Timedata;
+use App\Http\Livewire\Hr\Timesheet\Timesheetdata;
+use App\Models\Compensation;
+use App\Models\Core;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +65,11 @@ use App\Http\Livewire\Finance\Bm\Journals;
 
 Route::get('/', function () {
     return redirect('/login');
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('timein', [TimeInController::class, 'timein'])->name('timein');
 });
 
 //Login Routes
@@ -124,4 +136,18 @@ Route::prefix('core')->middleware('auth', 'isCore')->group(function () {
     Route::get('cacm/contract', Contract::class)->name('contract');
     Route::get('cacm/agreement', Agreement::class)->name('agreement');
     Route::get('joblisting', JobList::class)->name('joblisting');
+});
+
+//HR Routes
+Route::prefix('hr')->middleware('auth', 'isHr')->group(function () {
+    Route::view('dashboard', 'livewire.hr.dashboard')->name('hr');
+    Route::get('leavemangement', Leavedata::class)->name('leave');
+    Route::get('timesheet', Timesheetdata::class)->name('timesheet');
+    Route::get('claim', Claimdata::class)->name('claim');
+    Route::get('pay', Paydata::class)->name('pay');
+    Route::get('shift', Shiftdata::class)->name('shift');
+    Route::get('analytics', Analyticdata::class)->name('analytics');
+    Route::get('time', Timedata::class)->name('time');
+    Route::get('compensation', Compensationdata::class)->name('compensation');
+    Route::get('corehuman', Coredata::class)->name('corehuman');
 });

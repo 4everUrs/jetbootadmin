@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('leaves', function (Blueprint $table) {
+        Schema::create('timesheets', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('type');
             $table->string('position');
-            $table->string('reason');
-            $table->string('datestart');
-            $table->string('dateend');
-            $table->string('status');
+            $table->string('datefrom');
+            $table->string('dateto');
+            $table->string('totalhours');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leaves');
+        Schema::dropIfExists('timesheets');
     }
 };
