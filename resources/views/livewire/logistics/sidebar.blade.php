@@ -52,6 +52,7 @@
                             <a href="{{route('supplierposting')}}" class="nav-link">Posting</a>
                             <a href="{{route('disposal')}}" class="nav-link">Disposal</a>
                             <a href="{{route('bidders')}}" class="nav-link">Bidders</a>
+                            <a href="{{route('buyers')}}" class="nav-link">Buyers</a>
                             <a href="{{route('supplierlist')}}" class="nav-link">Supplier List</a>
                         </li>
                     </ul>

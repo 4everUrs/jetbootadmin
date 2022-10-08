@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vendor_shops', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('order_id');
             $table->string('item_name');
+            $table->integer('qty');
             $table->string('condition');
             $table->string('description');
             $table->integer('amount');
             $table->string('thumbnail');
-            $table->string('status');
-            $table->string('origin');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendor_shops');
+        Schema::dropIfExists('order_items');
     }
 };

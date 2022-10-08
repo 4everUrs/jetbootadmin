@@ -9,7 +9,7 @@ class Supplierslists extends Component
 {
     public function render()
     {
-        return view('livewire.logistics.procurement.supplierslists',[
+        return view('livewire.logistics.procurement.supplierslists', [
             'suppliers' => Supplier::get(),
         ]);
     }

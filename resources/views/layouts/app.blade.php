@@ -136,7 +136,7 @@
         if (currentLink.length > 0) { //this filter because some links are not from menu
         currentLink[0].classList.add("active");
         currentLink[0].closest(".nav-treeview").style.display = "block";
-        currentLink[0].closest(".has-treeview").classList.add("active");
+        currentLink[0].closest(".nav-treeview").classList.add("active");
         }
         
         function darkmode() {
@@ -161,9 +161,9 @@
         }
     </script>
     
-    <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="{{asset('dist/js/adminlte.js')}}"></script>
     

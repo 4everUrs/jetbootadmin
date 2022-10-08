@@ -41,4 +41,5 @@
             </x-table>
         </div>
     </div>
+    
 </div>

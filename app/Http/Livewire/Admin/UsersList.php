@@ -14,6 +14,7 @@ class UsersList extends Component
     public $teams;
     public $departments;
     public $name, $email, $phone, $username, $password;
+    public $search = '';
     public function render()
     {
         if (!empty($this->role_id)) {
