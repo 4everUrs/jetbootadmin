@@ -128,53 +128,7 @@
     </div>
     <!-- ./wrapper -->
     
-    <script>
-        window.addEventListener('showButton', event => {
-        var element = document.getElementById("createButton");
-        var review = document.getElementById("reviewButton");
-        element.classList.remove("d-none");
-        review.classList.add("d-none");
-        })
-        window.addEventListener('vendor-form', event => {
-        var vendor = document.getElementById('vendor');
-        var content = document.getElementById('content');
-        content.classList.add('d-none');
-        vendor.classList.remove('d-none');
-        })
-       /** add active class and stay opened when selected */
-        var url = window.location;
-        const allLinks = document.querySelectorAll('.nav-item a');
-        const currentLink = [...allLinks].filter(e => {
-        return e.href == url;
-        });
-        
-        if (currentLink.length > 0) { //this filter because some links are not from menu
-        currentLink[0].classList.add("active");
-        currentLink[0].closest(".nav-treeview").style.display = "block";
-        currentLink[0].closest(".nav-treeview").classList.add("active");
-        }
-        
-        function darkmode() {
-            var body = document.getElementById("boody");
-            var topbar = document.getElementById('topbar');
-            var moon = document.getElementById('dark');
-            var sun = document.getElementById('light');
-            sun.classList.remove('d-none');
-            moon.classList.add('d-none');
-            body.classList.add("dark-mode");
-            topbar.classList.add('bg-dark');
-        }
-        function light() {
-            var body = document.getElementById("boody");
-            var topbar = document.getElementById('topbar');
-            var moon = document.getElementById('dark');
-            var sun = document.getElementById('light');
-            sun.classList.add('d-none');
-            moon.classList.remove('d-none');
-            body.classList.remove("dark-mode");
-            topbar.classList.remove('bg-dark');
-        }
-    </script>
+    
     @stack('modals')
     
     @livewireScripts
