@@ -28,10 +28,9 @@
     <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     @livewireStyles
-    <script src="{{ mix('js/app.js') }}" defer></script>
     
+    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed" id="boody">
@@ -137,7 +136,7 @@
     
     @stack('scripts')
     
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
     
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="{{asset('dist/js/adminlte.js')}}"></script>
@@ -169,7 +168,7 @@
     <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
 
     <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-
+    <script src="{{ mix('js/app.js') }}" defer></script>
     {{-- <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>  --}}
 </body>
 
