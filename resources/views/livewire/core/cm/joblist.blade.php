@@ -6,6 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
+            <h2 style="float:left;"><strong>Create Job</strong></h2>
             <button wire:click="loadModal" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Add New Job</button>
             
             <tbody>
@@ -50,7 +51,7 @@
                 <textarea wire:model="details"class="form-control" rows="2"></textarea>
                 @error('details') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
-                <label for="">Location</label>
+                <label for="">Work Location</label>
                 <input wire:model="location"class="form-control" type="text">
                 @error('location') <span class="text-danger">{{$message}}</span> @enderror
             </div>

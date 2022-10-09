@@ -11,7 +11,7 @@
                 <th class="text-center">No.</th>
                 <th class="text-center">Name</th>
                 <th class="text-center">Email</th>
-                <th class="text-center">Location</th>
+                <th class="text-center">Company Location</th>
                 <th class="text-center">Status</th>
                 <th class="text-center">Action</th>
 

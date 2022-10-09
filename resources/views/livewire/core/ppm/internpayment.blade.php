@@ -6,9 +6,9 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="loadPayroll" type="create" class="btn btn-success" style="float:right"> Local Payroll</button>
+            <button wire:click="loadInternPayroll" type="create" class="btn btn-success" style="float:right"> International Payroll</button>
             <br><br>
-            <x-table head="List of Local Payroll">
+            <x-table head="List of International Payroll">
                 <thead>
                     <th>No.</th>
                     <th>Employee Name</th>
@@ -43,14 +43,13 @@
             </x-table>
         </div>
     </div>
-    <x-jet-dialog-modal wire:model="showPayroll">
+    <x-jet-dialog-modal wire:model="showInternPayroll">
         <x-slot name="title">
-            {{ __('Create Local Payroll') }}
+            {{ __('Create International Payroll') }}
             
         </x-slot>
         <x-slot name="content">
             <div class="form-group">
-                
                 <label for="">Employee Name</label>
                 <input wire:model="name"class="form-control" type="text">
                 @error('name') <span class="text-danger">{{$message}}</span> @enderror
@@ -79,11 +78,11 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('showPayroll')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
+            <x-jet-secondary-button wire:click="$toggle('showInternPayroll')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
     
-            <x-jet-button class="ms-2" wire:click="savePayroll" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+            <x-jet-button class="ms-2" wire:click="saveRequest" wire:loading.attr="disabled"><i class='fa fa-check'></i>
                 {{ __('Confirm') }}
             </x-jet-button>
         </x-slot>
@@ -92,7 +91,7 @@
     
     <div class="card">
         <div class="card-body">
-            <x-table head="List of Local Payment">
+            <x-table head="List of International Payment">
                 <thead>
                     <th>No.</th>
                     <th>Employee Name</th>
@@ -118,8 +117,8 @@
                         <td></td>
                         <td></td>
                         <td class="text-center">
-                            <button wire:click="payout" class="btn btn-sm btn-primary">Payout</button>
-                    </td>
+                                <button wire:click="payout" class="btn btn-sm btn-primary">Payout</button>
+                        </td>
                         
                     </tr>
                     @empty
@@ -132,7 +131,7 @@
     <br><br><br>
     <div class="card">
         <div class="card-body">
-            <x-table head="Local Collection">
+            <x-table head="International Collection">
                 <thead>
                     <th>No.</th>
                     <th>Employee Name</th>
@@ -141,7 +140,7 @@
                     <th>Collection</th>
                     <th>Status</th>
                     <th>Total Collection</th>
-                    <th class="text-center">Action</th>
+                    <th>Action</th>
                 </thead>
                 <tbody>
                     @forelse ($payrolls as $payroll)

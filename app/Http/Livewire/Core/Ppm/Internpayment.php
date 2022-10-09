@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Core\Ppm;
 
 use Livewire\Component;
-use App\Models\Payroll;
-class Paymentfee extends Component
+use App\Models\InternationalPayroll;
+class Internpayment extends Component
 {
-    public $showPayroll = false;
+    public $showInternPayroll = false;
     public $name,$attendance,$salary,$placement,$contribution,$collection;
     protected $rules = [
-        'name' => 'required|string|min:6',
+        'name' => 'required|string',
         'attendance' => 'required|string',
         'salary' => 'required|string',
         'contribution' => 'required|string',
@@ -22,17 +22,15 @@ class Paymentfee extends Component
     }
     public function render()
     {
-        return view('livewire.core.ppm.paymentfee',[
-            'payrolls' => Payroll::all(),
+        return view('livewire.core.ppm.internpayment',[
+            'payrolls' => internationalPayroll::all(),
         ]);
     }
-    public function savePayroll(){
+    public function saveRequest(){
         $validateddata = $this->validate();
-        
-        Payroll::create($validateddata);
-        flash()->addSuccess('Data update successfully');
+        InternationalPayroll::create($validateddata);
         $this->resetInput();
-        $this->showPayroll = false;
+        $this->showInternPayroll = false;
     }
     public function resetInput()
     {
@@ -43,12 +41,7 @@ class Paymentfee extends Component
         $this->placement = '';  
         $this->collection = '';  
     }
-    public function loadPayroll(){
-        $this->showPayroll = true;
-    }
-
-    public function request()
-    {
-        
+    public function loadInternPayroll(){
+        $this->showInternPayroll = true;
     }
 }

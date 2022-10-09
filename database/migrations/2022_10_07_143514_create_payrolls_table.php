@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('salary');
             $table->string('contribution');
             $table->string('placement');
+            $table->string('collection');
+            $table->string('status');
             $table->timestamps();
         });
     }

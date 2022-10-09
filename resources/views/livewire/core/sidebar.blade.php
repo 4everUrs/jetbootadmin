@@ -93,9 +93,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('paymentfee')}}" class="nav-link">Local Payroll</a>
-                        <a href="#" class="nav-link">Local Payment</a>
-                        <a href="#" class="nav-link">International Payroll</a>
-                        <a href="#" class="nav-link">International Payment</a>
+                        <a href="{{route('internpayment')}}" class="nav-link">International Payroll</a>
                     </li>
                 </ul>
             </li>
@@ -108,7 +106,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('placementfee')}}" class="nav-link">Local Deployment</a>
-                        <a href="{{route('placementfee')}}" class="nav-link">International Deployment</a>
+                        <a href="{{route('internplacement')}}" class="nav-link">International Deployment</a>
                     </li>
                 </ul>
             </li>

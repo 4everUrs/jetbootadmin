@@ -35,7 +35,7 @@
                     <input wire:model="email" class="form-control" type="text">
                     @error('email') <span class="text-danger">{{$message}}</span> @enderror
                     <br>
-                    <label for="">Location</label>
+                    <label for="">Company Location</label>
                     <input wire:model="location" class="form-control" type="text">
                     @error('location') <span class="text-danger">{{$message}}</span> @enderror
                     

@@ -3,32 +3,33 @@
 namespace App\Http\Livewire\Core\Am;
 
 use Livewire\Component;
-use App\Models\ApplicantForm;
-use App\Models\Onboard;
-use App\Models\JobPost;
+use App\Models\ApplicantList;
+use App\Models\LocalPlacement;
+
 class Jobcandidate extends Component
 {
     public function render()
     {
         return view('livewire.core.am.jobcandidate',[
-            'jobs' => ApplicantForm::all(),
+            'jobs' => ApplicantList::all(),
         ]);
     }
     public function approve($id)
     {
-       $job = ApplicantForm::find($id);
-       Onboard::create([
-            'company' => $job->company,
+       $job = ApplicantList::find($id);
+       LocalPlacement::create([
             'name' => $job->name,
-            'email' => $job->email,
+            'placement' => $job->placement,
+            'papers' => $job->papers,
             'location' => $job->location,
+            'ticket' => $job->ticket,
        ]);
        flash()->addSuccess('Data Approved Successfully');
     }
     public function approved($id)
     {
-       $job = ApplicantForm::find($id);
-       Onboard::create([
+       $job = ApplicantList::find($id);
+       LocalPlacement::create([
             'company' => $job->company,
             'name' => $job->name,
             'email' => $job->email,

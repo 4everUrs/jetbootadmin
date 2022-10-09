@@ -13,7 +13,7 @@
                 <th class="text-center">Position</th>
                 <th class="text-center">Email</th>
                 <th class="text-center">Phone</th>
-                <th class="text-center">Location</th>
+                <th class="text-center">Address</th>
                 <th class="text-center">Resume</th>
                 <th class="text-center">Documents <br>Medical etc.</th>
                 <th class="text-center">Action</th>
@@ -28,7 +28,7 @@
                     <td class="text-center">{{$job->position}}</td>
                     <td class="text-center">{{$job->email}}</td>
                     <td class="text-center">{{$job->phone}}</td>
-                    <td class="text-center">{{$job->location}}</td>
+                    <td class="text-center">{{$job->address}}</td>
                     <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$job->resume_file}}" target="__blank">Resume</a></td>
                     <td class="text-center">
                         <button wire:click="upload" class="btn btn-sm btn-primary">Upload Documents</button>

@@ -9,13 +9,13 @@ use Livewire\Component;
 
 class Applicantname extends Component
 {
-    public $name,$position,$email,$phone,$location,$resume;
+    public $name,$position,$email,$phone,$address,$resume;
     protected $rules = [
         'name' => 'required|string|min:6',
         'position' => 'required|string',
         'email' => 'required|string',
         'phone' => 'required|string',
-        'location' => 'required|string',
+        'address' => 'required|string',
         'resume' => 'required|file',
            
         
@@ -38,7 +38,7 @@ class Applicantname extends Component
             'position' => $job->position,
             'email' => $job->email,
             'phone' => $job->phone,
-            'location' => $job->location,
+            'address' => $job->address,
             'resume_file' => $job->resume_file
        ]);
        if($job->status == 'Approved'){
