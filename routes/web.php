@@ -45,6 +45,7 @@ use App\Http\Livewire\Hr\Payroll\Paydata;
 use App\Http\Livewire\Hr\Shiftschedule\Shiftdata;
 use App\Http\Livewire\Hr\Timeaattendance\Timedata;
 use App\Http\Livewire\Hr\Timesheet\Timesheetdata;
+use App\Http\Livewire\Logistics\Projectmanagement\Projectslists;
 use App\Models\Compensation;
 use App\Models\Core;
 
@@ -96,6 +97,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('vendor/disposal', Disposal::class)->name('disposal');
     Route::get('vendor/bidders', Bidders::class)->name('bidders');
     Route::get('vendor/buyers', Buyers::class)->name('buyers');
+    Route::get('projects/lists', Projectslists::class)->name('projects');
 });
 
 //Finance Routes
