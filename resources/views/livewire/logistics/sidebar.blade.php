@@ -78,7 +78,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">List of Project</a>
+                            <a href="{{route('projects')}}" class="nav-link">List of Project</a>
                             <a href="#" class="nav-link">Supplier Posting</a>
                         </li>
                     </ul>
