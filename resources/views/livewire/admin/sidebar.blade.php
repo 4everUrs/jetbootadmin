@@ -25,18 +25,7 @@
                 <p>Users List</p>
             </a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                Dropdown <span class="caret"></span>
-            </a>
-            <div class="dropdown-menu" style="">
-                <a class="dropdown-item" tabindex="-1" href="#">Action</a>
-                <a class="dropdown-item" tabindex="-1" href="#">Another action</a>
-                <a class="dropdown-item" tabindex="-1" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" tabindex="-1" href="#">Separated link</a>
-            </div>
-        </li>
+       
     </ul>
 </nav>
 </div>
