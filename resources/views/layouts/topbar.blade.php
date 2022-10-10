@@ -17,6 +17,18 @@
         <a href="{{route('timein')}}" class="btn btn-success btn-sm mx-2">Start Shift</a>
         <button class="btn btn-success btn-sm mx-2">Breaktime</button>
         <button class="btn btn-success btn-sm mx-2">End Shift</button>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                Dropdown <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" style="">
+                <a class="dropdown-item" tabindex="-1" href="#">Action</a>
+                <a class="dropdown-item" tabindex="-1" href="#">Another action</a>
+                <a class="dropdown-item" tabindex="-1" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" tabindex="-1" href="#">Separated link</a>
+            </div>
+        </li>
         <!-- Navbar Search -->
         @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
             @if (Auth::user()->role_id == '0')
