@@ -14,7 +14,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <a href="{{route('timein')}}" class="btn btn-success btn-sm mx-2">Start Shift</a>
+        <button  class="btn btn-success btn-sm mx-2">Start Shift</button>
         <button class="btn btn-success btn-sm mx-2">Breaktime</button>
         <button class="btn btn-success btn-sm mx-2">End Shift</button>
         <li class="nav-item dropdown">
@@ -30,7 +30,7 @@
             </div>
         </li>
         <!-- Navbar Search -->
-        @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+        {{-- @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
             @if (Auth::user()->role_id == '0')
                 <x-jet-dropdown id="teamManagementDropdown">
                     <x-slot name="trigger">
@@ -73,7 +73,7 @@
                     </x-slot>
                 </x-jet-dropdown>
             @endif
-        @endif
+        @endif --}}
         <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                 <i class="fas fa-search"></i>
