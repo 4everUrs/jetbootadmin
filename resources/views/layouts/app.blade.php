@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     
     @livewireStyles
-    
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <!--
 `body` tag options:
@@ -101,7 +101,7 @@
     <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- AdminLTE -->
     <script src="{{asset('dist/js/adminlte.js')}}"></script>
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    
     @stack('modals')
     
     @livewireScripts
