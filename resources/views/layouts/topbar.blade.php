@@ -17,26 +17,9 @@
         <button  class="btn btn-success btn-sm mx-2">Start Shift</button>
         <button class="btn btn-success btn-sm mx-2">Breaktime</button>
         <button class="btn btn-success btn-sm mx-2">End Shift</button>
-       <li class="nav-item ">
-        <a href="#procurement" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
-            <p>Procurement</p>
-            <i class="right fas fa-angle-left"></i>
-        </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="{{route('requests')}}" class="nav-link">Request List</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('suppliers')}}" class="nav-link">Suppliers List</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('po')}}" class="nav-link">Purchase Order</a>
-            </li>
-        </ul>
-    </li>
+       
         <!-- Navbar Search -->
-        {{-- @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+        @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
             @if (Auth::user()->role_id == '0')
                 <x-jet-dropdown id="teamManagementDropdown">
                     <x-slot name="trigger">
@@ -79,7 +62,7 @@
                     </x-slot>
                 </x-jet-dropdown>
             @endif
-        @endif --}}
+        @endif
         <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                 <i class="fas fa-search"></i>
