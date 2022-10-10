@@ -14,7 +14,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <a href="{{route('timein')}}" class="btn btn-success btn-sm mx-2">Start Shift</a>
+        <a href="" class="btn btn-success btn-sm mx-2">Start Shift</a>
         <button class="btn btn-success btn-sm mx-2">Breaktime</button>
         <button class="btn btn-success btn-sm mx-2">End Shift</button>
         <!-- Navbar Search -->
