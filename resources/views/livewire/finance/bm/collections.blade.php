@@ -11,7 +11,7 @@
             <thead>
                 <th>ID #</th>
                 <th>Date</th>
-                <th>Company Name:</th>
+                <th>Employee Name</th>
                 <th>Description</th>
                 <th>Amount</th>
                 <th>Receipt no.</th>

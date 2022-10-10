@@ -52,11 +52,6 @@ class Budgets extends Component
 
         }
     }
-    
-
-        
-
-    
 
     public function addBudgets()
     {

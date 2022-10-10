@@ -61,6 +61,10 @@
                     @endforelse
                 </tbody>
             </x-table>
+
+            <div class="mt-3 float-right">
+                {{$transactions->links()}}
+            </div>
             </div>
     </div>
 </div>

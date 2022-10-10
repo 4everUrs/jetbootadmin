@@ -36,6 +36,7 @@
                                 @endforeach
                            </table>
                         </td>
+                       
                         <td>
                            <table class="table">
                                 @foreach ($entry->subjournal as $subjournal)
@@ -55,9 +56,11 @@
                            </table>
                         </td>
                         <td>{{$entry->jencoded}}</td>
+                       
                         <td>
                             <button wire:click="viewModal({{$entry->id}})" class="btn btn-primary btn-sm">View</button>
                             <button wire:click="updateLiability({{$entry->id}})" class="btn btn-success btn-sm">Edit</button>
+                            <button wire:click="deleteliabilities({{$entry->id}})" class="btn btn-warning btn-sm">Delete</button>
                         </td>
                     </tr>
                       
@@ -84,11 +87,11 @@
                         <label>Category</label>
                         <select wire:model="jdescription" class="form-control">
                             <option>Select Option</option>
-                            <option value="Operating Budget">Operating budget</option>
-                            <option value="Financial Budget">Financial budget </option>
-                            <option value="Cash Budget">Cash Budget </option>
-                            <option value="Labor Budget">Labor Budget</option>
-                            <option value="Strategic Plan">Strategic Plan</option>
+                            <option value="Operating Budget">Accounts Payable</option>
+                            <option value="Financial Budget">Income Tax Payable </option>
+                            <option value="Cash Budget">Interest Payable </option>
+                            <option value="Labor Budget">Accrued Payable</option>
+                            <option value="Strategic Plan">Unearned Payable</option>
                         </select>
                        
                     </div>
@@ -104,6 +107,7 @@
                     <thead>
                     
                         <th>Description</th>
+                        <th>Sub-description</th>
                         <th>Debit</th>
                         <th>Credit</th>
                         <th class="text-center">Action</th>
@@ -114,6 +118,7 @@
                                 <td>{{$prev['jdescription']}}</td>
                                 <td>{{$prev['jdebit']}}</td>
                                 <td>{{$prev['jcredit']}}</td>
+
                                 <td class="text-center">
                                     <button class="btn btn-danger btn-sm">Remove</button>
                                 </td>
@@ -213,9 +218,9 @@
     {{--update liability--}}
 
     {{--delete liability--}}
-    <x-jet-dialog-modal wire:model="deleteLiability">
+    <x-jet-dialog-modal wire:model="deleteliability">
         <x-slot name="title">
-            {{ __('Delete ') }}
+            {{ __('Delete Records ') }}
         </x-slot>
         <x-slot name="content">
             <h4>Are you sure to Delete this RECORD?</h4>
@@ -223,7 +228,7 @@
 
         <x-slot name="footer">
             {{--wrong function calling --}}
-            <x-jet-button class="ms-2" wire:click="deleteLiabilities" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" wire:click="deleteliabilities" wire:loading.attr="disabled">
                 {{ __('Delete Record') }}
             </x-jet-button>
         </x-slot>

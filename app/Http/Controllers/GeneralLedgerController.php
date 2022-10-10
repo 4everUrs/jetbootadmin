@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\JournalEntry;
 use App\Models\GenLed;
 use PDF;
 use Illuminate\Http\Request;

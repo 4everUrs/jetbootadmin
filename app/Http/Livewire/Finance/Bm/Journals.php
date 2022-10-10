@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Journals extends Component
 {
-    public $jdescription,$jdebit,$jcredit,$jencoded,$journal_id ='1';
+    public $jdescription,$jdebit,$jcredit,$jencoded,$journal_id ='1',$jsubdescription;
     public $preview = [];
     public $grandtotal;
     public $childData = [];
@@ -24,7 +24,7 @@ class Journals extends Component
     public $selected_id;
     public $subJournal;
     public $editSub_id;
-
+    public $subjournals='d-none';
      // wire:model for delete modal no declare so i declare.
 
     use WithPagination;
@@ -39,6 +39,10 @@ class Journals extends Component
     }
     public function render()
     {
+        if ($this->jdescription=='Operating Budget')
+        {
+            $this->subjournals=null;
+        }
         if(!empty($this->selected_id)){
             $this->subjournalData = SubJournal::where('journal_entry_id','=',$this->selected_id)->get();
         }
@@ -64,6 +68,7 @@ class Journals extends Component
             'jdescription' => $this->jdescription,
             'jdebit' => $this->jdebit,
             'jcredit' => $this->jcredit,
+            'jsubdescription' => $this->jsubdescription,
         ];
        $this->grandtotal += $this->jdebit + $this->jcredit;
        $this->resetLiability();
@@ -81,6 +86,7 @@ class Journals extends Component
         {
             SubJournal::create([
                 'jdescription' => $prev['jdescription'],
+                'jsubdescription' => $prev['jsubdescription'],
                 'jdebit' => $prev['jdebit'],
                 'jcredit' => $prev['jcredit'],
                 'journal_entry_id' => $temp->id,
@@ -93,18 +99,25 @@ class Journals extends Component
 
     public function deleteliabilities()
     {
-        
-        JournalEntry::find($this->journal_id)->destroy($this->journal_id);
+        $temp = JournalEntry::find('id')->first();
+        foreach($this->$journal_entries as $entry)
+        {
+            SubJournal::get([
+                'jdescription' => $entry['jdescription'],
+                'jdebit' => $entry['jdebit'],
+                'jcredit' => $entry['jcredit'],
+                'journal_entries' => $temp->id,
+            ]);
+        }
         toastr()->addSuccess('Record deleted successfully');
-        $this->resetInput();
-        $this->deleteLiability= false;
+        $this->resetLiability();
+        $this->deleteliability= false;
     }
     public function delete($id)
     {
-        
-        //tigger to open delete modal
-        $this->journal_id = $id; // setting transaction_id to id from selected item
-         $this->deleteLiability= true;
+      //tigger to open delete modal
+        $this->journal_entries = $id; // setting transaction_id to id from selected item
+         $this->deleteliability= true;
         
     }
 

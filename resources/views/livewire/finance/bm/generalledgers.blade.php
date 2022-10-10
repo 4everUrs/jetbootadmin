@@ -7,83 +7,55 @@
 
 
 <a class="btn btn-info"href="{{route('generalreports')}}">Download PDF</a>
+<div class="card">
+    <div class="card-body">
 
-<x-table head="General Ledger Report">
-            
-    <thead>
-        <th>No.</th>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Debit</th> 
-        <th>Credit</th>
-       
-        <th class="text-center">Action</th>
-    </thead>
-
-    <tbody>
-        @forelse($journal_entries as $key => $journal_entry)
-        <tr>
-            <td>{{$journal_entry->id}}</td>
-            <td>{{$journal_entry->created_at}}</td>
-            <td>
-                {{-- <table class="table table-striped">
-                   @foreach ($childData[$key] as $index => $sub)
-                       <tr>
-                            <td>{{$childData[$key][$index]->jdescription}}</td>
-                       </tr>
-                   @endforeach
-                </table> --}}
-            </td>  
-            <td>
-                {{-- <table class="table table-striped">
-                    @foreach ($childData[$key]  as $index => $sub)
-                       <tr>
-                            <td>{{$childData[$key][$index]->jdebit}}</td>
-                       </tr>
-                   @endforeach
-                 </table> --}}
-            </td>  
-            <td>
-                {{-- <table class="table table-striped">
-                    @foreach ($childData[$key]  as $index => $sub)
-                       <tr>
-                            <td>{{$childData[$key][$index]->jcredit}}</td>
-                       </tr>
-                   @endforeach
-                 </table> --}}
-            </td>  
-          
-            <td class="text-center">
-
-                <button wire:click="ViewGeneralLed({{$journal_entry->id}})" class="btn btn-success"> View
-                </button>
-            </td>
-        </tr>
-        @empty
-        <tr>
-            <td class="text-center" colspan="7">"Unlisted Records"</td>
-        </tr>
-        @endforelse
-    </tbody>
-</x-table><br><br>
-<button wire:click="ViewGeneralLed" class="btn btn-danger btn-lg"> TOTAL </button>
-
-{{--View Records Modal--}}
-<x-jet-modal wire:model="ViewGenLed">
-    <x-slot name="title">
-        {{('View Records')}}
-    </x-slot>
-
-    <x-slot name="content">
-        <label>Date</label>
-        {{--<label>{{$dataGenled->created_at}}</label>--}}
-    </x-slot>
+        <x-table head="General Report ">
+            <thead>
+                <th></th>
+                <th>2022</th>
+                
+            </thead>
+        <tbody>
+            <tr>
+                <td><h2>Liabilities</h2></td>
+                <td></td>
+                
+            </tr>
+            <tr>
+                <td>Accounts Payable</td>
+                <td></td>
+                
+            </tr>
+            <tr>
+                <td>Income Tax Payable</td>
+                <td></td>
+                
+            </tr>
+            <tr>
+                <td>Interest Payable</td>
+                <td></td>
+                
+            </tr>
+            <tr>
+                <td>Accrued Expenses</td>
+                <td></td>
+                
+            </tr>
+            <tr>
+                <td>Unearned Payable</td>
+                <td></td>
+                
+            </tr>
+                
+                
+             
+        </tbody>
 
 
-    <x-slot name="footer">
-
-    </x-slot>
-</x-jet-modal>
+         </x-table>
+    </div>
+</div>
 </div>
 
 

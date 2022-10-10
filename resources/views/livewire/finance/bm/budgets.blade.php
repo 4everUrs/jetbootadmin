@@ -54,6 +54,7 @@
     <div class="mt-3 float-right">
         {{$transactions->links()}}
     </div>
+    
 </div>
 
 </div>
