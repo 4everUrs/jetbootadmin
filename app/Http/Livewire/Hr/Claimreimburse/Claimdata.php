@@ -9,7 +9,9 @@ use App\Models\Claim;
 class Claimdata extends Component
 {
     public $item, $purchasedate, $purchaseby, $amount, $paidby, $status = 'pending';
-    public $claimModal = false;
+    public $addRecord = false;
+    public $viewModal = false;
+    public $data;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $rules = [
@@ -24,11 +26,29 @@ class Claimdata extends Component
     {
         $this->validateOnly($fields);
     }
+    public function showModal()
+    {
+        $this->addRecord = true;
+    }
+    public function saveData()
+    {
+        $validatedData = $this->validate();
+        Claim::create($validatedData);
+        $this->resetInput();
+        toastr()->addSuccess('Data added successfully');
+        $this->addRecord = false;
+    }
     public function render()
     {
         return view('livewire.hr.claimreimburse.claimdata',[
             'datas' => Claim::paginate(6),
         ]);
+    }
+    public function viewData($id){
+        
+        $this->viewModal = true;
+        $this->data = Claim::find($id);
+        $this->name = $this->data->name;
     }
     public function saveRecord(){
         $validatedData = $this->validate();

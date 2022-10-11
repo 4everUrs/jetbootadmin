@@ -54,11 +54,9 @@
                             <input wire:model="position" class="form-control">
                             @error('position') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Date From</label>
-                            <input wire:model="datefrom" class="form-control">
-                            @error('datefrom') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <input type="date" wire:model="datefrom" class="form-control"><br>
                             <label>Date To</label>
-                            <input wire:model="dateto" class="form-control">
-                            @error('dateto') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <input type="date" wire:model="dateto" class="form-control"><br>
                             <label>Total Hours</label>
                             <input wire:model="totalhours" class="form-control">
                             @error('totalhours') <span class="alert text-danger">{{ $message }}<br /></span> @enderror

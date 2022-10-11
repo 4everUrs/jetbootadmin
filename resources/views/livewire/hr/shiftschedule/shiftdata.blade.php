@@ -63,27 +63,69 @@
                             @error('position') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Department</label>
                             <input wire:model="department" class="form-control">
-                            @error('position') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            @error('department') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Monday</label>
-                            <input wire:model="monday" class="form-control">
+                            <select wire:model="monday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10am - 7pm</option>
+                                <option>2pm - 11pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('monday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Tuesday</label>
-                            <input wire:model="tuesday" class="form-control">
+                            <select wire:model="tuesday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10am - 7pm</option>
+                                <option>2pm - 11pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('tuesday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Wednesday</label>
-                            <input wire:model="wednesday" class="form-control">
+                            <select wire:model="wednesday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10am - 7pm</option>
+                                <option>2pm - 11pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('wednesday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Thursday</label>
-                            <input wire:model="thursday" class="form-control">
+                            <select wire:model="thursday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10am - 7pm</option>
+                                <option>2pm - 11pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('thursday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Friday</label>
-                            <input wire:model="friday" class="form-control">
+                            <select wire:model="friday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10am - 7pm</option>
+                                <option>2pm - 11pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('friday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Saturday</label>
-                            <input wire:model="saturday" class="form-control">
+                            <select wire:model="saturday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10am - 7pm</option>
+                                <option>2pm - 11pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('saturday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Sunday</label>
-                            <input wire:model="sunday" class="form-control">
+                            <select wire:model="sunday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10am - 7pm</option>
+                                <option>2pm - 11pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('sunday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                         </div>
         </x-slot>

@@ -6,7 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button data-toggle="modal" data-target="#leaveModal" class="btn btn-success">Add Record</button>
+            <button wire:click="showModal" class="btn btn-success">Add Record</button>
             <x-table head="Leave Management">
                 <thead>
                     <th>No.</th>
@@ -44,17 +44,11 @@
             {{$datas->links()}}
         </div>
     </div>
-          <div wire:ignore.self class="modal fade" id="leaveModal" tabindex="-1" role="dialog"
-            aria-labelledby="leaveModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="leaveModalLabel">Add new Record</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+    <x-jet-dialog-modal wire:model="addRecord">
+        <x-slot name="title">
+            {{ __('Add new Record') }}
+        </x-slot>
+        <x-slot name="content">
                         <div class="form-group">
                             <label>Name</label>
                             <input wire:model="name" class="form-control">
@@ -75,27 +69,24 @@
                             <input wire:model="reason" class="form-control">
                             @error('reason') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Date Start</label>
-                            <input wire:model="datestart" class="form-control">
-                            @error('datestart') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <input type = "date" wire:model="datestart" class="form-control">
                             <label>Date End</label>
-                            <input wire:model="dateend" class="form-control">
-                            @error('dateend') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <input type = "date" wire:model="dateend" class="form-control">
                             
-                        </div>
+                            
+                        
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button wire:click="saveRecord" id="leaveModal" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @push('scripts')
-        <script>
-            window.addEventListener('close-modal', event => {
-                $('#leaveModal').modal('hide')
-            })
-        </script>
-        @endpush
+                </x-slot>
+                <x-slot name="footer">
+                    <x-jet-secondary-button wire:click="$toggle('addRecord')" wire:loading.attr="disabled">
+                        {{ __('Cancel') }}
+                    </x-jet-secondary-button>
+        
+                    <x-jet-button class="ms-2" wire:click="saveData" wire:loading.attr="disabled">
+        
+                        {{ __('Add new Record') }}
+                    </x-jet-button>
+                </x-slot>
+            </x-jet-dialog-modal>
 </div>
     

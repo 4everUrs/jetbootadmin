@@ -10,7 +10,9 @@ class Paydata extends Component
 {
     public $name, $payhour, $totalhours, $overtime, $latededuction , $penstiondeduction, $salary;
 
-    public $payModal = false;
+    public $addRecord = false;
+    public $viewModal = false;
+    public $data;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $rules = [
@@ -27,11 +29,29 @@ class Paydata extends Component
     {
         $this->validateOnly($fields);
     }
+    public function showModal()
+    {
+        $this->addRecord = true;
+    }
+    public function saveData()
+    {
+        $validatedData = $this->validate();
+        Pay::create($validatedData);
+        $this->resetInput();
+        toastr()->addSuccess('Data added successfully');
+        $this->addRecord = false;
+    }
     public function render()
     {
         return view('livewire.hr.payroll.paydata',[
             'datas' => Pay::paginate(6),
         ]);
+    }
+    public function viewData($id){
+        
+        $this->viewModal = true;
+        $this->data = Pay::find($id);
+        $this->name = $this->data->name;
     }
     public function saveRecord(){
         $validatedData = $this->validate();
