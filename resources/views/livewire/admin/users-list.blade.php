@@ -72,7 +72,6 @@
                 <div class="col">
                     <label>Department</label>
                     <select wire:model="dept" class="form-control">
-                        <option value="">Select Option</option>
                           @if (!empty($teams)){
                             @foreach ($teams as $key => $team)
                                 @if ($team->name != 'Admin')
@@ -88,7 +87,6 @@
                <div class="col d-none" id="department">
                     <label>XYZ</label>
                     <select wire:model="department_id" class="form-control">
-                        <option value="">Select Option</option>
                         @if (!empty($departments)){
                             @foreach ($departments as $key => $department)
                                 <option >{{$department->name}}</option>
