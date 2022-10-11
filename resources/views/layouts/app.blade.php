@@ -100,7 +100,7 @@
     
     
     <!-- jQuery -->
-    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     
     <!-- Bootstrap -->
     <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>

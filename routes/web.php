@@ -67,6 +67,9 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('timein', [TimeInController::class, 'timein'])->name('timein');
+    Route::get('dashboard', function () {
+        return view('dashboard');
+    });
 });
 
 //Login Routes
