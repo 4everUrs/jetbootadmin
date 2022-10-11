@@ -29,14 +29,16 @@ class Buyers extends Component
     }
     public function loadModal($order_id, $id)
     {
+
         $this->buyer_id = $id;
-        $this->buyerDetail = Buyer::find($id)->first();
+        $this->buyerDetail = Buyer::find($id);
+
         $this->selected_id = $order_id;
         $this->viewOrder = true;
     }
     public function savePost()
     {
-        $tmp = Buyer::find($this->buyer_id)->first();
+        $tmp = Buyer::find($this->buyer_id);
         $tmp->status = $this->status;
         $tmp->save();
         $this->viewOrder = false;
