@@ -29,6 +29,12 @@
                             {{ session('status') }}
                         </div>
                         @endif
+                        @if($errors->any())
+                        <div class="alert alert-danger mb-3 rounded-0" role="alert">
+                            {{$errors->first()}}
+                        </div>
+                        
+                        @endif
                         <form action="{{ route('login') }}" method="POST" class="login-form">
                             @csrf
                             <div class="form-group">
