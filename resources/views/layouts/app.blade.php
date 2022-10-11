@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
-    
+
     @livewireStyles
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
@@ -30,33 +30,33 @@
 -->
 
 <body class="hold-transition sidebar-mini">
-   <div class="wrapper">
-    <!-- Navbar -->
-    @include('layouts.topbar')
-    <!-- /.navbar -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        @include('layouts.topbar')
+        <!-- /.navbar -->
 
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
-            <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Tech-Trendz</span>
-        </a>
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="index3.html" class="brand-link">
+                <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Tech-Trendz</span>
+            </a>
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"
-                        class="img-circle elevation-2" alt="User Image">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"
+                            class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="{{route('profile.show')}}" class="d-block">{{ Auth::user()->name }}</a>
+
+                    </div>
                 </div>
-                <div class="info">
-                    <a href="{{route('profile.show')}}" class="d-block">{{ Auth::user()->name }}</a>
-
-                </div>
-            </div>
                 @if (Auth::user()->current_team_id == '1')
                 @livewire('admin.sidebar')
                 @elseif (Auth::user()->current_team_id == '2')
@@ -70,46 +70,46 @@
                 @elseif (Auth::user()->current_team_id == '6')
                 @livewire('logistics.sidebars.procurement')
                 @endif
-        </div>
-        <!-- /.sidebar -->
-    </aside>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">{{ $header }}</h1>
-                    </div><!-- /.col -->
-    
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-    
-        <div class="content">
-            <div class="container-fluid">
-                {{$slot}}
             </div>
-        </div>
-    
-    </div>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">{{ $header }}</h1>
+                        </div><!-- /.col -->
 
-   
-    
-    
-    
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    
-    <!-- Bootstrap -->
-    <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <!-- AdminLTE -->
-    <script src="{{asset('dist/js/adminlte.js')}}"></script>
-    
-    
-    <script>
-        var url = window.location;
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+
+            <div class="content">
+                <div class="container-fluid">
+                    {{$slot}}
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+        <!-- jQuery -->
+        <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
+        <!-- Bootstrap -->
+        <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <!-- AdminLTE -->
+        <script src="{{asset('dist/js/adminlte.js')}}"></script>
+
+
+        <script>
+            var url = window.location;
             
             // for sidebar menu entirely but not cover treeview
             $('ul.nav-sidebar a').filter(function() {
@@ -120,12 +120,24 @@
             $('ul.nav-treeview a').filter(function() {
             return this.href == url;
             }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
-    </script>
-    @stack('modals')
-    
-    @livewireScripts
-    
-    @stack('scripts')
+            window.addEventListener('showButton', event => {
+            var element = document.getElementById("createButton");
+            var review = document.getElementById("reviewButton");
+            element.classList.remove("d-none");
+            review.classList.add("d-none");
+            })
+            window.addEventListener('vendor-form', event => {
+            var vendor = document.getElementById('vendor');
+            var content = document.getElementById('content');
+            content.classList.add('d-none');
+            vendor.classList.remove('d-none');
+            })
+       </script>
+        @stack('modals')
+
+        @livewireScripts
+
+        @stack('scripts')
 </body>
 
 </html>
