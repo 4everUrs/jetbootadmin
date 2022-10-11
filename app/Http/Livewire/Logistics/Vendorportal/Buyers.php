@@ -42,5 +42,6 @@ class Buyers extends Component
         $tmp->status = $this->status;
         $tmp->save();
         $this->viewOrder = false;
+        toastr()->addSuccess('Change Status Successfully');
     }
 }
