@@ -44,11 +44,17 @@
             </tr>
             @endforelse
         </tbody>
-    </x-table>
+    </x-table><br><br>
+
+    <button wire:click="sumRecords" class="btn btn-outline-danger ">Sum</button>
+    
+    <label>The Sum of all transaction:&emsp;</label>
+    <label>{{$grandtotals}}</label><br><br>
     
     <div class="mt-3 float-right">
         {{$transactions->links()}}
     </div>
+    
 </div>
 
 </div>
@@ -110,7 +116,7 @@
         </x-jet-secondary-button>
         {{--wire:click function dito sa button hindi match sa function sa class--}}
         <x-jet-button class="ms-2" wire:click="addBudgets" wire:loading.attr="disabled">
-            {{ __('Update Request Budget') }}
+            {{ __('Add Request Budget') }}
         </x-jet-button>
     </x-slot>
 

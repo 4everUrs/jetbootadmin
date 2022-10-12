@@ -8,13 +8,13 @@ use Livewire\WithPagination;
 
 class Budgets extends Component
 {
-    public $originated,$category,$amount,$account,$description,$status='ongoing',$transaction_id;
-    
+    public $originated,$category,$amount,$account,$description,$status='Ongoing',$transaction_id;
+    public $grandtotals;
     public $addBudget= false;
     public $updateItem= false;
     public $deleteItem= false;
     public $deleteRequest = false; // wire:model for delete modal no declare so i declare.
-    
+   
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $rules = [
@@ -33,14 +33,24 @@ class Budgets extends Component
     public function render()
 
     {
+        $this->grandtotals;
         return view('livewire.finance.bm.budgets',[
-            'transactions'=>Transaction::orderBy('id','desc')->paginate(5),   
+            'transactions'=>Transaction::orderBy('id','desc')->paginate(10),   
         ]);
 
     }
 
     public function loadModalRequest(){
         $this->addBudget= true;
+    }
+
+    public function sumRecords()
+    {
+        $sum = Transaction::all();
+        foreach($sum as $sums){
+        $this->grandtotals += $sums-> amount;
+
+        }
     }
 
     public function addBudgets()

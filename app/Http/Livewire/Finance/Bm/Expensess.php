@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class Expensess extends Component
 {
     public $eoriginated ,$ecategory ,$eamount,$eaccount,$edescription,$estatus='ongoing',$eexpense_id;
-    
+    public $grandexpenses;
     public $addExpense= false;
     public $updateExpenseItem= false;
     public $deleteItem= false;
@@ -31,18 +31,28 @@ class Expensess extends Component
     }
     public function render()
     {
+        $this->grandexpenses;
         return view('livewire.finance.bm.expensess',[
-            'expenses'=>Expenses::orderBy('id','desc')->paginate(5),
+            'expenses'=>Expenses::orderBy('id','desc')->paginate(10),
         ]);
     }
     public function expensescreate()
     {
         
-        $this->addExpense= true;
+        $this->addexpense= true;
     }
     public function loadDeleteModal($id){
         $this->deleteExpense = true;
         $this->eexpense_id = $id;
+    }
+
+    public function sumExpenses()
+    {
+        $totals = Expenses::all();
+        foreach($totals as $total){
+        $this->grandexpenses += $total->eamount;
+
+        }
     }
 
     public function addExpenses()
