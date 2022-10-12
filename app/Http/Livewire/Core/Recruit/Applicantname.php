@@ -39,16 +39,11 @@ class Applicantname extends Component
             'email' => $job->email,
             'phone' => $job->phone,
             'address' => $job->address,
-            'resume_file' => $job->resume_file
+            'resume_file' => $job->resume_file,
+            'location' => $job->location,
        ]);
-       if($job->status == 'Approved'){
-            flash()->addWarning('Data is already approved');
-       }
-       else{
-            $job->status = 'Approved';
-            $job->save();
-            flash()->addSuccess('Data Approved Successfully');
-        }
+       flash()->addSuccess('Data Approved Successfully');
+      
     }
     public function denied($id)
     {

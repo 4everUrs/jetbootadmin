@@ -54,8 +54,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('employeedata')}}" class="nav-link">Local</a>
-                        <a href="#" class="nav-link">International</a>
+                        <a href="{{route('employeedata')}}" class="nav-link">Employee Data</a>
                     </li>
                 </ul>
             </li>
@@ -92,8 +91,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('paymentfee')}}" class="nav-link">Local Payroll</a>
-                        <a href="{{route('internpayment')}}" class="nav-link">International Payroll</a>
+                        <a href="{{route('paymentfee')}}" class="nav-link">Payroll</a>
                     </li>
                 </ul>
             </li>
@@ -105,8 +103,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('placementfee')}}" class="nav-link">Local Deployment</a>
-                        <a href="{{route('internplacement')}}" class="nav-link">International Deployment</a>
+                        <a href="{{route('placementfee')}}" class="nav-link">Deployment</a>
                     </li>
                 </ul>
             </li>

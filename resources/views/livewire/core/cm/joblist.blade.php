@@ -22,11 +22,34 @@
     <x-table head="">
         <thead>
             <th>No.</th>
-            <th>Company Name</th>
-            <th>Collection</th>
-            <th>Status</th>
+                <th>Company Name</th>
+                <th>Position</th>
+                <th>Monthly Salary</th>
+                <th>Job Details</th>
+                <th>Location</th>
+                <th class="text-center">Action</th>
+
 
         </thead>
+        <tbody>
+            @forelse($clients as $client)
+            <tr>
+                <td>{{$client->id}}</td>
+                <td>{{$client->name}}</td>
+                <td>{{$client->position}}</td>
+                <td>{{$client->salary}}</td>
+                <td>{{$client->details}}</td>
+                <td>{{$client->location}}</td>
+                <td class="text-center">
+                    <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary">Approve</button>
+                    <button wire:click="edit({{$client->id}})"class="btn btn-sm btn-secondary">Edit</button>
+                    <button wire:click="delete({{$client->id}})"class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+            @empty
+
+            @endforelse
+        </tbody>
     </x-table>
     <x-jet-dialog-modal wire:model="showModal">
         <x-slot name="title">
@@ -36,7 +59,13 @@
         <x-slot name="content">
             <div class="form-group">
                 <label for="">Company Name</label>
-                <input wire:model="name"class="form-control" type="text">
+                <select wire:model="name"class="form-control" type="text">
+                <option value="">Select Company</option>
+                @foreach ($clients as $client)
+                <option>{{$client->name}}</option>
+                @endforeach
+                </select>
+                
                 @error('name') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Position</label>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('resume_file');
             $table->string('company');
             $table->string('location');
+            $table->string('status');
             $table->timestamps();
         });
     }

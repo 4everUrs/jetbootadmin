@@ -7,11 +7,12 @@ use App\Models\Client;
 class Addclient extends Component
 {
     public $showClient = false;
-    public $name,$email,$location;
+    public $name,$email,$location,$status="Ongoing";
     protected $rules = [
-        'name' => 'required|string|min:6',
+        'name' => 'required|string|',
         'email' => ['required','email'],
-        'location' => 'required|string'
+        'location' => 'required|string',
+        'status' => 'required|string'
         
         
     ];

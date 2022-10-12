@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Onboard extends Model
+class InternationalPlacement extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'age', 'gender', 'company', 'position', 'contract', 'status'
+        'name', 'location', 'placement', 'papers', 'ticket'
     ];
 }

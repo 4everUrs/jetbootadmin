@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Core\Am;
 
+use App\Models\ApplicantForm;
 use Livewire\Component;
 use App\Models\ApplicantList;
 use App\Models\LocalPlacement;
+use App\Models\InternationalPlacement;
 
 class Jobcandidate extends Component
 {
@@ -16,24 +18,17 @@ class Jobcandidate extends Component
     }
     public function approve($id)
     {
-       $job = ApplicantList::find($id);
+       $job = ApplicantForm::find($id);
+ 
        LocalPlacement::create([
             'name' => $job->name,
-            'placement' => $job->placement,
-            'papers' => $job->papers,
-            'location' => $job->location,
-            'ticket' => $job->ticket,
-       ]);
-       flash()->addSuccess('Data Approved Successfully');
-    }
-    public function approved($id)
-    {
-       $job = ApplicantList::find($id);
-       LocalPlacement::create([
-            'company' => $job->company,
-            'name' => $job->name,
+            'phone' => $job->phone,
             'email' => $job->email,
-            'location' => $job->location,
+            'company_name' => $job->company,
+            'company_location' => $job->location,
+            'position' => $job->position,
+            'status' => $job->status,
+            
        ]);
        flash()->addSuccess('Data Approved Successfully');
     }

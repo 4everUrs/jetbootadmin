@@ -11,7 +11,6 @@
                     <th class="text-center">No.</th>
                     <th class="text-center">Employee Name</th>
                     <th class="text-center">Email</th>
-                    <th class="text-center">Documents</th>
                     <th class="text-center">Action</th>
                 </thead>
                 <tbody>
@@ -20,7 +19,6 @@
                         <td class="text-center">{{$job->id}}</td>
                         <td class="text-center">{{$job->name}}</td>
                         <td class="text-center">{{$job->email}}</td>
-                        <td class="text-center">{{$job->document}}</td>
                         <td class="text-center">
                             <button wire:click="submit" class="btn btn-primary">Submit</button>
                         </td>

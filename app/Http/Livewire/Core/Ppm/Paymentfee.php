@@ -14,7 +14,6 @@ class Paymentfee extends Component
         'salary' => 'required|string',
         'contribution' => 'required|string',
         'placement' => 'required|string',
-        'collection' => 'required|string'
     ];
     public function updated($fields)
     {
@@ -26,6 +25,20 @@ class Paymentfee extends Component
             'payrolls' => Payroll::all(),
         ]);
     }
+    public function edit($id){
+        $payrolls = Payroll::find($id);
+        $this->name=$payrolls->name;
+        $this->attendance=$payrolls->attendance;
+        $this->salary=$payrolls->salary;
+        $this->contribution=$payrolls->contribution;
+        $this->placement=$payrolls->placement;
+
+        $this->showPayroll = true;
+    }
+    public function save(){
+        
+    }
+
     public function savePayroll(){
         $validateddata = $this->validate();
         
@@ -42,9 +55,6 @@ class Paymentfee extends Component
         $this->contribution = '';  
         $this->placement = '';  
         $this->collection = '';  
-    }
-    public function loadPayroll(){
-        $this->showPayroll = true;
     }
 
     public function request()

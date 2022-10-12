@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Core\Cm;
 
 use Livewire\Component;
 use App\Models\Vacant;
+use App\Models\Client;
 class Joblist extends Component
 {
     public $showModal = false;
@@ -11,7 +12,7 @@ class Joblist extends Component
     protected function rules()
     {
         return [
-            'name' => 'required|string|min:6',
+            'name' => 'required|string|',
             'position' => 'required|string',
             'salary' => 'required|string',
             'details' => 'required|string',
@@ -25,7 +26,9 @@ class Joblist extends Component
     }
     public function render()
     {
-        return view('livewire.core.cm.joblist');
+        return view('livewire.core.cm.joblist',[
+            'clients' => Client::all(),
+        ]);
     }
     public function saveRequest(){
         $validateddata=$this->validate();

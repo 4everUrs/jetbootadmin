@@ -14,9 +14,9 @@
                     <th>Employee Name</th>
                     <th>Daily Attendance</th>
                     <th>Minimum Wage</th>
+                    <th>Total</th>
                     <th>Contribution</th>
                     <th>Placement Fee</th>
-                    <th>Collection</th>
                     <th>Total Salary</th>
                     <th class="text-center">Action</th>
                 </thead>
@@ -27,11 +27,12 @@
                         <td class="text-center">{{$payroll->name}}</td>
                         <td class="text-center">{{$payroll->attendance}}</td>
                         <td class="text-center">{{$payroll->salary}}</td>
+                        <td></td>
                         <td class="text-center">{{$payroll->contribution}}</td>
                         <td class="text-center">{{$payroll->placement}}</td>
-                        <td class="text-center">{{$payroll->collection}}</td>
                         <td></td>
                         <td class="text-center">
+                            <button wire:click="edit({{$payroll->id}})" class="btn btn-sm btn-info">Edit</button>
                             <button wire:click="request" class="btn btn-sm btn-primary">Request</button>
                         </td>
                         
@@ -71,10 +72,7 @@
                 <input wire:model="placement"class="form-control" type="number">
                 @error('placement') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
-                <label for="">Collection</label>
-                <input wire:model="collection"class="form-control" type="number">
-                @error('collection') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
+            
                 
             </div>
         </x-slot>
@@ -100,7 +98,6 @@
                     <th>Minimum Wage</th>
                     <th>Contribution</th>
                     <th>Placement Fee</th>
-                    <th>Collection</th>
                     <th>Status</th>
                     <th>Total Salary</th>
                     <th>Action</th>
@@ -114,7 +111,6 @@
                         <td class="text-center">{{$payroll->salary}}</td>
                         <td class="text-center">{{$payroll->contribution}}</td>
                         <td class="text-center">{{$payroll->placement}}</td>
-                        <td class="text-center">{{$payroll->collection}}</td>
                         <td></td>
                         <td></td>
                         <td class="text-center">
