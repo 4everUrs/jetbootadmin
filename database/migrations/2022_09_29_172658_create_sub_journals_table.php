@@ -13,17 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('journal_entries', function (Blueprint $table) {
-                
-               
+        Schema::create('sub_journals', function (Blueprint $table) {
             $table->id();
+            $table->string('jdescription');
+            $table->integer('jcredit');
+            $table->integer('jdebit');
+            $table->unsignedInteger('journal_entry_id');
             $table->timestamps();
-            $table->string('jencoded');
-            
-            });
+        });
+    }
 
-
-        }
     /**
      * Reverse the migrations.
      *
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journal_entries');
+        Schema::dropIfExists('sub_journals');
     }
 };

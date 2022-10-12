@@ -13,17 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('journal_entries', function (Blueprint $table) {
-                
-               
+        Schema::create('allocations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('jencoded');
-            
-            });
+        });
+    }
 
-
-        }
     /**
      * Reverse the migrations.
      *
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journal_entries');
+        Schema::dropIfExists('allocations');
     }
 };

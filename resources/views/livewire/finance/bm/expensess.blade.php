@@ -10,7 +10,7 @@
                 <th>Name</th>
                 <th>Category</th>
                 <th>Date</th>
-                <th>Ammount</th>
+                <th>Amount</th>
                 <th>Account</th>
                 <th>Description</th>
                 <th>Status</th>
@@ -38,7 +38,10 @@
                 </tr>
                 @endforelse
             </tbody>
-        </x-table>
+        </x-table><br><br>
+        <button wire:click="sumExpenses" class="btn btn-outline-danger ">Grandtotal</button>
+        <label>The Sum of all transaction:</label>
+        <label>{{$grandexpenses}}</label><br><br>
         <div class="mt-3 float-right">
             {{$expenses->links()}}
         </div>
@@ -48,9 +51,9 @@
 <!--EXPENSES TABLE-->
 
 <!--pop up form EXPENSES-->
-<x-jet-dialog-modal wire:model="addExpense">
+<x-jet-dialog-modal wire:model="addExpense" maxWidth="xl">
     <x-slot name="title">
-        {{ __('Add RequestBudget') }}
+        {{ __('Add Expenses') }}
     </x-slot>
 
     <x-slot name="content">
