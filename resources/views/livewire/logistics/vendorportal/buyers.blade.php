@@ -29,6 +29,7 @@
                                 <button wire:click='loadModal({{$buyer->order_id}},{{$buyer->id}})' class="btn btn-dark">View</button>
                             </td>
                         </tr>
+                        
                     @empty
                         <tr>
                             <td class="text-center" colspan="7">No Record</td>
