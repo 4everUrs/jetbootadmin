@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 
 class Timedata extends Component
 {
-    public $name, $position, $department, $timein, $timeout, $date, $status;
+    public $name, $position, $department, $timein, $breakin, $breakout, $timeout, $date, $status;
     public $addRecord = false;
     public $viewModal = false;
     
@@ -23,8 +23,10 @@ class Timedata extends Component
         'name' => 'required|string',
         'position' => 'required|string',
         'department' => 'required|string',
-        'timein' => 'required|string',
-        'timeout' => 'required|string',
+        'timein' => 'string',
+        'breakin' => 'string',
+        'breakout' => 'string',
+        'timeout' => 'string',
         'date' => 'required|string',
         'status' => 'required|string',
 
@@ -70,6 +72,8 @@ class Timedata extends Component
         $this->position = null;
         $this->department = null;
         $this->timein= null;
+        $this->breakin= null;
+        $this->breakout= null;
         $this->timeout = null;
         $this->date= null;
         $this->status = null;

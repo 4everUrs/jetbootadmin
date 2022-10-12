@@ -10,7 +10,9 @@ class Compensationdata extends Component
 {
 
         public $name, $position, $basepay, $benefits, $insentives, $insurance;
-        public $compensationModal = false;
+        public $addRecord = false;
+        public $viewModal = false;
+        public $data;
         use WithPagination;
         protected $paginationTheme = 'bootstrap';
         protected $rules = [
@@ -26,12 +28,30 @@ class Compensationdata extends Component
         {
             $this->validateOnly($fields);
         }
+        public function showModal()
+    {
+        $this->addRecord = true;
+    }
+    public function saveData()
+    {
+        $validatedData = $this->validate();
+        Compensation::create($validatedData);
+        $this->resetInput();
+        toastr()->addSuccess('Data added successfully');
+        $this->addRecord = false;
+    }
 
     public function render()
     {
         return view('livewire.hr.compensation.compensationdata',[
             'datas' => Compensation::paginate(6)
         ]);
+    }
+    public function viewData($id){
+        
+        $this->viewModal = true;
+        $this->data = Compensation::find($id);
+        $this->name = $this->data->name;
     }
     public function saveRecord(){
         $validatedData = $this->validate();

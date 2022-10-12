@@ -29,6 +29,16 @@ use App\Http\Livewire\Core\Cm\Clientdata;
 use App\Http\Livewire\Core\Cm\Joblist;
 use App\Http\Livewire\Core\Cacm\Contract;
 use App\Http\Livewire\Core\Cacm\Agreement;
+use App\Http\Livewire\Hr\Claimreimburse\Claimdata;
+use App\Http\Livewire\Hr\Compensation\Compensationdata;
+use App\Http\Livewire\Hr\Core\Coredata;
+use App\Http\Livewire\Hr\Hr\Analyticdata;
+use App\Http\Livewire\Hr\Payroll\Paydata;
+use App\Http\Livewire\Hr\Shiftschedule\Shiftdata;
+use App\Http\Livewire\Hr\Timeaattendance\Timedata;
+use App\Http\Livewire\Hr\Timesheet\Timesheetdata;
+use App\Models\Compensation;
+use App\Models\Core;
 use App\Http\Livewire\Logistics\Procurement\Supplierslists;
 use App\Http\Livewire\Logistics\Procurement\Purchaseorders;
 use App\Http\Livewire\Logistics\Vendorportal\Recievedrequests;
@@ -39,22 +49,12 @@ use App\Http\Livewire\Logistics\Vendorportal\Bidders;
 use App\Http\Livewire\Logistics\Vendorportal\Buyers;
 use App\Http\Livewire\Finance\Bm\Requestedlist;
 use App\Http\Livewire\Finance\Bm\Journals;
-use App\Http\Livewire\Hr\Claimreimburse\Claimdata;
-use App\Http\Livewire\Hr\Compensation\Compensationdata;
-use App\Http\Livewire\Hr\Core\Coredata;
-use App\Http\Livewire\Hr\Hr\Analyticdata;
-use App\Http\Livewire\Hr\Payroll\Paydata;
-use App\Http\Livewire\Hr\Shiftschedule\Shiftdata;
-use App\Http\Livewire\Hr\Timeaattendance\Timedata;
-use App\Http\Livewire\Hr\Timesheet\Timesheetdata;
-use App\Http\Livewire\Logistics\Projectmanagement\Projectslists;
-use App\Models\Compensation;
-use App\Models\Core;
 use App\Http\Livewire\Finance\Bm\Disbursements;
 use App\Http\Livewire\Finance\Bm\Generalledgers;
 use App\Http\Livewire\Finance\Bm\Collections;
 use App\Http\Livewire\Finance\Bm\Allocates;
 use App\Http\Livewire\Finance\Bm\Balancesheets;
+use App\Http\Livewire\Logistics\Projectmanagement\Projectslists;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,14 +69,6 @@ use App\Http\Livewire\Finance\Bm\Balancesheets;
 
 Route::get('/', function () {
     return redirect('/login');
-});
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('timein', [TimeInController::class, 'timein'])->name('timein');
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    });
 });
 
 //Login Routes

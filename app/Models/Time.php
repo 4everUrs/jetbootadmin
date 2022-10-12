@@ -9,6 +9,6 @@ class Time extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'name', 'position', 'department', 'timein', 'timeout','date','status',
+        'name', 'position', 'department', 'timein', 'breakin' ,'breakout', 'timeout','date','status',
     ];
 }

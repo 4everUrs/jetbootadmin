@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('position');
             $table->string('department');
             $table->string('timein');
+            $table->string('breakin');
+            $table->string('breakout');
             $table->string('timeout');
             $table->string('date');
             $table->string('status');
