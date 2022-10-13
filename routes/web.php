@@ -2,6 +2,7 @@
 <?php
 
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PDFController;
@@ -61,6 +62,11 @@ use App\Http\Livewire\Logistics\Assetmgmt\Assetslist;
 use App\Http\Livewire\Logistics\Assetmgmt\Createasset;
 use App\Http\Livewire\Logistics\Projectmanagement\Createnewproject;
 use App\Http\Livewire\Logistics\Projectmanagement\Proposal;
+use App\Http\Livewire\Logistics\Fleet\Activity;
+use App\Http\Livewire\Logistics\Fleet\Maps;
+use App\Http\Livewire\Logistics\Fleet\Reservation;
+use App\Http\Livewire\Logistics\Fleet\Romrequest;
+use App\Http\Livewire\Logistics\Fleet\Vinfo;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,6 +122,10 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('project/new', Createnewproject::class)->name('newproject');
     Route::get('project/proposal', Proposal::class)->name('proposal');
     Route::get('project/proposal/download/{id}', [DownloadProposalController::class, 'proposalDownload'])->name('proposalDownload');
+    Route::get('fleet/vinfo', Vinfo::class)->name('vehicleinformation');
+    Route::get('fleet/maps', Maps::class,)->name('mappers');
+    Route::get('fleet/romrequest', Romrequest::class)->name('repairs');
+    Route::get('fleet/reservation', Reservation::class)->name('reserve');
 });
 
 //Finance Routes
@@ -129,8 +139,6 @@ Route::prefix('finance')->middleware('auth', 'isFinance')->group(function () {
     Route::get('collections', Collections::class)->name('collects');
     Route::get('allocates', Allocates::class)->name('allocatebudget');
     Route::get('balancesheets', Balancesheets::class)->name('bsheets');
-
-
     Route::get('loaddisburse', [DisbursementController::class, 'downloadPdf'])->name('export');
     Route::get('genledgerreport', [GeneralLedgerController::class, 'downloadPdf'])->name('generalreports');
 });

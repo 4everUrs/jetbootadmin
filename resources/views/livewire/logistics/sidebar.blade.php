@@ -83,6 +83,28 @@
                             <a href="{{route('proposal')}}" class="nav-link">Project Proposal</a>
                         </li>
                     </ul>
+                     <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-car"></i>
+                    <p>Fleet Management</p>
+                    <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                <li class="nav-item">
+                        <a href="{{route('mappers')}}" class="nav-link">Maps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('vehicleinformation')}}" class="nav-link">Vehicles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('repairs')}}" class="nav-link">Repairs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('reserve')}}" class="nav-link">Reservations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Reports</a>
+                    </li>
                 </li>
             </li>
         </ul>
