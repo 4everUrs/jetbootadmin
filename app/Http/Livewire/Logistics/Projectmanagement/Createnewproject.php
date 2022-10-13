@@ -25,5 +25,12 @@ class Createnewproject extends Component
             'status' => $this->status,
             'progress' => $this->progess
         ]);
+        toastr()->addSuccess('New project created');
+        $this->resetInput();
+        return redirect()->route('projects');
+    }
+    public function resetInput()
+    {
+        $this->reset();
     }
 }

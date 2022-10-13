@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Logistics\Assetmgmt;
 
+use App\Models\Building;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,6 +17,7 @@ class Assetslist extends Component
 
         return view('livewire.logistics.assetmgmt.assetslist', [
             'users' => User::where('role_id', '!=', '3')->get(),
+            'buildings' => Building::all(),
         ]);
     }
 }
