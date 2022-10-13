@@ -1,6 +1,7 @@
 
 <?php
 
+use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
@@ -20,7 +21,11 @@ use App\Http\Livewire\Logistics\Vendorportal\Supplierlist;
 
 use App\Http\Livewire\Finance\Bm\Requestedlist;
 use App\Http\Livewire\Finance\Bm\Journals;
-
+use App\Http\Livewire\Logistics\Fleet\Activity;
+use App\Http\Livewire\Logistics\Fleet\Maps;
+use App\Http\Livewire\Logistics\Fleet\Reservation;
+use App\Http\Livewire\Logistics\Fleet\Romrequest;
+use App\Http\Livewire\Logistics\Fleet\Vinfo;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +66,11 @@ Route::prefix('logistics')->middleware('auth','isLogistics')->group(function(){
     Route::get('procurement/po/view/{id}',[PDFController::class,'index'])->name('pdf');
     Route::get('procurement/po/download/{id}',[PDFController::class,'downloadPdf'])->name('download');
     Route::get('vendor/supplierlist',Supplierlist::class)->name('supplierlist');
+
+    Route::get('fleet/vinfo',Vinfo::class)->name('vehicleinformation');
+    Route::get('fleet/maps', Maps::class,)->name('mappers');
+    Route::get('fleet/romrequest',Romrequest::class)->name('repairs');
+    Route::get('fleet/reservation',Reservation::class)->name('reserve');
 });
 
 //Finance Routes
