@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Finance\Bm;
 
 use Livewire\Component;
 use App\Models\Transaction;
+use App\Models\Expenses;
 use Livewire\WithPagination;
 
 class Budgets extends Component

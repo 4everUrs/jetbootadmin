@@ -39,7 +39,7 @@ class Journals extends Component
     }
     public function render()
     {
-        if ($this->jdescription=='Operating Budget')
+        if ($this->jdescription=='Cash')
         {
             $this->subjournals=null;
         }
@@ -86,7 +86,7 @@ class Journals extends Component
         {
             SubJournal::create([
                 'jdescription' => $prev['jdescription'],
-                'jsubdescription' => $prev['jsubdescription'],
+                'jsubdescription' => $this->jsubdescription,
                 'jdebit' => $prev['jdebit'],
                 'jcredit' => $prev['jcredit'],
                 'journal_entry_id' => $temp->id,
@@ -97,18 +97,16 @@ class Journals extends Component
        
     }
 
-    public function deleteliabilities()
+    public function deleteliabilities($id)
     {
-        $temp = JournalEntry::find('id')->first();
-        foreach($this->$journal_entries as $entry)
+        
+        $temp = SubJournal::where('journal_entry_id','=',$id)->get();
+
+        foreach($temp as $temps)
         {
-            SubJournal::get([
-                'jdescription' => $entry['jdescription'],
-                'jdebit' => $entry['jdebit'],
-                'jcredit' => $entry['jcredit'],
-                'journal_entries' => $temp->id,
-            ]);
+            $temps->delete();
         }
+        JournalEntry::find($id)->delete();
         toastr()->addSuccess('Record deleted successfully');
         $this->resetLiability();
         $this->deleteliability= false;
@@ -126,6 +124,7 @@ class Journals extends Component
         $this->updateLiability=true;
         $this->subJournal = SubJournal::where('journal_entry_id','=',$id)->get();
         $this->getGrandTotal();
+      
     }
 
     public function updateLiabilities(){
@@ -133,6 +132,7 @@ class Journals extends Component
         JournalEntry::find($this->$journal_id)->update($validatedData);
         $this->resetLiability();
         toastr()->updateLiability=false;
+        $this->resetLiability();
     }
     public function editSub($id)
     { 
@@ -164,6 +164,7 @@ class Journals extends Component
         // $this->jdebit =null;
         $this->grandtotal = null;
         $this->getGrandTotal();
+        $this->resetLiability();
     }
     public function resetLiability(){
         $this->journal_id =null;

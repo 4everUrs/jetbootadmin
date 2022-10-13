@@ -9,7 +9,7 @@ class JournalEntry extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'jdescription', 'jdebit', 'jcredit','jencoded','journal_entry_id','created_at'
+        'jdescription', 'jdebit', 'jcredit','jencoded','journal_entry_id','created_at','jsubdescription'
     ]; 
     function subjournal()
     {
