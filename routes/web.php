@@ -1,6 +1,7 @@
 
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PDFController;
@@ -8,6 +9,7 @@ use App\Http\Livewire\Admin\UsersList;
 use App\Http\Livewire\Logistics\Procurement\PurchaseItems;
 use App\Http\Controllers\TimeInController;
 use App\Http\Controllers\DisbursementController;
+use App\Http\Controllers\DownloadProposalController;
 use App\Http\Controllers\GeneralLedgerController;
 use App\Http\Livewire\Logistics\Procurement\Requestlists;
 use App\Http\Livewire\Logistics\Warehouse\Inventory;
@@ -55,6 +57,10 @@ use App\Http\Livewire\Finance\Bm\Generalledgers;
 use App\Http\Livewire\Finance\Bm\Collections;
 use App\Http\Livewire\Finance\Bm\Allocates;
 use App\Http\Livewire\Finance\Bm\Balancesheets;
+use App\Http\Livewire\Logistics\Assetmgmt\Assetslist;
+use App\Http\Livewire\Logistics\Assetmgmt\Createasset;
+use App\Http\Livewire\Logistics\Projectmanagement\Createnewproject;
+use App\Http\Livewire\Logistics\Projectmanagement\Proposal;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,14 +79,11 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('timein', [TimeInController::class, 'timein'])->name('timein');
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    });
+    Route::get('/timein', [AttendanceController::class, 'timein'])->name('timein');
 });
 
 //Login Routes
-Route::get('/redirects', [LoginController::class, 'login']);
+Route::get('/redirects', [LoginController::class, 'login'])->name('home');
 Route::get('/staff', [LoginController::class, 'staff'])->name('staff');
 Route::get('/manager', [LoginController::class, 'manager'])->name('manager');
 
@@ -108,6 +111,11 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('vendor/bidders', Bidders::class)->name('bidders');
     Route::get('vendor/buyers', Buyers::class)->name('buyers');
     Route::get('projects/lists', Projectslists::class)->name('projects');
+    Route::get('assets/lists', Assetslist::class)->name('assets');
+    Route::get('assets/new', Createasset::class)->name('newasset');
+    Route::get('project/new', Createnewproject::class)->name('newproject');
+    Route::get('project/proposal', Proposal::class)->name('proposal');
+    Route::get('project/proposal/download/{id}', [DownloadProposalController::class, 'proposalDownload'])->name('proposalDownload');
 });
 
 //Finance Routes

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Time extends Model
+class Proposal extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'position', 'department', 'timein', 'timeout', 'date', 'status', 'breakin', 'breakout', 'user_id'
+        'user_id', 'title', 'duration', 'budget', 'requested_by', 'status'
     ];
     public function User()
     {

@@ -65,8 +65,8 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">....</a>
-                            <a href="#" class="nav-link">.....</a>
+                            <a href="{{route('assets')}}" class="nav-link">Assets List</a>
+                            <a href="{{route('newasset')}}" class="nav-link">Add New Asset</a>
                         </li>
                     </ul>
                 </li>
@@ -79,7 +79,8 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{route('projects')}}" class="nav-link">List of Project</a>
-                            <a href="#" class="nav-link">Supplier Posting</a>
+                            <a href="{{route('newproject')}}" class="nav-link">Creat new project</a>
+                            <a href="{{route('proposal')}}" class="nav-link">Project Proposal</a>
                         </li>
                     </ul>
                 </li>
