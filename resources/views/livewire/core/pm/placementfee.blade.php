@@ -13,8 +13,8 @@
                     <th>Contact</th>
                     <th>Email</th>
                     <th>Company Name</th>
-                    <th>Position</th>
                     <th>Location</th>
+                    <th>Position</th>
                     <th>Status</th>
                     <th>Remarks</th>
                     <th>Action</th>
@@ -44,42 +44,4 @@
             </x-table>
         </div>
     </div>
-    <x-jet-dialog-modal wire:model="showPlacement">
-        <x-slot name="title">
-            {{ __('Create Local Placement') }}
-            
-        </x-slot>
-        <x-slot name="content">
-            <div class="form-group">
-                
-               
-                <label for="">Total Placement Fee</label>
-                <input wire:model="placement"class="form-control" type="number">
-                @error('placement') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
-                <label for="">Deployment Papers</label>
-                <input wire:model="papers"class="form-control" type="file">
-                @error('papers') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
-                <label>Ticket Booking</label>
-                <select wire:model="ticket"class="form-control" type="text">
-                @error('ticket') <span class="text-danger">{{$message}}</span> @enderror
-                <option value="Approved">Approved</option>
-                <option value="">Pending</option>
-                </select>
-                <br>
-                
-                
-            </div>
-        </x-slot>
-        <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('showPlacement')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
-                {{ __('Cancel') }}
-            </x-jet-secondary-button>
-    
-            <x-jet-button class="ms-2" wire:click="savePlacement" wire:loading.attr="disabled"><i class='fa fa-check'></i>
-                {{ __('Confirm') }}
-            </x-jet-button>
-        </x-slot>
-    </x-jet-dialog-modal>
 </div>

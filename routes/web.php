@@ -1,6 +1,7 @@
 
 <?php
 
+use App\Http\Controllers\ContractController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
@@ -101,6 +102,7 @@ Route::prefix('core')->middleware('auth','isCore')->group(function(){
     Route::get('cacm/contract',Contract::class)->name('contract');
     Route::get('cacm/agreement',Agreement::class)->name('agreement');
     Route::get('joblisting',JobList::class)->name('joblisting');
+    Route::get('contract/download/{id}',[ContractController::class,'downloadContract'])->name('downloadcontract');
     
     
 });

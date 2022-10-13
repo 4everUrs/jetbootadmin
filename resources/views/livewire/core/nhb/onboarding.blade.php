@@ -18,6 +18,7 @@
                 <th class="text-center">Position</th>
                 <th class="text-center">Contract Term</th>
                 <th class="text-center">Status</th>
+                <th class="text-center">Resume</th>
                 <th class="text-center">Contract Date</th>
                 <th class="text-center">Action</th> 
                 
@@ -31,13 +32,15 @@
                         <td class="text-center">{{$onboard->name}}</td>
                         <td class="text-center">{{$onboard->age}}</td>
                         <td class="text-center">{{$onboard->gender}}</td>
-                        <td class="text-center">{{$onboard->company}}</td>
+                        <td class="text-center">{{$onboard->company_name}}</td>
                         <td class="text-center">{{$onboard->position}}</td>
                         <td class="text-center">{{$onboard->contract}}</td>
                         <td class="text-center">{{$onboard->status}}</td>
+                        <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$onboard->resume_file}}" target="__blank">Resume</a></td>
                         <td class="text-center">{{$onboard->created_at}}</td>
-                        <td></td>
-                        
+                        <td class="text-center">
+                            <button wire:click="submit({{$onboard->id}})" class="btn btn-sm btn-primary">Send to Employee Mngt. </button>
+                        </td>
                       </tr>
                     @empty
                       
@@ -57,28 +60,25 @@
                 <label for="">Name</label>
                 <select wire:model="name"class="form-control" type="text">
                     <option value="">Select Name</option>
-                    @foreach ($onboards as $onboard)
-                    <option>{{$onboard->name}}</option>
+                    @foreach ($onboards as$index=> $onboard)
+                    <option value="{{$index+1}}">{{$onboard->name}}</option>
                     @endforeach
                 </select>
                 @error('name') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Age</label>
-                <input wire:model="age"class="form-control" type="text">
+                <input wire:model="age"class="form-control" type="number">
                 @error('age') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Gender</label>
-                <input wire:model="gender"class="form-control" type="text">
+                <select wire:model="gender"class="form-control" type="text">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
                 @error('gender') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
-                <label for="">Company Name</label>
-                <input wire:model="company"class="form-control" type="text">
-                @error('company') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
-                <label for="">Position</label>
-                <input wire:model="position"class="form-control" type="text">
-                @error('position') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
+                
                 <label for="">Contract Term</label>
                 <input wire:model="contract"class="form-control" type="text">
                 @error('contract') <span class="text-danger">{{$message}}</span> @enderror

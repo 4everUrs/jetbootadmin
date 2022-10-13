@@ -9,7 +9,7 @@ class Employeedata extends Component
     public function render()
     {
         return view('livewire.core.em.employeedata',[
-            'jobs' => LocalEmployee::all(),
+            'onboards' => LocalEmployee::all(),
         ]);
     }
 }
