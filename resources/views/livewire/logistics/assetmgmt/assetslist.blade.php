@@ -19,9 +19,17 @@
                         <button class="nav-link" id="vehicle-tab" data-toggle="tab" data-target="#vehicle" type="button" role="tab"
                             aria-controls="vehicle" aria-selected="false">Vechicle</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li class="nav-item mr-2" role="presentation">
                         <button class="nav-link" id="equipments-tab" data-toggle="tab" data-target="#equipments" type="button" role="tab"
                             aria-controls="equipments" aria-selected="false">Equipments</button>
+                    </li>
+                    <li class="nav-item mr-2" role="presentation">
+                        <button class="nav-link" id="contractor-tab" data-toggle="tab" data-target="#contractor" type="button" role="tab"
+                            aria-controls="contractor" aria-selected="false">Contractor</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="supplier-tab" data-toggle="tab" data-target="#supplier" type="button" role="tab"
+                            aria-controls="supplier" aria-selected="false">Supplier</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -154,6 +162,12 @@
                                 </x-table>
                             </div>
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="contractor" role="tabpanel" aria-labelledby="contractor-tab">
+                        ..
+                    </div>
+                    <div class="tab-pane fade" id="supplier" role="tabpanel" aria-labelledby="supplier-tab">
+                        ..
                     </div>
                 </div>
             </div>

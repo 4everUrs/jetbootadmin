@@ -2,48 +2,53 @@
 
 namespace App\Http\Livewire\Logistics\Vendorportal;
 
+use App\Models\MroRequest;
 use Livewire\Component;
 use App\Models\Recieved;
 use App\Models\Post;
+
 class Recievedrequests extends Component
 {
     public $postModal = false;
-    public $title, $requirements=[], $origin, $selected_id;
-    public $data,$datas;
-    
-    
+    public $title, $requirements = [], $origin, $selected_id;
+    public $data, $datas;
+
+
     protected $rules = [
         'title' => 'required|string',
         'requirements' => 'required|string',
         'origin' => 'required|string'
     ];
-   
-     public function updated($fields)
+
+    public function updated($fields)
     {
         $this->validateOnly($fields);
     }
-    
+
 
     public function render()
     {
-        if(!empty($this->selected_id)){
+
+        if (!empty($this->selected_id)) {
             $this->data = Recieved::find($this->selected_id);
             $this->datas = Recieved::find($this->selected_id)->getRequirements;
         }
-       
-        return view('livewire.logistics.vendorportal.recievedrequests',[
+
+        return view('livewire.logistics.vendorportal.recievedrequests', [
             'recieveds' => Recieved::get(),
+            'requests' => MroRequest::all(),
         ]);
     }
     public function loadModal($id)
     {
         $this->selected_id = $id;
-        
+
         $this->postModal = true;
     }
-    
-    public function savePost(){
-        
+
+    public function savePost()
+    {
+
         $data = Recieved::find($this->selected_id);
 
         Post::create([
@@ -53,16 +58,13 @@ class Recievedrequests extends Component
             'start' => $data->start,
             'end' => $data->end,
             'location' => $data->location,
-            'description' =>$data->description,
+            'description' => $data->description,
         ]);
 
         $post = Recieved::find($this->selected_id);
         $post->status = 'Posted';
         $post->save();
-        
+
         $this->postModal = false;
     }
-        
-    
-
 }

@@ -51,8 +51,6 @@ use App\Http\Livewire\Hr\Shiftschedule\Shiftdata;
 use App\Http\Livewire\Hr\Timeaattendance\Timedata;
 use App\Http\Livewire\Hr\Timesheet\Timesheetdata;
 use App\Http\Livewire\Logistics\Projectmanagement\Projectslists;
-use App\Models\Compensation;
-use App\Models\Core;
 use App\Http\Livewire\Finance\Bm\Disbursements;
 use App\Http\Livewire\Finance\Bm\Generalledgers;
 use App\Http\Livewire\Finance\Bm\Collections;
@@ -67,6 +65,8 @@ use App\Http\Livewire\Logistics\Fleet\Maps;
 use App\Http\Livewire\Logistics\Fleet\Reservation;
 use App\Http\Livewire\Logistics\Fleet\Romrequest;
 use App\Http\Livewire\Logistics\Fleet\Vinfo;
+use App\Http\Livewire\Logistics\Vendorportal\Workshops;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -116,6 +116,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('vendor/disposal', Disposal::class)->name('disposal');
     Route::get('vendor/bidders', Bidders::class)->name('bidders');
     Route::get('vendor/buyers', Buyers::class)->name('buyers');
+    Route::get('vendor/workshops', Workshops::class)->name('workshop');
     Route::get('projects/lists', Projectslists::class)->name('projects');
     Route::get('assets/lists', Assetslist::class)->name('assets');
     Route::get('assets/new', Createasset::class)->name('newasset');
@@ -125,6 +126,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('fleet/vinfo', Vinfo::class)->name('vehicleinformation');
     Route::get('fleet/maps', Maps::class,)->name('mappers');
     Route::get('fleet/romrequest', Romrequest::class)->name('repairs');
+    Route::get('fleet/reservation', Reservation::class)->name('reserve');
     Route::get('fleet/reservation', Reservation::class)->name('reserve');
 });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Logistics\Fleet;
 
+use App\Models\MaintenanceRequest;
 use App\Models\Vehicle;
 use Livewire\Component;
 use App\Models\Vehicleinform;
@@ -11,10 +12,12 @@ class Vinfo extends Component
 {
     public $origin = 'vinfo', $pnumber, $vmodel, $driver_name, $status = "Pending";
     public $vehicleModal = false;
+    public $modalRepair = false;
     public $information = [];
     public $infoBox = [];
     public $infoTest = [];
     public $selected_id;
+    public $description, $category;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public function saveRequest()
@@ -42,5 +45,26 @@ class Vinfo extends Component
         $temp->save();
         toastr()->addSuccess('New Driver Assigned');
         $this->reset();
+    }
+    public function repairModal($id)
+    {
+        $this->modalRepair = true;
+        $this->selected_id = $id;
+    }
+    public function sendRequest()
+    {
+        $temp = Vehicle::find($this->selected_id);
+        MaintenanceRequest::create([
+            'subject' => $temp->brand . ' ' . $temp->model,
+            'description' => $this->description,
+            'category' => $this->category,
+            'status' => 'Pending',
+            'origin' => 'Fleet Management'
+        ]);
+        $temp->status = 'Maintenance';
+        $temp->save();
+        toastr()->addSuccess('New Driver Assigned');
+        $this->reset();
+        $this->modalRepair = false;
     }
 }

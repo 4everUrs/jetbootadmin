@@ -6,7 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <x-table head="Request Lists">
+            <x-table head="Procurement Request Lists">
                 <thead>
                     <th>No.</th>
                     <th>Origin</th>
@@ -15,7 +15,7 @@
                     <th>Location</th>   
                     <th>Data Posted</th>
                     <th>Status</th>
-                    <th>Actiom</th>
+                    <th>Action</th>
 
 
                 </thead>
@@ -39,6 +39,42 @@
                         <td class="text-center" colspan="8"> no record found</td>
                     </tr>
                     @endforelse
+                </tbody>
+            </x-table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <x-table head="M.R.O Request Lists">
+                <thead>
+                    <th>No.</th>
+                    <th>Type</th>
+                    <th>Content</th>
+                    <th>Location</th>
+                    <th>Data Posted</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                   @forelse ($requests as $request)
+                    <tr>
+                        <td>{{$request->id}}</td>
+                        <td>{{$request->type}}</td>
+                        <td>{{$request->content}}</td>
+                        <td>{{$request->location}}</td>
+                        <td>{{$request->created_at}}</td>
+                        <td>{{$request->status}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm">Post</button>
+                            <button class="btn btn-danger btn-sm">Remove</button>
+                        </td>
+                    </tr>
+                       
+                   @empty
+                       <tr>
+                        <td class="text-center" colspan="7"> no record found</td>
+                    </tr>
+                   @endforelse
                 </tbody>
             </x-table>
         </div>

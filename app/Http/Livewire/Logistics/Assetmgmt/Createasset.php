@@ -11,7 +11,7 @@ use Livewire\Component;
 class Createasset extends Component
 {
     public $type;
-    public $name, $contractor, $location, $date, $cost, $specs;
+    public $name, $contractor, $location, $date, $cost, $specs, $status = 'Completed';
     public $brand, $model, $condition, $vehicleType, $plate;
     public $equipmentType, $quantity, $description;
     public function render()
@@ -28,14 +28,16 @@ class Createasset extends Component
     public function createAsset()
     {
         $validatedData = $this->validate([
-            'type' => 'required|',
+            'name' => 'required|',
             'contractor' => 'required',
             'location' => 'required|string',
             'date' => 'required|string',
             'cost' => 'required|integer',
-            'specs' => 'required|string'
+            'specs' => 'required|string',
+            'status' => 'required|string',
         ]);
         $validatedData['date'] = Carbon::parse($this->date)->toFormattedDateString();
+        $validatedData['status'] = $this->status;
         Building::create($validatedData);
         toastr()->addSuccess('New asset created');
         $this->reset();
