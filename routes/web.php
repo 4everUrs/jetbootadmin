@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\ContractController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PDFController;
@@ -17,9 +18,8 @@ use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
 use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 use App\Http\Livewire\Finance\Bm\Budgets;
-use App\Http\Livewire\Core\Recruit\Addclient;
 use App\Http\Livewire\Core\Recruit\Applicantname;
-use App\Http\Livewire\Core\Recruit\Denied;
+use App\Http\Livewire\Core\Am\Deniedapplicant;
 use App\Http\Livewire\Core\Am\Jobcandidate;
 use App\Http\Livewire\Core\Nhb\Onboarding;
 use App\Http\Livewire\Core\Em\Employeedata;
@@ -27,10 +27,12 @@ use App\Http\Livewire\Core\Rap\Applicantreport;
 use App\Http\Livewire\Core\Rap\Clientreport;
 use App\Http\Livewire\Core\Pjm\Jobvacancy;
 use App\Http\Livewire\Core\Ppm\Paymentfee;
+use App\Http\Livewire\Core\Ppm\Internpayment;
 use App\Http\Livewire\Core\Pm\Placementfee;
+use App\Http\Livewire\Core\Pm\Internplacement;
+use App\Http\Livewire\Core\Cm\Addclient;
 use App\Http\Livewire\Core\Cm\Clientdata;
 use App\Http\Livewire\Core\Cm\Joblist;
-use App\Http\Livewire\Core\Cacm\Contract;
 use App\Http\Livewire\Core\Cacm\Agreement;
 use App\Http\Livewire\Logistics\Procurement\Supplierslists;
 use App\Http\Livewire\Logistics\Procurement\Purchaseorders;
@@ -149,9 +151,8 @@ Route::prefix('finance')->middleware('auth', 'isFinance')->group(function () {
 //Core Routes
 Route::prefix('core')->middleware('auth', 'isCore')->group(function () {
     Route::view('dashboard', 'livewire.core.dashboard')->name('core');
-    Route::get('recruit/addclient', Addclient::class)->name('addclient');
     Route::get('recruit/applicantname', Applicantname::class)->name('applicantname');
-    Route::get('recruit/denied', Denied::class)->name('denied');
+    Route::get('am/deniedapplicant', Deniedapplicant::class)->name('deniedapplicant');
     Route::get('am/jobcandidate', Jobcandidate::class)->name('jobcandidate');
     Route::get('nhb/onboarding', Onboarding::class)->name('onboarding');
     Route::get('em/employeedata', Employeedata::class)->name('employeedata');
@@ -159,12 +160,15 @@ Route::prefix('core')->middleware('auth', 'isCore')->group(function () {
     Route::get('rap/clientreport', Clientreport::class)->name('clientreport');
     Route::get('pjm/jobvacancy', Jobvacancy::class)->name('jobvacancy');
     Route::get('ppm/paymentfee', Paymentfee::class)->name('paymentfee');
+    Route::get('ppm/internpayment', internpayment::class)->name('internpayment');
     Route::get('pm/placementfee', Placementfee::class)->name('placementfee');
+    Route::get('pm/internplacement', Internplacement::class)->name('internplacement');
+    Route::get('cm/addclient', Addclient::class)->name('addclient');
     Route::get('cm/clientdata', Clientdata::class)->name('clientdata');
     Route::get('cm/joblist', Joblist::class)->name('joblist');
-    Route::get('cacm/contract', Contract::class)->name('contract');
     Route::get('cacm/agreement', Agreement::class)->name('agreement');
     Route::get('joblisting', JobList::class)->name('joblisting');
+    Route::get('contract/download/{id}', [ContractController::class, 'downloadContract'])->name('downloadcontract');
 });
 
 //HR Routes
