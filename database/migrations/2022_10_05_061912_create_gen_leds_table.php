@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('gen_leds', function (Blueprint $table) {
             $table->id();
+            $table->string('ldescription');
+            $table->string('ldate');
+            $table->string('ldebit');
+            $table->string('lcredit'); 
+            $table->string('lstatus'); 
             $table->timestamps();
         });
     }

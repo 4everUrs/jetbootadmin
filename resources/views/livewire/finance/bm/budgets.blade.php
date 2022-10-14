@@ -43,6 +43,8 @@
                 <td class="text-center" colspan="9">"Unlisted Records"</td>
             </tr>
             @endforelse
+
+            
         </tbody>
     </x-table><br><br>
 
