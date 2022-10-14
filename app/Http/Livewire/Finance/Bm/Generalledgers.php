@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Finance\Bm;
 
 use Livewire\Component;
-use App\Models\GenLed;
+
 use Livewire\WithPagination;
 
 

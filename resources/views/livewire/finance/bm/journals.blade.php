@@ -1,23 +1,24 @@
 <div>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Journal Entry') }}
+            {{ __('Reports') }}
         </h2>
     </x-slot>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item mr-2" role="presentation">
+        <li wire:ignore class="nav-item mr-2" role="presentation">
           <button class="nav-link active" id="journalentry-tab" data-bs-toggle="tab" data-bs-target="#journalentry" type="button" role="tab" aria-controls="journalentry" aria-selected="true">Journal Entry</button>
         </li>
-        <li class="nav-item mr-2" role="presentation">
-          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Trial Balance</button>
-        </li>
-        <li class="nav-item mr-2 " role="presentation">
+        <li wire:ignoreclass="nav-item mr-2 " role="presentation">
           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">General Ledger</button>
         </li>
+        <li wire:ignore class="nav-item mr-2" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Trial Balance</button>
+          </li>
       </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="journalentry" role="tabpanel" aria-labelledby="Journal Entry">
+      {{--Journal Entry--}}
+      <div  class="tab-content" id="myTabContent">
+        <div wire:ignore.self class="tab-pane fade show active" id="journalentry" role="tabpanel" aria-labelledby="Journal Entry">
            
             <div class="card">
                 <div class="card-body">
@@ -34,6 +35,7 @@
                             <th>Debit</th>
                             <th>Credit</th>
                             <th>Encoded By</th>
+                            <th>Status</th>
                             <th class="text-center">Action</th>
                         </thead>
         
@@ -80,17 +82,22 @@
                                    </table>
                                 </td>
                                 <td>{{$entry->jencoded}}</td>
+                                <td>{{$entry->jstatus}}</td>
+
                                
                                 <td>
                                     <button wire:click="viewModal({{$entry->id}})" class="btn btn-primary btn-sm">View</button>
                                     <button wire:click="updateLiability({{$entry->id}})" class="btn btn-success btn-sm">Edit</button>
                                     <button wire:click="deleteliabilities({{$entry->id}})" class="btn btn-warning btn-sm">Delete</button>
+                                    <button wire:click="recordliabilities({{$entry->id}})" class="btn btn-danger btn-sm">Record</button>
                                 </td>
                             </tr>
                               
                           @endforeach
                         </tbody>
                     </x-table>
+
+                    <label></label>
         
                     <div class="mt-3 float-right">
                         {{-- {{$journal_entries->links()}} --}}
@@ -112,10 +119,13 @@
                                 <select wire:model="jdescription" class="form-control">
                                     <option>Select Option</option>
                                     <option value="Cash">Cash</option>
+                                    <option value="Accounts Receivable">Accounts Receivable </option>
                                     <option value="Accounts Payable">Accounts Payable </option>
-                                    <option value="Salary">Payment of Salary </option>
-                                    <option value="Inventory">Inventory</option>
-                                    <option value="Unearned Payable">Unearned Payable</option>
+                                    <option value="Cash Dividends Payable">Cash Dividends Payable</option>
+                                    <option value="Salary & Wages">Salary & Wages</option>
+                                    <option value="Commission Fee">Commission Fee</option>
+                                    <option value="Collection">Collection</option>
+
                                 </select>
                                 <label>Sub-Category</label>
                                 <textarea class="form-control" wire:model="jsubdescription"> </textarea>
@@ -186,11 +196,16 @@
                                 <select wire:model="jdescription" class="form-control">
                                     <option>Select Option</option>
                                     <option value="Cash">Cash</option>
+                                    <option value="Accounts Receivable">Accounts Receivable </option>
                                     <option value="Accounts Payable">Accounts Payable </option>
-                                    <option value="Salary">Payment of Salary </option>
-                                    <option value="Inventory">Inventory</option>
-                                    <option value="Unearned Payable">Unearned Payable</option>
+                                    <option value="Cash Dividends Payable">Cash Dividends Payable</option>
+                                    <option value="Salary & Wages">Salary & Wages</option>
+                                    <option value="Commission Fee">Commission Fee</option>
+                                    <option value="Collection">Collection</option>
                                 </select>
+
+                                <label>Sub-Category</label>
+                                <textarea class="form-control" wire:model="jsubdescription"> </textarea>
                                
                             </div>
                             <div class="col">
@@ -205,6 +220,7 @@
                             <thead>
                             
                                 <th>Description</th>
+                                <th>Sub-Description</th>
                                 <th>Debit</th>
                                 <th>Credit</th>
                                 <th class="text-center">Action</th>
@@ -214,6 +230,7 @@
                                 @foreach ($subjournalData as $data)
                                     <tr>
                                         <td>{{$data->jdescription}}</td>
+                                        <td>{{$data->jsubdescription}}</td>
                                         <td>{{$data->jdebit}}</td>
                                         <td>{{$data->jcredit}}</td>
                                         <td class="text-center">
@@ -264,15 +281,17 @@
         
             <x-jet-dialog-modal wire:model="viewRecord" maxWidth="xl">
                 <x-slot name="title">
-                    {{ __('Update Liability Record') }}
+                    {{ __('View Journal Entry Record') }}
                 </x-slot>
                 <x-slot name="content">
                     <table class="table table-striped">
                         <thead>
                             <th>No</th>
                             <th>Description</th>
+                            <th>Sub-Description</th>
                             <th>Credit</th>
                             <th>Debit</th>
+                            
                         </thead>
                         <tbody>
                             @if (!empty($subjournalData))
@@ -280,6 +299,7 @@
                             <tr>
                                 <td>{{$data->id}}</td>
                                 <td>{{$data->jdescription}}</td>
+                                <td>{{$data->jsubdescription}}</td>
                                 <td>{{$data->jcredit}}</td>
                                 <td>{{$data->jdebit}}</td>
                             </tr>
@@ -305,9 +325,99 @@
         
         </div>
 
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="Trial Balance">...</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="General Ledger">...</div>
+        {{--End of Journal Entry--}}  
+
+        {{--General Ledger--}}      
+    </div>
+    <div class="card">
+        <div class="card-body">
+        <div wire:ignore.self class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="General Ledger">
+
+        <a wire:click="loadModalCash" class="btn btn-success">Add Cash Record</a>
+        <div class="class">
+            <div class="card-body">
+                <x-table head="Cash">
+                    <thead>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Debit</th>
+                        <th>Credit</th>
+                        <th>Status</th>
+                        
+                    </thead>
+                <tbody>
+                    @forelse($gen_leds as $gen_led)
+                    <tr>
+                        <td>{{$gen_led->id}}</td>
+                        <td>{{$gen_led->ldate}}</td>
+                        <td>{{$gen_led->ldescription}}</td>
+                        <td>{{$gen_led->ldebit}}</td>
+                        <td>{{$gen_led->lcredit}}</td>
+                        <td>{{$gen_led->lstatus}}</td>
+                        
+                    </tr>
+                        @empty
+                     <tr>
+                         <td class="text-center" colspan="7">Unlisted Records</td>
+                    </tr>
+                        @endforelse
+                </tbody>
+            </x-table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+        {{--(CASH)- ADD MODAL GENERAL LEDGER--}}
+
+        <x-jet-dialog-modal wire:model="addGenled" maxWidth="xl" >
+            <x-slot name="title">
+                {{ __('Add Record for CASH') }}
+            </x-slot>
+            
+            <x-slot name="content">
+                <div class="row form-group">
+                    <div class="col">
+                        <label for ="start">Date</label>
+                        <input type="date"  id="start" name="trip-start"
+                        value="2022-10-22" min="2022-01-22" max="2022-12-31"
+                        class="form-control" wire:model= "ldate">
+
+                        <label>Description</label>
+                        <textarea class="form-control" wire:model="ldescription"> </textarea>
+
+                        <label>Credit</label>
+                        <input type="number" class="form-control" wire:model="ldebit">
+
+                        <label>Debit</label>
+                        <input type="number" class="form-control" wire:model="lcredit">       
+                    </div>
+                </div>
+            </x-slot>
+            
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('addGenled')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+                <x-jet-button class="ms-2" wire:click="addGenleds" wire:loading.attr="disabled">
+                    {{ __('Add Cash Record') }}
+                </x-jet-button>
+            </x-slot>
+
+        </x-jet-dialog-modal>
+
+        {{--END (CASH)- ADD MODAL GENERAL LEDGER--}}
+      
+
+        {{--End of General Ledger--}} 
       </div>
+
+
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="Trial Balance">
+        
+        </div>
     
 
 
