@@ -5,12 +5,16 @@ namespace App\Http\Livewire\Finance\Bm;
 use Livewire\Component;
 use App\Models\JournalEntry;
 use App\Models\SubJournal;
+use App\Models\GenLed;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 class Journals extends Component
 {
-    public $jdescription, $jdebit, $jcredit, $jencoded, $journal_id = '1', $jsubdescription;
+
+    public $jdescription, $jdebit, $jcredit, $jencoded, $journal_id = '1', $jsubdescription, $jstatus = 'Process';
+    public $ldate, $ldescription, $ldebit, $lcredit, $lstatus;
+    public $gen_leds;
     public $preview = [];
     public $grandtotal;
     public $childData = [];
@@ -19,6 +23,7 @@ class Journals extends Component
     public $deleteLiability = false;
     public $deleteLiabilities = false;
     public $viewRecord = false;
+    public $addGenled = false;
     public $journal_entries;
     public $subjournalData;
     public $selected_id;
@@ -43,10 +48,13 @@ class Journals extends Component
         if ($this->jdescription == 'Operating Budget') {
             $this->subjournals = null;
         }
+        if ($this->jdescription == 'Cash') {
+            $this->subjournals = null;
+        }
         if (!empty($this->selected_id)) {
             $this->subjournalData = SubJournal::where('journal_entry_id', '=', $this->selected_id)->get();
         }
-
+        $this->gen_leds = GenLed::all();
         $this->preview;
         $this->grandtotal;
         $this->journal_entries = JournalEntry::with('subjournal')->get();
@@ -58,6 +66,15 @@ class Journals extends Component
     {
         $this->addLiability = true;
     }
+
+    public function recordliabilities($id)
+    {
+
+        $record = SubJournal::find($id);
+        $record->jstatus = 'Recorded';
+        $record->save();
+    }
+
     public function viewModal($id)
     {
         $this->selected_id = $id;
@@ -86,20 +103,22 @@ class Journals extends Component
         foreach ($this->preview as $index => $prev) {
             SubJournal::create([
                 'jdescription' => $prev['jdescription'],
-                'jsubdescription' => $prev['jsubdescription'],
+                'jsubdescription' => $this->jsubdescription,
                 'jdebit' => $prev['jdebit'],
                 'jcredit' => $prev['jcredit'],
+                'jstatus' => $prev['jstatus'],
                 'journal_entry_id' => $temp->id,
             ]);
         }
         toastr()->addSuccess('Record added successfully');
         $this->resetLiability();
+        $this->addLiability = false;
     }
 
-    public function deleteliabilities()
+    public function deleteliabilities($id)
     {
         $temp = JournalEntry::find('id')->first();
-        foreach ($this->$journal_entries as $entry) {
+        foreach ($this->journal_entries as $entry) {
             SubJournal::get([
                 'jdescription' => $entry['jdescription'],
                 'jdebit' => $entry['jdebit'],
@@ -107,6 +126,12 @@ class Journals extends Component
                 'journal_entries' => $temp->id,
             ]);
         }
+        $temp = SubJournal::where('journal_entry_id', '=', $id)->get();
+
+        foreach ($temp as $temps) {
+            $temps->delete();
+        }
+        JournalEntry::find($id)->delete();
         toastr()->addSuccess('Record deleted successfully');
         $this->resetLiability();
         $this->deleteliability = false;
@@ -129,9 +154,10 @@ class Journals extends Component
     public function updateLiabilities()
     {
         $validatedData = $this->validate();
-        JournalEntry::find($this->$journal_id)->update($validatedData);
+        JournalEntry::find($this->journal_id)->update($validatedData);
         $this->resetLiability();
         toastr()->updateLiability = false;
+        $this->updateLiability = false;
     }
     public function editSub($id)
     {
@@ -139,6 +165,7 @@ class Journals extends Component
         $this->editSub_id = $id;
         $temp = SubJournal::where('id', '=', $id)->first();
         $this->jdescription = $temp->jdescription;
+        $this->jsubdescription = $temp->jsubdescription;
         $this->jdebit = $temp->jdebit;
         $this->jcredit = $temp->jcredit;
     }
@@ -161,6 +188,7 @@ class Journals extends Component
         // $this->jdebit =null;
         $this->grandtotal = null;
         $this->getGrandTotal();
+        $this->resetLiability();
     }
     public function resetLiability()
     {
@@ -169,5 +197,46 @@ class Journals extends Component
         $this->jcredit = null;
         $this->jdebit = null;
         $this->jencoded = 'ADMIN';
+        $this->jstatus = 'Process';
     }
+
+
+    //General Ledger
+    public function loadModalCash()
+    {
+        $this->addGenled = true;
+    }
+
+    public function addGenleds()
+    {
+        GenLed::create(
+            [
+                'ldate' => $this->ldate,
+                'ldescription' => $this->ldescription,
+                'ldebit' => $this->ldebit,
+                'lcredit' => $this->lcredit,
+                'lstatus' => $this->lstatus
+            ]
+        );
+        $this->resetCash();
+        toastr()->addSuccess('Cash Record successfully');
+        $this->addGenled = false;
+    }
+
+    public function resetCash()
+    {
+        $this->ldate = null;
+        $this->ldescription = null;
+        $this->ldebit = null;
+        $this->lcredit = null;
+        $this->lstatus = 'Process';
+    }
+
+
+    //end General Ledger
+
+
+
+
+
 }

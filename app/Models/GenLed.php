@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GenLed extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'ldate','ldescription','ldebit','lcredit','lstatus'
+    ]; 
 }
