@@ -9,6 +9,6 @@ class LocalPlacement extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'location', 'phone','company_name','company_location','position','status','remarks' ,'email'
+        'name', 'location', 'phone','company_name','company_location','position','status','placement' ,'email'
     ];
 }

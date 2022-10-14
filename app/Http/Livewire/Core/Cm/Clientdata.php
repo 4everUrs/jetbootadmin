@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Core\Cm;
 use Livewire\Component;
 
 use App\Models\Client;
+use App\Models\Job;
 class Clientdata extends Component
 {
     public $showClient = false;
@@ -40,6 +41,11 @@ class Clientdata extends Component
     public function approve($id)
     {
        $client = Client::find($id);
+
+       Job::create([
+            'name' => $client->name,
+            'location' => $client->location,
+       ]);
         if($client->status == 'Approved'){
             flash()->addWarning('Data is already approved');
         }
@@ -49,36 +55,6 @@ class Clientdata extends Component
             flash()->addSuccess('Data approved successfully');
        }
         
-    }
-    public function resetInput()
-    {
-        $this->client_id = '';
-        $this->name = '';
-        $this->email = '';
-        $this->location = '';
-        $this->status = '';
-        $this->client_edit_id = '';
-    }
-    public function edit($id)
-    {
-        $client = Client::where('id',$id)->first();
-        $this->client_edit_id = $client->id;
-        $this->client_id = $client->client_id;
-        $this->name = $client->name;
-        $this->email = $client->email;
-        $this->location = $client->location;
-        $this->status = $client->status;
-        
-        $client->save();
-        
-        
-    }
-    public function editData()
-    {
-        $validatedData = $this->validate();
-        
-        Client::create($validatedData);
-        $this->resetInput();
     }
     
     public function delete($id)

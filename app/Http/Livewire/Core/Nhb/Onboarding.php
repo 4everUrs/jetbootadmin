@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Core\Nhb;
 use Livewire\Component;
 use App\Models\Onboard;
 use App\Models\LocalEmployee;
+use App\Models\LocalPlacement;
+
 class Onboarding extends Component
 {
     public $showPayroll = false;
@@ -43,7 +45,7 @@ class Onboarding extends Component
         $this->showPayroll = true;
     }
     public function submit($id){
-        $onboard = Onboard::find($id);
+        $onboard = LocalPlacement::find($id);
         LocalEmployee::create([
             'name' => $onboard->name,
             'phone' => $onboard->phone,

@@ -9,7 +9,7 @@
 <body>
    
     @if(!empty($contract))
-        <h2><strong>COMPANY CONTRACT AGREEMENT</strong></h2>
+        <h5><strong>COMPANY CONTRACT AGREEMENT</strong></h5>
         <p>This Agency Agreement is entered into as of <u><b>{{Carbon\Carbon::parse($contract->created_at)->toFormattedDateString()}}</b></u> by and between 
             <strong>Tech-Trendz</strong> having its principal place of business located at Quezon City (the “Company”) and [Client.] <u><b>{{$contract->client_name}}</b></u> 
             having its principal place of business located at <u><b>{{$contract->client_location}}</b></u>(the “Agent”), both of whom agree to be bound by this Agreement.</p>
@@ -19,16 +19,16 @@
         <ul><p>1.	Assignment of Right
         <ul>a.	With certain limitations stated herein, the Company hereby authorizes the Agent the right to market and offer for sale the Products according to the terms and limitations stated in this Agency Agreement.</ul>
         <ul>b.	The Company reserves the right to add to or subtract from the list of Products authorized on Exhibit A attached hereto with notice to the Agent.</ul></p></ul>
-        <ul><p>2.	Territory
+        <ul><p>2.	Territory - 
         The Agent shall be authorized to market the Product in (the “Territory”).</p></ul>
-        <ul><p>3.	Exclusivity
+        <ul><p>3.	Exclusivity - 
         The Agent shall be the exclusive party authorized to market the Product within the Territory.</p></ul>
-        <ul><p>4.	Trademark Rights
+        <ul><p>4.	Trademark Rights - 
         The Agent agrees and acknowledges the following with regard to the Company’s trademark:
         <ul>a.	The Company is the sole and exclusive owner to all rights, title, and interest in “Trademark” or to any other trademarks associated with the Company (the “Company Trademarks”) that the Agent may utilize in performing the services herein.</ul>
         <ul>b.	The Company hereby grants to the Agent for the duration of this Agreement and subject to the 
         limitations stated within this Agreement a non-exclusive, non-transferable, revocable right to use the Company Trademarks as necessary to market and offer for sale the Products within the Territory.</ul></p></ul>
-        <ul><p>5.	Agent Responsibilities
+        <ul><p>5.	Agent Responsibilities - 
         In marketing and offering the Products for sale in the Territory, the Agent shall:
         <ul>a.	Act with diligence, devoting reasonable time and effort to fulfill the duties described herein;</ul>
         <ul>b.	Maintain reasonable technical and practical knowledge with regard to the Products;</ul>
@@ -37,7 +37,7 @@
         <ul>e.	Promptly respond to all communications by customers and the Company regarding the Products;</ul>
         <ul>f.	Reasonably assist the Company with regard to any and all collection matters as requested by the Company;</ul>
         <ul>g.	Prepare and maintain any reports and documentation, as requested by the Company.</ul></p></ul>
-        <ul><p>6.	Commission
+        <ul><p>6.	Commission - 
         The Company shall pay to the Agent 20% of all Net Product Sales directly from the Agent’s efforts. “Net Product Sales” shall be defined as the amount of sales revenue from any sales made by the Agent less any chargebacks, returns, or defaults by customers.
         <ul>a.	Should the Parties terminate this Agreement for any reason, the Company shall pay the Agent only for sales of the Products made prior to the termination date.</ul>
         <ul>b.	In the event that the Agent receives commission payments for orders that are subsequently refunded, charged back, or the 
@@ -50,12 +50,10 @@
         <ul><p>8.	Term and Termination
         <ul>a.	This Agreement shall commence upon the date of execution and continue until either Party terminates this Agreement in writing.</ul>
         <ul>b.	Upon such termination, the Agent shall cease marketing and offering for sale the Products and shall continue to abide by the obligation refrain from sharing with any third party any of the Company’s confidential information.</ul></p></ul>
-        <ul><p>9.	Indemnification
+        <ul><p>9.	Indemnification - 
         The Agent agrees to indemnify, defend, and protect the Company from and against all lawsuits and costs of every kind pertaining to any violation of the law, this Agreement, or the rights of any third party by the Agent while acting pursuant to this Agreement. Such costs include but are not limited to reasonable legal fees.</p></ul>
-        <ul><p>10.	No Modification Unless in Writing
+        <ul><p>10.	No Modification Unless in Writing - 
         No modification of this Agreement shall be valid unless in writing and agreed upon by both Parties.</p></ul>
-        <ul><p>11.	Applicable Law
-        This Agreement and the interpretation of its terms shall be governed by and construed in accordance with the laws of the State of California and subject to the exclusive jurisdiction of the federal and state courts located in Alpine County, California.</p></ul>
         
         IN WITNESS WHEREOF, by execution by the parties below, this Service-Level Agreement will form a part of the Contract.
         <br>

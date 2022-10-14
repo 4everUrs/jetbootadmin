@@ -26,7 +26,7 @@
                 <th>Position</th>
                 <th>Monthly Salary</th>
                 <th>Job Details</th>
-                <th>Location</th>
+                <th>Company Location</th>
                 <th class="text-center">Action</th>
 
 
@@ -61,8 +61,8 @@
                 <label for="">Company Name</label>
                 <select wire:model="name"class="form-control" type="text">
                 <option value="">Select Company</option>
-                @foreach ($clients as $client)
-                <option>{{$client->name}}</option>
+                @foreach ($clients as$index=> $client)
+                <option value="{{$index+1}}">{{$client->name}}</option>
                 @endforeach
                 </select>
                 
@@ -80,9 +80,6 @@
                 <textarea wire:model="details"class="form-control" rows="2"></textarea>
                 @error('details') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
-                <label for="">Work Location</label>
-                <input wire:model="location"class="form-control" type="text">
-                @error('location') <span class="text-danger">{{$message}}</span> @enderror
             </div>
         </x-slot>
         <x-slot name="footer">

@@ -8,12 +8,37 @@ use App\Models\LocalPlacement;
 use App\Models\Onboard;
 class Placementfee extends Component
 {
+    public $showPlacement = false;
+    public $name,$placement,$status;
     public function render()
     {
         return view('livewire.core.pm.placementfee',[
             'jobs' => LocalPlacement::all(),
         ]);
     }
+    public function savePlacement(){
+        $validateddata = $this->validate([
+            'placement' => 'required|string',
+            'status' => 'required|string',
+        ]);
+        $job = LocalPlacement::find($this->name);
+        $job->placement = $validateddata['placement'];
+        $job->status = $validateddata['status'];
+        $job->save();
+        flash()->addSuccess('Data update successfully');
+        $this->resetInput();
+        $this->showPlacement = false;
+    }
+    public function resetInput()
+    {
+        $this->name = '';  
+        $this->placement = '';    
+        $this->status = '';    
+    }
+    public function loadPlacement(){
+        $this->showPlacement = true;
+    }
+
     public function deploy($id){
         $job = ApplicantForm::find($id);
        

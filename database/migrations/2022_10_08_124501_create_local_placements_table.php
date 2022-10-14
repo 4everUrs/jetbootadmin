@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('company_name');
             $table->string('company_location');
             $table->string('position');
-            $table->string('status');
-            $table->string('remarks')->nullable();
+            $table->string('placement');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

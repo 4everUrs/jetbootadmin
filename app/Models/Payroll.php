@@ -9,6 +9,6 @@ class Payroll extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'attendance', 'salary', 'contribution', 'placement', 'collection', 'status'
+        'name', 'attendance', 'salary', 'contribution', 'placement', 'status'
     ];
 }

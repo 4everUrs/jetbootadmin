@@ -9,7 +9,16 @@ class Agreement extends Component
     public $aggreement = false;
     public $client_name,$client_location,$contract_term;
     public  $contractModal = false;
-   public $selected_id;
+    public $selected_id;
+    protected $rules = [
+        'client_name' => 'required|string',
+        'client_location' => 'required|string',
+        'contract_term' => 'required|string',
+    ];
+    public function updated($fields)
+    {
+        $this->validateOnly($fields);
+    }
     public function render()
     {
         return view('livewire.core.cacm.agreement',[
@@ -18,6 +27,11 @@ class Agreement extends Component
         ]);
     }
     public function aggreementSave(){
+        $validateddata = $this->validate([
+            'client_name' => 'required|string',
+            'client_location' => 'required|string',
+            'contract_term' => 'required|string',
+        ]);
         Contract::create([
             'client_name' => $this->client_name,
             'client_location' => $this->client_location,

@@ -31,6 +31,7 @@
                     <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$job->resume_file}}" target="__blank">Resume</a></td>
                     <td class="text-center">
                         <button wire:click="approve({{$job->id}})" class="btn btn-primary">Approved</button>
+                        <button wire:click="denied({{$job->id}})" class="btn btn-danger">Denied</button>
                     </td>
                     
                   </tr>

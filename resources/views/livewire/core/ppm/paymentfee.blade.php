@@ -6,9 +6,9 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="loadPayroll" type="create" class="btn btn-success" style="float:right"> Local Payroll</button>
+            <button wire:click="loadPayroll" type="create" class="btn btn-success" style="float:right"> Payroll</button>
             <br><br>
-            <x-table head="List of Local Payroll">
+            <x-table head="List of Payroll">
                 <thead>
                     <th>No.</th>
                     <th>Employee Name</th>
@@ -46,18 +46,23 @@
     </div>
     <x-jet-dialog-modal wire:model="showPayroll">
         <x-slot name="title">
-            {{ __('Create Local Payroll') }}
+            {{ __('Create Payroll') }}
             
         </x-slot>
         <x-slot name="content">
             <div class="form-group">
                 
                 <label for="">Employee Name</label>
-                <input wire:model="name"class="form-control" type="text">
+                <select wire:model="name"class="form-control" type="text">
+                    <option value="">Select Name</option>
+                    @foreach ($payrolls as$index=> $payroll)
+                    <option value="{{$index+1}}">{{$payroll->name}}</option>
+                    @endforeach
+                </select>
                 @error('name') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Daily Attendance</label>
-                <input wire:model="attendance"class="form-control" type="text">
+                <input wire:model="attendance"class="form-control" type="number">
                 @error('attendance') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Minimum Wage</label>
@@ -67,10 +72,6 @@
                 <label for="">Contribution</label>
                 <input wire:model="contribution"class="form-control" type="number">
                 @error('contribution') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
-                <label for="">Placement Fee</label>
-                <input wire:model="placement"class="form-control" type="number">
-                @error('placement') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
             
                 
@@ -90,7 +91,7 @@
     
     <div class="card">
         <div class="card-body">
-            <x-table head="List of Local Payment">
+            <x-table head="List of Payment">
                 <thead>
                     <th>No.</th>
                     <th>Employee Name</th>
@@ -128,13 +129,12 @@
     <br><br><br>
     <div class="card">
         <div class="card-body">
-            <x-table head="Local Collection">
+            <x-table head="Collection">
                 <thead>
                     <th>No.</th>
                     <th>Employee Name</th>
                     <th>Contribution</th>
                     <th>Placement Fee</th>
-                    <th>Collection</th>
                     <th>Status</th>
                     <th>Total Collection</th>
                     <th class="text-center">Action</th>
@@ -146,7 +146,6 @@
                         <td class="text-center">{{$payroll->name}}</td>
                         <td class="text-center">{{$payroll->contribution}}</td>
                         <td class="text-center">{{$payroll->placement}}</td>
-                        <td class="text-center">{{$payroll->collection}}</td>
                         <td class="text-center">{{$payroll->status}}</td>
                         <td></td>
                         <td class="text-center">

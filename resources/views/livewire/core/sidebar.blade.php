@@ -15,9 +15,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('addclient')}}" class="nav-link"><i class='fa fa-plus'></i> Add Client</a>
                         <a href="{{route('applicantname')}}" class="nav-link"><i class='fa fa-list-ol'></i> List of Applicant</a>
-                        <a href="{{route('denied')}}" class="nav-link"><i class='fa fa-trash'></i> List of Denied ??</a>
                     </li>
                 </ul>
             </li>
@@ -30,7 +28,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('jobcandidate')}}" class="nav-link">List of Applicant</a>
-                        <a href="#" class="nav-link">Applicant Record</a>
+                        <a href="{{route('deniedapplicant')}}" class="nav-link"> List of Denied Applicant</a>
                     </li>
                 </ul>
             </li>
@@ -128,7 +126,6 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('contract')}}" class="nav-link"><i class='fa fa-pen'></i> Agency Contract Agreement <br> Form</a>
                         <a href="{{route('agreement')}}" class="nav-link">Clients Agreement List</a>
                     </li>
                 </ul>
