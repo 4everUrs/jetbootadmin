@@ -135,11 +135,12 @@
             vendor.classList.remove('d-none');
             })
        </script>
-       <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+      
         @stack('modals')
 
         @livewireScripts
-
+        <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
+            data-turbolinks-eval="false" data-turbo-eval="false"></script>
         @stack('scripts')
         
 </body>

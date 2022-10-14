@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Logistics\Assetmgmt;
 
 use App\Models\Building;
+use App\Models\Equipment;
+use App\Models\Vehicle;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -10,6 +12,8 @@ class Createasset extends Component
 {
     public $type;
     public $name, $contractor, $location, $date, $cost, $specs;
+    public $brand, $model, $condition, $vehicleType, $plate;
+    public $equipmentType, $quantity, $description;
     public function render()
     {
         if ($this->type == 'building') {
@@ -24,7 +28,7 @@ class Createasset extends Component
     public function createAsset()
     {
         $validatedData = $this->validate([
-            'name' => 'required|',
+            'type' => 'required|',
             'contractor' => 'required',
             'location' => 'required|string',
             'date' => 'required|string',
@@ -34,6 +38,35 @@ class Createasset extends Component
         $validatedData['date'] = Carbon::parse($this->date)->toFormattedDateString();
         Building::create($validatedData);
         toastr()->addSuccess('New asset created');
+        $this->reset();
+    }
+    public function createVehicle()
+    {
+        $validatedData = $this->validate([
+            'type' => 'required|string',
+            'brand' => 'required|string',
+            'model' => 'required|string',
+            'plate' => 'required|string',
+            'condition' => 'required|string',
+            'cost' => 'required|integer',
+        ]);
+        $validatedData['type'] = $this->vehicleType;
+        Vehicle::create($validatedData);
+        toastr()->addSuccess('New vehicle created');
+        $this->reset();
+    }
+    public function createNewEquipment()
+    {
+        $validatedData = $this->validate([
+            'type' => 'required|string',
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'quantity' => 'required|integer',
+            'cost' => 'required|integer',
+        ]);
+        $validatedData['type'] = $this->equipmentType;
+        Equipment::create($validatedData);
+        toastr()->addSuccess('New equipment added');
         $this->reset();
     }
 }

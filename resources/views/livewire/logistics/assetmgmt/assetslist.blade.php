@@ -101,13 +101,60 @@
                                         <th>Vechicle Brand</th>
                                         <th>Vechile Model</th>
                                         <th>Vechicle Plate No.</th>
+                                        <th>Vechicle Condition.</th>
                                         <th>Status.</th>
                                     </thead>
+                                    <tbody>
+                                        @forelse ($vehicles as $vehicle)
+                                            <tr>
+                                                <td>{{$vehicle->id}}</td>
+                                                <td>{{$vehicle->type}}</td>
+                                                <td>{{$vehicle->brand}}</td>
+                                                <td>{{$vehicle->model}}</td>
+                                                <td>{{$vehicle->plate}}</td>
+                                                <td>{{$vehicle->condition}}</td>
+                                                <td>{{$vehicle->status}}</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="6" class="text-center">No Record Found</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
                                 </x-table>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="equipments" role="tabpanel" aria-labelledby="equipments-tab">...</div>
+                    <div class="tab-pane fade" id="equipments" role="tabpanel" aria-labelledby="equipments-tab">
+                        <div class="card">
+                            <div class="card-body">
+                                <x-table head="Equipments">
+                                    <thead>
+                                        <th>No.</th>
+                                        <th>Type.</th>
+                                        <th>Name.</th>
+                                        <th style="width: 20%">Description.</th>
+                                        <th>Quantity.</th>
+                                        <th>Purchase Date.</th>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($equipments as $equipment)
+                                            <tr>
+                                                <td>{{$equipment->id}}</td>
+                                                <td>{{$equipment->type}}</td>
+                                                <td>{{$equipment->name}}</td>
+                                                <td>{{$equipment->description}}</td>
+                                                <td>{{$equipment->quantity}}</td>
+                                                <td>{{Carbon\Carbon::parse($equipment->create_at)->toFormattedDateString()}}</td>
+                                            </tr>
+                                        @empty
+                                            
+                                        @endforelse
+                                    </tbody>
+                                </x-table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

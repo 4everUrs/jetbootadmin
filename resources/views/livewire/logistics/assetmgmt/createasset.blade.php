@@ -74,12 +74,102 @@
         </div>
         <div class="card mt-3 d-none" id="vehicle">
             <div class="card-body">
-                <h1>Vehicle Form</h1>
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Vehicle Type</td>
+                        <td>
+                            <input wire:model="vehicleType" type="text" class="form-control">
+                            @error('vehicleType') <span class="alert alert-danger">{{ $message }}</span><br> @enderror
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vehicle Brand</td>
+                        <td>
+                            <input wire:model="brand" type="text" class="form-control">
+                            @error('brand') <span class="alert alert-danger">{{ $message }}</span><br> @enderror
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vehicle Model</td>
+                        <td>
+                            <input wire:model="model" type="text" class="form-control">
+                            @error('model') <span class="alert alert-danger">{{ $message }}</span><br> @enderror
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vehicle Plate Number</td>
+                        <td>
+                            <input wire:model="plate" type="text" class="form-control">
+                            @error('plate') <span class="alert alert-danger">{{ $message }}</span><br> @enderror
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vehicle Condition</td>
+                        <td>
+                            <select wire:model="condition" class="form-control">
+                                <option value="">Select Option</option>
+                                <option value="Brand New">Brand New</option>
+                                <option value="Pre-owned">Pre-owned</option>
+                                <option value="Damaged">Damaged</option>
+                            </select>
+                            @error('condition') <span class="alert alert-danger">{{ $message }}</span><br> @enderror
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Purchase Cost</td>
+                        <td>
+                            <input wire:model="cost" type="number" class="form-control">
+                            @error('cost') <span class="alert alert-danger">{{ $message }}</span><br> @enderror
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-right">
+                            <button wire:click="createVehicle" class="btn btn-dark">Create Vechicle</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="card mt-3 d-none" id="equipment">
             <div class="card-body">
-                <h1>Equipment Form Form</h1>
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Equipment Type</td>
+                        <td>
+                            <input wire:model="equipmentType" class="form-control" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Equipment Name</td>
+                        <td>
+                            <input wire:model="name" class="form-control" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Equipment Description</td>
+                        <td>
+                            <textarea wire:model="description" class="form-control" rows="5"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Quantity</td>
+                        <td>
+                            <input wire:model="quantity" class="form-control" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pruchase Cost</td>
+                        <td>
+                            <input wire:model="cost" class="form-control" type="number">
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td colspan="2" class="text-right">
+                            <button wire:click="createNewEquipment" class="btn btn-dark">Add New Equipment</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
