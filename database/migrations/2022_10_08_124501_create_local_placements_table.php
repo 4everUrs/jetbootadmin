@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('onboards', function (Blueprint $table) {
+        Schema::create('local_placements', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('age');
-            $table->string('gender');
+            $table->string('phone');
+            $table->string('email');
             $table->string('company_name');
+            $table->string('company_location');
             $table->string('position');
-            $table->string('contract');
-            $table->string('status');
-            $table->string('resume_file');
+            $table->string('placement');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('onboards');
+        Schema::dropIfExists('local_placements');
     }
 };

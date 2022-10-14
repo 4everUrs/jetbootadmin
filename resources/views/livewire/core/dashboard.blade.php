@@ -10,7 +10,7 @@
         
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3></h3>
+                        <h3>150</h3>
                         <p>Applicant</p>
                     </div>
                     <div class="icon">
@@ -19,6 +19,7 @@
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+        
         </div>
     
     </x-app-layout>

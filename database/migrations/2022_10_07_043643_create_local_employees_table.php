@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('local_employees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email');
-            $table->string('document');
+            $table->string('phone');
+            $table->string('position');
+            $table->string('company_name');
+            $table->string('company_location');
             $table->timestamps();
         });
     }

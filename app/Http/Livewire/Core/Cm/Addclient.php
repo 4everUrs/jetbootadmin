@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\Core\Recruit;
+namespace App\Http\Livewire\Core\Cm;
 
 use Livewire\Component;
 use App\Models\Client;
+
 class Addclient extends Component
 {
     public $showClient = false;
@@ -22,7 +23,7 @@ class Addclient extends Component
     }
     public function render()
     {
-        return view('livewire.core.recruit.addclient',[
+        return view('livewire.core.cm.addclient',[
             'clients' => Client::get(),
         ]);
     }

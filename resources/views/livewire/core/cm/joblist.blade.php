@@ -6,6 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
+            <h2 style="float:left;"><strong>Create Job</strong></h2>
             <button wire:click="loadModal" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Add New Job</button>
             
             <tbody>
@@ -21,11 +22,34 @@
     <x-table head="">
         <thead>
             <th>No.</th>
-            <th>Company Name</th>
-            <th>Collection</th>
-            <th>Status</th>
+                <th>Company Name</th>
+                <th>Position</th>
+                <th>Monthly Salary</th>
+                <th>Job Details</th>
+                <th>Company Location</th>
+                <th class="text-center">Action</th>
+
 
         </thead>
+        <tbody>
+            @forelse($clients as $client)
+            <tr>
+                <td>{{$client->id}}</td>
+                <td>{{$client->name}}</td>
+                <td>{{$client->position}}</td>
+                <td>{{$client->salary}}</td>
+                <td>{{$client->details}}</td>
+                <td>{{$client->location}}</td>
+                <td class="text-center">
+                    <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary">Approve</button>
+                    <button wire:click="edit({{$client->id}})"class="btn btn-sm btn-secondary">Edit</button>
+                    <button wire:click="delete({{$client->id}})"class="btn btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+            @empty
+
+            @endforelse
+        </tbody>
     </x-table>
     <x-jet-dialog-modal wire:model="showModal">
         <x-slot name="title">
@@ -35,7 +59,13 @@
         <x-slot name="content">
             <div class="form-group">
                 <label for="">Company Name</label>
-                <input wire:model="name"class="form-control" type="text">
+                <select wire:model="name"class="form-control" type="text">
+                <option value="">Select Company</option>
+                @foreach ($clients as$index=> $client)
+                <option value="{{$index+1}}">{{$client->name}}</option>
+                @endforeach
+                </select>
+                
                 @error('name') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Position</label>
@@ -50,9 +80,6 @@
                 <textarea wire:model="details"class="form-control" rows="2"></textarea>
                 @error('details') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
-                <label for="">Location</label>
-                <input wire:model="location"class="form-control" type="text">
-                @error('location') <span class="text-danger">{{$message}}</span> @enderror
             </div>
         </x-slot>
         <x-slot name="footer">

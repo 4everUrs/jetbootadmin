@@ -9,13 +9,13 @@ use Livewire\Component;
 
 class Applicantname extends Component
 {
-    public $name,$position,$email,$phone,$location,$resume;
+    public $name,$position,$email,$phone,$address,$resume;
     protected $rules = [
         'name' => 'required|string|min:6',
         'position' => 'required|string',
         'email' => 'required|string',
         'phone' => 'required|string',
-        'location' => 'required|string',
+        'address' => 'required|string',
         'resume' => 'required|file',
            
         
@@ -38,17 +38,12 @@ class Applicantname extends Component
             'position' => $job->position,
             'email' => $job->email,
             'phone' => $job->phone,
+            'address' => $job->address,
+            'resume_file' => $job->resume_file,
             'location' => $job->location,
-            'resume_file' => $job->resume_file
        ]);
-       if($job->status == 'Approved'){
-            flash()->addWarning('Data is already approved');
-       }
-       else{
-            $job->status = 'Approved';
-            $job->save();
-            flash()->addSuccess('Data Approved Successfully');
-        }
+       flash()->addSuccess('Data Approved Successfully');
+      
     }
     public function denied($id)
     {

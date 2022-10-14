@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Payroll extends Model
 {
     use HasFactory;
-    protected $fillabe = [
-        'name', 'attendance', 'salary', 'contribution', 'placement'
+    protected $fillable = [
+        'name', 'attendance', 'salary', 'contribution', 'placement', 'status'
     ];
 }

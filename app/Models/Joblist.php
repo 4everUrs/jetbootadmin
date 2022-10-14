@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Joblist extends Model
+class JobList extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'position', 'salary', 'details', 'location',
+        'name', 'position', 'salary', 'details', 'location'
     ];
 }

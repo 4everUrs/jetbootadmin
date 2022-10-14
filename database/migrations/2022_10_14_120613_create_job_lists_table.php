@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('onboards', function (Blueprint $table) {
+        Schema::create('job_lists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('age');
-            $table->string('gender');
-            $table->string('company_name');
             $table->string('position');
-            $table->string('contract');
-            $table->string('status');
-            $table->string('resume_file');
+            $table->string('salary');
+            $table->string('details');
+            $table->string('location');
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('onboards');
+        Schema::dropIfExists('job_lists');
     }
 };

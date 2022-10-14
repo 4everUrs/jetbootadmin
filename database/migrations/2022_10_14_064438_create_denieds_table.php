@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('onboards', function (Blueprint $table) {
+        Schema::create('denieds', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('age');
-            $table->string('gender');
-            $table->string('company_name');
             $table->string('position');
-            $table->string('contract');
-            $table->string('status');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
             $table->string('resume_file');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('onboards');
+        Schema::dropIfExists('denieds');
     }
 };
