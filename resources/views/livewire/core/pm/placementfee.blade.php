@@ -57,8 +57,8 @@
                 <label for="">Employee Name</label>
                 <select wire:model="name"class="form-control" type="text">
                     <option value="">Select Name</option>
-                    @foreach ($jobs as$index=> $job)
-                    <option value="{{$index+1}}">{{$job->name}}</option>
+                    @foreach ($jobs as $job)
+                    <option value="{{$job->id}}">{{$job->name}}</option>
                     @endforeach
                 </select>
                 @error('name') <span class="text-danger">{{$message}}</span> @enderror
