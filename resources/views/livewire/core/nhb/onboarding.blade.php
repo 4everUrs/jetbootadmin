@@ -60,8 +60,8 @@
                 <label for="">Name</label>
                 <select wire:model="name"class="form-control" type="text">
                     <option value="">Select Name</option>
-                    @foreach ($onboards as$index=> $onboard)
-                    <option value="{{$index+1}}">{{$onboard->name}}</option>
+                    @foreach ($onboards as$id=> $onboard)
+                    <option value="{{$id+1}}">{{$onboard->name}}</option>
                     @endforeach
                 </select>
                 @error('name') <span class="text-danger">{{$message}}</span> @enderror

@@ -16,6 +16,7 @@
                 <th class="text-center">Address</th>
                 <th class="text-center">Company Name</th>
                 <th class="text-center">Company Address</th>
+                <th class="text-center">Resume</th>
                 <th class="text-center">Status</th>
                 <th class="text-center">Action</th>
             </thead>
@@ -30,6 +31,7 @@
                     <td class="text-center">{{$job->address}}</td>
                     <td class="text-center">{{$job->company}}</td>
                     <td class="text-center">{{$job->location}}</td>
+                    <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$job->resume_file}}" target="__blank">Resume</a></td>
                     <td class="text-center">{{$job->status}}</td>
                     <td class="text-center">
                         <button wire:click="approve({{$job->id}})" class="btn btn-primary">Approve</button>
