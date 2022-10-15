@@ -64,34 +64,6 @@
         </x-slot>
     
     </x-jet-dialog-modal>
-    <x-jet-dialog-modal wire:model="modalRepair">
-        <x-slot name="title">
-            {{ __('Request for maintenance') }}
-        </x-slot>
-    
-        <x-slot name="content">
-            <label>Category</label>
-            <select wire:model="category" class="form-control">
-                <option value="">Select category</option>
-                <option value="repair">Repair</option>
-                <option value="maintenance">Maintenance</option>
-                <option value="overhaul">Overhaul</option>
-            </select>
-            <label for="name">Description</label>
-            <textarea wire:model="description" class="form-control" rows="4"></textarea>
-        </x-slot>
-    
-        <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('vehicularModal')" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
-            </x-jet-secondary-button>
-    
-            <x-jet-button class="ms-2" wire:click="sendRequest" wire:loading.attr="disabled">
-                {{ __('Save Info') }}
-            </x-jet-button>
-        </x-slot>
-    
-    </x-jet-dialog-modal>
 </div>
 
 
