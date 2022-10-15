@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Journals extends Component
 {
-    public $jdescription,$jdebit,$jcredit,$jencoded,$journal_id ='1',$jsubdescription,$jstatus='Process';
+    public $jdescription,$jdebit,$jcredit,$jencoded,$journal_id ='1',$jsubdescription;//$jstatus='Process';
     public $ldate,$ldescription,$ldebit,$lcredit,$lstatus;
     public $gen_leds;
     public $preview = [];
@@ -66,7 +66,7 @@ class Journals extends Component
     {
     
         $record =SubJournal::find($id);
-        $record->jstatus='Recorded';
+        //$record->jstatus='Recorded';
         $record->save();
     }
 
@@ -102,7 +102,7 @@ class Journals extends Component
                 'jsubdescription' => $this->jsubdescription,
                 'jdebit' => $prev['jdebit'],
                 'jcredit' => $prev['jcredit'],
-                'jstatus' => $prev['jstatus'],
+                //'jstatus' => $prev['jstatus'],
                 'journal_entry_id' => $temp->id,
             ]);
         }
@@ -165,7 +165,7 @@ class Journals extends Component
         $temp = SubJournal::where('journal_entry_id','=',$this->selected_id)->get();
         foreach($temp as $tmp)
         {
-            $this->grandtotal += $tmp->jcredit + $tmp->jdebit;
+            $this->grandtotal -= $tmp->jcredit - $tmp->jdebit;
         }
     }
     public function saveSub()
@@ -188,7 +188,7 @@ class Journals extends Component
         $this->jcredit =null;
         $this->jdebit =null;
         $this->jencoded = 'ADMIN';
-        $this->jstatus = 'Process';
+        //$this->jstatus = 'Process';
     }
 
 
