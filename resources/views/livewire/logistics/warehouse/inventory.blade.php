@@ -7,35 +7,44 @@
     <div  class="card ">
         <div class="card-body">
             {{--show modal--}}
-            <a wire:click="loadModal" class="btn btn-success">Add new item
-                <i class="fas fa-box nav-icon"></i>
+            <a wire:click="loadModal" class="btn btn-dark btn-sm">Add new item
             </a>
-
-            <x-table head="Inventory">
-                <thead>
-                    <th>No</th>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Status</th>
-                    <th class="text-center">Action</th>
+            
+            <x-table head="Inventory" >
+                <thead class="bg-info">
+                    <th class="text-center align-middle">Item No</th>
+                    <th class="text-center align-middle">Name</th>
+                    <th class="text-center align-middle">Supplier</th>
+                    <th class="text-center align-middle">Description</th>
+                    <th class="text-center align-middle">Cost per item</th>
+                    <th class="text-center align-middle">Stock<br>Quantity</th>
+                    <th class="text-center align-middle">Inventory<br>Value</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Discontinued?</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($items as $item)
                     <tr>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->code}}</td>
+                        <td class="text-center align-middle">{{$item->id}}</td>
+                        <td>{{$item->name}}</td>
+                        <td>{{$item->supplier->name}}</td>
                         <td>{{$item->description}}</td>
-                        <td>{{$item->quantity}}</td>
-                        <td>{{$item->status}}</td>
-                        <td class="text-center">
-                            <button wire:click="update({{$item->id}})" class="btn btn-primary">Edit</button>
-                            <button wire:click="delete({{$item->id}})" class="btn btn-danger">Delete</button>
+                        <td class="text-center align-middle">@money($item->cost_per_item)</td>
+                        <td class="text-center align-middle">{{$item->stock_quantity}}</td>
+                        <td class="text-center align-middle">@money($item->stock_value)</td>
+                        <td class="text-center align-middle">{{$item->status}}</td>
+                        <td class="text-center align-middle">{{$item->remarks}}</td>
+                        <td class="text-center align-middle">
+                            <button wire:click="update({{$item->id}})" class="btn btn-primary btn-sm">Update</button>
+                            <button wire:click="delete({{$item->id}})" class="btn btn-danger btn-sm">Delete</button>
+                            <button wire:click="restock({{$item->id}})" class="btn btn-info btn-sm">Restock</button>
                         </td>
+                       
                     </tr>
                     @empty
                         <tr>
-                            <td class="text-center" colspan="6">No record found</td>
+                            <td class="text-center" colspan="10">No record found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -46,7 +55,7 @@
         </div>
     </div>
     {{--Create Modal--}}
-    <x-jet-dialog-modal wire:model="addItem">
+    <x-jet-dialog-modal wire:model="addItem" maxWidth="md">
 
             <x-slot name="title">
                 {{ __('Add new item') }}
@@ -54,15 +63,32 @@
 
             <x-slot name="content">
                 <div class="form-group">
-                    <label>Code</label>
-                    <input type="text" class="form-control" wire:model="code">
-                    @error('code') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    <label>Manufacturer</label>
+                    <select wire:model="manufacturer" class="form-control">
+                        <option value="">Select Option</option>
+                        @forelse ($suppliers as $supplier)
+                            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                        @empty
+                            <option value="">No Supplier found</option>
+                        @endforelse
+                    </select>
+                    @error('manufacturer') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    <label>Item Name</label>
+                    <input wire:model="name" type="text" class="form-control">
+                    @error('name') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+
                     <label>Description</label>
-                    <input type="text" class="form-control" wire:model="description">
+                    <textarea wire:model="description" class="form-control" rows="3"></textarea>
                     @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    <label>Cost per item</label>
+                    <input wire:model="cost_per_item" type="text" class="form-control">
+                    @error('cost_per_item') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                     <label>Quantity</label>
-                    <input type="number" class="form-control" wire:model="quantity">
-                    @error('quantity') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    <input wire:model="stock_quantity" type="number" class="form-control">
+                    @error('stock_quantity') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    <label>Reorder Level</label>
+                    <input wire:model="reorder_level" type="number" class="form-control">
+                    @error('reorder_level') <span class="alert text-danger">{{ $message }}<br /></span> @enderror          
                 </div>
             </x-slot>
 

@@ -6,55 +6,63 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <a  wire:click="showModal"class="btn btn-primary">Send Request</a>
-            
-            <img src="" alt="">
-            <x-table head="Request List Table">
-                <thead>
-                    <th>No.</th>
-                    <th>From</th>
-                    <th>Content</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th class="text-center">Action</th>
-                </thead>
-                <tbody>
-                    @forelse ($requests as $request)
+            <button wire:click="$toggle('requestModal')" class="btn btn-primary btn-sm">Request for Item</button>
+            <button wire:click="$toggle('disposeModal')" class="btn btn-dark btn-sm">Dispose Item</button>
+            <button wire:click="$toggle('requestModal')" class="btn btn-warning btn-sm">Request for Delivery</button>
+           <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+            <li class="nav-item mr-2" role="presentation">
+                <button class="nav-link active" id="recieved-tab" data-bs-toggle="tab" data-bs-target="#recieved" type="button"
+                    role="tab" aria-controls="recieved" aria-selected="false">Recieved</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="sent-tab" data-bs-toggle="tab" data-bs-target="#sent" type="button"
+                    role="tab" aria-controls="sent" aria-selected="false">Sent</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="recieved" role="tabpanel" aria-labelledby="recieved-tab">
+                <x-table head="Request List Table">
+                    <thead class="bg-info">
+                        <th>No.</th>
+                        <th>Origin</th>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th class="text-center">Action</th>
+                    </thead>
+                    <tbody>
+                        @forelse ($requests as $request)
                         <tr>
                             <td>{{$request->id}}</td>
                             <td>{{$request->origin}}</td>
                             <td>{{$request->content}}</td>
                             <td>{{$request->create_at}}</td>
                             <td>{{$request->status}}</td>
-                           
+                
                         </tr>
-                    @empty
-                    <tr>
-                        <td class="text-center" colspan="6">No Record Found Nigga!</td>
-                    </tr>
-                        
-                    @endforelse
-                </tbody>
-            </x-table>
+                        @empty
+                        <tr>
+                            <td class="text-center" colspan="6">No Record Found Nigga!</td>
+                        </tr>
+                
+                        @endforelse
+                    </tbody>
+                </x-table>
+            </div>
+            <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">...</div>
+        </div>
         </div>
     </div>
 
     
 
-   <x-jet-dialog-modal wire:model="requestModal">
+   <x-jet-dialog-modal wire:model="disposeModal">
         <x-slot name="title">
             {{__('Send Request')}}
         </x-slot>
         <x-slot name="content">
             <div class="form-group">
-                <label>Send to:</label>
-                <select wire:model="destination" class="form-control">
-                    <option>Select Destination</option>
-                    <option value="1">Procurement</option>
-                    <option value="2">Fleet Management</option>
-                    <option value="3">Vendor Portal</option>
-                </select>
-                <div class="form-group d-none" id="vendor">
+                <div class="form-group" id="vendor">
                     <label>Item</label>
                     <input wire:model="item_name" type="text" class="form-control">
                     @error('item') <span class="text-danger">{{ $message }}</span><br> @enderror
@@ -109,17 +117,19 @@
 
                 </div>
                 <div class="form-group" id="content">
+                    
                     <label>Content</label>
                     <textarea wire:model="content" class="form-control"></textarea>
+                    @error('content') <span class="text-danger">{{ $message }}</span><br> @enderror
                 </div>
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('requestModal')" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$toggle('disposeModal')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
         
-            <x-jet-button class="ms-2" id="createButton" wire:click="saveItem" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" id="createButton" wire:click="saveDisposal" wire:loading.attr="disabled">
 
                 {{ __('Send') }}
             </x-jet-button>
@@ -127,4 +137,53 @@
         
         </x-slot>
    </x-jet-dialog-modal>
+
+   <x-jet-dialog-modal wire:model="requestModal">
+    <x-slot name="title">
+        {{__('Send Request')}}
+    </x-slot>
+    <x-slot name="content">
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <label>Category</label>
+                    <select wire:model="category" class="form-control">
+                        <option value="New">New</option>
+                        <option value="Re-Purchase">Re-Purchase</option>
+                    </select>
+                </div>
+                <div class="col d-none" id="supplier">
+                    <label>Category</label>
+                    <select class="form-control">
+                        <option value="New">New</option>
+                        <option value="Re-Purchase">Re-Purchase</option>
+                    </select>
+                </div>
+            </div>
+            <label>Request Content</label>
+            <textarea wire:model="content" class="form-control" rows="5"></textarea>
+            @error('content') <span class="text-danger">{{ $message }}</span><br> @enderror
+        </div>
+    </x-slot>
+    <x-slot name="footer">
+        <x-jet-secondary-button wire:click="$toggle('requestModal')" wire:loading.attr="disabled">
+            {{ __('Cancel') }}
+        </x-jet-secondary-button>
+
+        <x-jet-button class="ms-2" id="createButton" wire:click="saveRequest" wire:loading.attr="disabled">
+
+            {{ __('Send') }}
+        </x-jet-button>
+
+
+    </x-slot>
+    </x-jet-dialog-modal>
+    @push('scripts')
+        <script>
+            window.addEventListener('show-supplier', event => {
+            var vendor = document.getElementById('supplier');
+            vendor.classList.remove('d-none');
+            })
+        </script>
+    @endpush
 </div>

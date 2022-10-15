@@ -9,6 +9,11 @@ class Stock extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'code', 'description', 'quantity', 'status',
+        'name', 'supplier_id', 'description', 'cost_per_item', 'stock_value', 'item_no', 'stock_quantity',
+        'reorder_level', 'status', 'remarks'
     ];
+    public function Supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
 }
