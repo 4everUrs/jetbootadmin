@@ -65,7 +65,9 @@ use App\Http\Livewire\Logistics\Projectmanagement\Proposal;
 use App\Http\Livewire\Logistics\Fleet\Activity;
 use App\Http\Livewire\Logistics\Fleet\Maps;
 use App\Http\Livewire\Logistics\Fleet\Reservation;
+use App\Http\Livewire\Logistics\Fleet\Rominventory;
 use App\Http\Livewire\Logistics\Fleet\Romrequest;
+use App\Http\Livewire\Logistics\Fleet\Romrequestlist;
 use App\Http\Livewire\Logistics\Fleet\Vinfo;
 use App\Http\Livewire\Logistics\Vendorportal\Workshops;
 
@@ -129,7 +131,9 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('fleet/maps', Maps::class,)->name('mappers');
     Route::get('fleet/romrequest', Romrequest::class)->name('repairs');
     Route::get('fleet/reservation', Reservation::class)->name('reserve');
-    Route::get('fleet/reservation', Reservation::class)->name('reserve');
+    Route::get('fleet/romrequestlist', Romrequestlist::class)->name('romlist');
+    Route::get('fleet/rominventory', Rominventory::class)->name('rominventory');
+    
 });
 
 //Finance Routes
