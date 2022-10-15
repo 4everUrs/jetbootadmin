@@ -6,13 +6,13 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="loadPayroll" class="btn btn-success">Contract</button>
+            <button wire:click="loadPayroll" class="btn btn-success"><i class='fa fa-edit'></i> Create Contract</button>
             <x-table head="">
                 <thead>
-                    <th>Client Name</th>
-                    <th>Client Location</th>
-                    <th>Contract Term</th>
-                    <th>Status</th>
+                    <th class="text-center">Client Name</th>
+                    <th class="text-center">Client Location</th>
+                    <th class="text-center">Contract Term</th>
+                    <th class="text-center">Status</th>
                 </thead>
                 <tbody>
                     @forelse ($onboards as $onboard)
@@ -20,12 +20,14 @@
                             <td class="text-center">{{$onboard->client_name}}</td>
                             <td class="text-center">{{$onboard->client_location}}</td>
                             <td class="text-center">{{$onboard->contract_term}}</td>
-                            <td>
-                                <button wire:click="viewModal({{$onboard->id}})" class="btn btn-primary">View</button>
+                            <td class="text-center">
+                                <button wire:click="viewModal({{$onboard->id}})" class="btn btn-primary" ><i class='fa fa-eye'></i> View</button>
                             </td>
                           </tr>
                         @empty
-                          
+                            <tr>
+                                <td colspan="4" class="text-center">No Record Found</td>
+                            </tr>
                         @endforelse
                 </tbody>
             </x-table>
@@ -132,10 +134,10 @@
         </x-slot>
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('contractModal')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
-                {{ __('Cancel') }}
+                {{ __('Close') }}
             </x-jet-secondary-button>
     
-            <x-jet-button class="ms-2" wire:click="download" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+            <x-jet-button class="ms-2" wire:click="download" wire:loading.attr="disabled"><i class='fa fa-download'></i>
                 {{ __('Download') }}
             </x-jet-button>
         </x-slot>

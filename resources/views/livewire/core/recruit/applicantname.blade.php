@@ -1,6 +1,6 @@
 <div>
     <x-slot name="header">
-        <h2 class="h3 font-weight-bold" style="margin-left:290px">
+        <h2 class="h4 font-weight-bold">
          {{ __('List of Applicants') }}
         </h2>
     </x-slot>
@@ -34,11 +34,13 @@
                     <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$job->resume_file}}" target="__blank">Resume</a></td>
                     <td class="text-center">{{$job->status}}</td>
                     <td class="text-center">
-                        <button wire:click="approve({{$job->id}})" class="btn btn-primary">Approve</button>
+                        <button wire:click="approve({{$job->id}})" class="btn btn-primary"><i class='fa fa-check'></i> Approve</button>
                     </td>
                   </tr>
               @empty
-                  
+                <tr>
+                    <td colspan="11" class="text-center">No Record Found</td>
+                </tr>
               @endforelse
             </tbody>
            </x-table>

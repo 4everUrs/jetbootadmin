@@ -6,7 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="loadPayroll" type="create" class="btn btn-success" style="float:right"> Add Input</button>
+            <button wire:click="loadOnboard" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Add Onboard</button>
             <br><br>
            <x-table head="">
             <thead>
@@ -39,17 +39,19 @@
                         <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$onboard->resume_file}}" target="__blank">Resume</a></td>
                         <td class="text-center">{{$onboard->created_at}}</td>
                         <td class="text-center">
-                            <button wire:click="submit({{$onboard->id}})" class="btn btn-sm btn-primary">Send to Employee Mngt. </button>
+                            <button wire:click="submit({{$onboard->id}})" class="btn btn-sm btn-primary"><i class='fa fa-share'></i> Send to Employee Mngt. </button>
                         </td>
                       </tr>
                     @empty
-                      
+                        <tr>
+                            <td colspan="11" class="text-center">No Record Found</td>
+                        </tr>
                     @endforelse
             </tbody>
            </x-table>
         </div>
     </div>
-    <x-jet-dialog-modal wire:model="showPayroll">
+    <x-jet-dialog-modal wire:model="showOnboard">
         <x-slot name="title">
             {{ __('Create New Hire Onboard Data') }}
             
@@ -89,11 +91,11 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('showPayroll')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
+            <x-jet-secondary-button wire:click="$toggle('showOnboard')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
     
-            <x-jet-button class="ms-2" wire:click="savePayroll" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+            <x-jet-button class="ms-2" wire:click="saveOnboard" wire:loading.attr="disabled"><i class='fa fa-check'></i>
                 {{ __('Confirm') }}
             </x-jet-button>
         </x-slot>

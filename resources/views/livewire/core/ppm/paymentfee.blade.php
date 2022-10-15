@@ -6,18 +6,18 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="loadPayroll" type="create" class="btn btn-success" style="float:right"> Payroll</button>
+            <button wire:click="loadPayroll" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Payroll</button>
             <br><br>
             <x-table head="List of Payroll">
                 <thead>
-                    <th>No.</th>
-                    <th>Employee Name</th>
-                    <th>Daily Attendance</th>
-                    <th>Minimum Wage</th>
-                    <th>Total</th>
-                    <th>Contribution</th>
-                    <th>Placement Fee</th>
-                    <th>Total Salary</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Employee Name</th>
+                    <th class="text-center">Daily Attendance</th>
+                    <th class="text-center">Minimum Wage</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Contribution</th>
+                    <th class="text-center">Placement Fee</th>
+                    <th class="text-center">Total Salary</th>
                     <th class="text-center">Action</th>
                 </thead>
                 <tbody>
@@ -38,7 +38,9 @@
                         
                     </tr>
                     @empty
-                      
+                        <tr>
+                            <td colspan="9" class="text-center">No Record Found</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </x-table>
@@ -93,15 +95,15 @@
         <div class="card-body">
             <x-table head="List of Payment">
                 <thead>
-                    <th>No.</th>
-                    <th>Employee Name</th>
-                    <th>Daily Attendance</th>
-                    <th>Minimum Wage</th>
-                    <th>Contribution</th>
-                    <th>Placement Fee</th>
-                    <th>Status</th>
-                    <th>Total Salary</th>
-                    <th>Action</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Employee Name</th>
+                    <th class="text-center">Daily Attendance</th>
+                    <th class="text-center">Minimum Wage</th>
+                    <th class="text-center">Contribution</th>
+                    <th class="text-center">Placement Fee</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Total Salary</th>
+                    <th class="text-center">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($payrolls as $payroll)
@@ -120,7 +122,9 @@
                         
                     </tr>
                     @empty
-                      
+                        <tr>
+                            <td colspan="9" class="text-center">No Record Found</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </x-table>
@@ -131,12 +135,12 @@
         <div class="card-body">
             <x-table head="Collection">
                 <thead>
-                    <th>No.</th>
-                    <th>Employee Name</th>
-                    <th>Contribution</th>
-                    <th>Placement Fee</th>
-                    <th>Status</th>
-                    <th>Total Collection</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Employee Name</th>
+                    <th class="text-center">Contribution</th>
+                    <th class="text-center">Placement Fee</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Total Collection</th>
                     <th class="text-center">Action</th>
                 </thead>
                 <tbody>
@@ -154,7 +158,9 @@
                         
                     </tr>
                     @empty
-                      
+                        <tr>
+                            <td colspan="7" class="text-center">No Record Found</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </x-table>
