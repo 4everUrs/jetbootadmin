@@ -8,7 +8,7 @@
         <div class="card-body">
             <button wire:click='loadModal' class="btn btn-dark btn-sm">+ New Proposal</button>
             <x-table head="List of Proposal">
-                <thead>
+                <thead class="bg-info">
 
                     <th>Project Title</th>
                     <th>Duration</th>

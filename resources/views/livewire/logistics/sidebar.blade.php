@@ -1,6 +1,6 @@
 <div>
     <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-compact" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
                 <a href="{{route('logistics')}}" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
@@ -23,6 +23,12 @@
                     <li class="nav-item">
                         <a href="{{route('po')}}" class="nav-link">Purchase Order</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('bmproposal')}}" class="nav-link">Budget Proposal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('reorders')}}" class="nav-link">Re-Order Requests</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">
@@ -37,6 +43,9 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('requestlists')}}" class="nav-link">Request List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('warehousePO')}}" class="nav-link">Purchase Order</a>
                     </li>
 
                 </ul>
@@ -68,6 +77,9 @@
                     <li class="nav-item">
                         <a href="{{route('assets')}}" class="nav-link">Assets List</a>
                         <a href="{{route('newasset')}}" class="nav-link">Add New Asset</a>
+                        <a href="{{route('evaluations')}}" class="nav-link">Asset Evaluation</a>
+                        <a href="{{route('assetreport')}}" class="nav-link">Reports</a>
+                        <a href="{{route('assetmaintenance')}}" class="nav-link">Maintenance Request</a>
                     </li>
                 </ul>
             </li>
@@ -82,9 +94,11 @@
                         <a href="{{route('projects')}}" class="nav-link">List of Project</a>
                         <a href="{{route('newproject')}}" class="nav-link">Creat new project</a>
                         <a href="{{route('proposal')}}" class="nav-link">Project Proposal</a>
+                        <a href="{{route('pmreports')}}" class="nav-link">Send Reports</a>
                     </li>
                 </ul>
-            <li class="nav-item ">
+            </li>
+           <li class="nav-item ">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-car"></i>
                     <p>Fleet Management</p>
@@ -92,49 +106,40 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('mappers')}}" class="nav-link">Maps</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('vehicleinformation')}}" class="nav-link">Vehicles</a>
-                    </li>
-                    <a href="#" class="nav-link">Reports</a>
-            </li>
-            </li>
-            </li>
-
-        </ul>
-        <li class="nav-item ">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-car"></i>
-                <p>Vehicle Reservation</p>
-                <i class="right fas fa-angle-left"></i>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('reserve')}}" class="nav-link">Reservations</a>
-                </li>
-            </ul>
-        <li class="nav-item ">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-car"></i>
-                <p>MRO</p>
-                <i class="right fas fa-angle-left"></i>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{route('repairs')}}" class="nav-link">Repairs</a>
-                </li>
-            </ul>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('romlist')}}" class="nav-link">MRO Request List</a>
+                        {{-- <a href="{{route('mappers')}}" class="nav-link">Maps</a> --}}
+                        <a href="{{route('vehicleinformation')}}" class="nav-link">Vehicle List</a>
+                        <a href="#" class="nav-link">Request List</a>
+                        <a href="#" class="nav-link">Reports</a>
                     </li>
                 </ul>
-                    <ul class="nav nav-treeview">
+            </li>
+          <li class="nav-item ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-car"></i>
+                    <p>Vehicle Reservation</p>
+                    <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
                     <li class="nav-item">
+                        <a href="{{route('reserve')}}" class="nav-link">Reservations</a>
+                    </li>
+                </ul>
+            </li>
+           <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>M.R.O</p>
+                    <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('repairs')}}" class="nav-link">Repairs</a>
+                        <a href="{{route('romlist')}}" class="nav-link">MRO Request List</a>
                         <a href="{{route('rominventory')}}" class="nav-link">Inventory</a>
                     </li>
-                    </ul>
-                
+                </ul>
+            </li>
+            
+         </ul>
     </nav>
 </div>

@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        //$table->id();
-        $table->string('subject');
-        $table->string('origin');
-        $table->string('category');
-        $table->string('description');
-        $table->string('completion_date')->nullable();
-        $table->string('status')->nullable();
-        $table->timestamps();
+        Schema::create('warehouse_sents', function (Blueprint $table) {
+            $table->id();
+            $table->string('category');
+            $table->string('destination');
+            $table->string('content');
+            $table->string('status');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('warehouse_sents');
     }
 };

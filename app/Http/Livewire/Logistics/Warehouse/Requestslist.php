@@ -6,59 +6,33 @@ use Livewire\Component;
 use App\Models\RequestList;
 use App\Models\ProcurementRequest;
 use Livewire\WithPagination;
-use Carbon\Carbon;
 use Livewire\WithFileUploads;
-use App\Models\Shop;
-use App\Models\Image;
-use App\Models\VendorShop;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Reorder;
+use App\Models\Stock;
+use App\Models\Supplier;
+use App\Models\WarehouseSent;
 
 class Requestslist extends Component
 {
     public $origin = 'Warehouse', $content, $status = 'Pending';
-    public $destination;
-    public $disposeModal = false;
     public $requestModal = false;
-    public $images = [];
-    public $fileCounter = [];
-    public $displayImage;
-    public $thumbnail;
-    public $category;
-
-
-
-    public $item_name, $condition, $description, $amount, $file_name;
-
+    public $reOrderModal = false;
+    public $category, $quantity, $supplier, $item;
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
-    protected $listeners = ['postAdded' => 'listing'];
-
-
-    public function addRow()
-    {
-        $this->fileCounter[] = ['1'];
-    }
-    public function removeRow($index)
-    {
-        unset($this->fileCounter[$index]);
-    }
-
     public function render()
     {
-        $this->fileCounter;
-        if ($this->category == "Re-Purchase") {
+        if ($this->category == "Re-order") {
             $this->dispatchBrowserEvent('show-supplier');
         }
         return view('livewire.logistics.warehouse.requestslist', [
             'requests' => RequestList::get(),
-
+            'suppliers' => Supplier::all(),
+            'sents' => WarehouseSent::all(),
+            'items' => Stock::where('supplier_id', '=', $this->supplier)->where('status', '=', 'LOW')->get(),
         ]);
-    }
-    public function listing($selected_id)
-    {
-        dd('test');
     }
 
     public function saveRequest()
@@ -67,48 +41,45 @@ class Requestslist extends Component
         ProcurementRequest::create([
             'origin' => $this->origin,
             'content' => $this->content,
-            'status' => $this->status
+            'status' => $this->status,
+            'category' => 'Supplier'
         ]);
-        toastr()->addSuccess('Request Success sent!.');
+        WarehouseSent::create([
+            'destination' => 'Procurement',
+            'content' => $this->content,
+            'status' => $this->status,
+            'category' => 'Supplier'
+        ]);
+        toastr()->addSuccess('Request Sent Successfully');
         $this->requestModal = false;
         $this->reset();
     }
-    public function saveDisposal()
+    public function saveReorder()
     {
-        $validatedData = $this->validate([
-            'item_name' => 'required|string',
-            'condition' => 'required|string',
-            'description' => 'required|string',
-            'amount' => 'required|integer',
-            'status' => 'required|string',
-            'origin' => 'required|string',
-            'thumbnail' => 'required|image'
-        ]);
-        $validatedData['thumbnail'] = $this->thumbnail->store('shop', 'do');
-        Shop::create($validatedData);
-        if (!empty($this->images)) {
-            $this->saveImages();
-        }
-        toastr()->addSuccess('Request Success sent!.');
-        $this->resetInput();
-        $this->requestModal = false;
-    }
-    public function saveImages()
-    {
-        $temp = Shop::latest('id')->first();
-
+        $temp = Stock::find($this->item);
         $this->validate([
-            'images.*' => 'image|max:1024', // 1MB Max
+            'item' => 'required',
+            'supplier' => 'required',
+            'quantity' => 'required',
+            'content' => 'required',
         ]);
-        foreach ($this->images as $image) {
-            Image::create([
-                'shop_id' => $temp->id,
-                'vendor_shop_id' => $temp->id,
-                'file_name' => $image->store('shop', 'do'),
-            ]);
-        }
+        Reorder::create([
+            'supplier_id' => $this->supplier,
+            'quantity' => $this->quantity,
+            'price' => $temp->cost_per_item,
+            'description' => $this->content,
+            'status' => $this->status
+        ]);
+        WarehouseSent::create([
+            'destination' => 'Procurement',
+            'content' => $this->content,
+            'status' => $this->status,
+            'category' => 'Re-Order'
+        ]);
+        toastr()->addSuccess('Re-Order Sent Successfully');
+        $this->reOrderModal = false;
+        $this->reset();
     }
-
     public function resetInput()
     {
         $this->origin = null;

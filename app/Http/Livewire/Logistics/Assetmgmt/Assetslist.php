@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Logistics\Assetmgmt;
 
 use App\Models\Building;
 use App\Models\Equipment;
+use App\Models\Supplier;
 use App\Models\User;
 use App\Models\Vehicle;
 use Livewire\Component;
@@ -20,6 +21,8 @@ class Assetslist extends Component
             'buildings' => Building::all(),
             'vehicles' => Vehicle::all(),
             'equipments' => Equipment::all(),
+            'suppliers' => Supplier::all(),
+            'contractors' => Supplier::where('status', '=', 'contractor')->get()
         ]);
     }
 }

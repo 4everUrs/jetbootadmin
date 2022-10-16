@@ -15,17 +15,30 @@ class Inventory extends Component
     public $stock_value, $cost_per_item, $reorder_level, $stock_quantity, $name, $manufacturer, $supplier_id;
     public $addItem = false;
     public $deleteModal = false;
-    public $updateModal = false;
+    public $restockModal = false;
     public $table = false;
-
+    public $selected_id, $qty;
     public function render()
     {
+
         return view('livewire.logistics.warehouse.inventory', [
             'items' => Stock::with('Supplier')->orderBy('id', 'desc')->paginate(3),
             'suppliers' => Supplier::all(),
         ]);
     }
-
+    public function mount()
+    {
+        $items = Stock::with('Supplier')->get();
+        foreach ($items as $item) {
+            if ($item->stock_quantity <= $item->reorder_level) {
+                $item->status = 'LOW';
+                $item->save();
+            } elseif ($item->stock_quantity > $item->reorder_level) {
+                $item->status = 'OK';
+                $item->save();
+            }
+        }
+    }
     public function saveItem()
     {
         $validatedData = $this->validate([
@@ -46,18 +59,18 @@ class Inventory extends Component
         $this->addItem = false;
     }
 
-    public function updateItem()
+    public function restockItem()
     {
-        $validatedData = $this->validate();
-        Stock::find($this->item_id)->update($validatedData);
+        $temp = Stock::find($this->selected_id);
+        $temp->stock_quantity += $this->qty;
+        $temp->save();
         toastr()->addSuccess('Data update successfully');
-        $this->resetInput();
-        $this->updateModal = false;
+        $this->reset();
+        $this->restockModal = false;
     }
 
     public function deleteModal()
     {
-
         Stock::find($this->item_id)->destroy($this->item_id);
         toastr()->addSuccess('Data deleted successfully');
         $this->resetInput();
@@ -70,15 +83,10 @@ class Inventory extends Component
         $this->deleteModal = true;
     }
 
-    public function update($id)
+    public function restock($id)
     {
-        $this->updateModal = true;
-        $item = Stock::find($id);
-        $this->item_id = $id;
-        $this->code = $item->code;
-        $this->description = $item->description;
-        $this->quantity = $item->quantity;
-        $this->status = $item->status;
+        $this->selected_id = $id;
+        $this->restockModal = true;
     }
 
     public function resetInput()

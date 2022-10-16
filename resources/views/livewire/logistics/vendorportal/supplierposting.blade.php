@@ -8,7 +8,7 @@
         <div class="card-body">
 
             <x-table head="Post Table">
-                <thead>
+                <thead class="bg-info">
                     <th>Type</th>
                     <th>Description</th>
                     <th>Date Posted</th>

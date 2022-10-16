@@ -9,7 +9,7 @@
             <a href="{{route('newproject')}}" class="btn btn-dark btn-sm">+ Create new project</a>
             <button wire:click="loadModal" class="btn btn-success btn-sm">+ Create budget proposal</button>
             <x-table head="Projects">
-                <thead>
+                <thead class="bg-info">
                     <th>Title</th>
                     <th>Manager</th>
                     <th>Budget</th>

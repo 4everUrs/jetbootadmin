@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 class Vinfo extends Component
 {
     public $origin = 'vinfo', $pnumber, $vmodel, $driver_name, $status = "Pending";
-    public $vehicleModal = false;
+    public $repair = false;
     public $modalRepair = false;
     public $information = [];
     public $infoBox = [];
@@ -37,7 +37,22 @@ class Vinfo extends Component
         $this->selected_id = $id;
         $this->vehicleModal = true;
     }
-
+    public function sendRepair()
+    {
+        $temp = Vehicle::find($this->selected_id);
+        MaintenanceRequest::create([
+            'origin' => 'Fleet Management',
+            'subject' => $temp->brand . ' ' . $temp->model,
+            'category' => $this->category,
+            'description' => $this->description,
+            'status' => $this->status,
+        ]);
+        $temp->status = 'Maintenance';
+        $temp->save();
+        toastr()->addSuccess('Request Sent');
+        $this->repair = false;
+        $this->reset();
+    }
     public function saveInfo()
     {
         $temp = Vehicle::find($this->selected_id);
@@ -48,7 +63,7 @@ class Vinfo extends Component
     }
     public function repairModal($id)
     {
-        $this->modalRepair = true;
+        $this->repair = true;
         $this->selected_id = $id;
     }
     public function sendRequest()

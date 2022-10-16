@@ -32,7 +32,7 @@
   * sidebar-mini
 -->
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
     <div class="wrapper">
         <!-- Navbar -->
         @livewire('admin.topbar')
@@ -95,8 +95,11 @@
                     {{$slot}}
                 </div>
             </div>
-
+            
         </div>
+        <footer class="main-footer">
+            <strong>Disclaimer: This is for educational pusposes only make by student of <a href="https://bcp.edu.ph/">Bestlink College of the Philippines</a>.</strong> All rights reserved.
+        </footer>
 
 
 

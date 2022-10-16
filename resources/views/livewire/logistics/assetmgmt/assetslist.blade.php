@@ -36,15 +36,15 @@
                     <div class="tab-pane fade show active" id="workforce" role="tabpanel" aria-labelledby="workforce-tab">
                         <div class="card">
                             <div class="card-body">
-                                <x-table head="Employee">
-                                    <thead>
+                                <x-table head="Employee" class="rounded">
+                                    <thead class="bg-info">
                                         <th>No.</th>
                                         <th>Name</th>
                                         <th>Department</th>
                                         <th>Position</th>
                                         <th>Type</th>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="bg-white">
                                         @forelse ($users as $user)
                                             <tr>
                                                 <td>{{$user->id}}</td>
@@ -73,7 +73,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <x-table head="Buildings">
-                                    <thead>
+                                    <thead class="bg-info">
                                         <th>Building Name</th>
                                         <th>Building Location</th>
                                         <th>Building Specs</th>
@@ -103,7 +103,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <x-table head="Vehicle">
-                                    <thead>
+                                    <thead class="bg-info">
                                         <th>No</th>
                                         <th>Vehicle Type</th>
                                         <th>Vechicle Brand</th>
@@ -137,7 +137,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <x-table head="Equipments">
-                                    <thead>
+                                    <thead class="bg-info">
                                         <th>No.</th>
                                         <th>Type.</th>
                                         <th>Name.</th>
@@ -164,10 +164,62 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="contractor" role="tabpanel" aria-labelledby="contractor-tab">
-                        ..
+                        <div class="card">
+                            <div class="card-body">
+                                <x-table head="Suppliers Lists">
+                                    <thead class="bg-info">
+                                        <th>Company Name</th>
+                                        <th>Company Address</th>
+                                        <th>Company Phone</th>
+                                        <th>Company Email</th>
+                                        <th>Status</th>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($contractors as $contractor)
+                                        <tr>
+                                            <td>{{$contractor->name}}</td>
+                                            <td>{{$contractor->address}}</td>
+                                            <td>{{$contractor->phone}}</td>
+                                            <td>{{$contractor->email}}</td>
+                                            <td>{{$contractor->status}}</td>
+                                
+                                        </tr>
+                                        @empty
+                                
+                                        @endforelse
+                                    </tbody>
+                                </x-table>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="supplier" role="tabpanel" aria-labelledby="supplier-tab">
-                        ..
+                       <div class="card">
+                        <div class="card-body">
+                            <x-table head="Suppliers Lists">
+                                <thead class="bg-info">
+                                    <th>Company Name</th>
+                                    <th>Company Address</th>
+                                    <th>Company Phone</th>
+                                    <th>Company Email</th>
+                                    <th>Status</th>
+                                </thead>
+                                <tbody>
+                                    @forelse ($suppliers as $supplier)
+                                    <tr>
+                                        <td>{{$supplier->name}}</td>
+                                        <td>{{$supplier->address}}</td>
+                                        <td>{{$supplier->phone}}</td>
+                                        <td>{{$supplier->email}}</td>
+                                        <td>{{$supplier->status}}</td>
+                    
+                                    </tr>
+                                    @empty
+                    
+                                    @endforelse
+                                </tbody>
+                            </x-table>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

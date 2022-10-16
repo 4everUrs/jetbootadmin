@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <x-table head="Buyers List">
-                <thead>
+                <thead class="bg-info">
                     <th>Recipient</th>
                     <th>Email</th>
                     <th>Phone</th>
