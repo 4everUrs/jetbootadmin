@@ -65,8 +65,8 @@
                 <label for="">Company Name</label>
                 <select wire:model="name"class="form-control" type="text">
                 <option value="">Select Company</option>
-                @foreach ($clients as$index=> $client)
-                <option value="{{$index+1}}">{{$client->name}}</option>
+                @foreach ($clients as $client)
+                <option value="{{$client->id}}">{{$client->name}}</option>
                 @endforeach
                 </select>
                 
