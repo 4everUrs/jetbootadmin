@@ -9,7 +9,7 @@ use App\Models\LocalPlacement;
 
 class Onboarding extends Component
 {
-    public $showPayroll = false;
+    public $showOnboard = false;
     public $name,$age,$gender,$company_name,$position,$status='Hired',$contract,$resume_file;
     
   
@@ -19,7 +19,7 @@ class Onboarding extends Component
             'onboards' => Onboard::all(),
         ]);
     }
-    public function savePayroll(){
+    public function saveOnboard(){
         $validateddata = $this->validate([
         'age' => 'required|string',
         'gender' => 'required|string',
@@ -32,7 +32,7 @@ class Onboarding extends Component
         $onboard->save();
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
-        $this->showPayroll = false;
+        $this->showOnboard = false;
     }
     public function resetInput()
     {
@@ -41,8 +41,8 @@ class Onboarding extends Component
         $this->gender = '';     
         $this->contract = '';  
     }
-    public function loadPayroll(){
-        $this->showPayroll = true;
+    public function loadOnboard(){
+        $this->showOnboard = true;
     }
     public function submit($id){
         $onboard = LocalPlacement::find($id);

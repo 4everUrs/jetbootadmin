@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Wait') }}
+            {{ __('') }}
         </h2>
     </x-slot>
     <div class="card">
@@ -33,7 +33,9 @@
                     
                   </tr>
               @empty
-                  
+                <tr>
+                    <td colspan="8" class="text-center">No Record Found</td>
+                </tr>
               @endforelse
             </tbody>
            </x-table>

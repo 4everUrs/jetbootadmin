@@ -18,39 +18,43 @@
            
         </div>
     </div>
-    <br>
-    <x-table head="">
-        <thead>
-            <th>No.</th>
-                <th>Company Name</th>
-                <th>Position</th>
-                <th>Monthly Salary</th>
-                <th>Job Details</th>
-                <th>Company Location</th>
-                <th class="text-center">Action</th>
+    <div class="card">
+        <div class="card-body">
+            <x-table head="Job Record">
+                <thead>
+                    <th>No.</th>
+                        <th class="text-center">Company Name</th>
+                        <th class="text-center">Position</th>
+                        <th class="text-center">Monthly Salary</th>
+                        <th class="text-center">Job Details</th>
+                        <th class="text-center">Company Location</th>
+                        <th class="text-center">Action</th>
 
 
-        </thead>
-        <tbody>
-            @forelse($clients as $client)
-            <tr>
-                <td>{{$client->id}}</td>
-                <td>{{$client->name}}</td>
-                <td>{{$client->position}}</td>
-                <td>{{$client->salary}}</td>
-                <td>{{$client->details}}</td>
-                <td>{{$client->location}}</td>
-                <td class="text-center">
-                    <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary">Approve</button>
-                    <button wire:click="edit({{$client->id}})"class="btn btn-sm btn-secondary">Edit</button>
-                    <button wire:click="delete({{$client->id}})"class="btn btn-sm btn-danger">Delete</button>
-                </td>
-            </tr>
-            @empty
-
-            @endforelse
-        </tbody>
-    </x-table>
+                </thead>
+                <tbody>
+                    @forelse($clients as $client)
+                    <tr>
+                        <td class="text-center">{{$client->id}}</td>
+                        <td class="text-center">{{$client->name}}</td>
+                        <td class="text-center">{{$client->position}}</td>
+                        <td class="text-center">{{$client->salary}}</td>
+                        <td class="text-center">{{$client->details}}</td>
+                        <td class="text-center">{{$client->location}}</td>
+                        <td class="text-center">
+                            <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i>Approve</button>
+                            <button wire:click="delete({{$client->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i>Delete</button>
+                        </td>
+                    </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center">No Record Found</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </x-table>
+        </div>
+    </div>
     <x-jet-dialog-modal wire:model="showModal">
         <x-slot name="title">
             {{ __('Create Job') }}
@@ -61,8 +65,8 @@
                 <label for="">Company Name</label>
                 <select wire:model="name"class="form-control" type="text">
                 <option value="">Select Company</option>
-                @foreach ($clients as$index=> $client)
-                <option value="{{$index+1}}">{{$client->name}}</option>
+                @foreach ($clients as $client)
+                <option value="{{$client->id}}">{{$client->name}}</option>
                 @endforeach
                 </select>
                 

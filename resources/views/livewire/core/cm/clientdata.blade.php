@@ -1,6 +1,6 @@
 <div>
     <x-slot name="header">
-        <h2 class="h3 font-weight-bold" style="margin-left:370px">
+        <h2 class="h4 font-weight-bold">
             {{ __('Client Lists') }}
         </h2>
     </x-slot>
@@ -57,7 +57,7 @@
            <x-table head="">
             <thead>
                 <th class="text-center">No.</th>
-                <th class="text-center">Name</th>
+                <th class="text-center">Company Name</th>
                 <th class="text-center">Email</th>
                 <th class="text-center">Company Location</th>
                 <th class="text-center">Status</th>
@@ -74,12 +74,14 @@
                     <td class="text-center">{{$client->location}}</td>
                     <td class="text-center">{{$client->status}}</td>
                     <td class="text-center">
-                        <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary">Approve</button>
-                        <button wire:click="delete({{$client->id}})" class="btn btn-sm btn-danger">Delete</button>
+                        <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Approve</button>
+                        <button wire:click="delete({{$client->id}})" class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                     </td>
                 </tr>
                 @empty
-                    
+                    <tr>
+                        <td colspan="6" class="text-center">No Record Found</td>
+                    </tr>
                 @endforelse
             </tbody>
            </x-table>
