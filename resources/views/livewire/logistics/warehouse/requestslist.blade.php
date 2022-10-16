@@ -37,9 +37,17 @@
                                     <td>{{$request->id}}</td>
                                     <td>{{$request->origin}}</td>
                                     <td>{{$request->content}}</td>
-                                    <td>{{$request->create_at}}</td>
+                                    <td>{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
                                     <td>{{$request->status}}</td>
-                        
+                                    <td class="text-center">
+                                        @if ($request->status == 'Pending')
+                                            <button wire:click="confirm({{$request->id}})" class="btn btn-primary btn-sm">Confirm</button>
+                                        @else
+                                            <button wire:click="dispatch({{$request->id}})" class="btn btn-success btn-sm">Dispatch</button>
+                                        @endif
+                                        
+                                        
+                                    </td>
                                 </tr>
                                 @empty
                                 <tr>
@@ -149,6 +157,39 @@
                 {{ __('Send') }}
             </x-jet-button>
         </x-slot>
+        </x-jet-dialog-modal>
+        {{--Dispatch Modal--}}
+        <x-jet-dialog-modal wire:model="dispatchModal">
+            <x-slot name="title">
+                {{__('Send Request')}}
+            </x-slot>
+            <x-slot name="content">
+                <div class="form-group">
+                    <label>Inventory</label>
+                   <select wire:model="stock_id" class="form-control">
+                    <option value="">Select Item</option>
+                    @forelse ($inventories as $inventory)
+                        <option value="{{$inventory->id}}">{{$inventory->name}}</option>
+                    @empty
+                        <option value="">No Item</option>
+                    @endforelse
+                   </select>
+                   <label>Quantity</label>
+                   <input type="number" class="form-control" wire:model="qty">
+                </div>
+            </x-slot>
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('dispatchModal')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+        
+                <x-jet-button class="ms-2" id="createButton" wire:click="sendDispatch" wire:loading.attr="disabled">
+        
+                    {{ __('Send') }}
+                </x-jet-button>
+        
+        
+            </x-slot>
         </x-jet-dialog-modal>
 
     @push('scripts')
