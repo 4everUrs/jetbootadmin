@@ -30,13 +30,15 @@
                     <td class="text-center">{{$job->address}}</td>
                     <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$job->resume_file}}" target="__blank">Resume</a></td>
                     <td class="text-center">
-                        <button wire:click="approve({{$job->id}})" class="btn btn-primary">Approved</button>
-                        <button wire:click="denied({{$job->id}})" class="btn btn-danger">Denied</button>
+                        <button wire:click="approve({{$job->id}})" class="btn btn-primary"><i class='fa fa-check'></i> Approved</button>
+                        <button wire:click="denied({{$job->id}})" class="btn btn-danger"><i class='fa fa-trash'></i> Denied</button>
                     </td>
                     
                   </tr>
               @empty
-                  
+                <tr>
+                    <td colspan="8" class="text-center">No Record Found</td>
+                </tr>
               @endforelse
             </tbody>
            </x-table>

@@ -6,20 +6,20 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="loadPlacement" type="create" class="btn btn-success" style="float:right"> Placement</button>
+            <button wire:click="loadPlacement" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Placement</button>
             <br><br>
             <x-table head="">
                 <thead>
-                    <th>No.</th>
-                    <th>Applicant Name</th>
-                    <th>Contact</th>
-                    <th>Email</th>
-                    <th>Company Name</th>
-                    <th>Location</th>
-                    <th>Position</th>
-                    <th>Placement Fee</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Applicant Name</th>
+                    <th class="text-center">Contact</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Company Name</th>
+                    <th class="text-center">Location</th>
+                    <th class="text-center">Position</th>
+                    <th class="text-center">Placement Fee</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Action</th>
                    
                 </thead>
                 <tbody>
@@ -35,12 +35,14 @@
                         <td class="text-center">{{$job->placement}}</td>
                         <td class="text-center">{{$job->status}}</td>
                         <td>
-                            <button wire:click="deploy({{$job->id}})" class="btn btn-sm btn-primary">Deployment</button>
+                            <button wire:click="deploy({{$job->id}})" class="btn btn-sm btn-primary"><i class='fa fa-car'></i> Deployment</button>
                         </td>
                         
                       </tr>
                     @empty
-                      
+                        <tr>
+                            <td colspan="10" class="text-center">No Record Found</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </x-table>

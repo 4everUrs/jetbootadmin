@@ -53,4 +53,17 @@ class Joblist extends Component
         ]);
         flash()->addSuccess('Data Send Successfully');
     }
+    public function delete($id)
+    {
+        $client = Job::where('id',$id)->first();
+        if($client->showModal){
+            flash()->addWarning('Data is already deleted');
+        }
+        else{
+            $client->showModal;
+            $client->delete();
+            flash()->addSuccess('Data deleted successfully');
+        }
+        
+    }
 }

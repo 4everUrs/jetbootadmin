@@ -26,11 +26,13 @@
                             <td class="text-center">{{$onboard->company_name}}</td>
                             <td class="text-center">{{$onboard->company_location}}</td>
                             <td class="text-center">
-                                <button wire:click="submit({{$onboard->id}})" class="btn btn-sm btn-primary">Send to Payroll Mngt. </button>
+                                <button wire:click="submit({{$onboard->id}})" class="btn btn-sm btn-primary"><i class='fa fa-share'></i> Payroll</button>
                             </td>
                           </tr>
                         @empty
-                          
+                            <tr>
+                                <td colspan="7" class="text-center">No Record Found</td>
+                            </tr>
                         @endforelse
                 </tbody>
             </x-table>
