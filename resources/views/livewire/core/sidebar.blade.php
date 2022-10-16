@@ -64,8 +64,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('applicantreport')}}" class="nav-link"><i class='fa fa-file'></i> Applicant Report</a>
-                        <a href="{{route('clientreport')}}" class="nav-link"><i class='fa fa-file'></i> Client Report</a>
+                        <a href="{{route('applicantreport')}}" class="nav-link"><i class='fa fa-file'></i>Analytics & Report</a>
                     </li>
                 </ul>
             </li>
