@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Disburse extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'originated', 'category', 'amount','account', 'description', 'status'
+    ];
 }

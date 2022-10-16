@@ -1,25 +1,84 @@
 <div>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Reports') }}
+            {{ __('Records & Reports') }}
         </h2>
     </x-slot>
 
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li wire:ignore class="nav-item mr-2" role="presentation">
-          <button class="nav-link active" id="journalentry-tab" data-bs-toggle="tab" data-bs-target="#journalentry" type="button" role="tab" aria-controls="journalentry" aria-selected="true">Journal Entry</button>
-        </li>
-        <li wire:ignoreclass="nav-item mr-2 " role="presentation">
-          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">General Ledger</button>
-        </li>
-        <li wire:ignore class="nav-item mr-2" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Trial Balance</button>
-          </li>
-      </ul>
+    
       {{--Journal Entry--}}
-      <div  class="tab-content" id="myTabContent">
-        <div wire:ignore.self class="tab-pane fade show active" id="journalentry" role="tabpanel" aria-labelledby="Journal Entry">
-           
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li wire:ignore class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Accounts Payable</button>
+        </li>
+        <li wire:ignore class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Accounts Receivable</button>
+        </li>
+        <li wire:ignore class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Journal Entry</button>
+        </li>
+        <li wire:ignore class="nav-item" role="presentation">
+          <button class="nav-link" id="trial-tab" data-bs-toggle="tab" data-bs-target="#trial" type="button" role="tab" aria-controls="trial" aria-selected="false">Trial Balance</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        
+        
+        
+        
+      
+{{-------------------------------------------Accounts Payable---------------------------------------------------------}}        
+        
+    <div wire:ignore.self class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> 
+
+        <div class="card">
+            <div class="card-body">
+                <a class="btn btn-success">Add Accounts Payable</a>
+
+                <x-table head="Lists of Account Payables">
+
+                    <thead >
+                        <th>Code No</th>
+                        <th>From</th>
+                        <th>Description</th>
+                        <th>Attachment file</th>
+                        <th>Date</th>
+                        <th>Action/th>
+                    </thead>
+
+                </x-table>
+            </div>
+        </div>
+    </div>
+{{-------------------------------------------End Accounts Payable---------------------------------------------------------}} 
+
+{{-------------------------------------------Accounts Payable---------------------------------------------------------}} 
+        <div wire:ignore.self class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="card">
+                <div class="card-body">
+                    <a class="btn btn-success">Add Account Receivable</a>
+    
+                    <x-table head="Lists of Account Receivable">
+    
+                        <thead >
+                            <th>Code No</th>
+                            <th>From</th>
+                            <th>Description</th>
+                            <th>Attachment file</th>
+                            <th>Date</th>
+                            <th>Action/th>
+                        </thead>
+    
+                    </x-table>
+                </div>
+            </div>
+        </div>        
+{{-------------------------------------------End Accounts Payable---------------------------------------------------------}} 
+
+
+{{-------------------------------------------JOURNAL ENTRY---------------------------------------------------------}}    
+        <div wire:ignore.self class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"> 
+            
             <div class="card">
                 <div class="card-body">
         
@@ -35,9 +94,9 @@
                             <th>Debit</th>
                             <th>Credit</th>
                             <th>Encoded By</th>
-                            <th>Status</th>
+                            {{--<th>Status</th>--}}
                             <th class="text-center">Action</th>
-                        </thead>
+                        </thead> 
         
                         <tbody>
                           @foreach ($journal_entries as $entry)
@@ -82,29 +141,27 @@
                                    </table>
                                 </td>
                                 <td>{{$entry->jencoded}}</td>
-                                <td>{{$entry->jstatus}}</td>
+                                {{--<td>{{$entry->jstatus}}</td>--}}
 
                                
                                 <td>
                                     <button wire:click="viewModal({{$entry->id}})" class="btn btn-primary btn-sm">View</button>
                                     <button wire:click="updateLiability({{$entry->id}})" class="btn btn-success btn-sm">Edit</button>
                                     <button wire:click="deleteliabilities({{$entry->id}})" class="btn btn-warning btn-sm">Delete</button>
-                                    <button wire:click="recordliabilities({{$entry->id}})" class="btn btn-danger btn-sm">Record</button>
+                                    {{--<button wire:click="recordliabilities({{$entry->id}})" class="btn btn-danger btn-sm">Record</button>--}}
                                 </td>
                             </tr>
                               
                           @endforeach
                         </tbody>
                     </x-table>
-
-                    <label></label>
-        
-                    <div class="mt-3 float-right">
-                        {{-- {{$journal_entries->links()}} --}}
-                    </div>
+                    
                 </div>
             </div>
-        
+        </div>
+{{-------------------------------------------END JOURNAL ENTRY------------------------------------------------------------------------------------}} 
+
+ {{---------------------------------------- JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}       
             {{--add liability--}}
             <x-jet-dialog-modal wire:model="addLiability" maxWidth="xl">
                 <x-slot name="title">
@@ -320,22 +377,15 @@
                     </x-jet-button>
                 </x-slot>
             </x-jet-dialog-modal>
-        
-        
-        
-        </div>
-
         {{--End of Journal Entry--}}  
+{{----------------------------------------JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}
 
-        {{--General Ledger--}}      
-    </div>
+{{-----------------------------------------TRIAL BALANCE TABLE-----------------------------------------------------------------------------------}}      
+<div wire:ignore.self class="tab-pane fade" id="trial" role="tabpanel" aria-labelledby="trial-tab">...
     <div class="card">
-        <div class="card-body">
-        <div wire:ignore.self class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="General Ledger">
+        <div class="card-body">    
+            <a wire:click="loadModalCash" class="btn btn-success">Add Cash Record</a>
 
-        <a wire:click="loadModalCash" class="btn btn-success">Add Cash Record</a>
-        <div class="class">
-            <div class="card-body">
                 <x-table head="Cash">
                     <thead>
                         <th>Id</th>
@@ -343,9 +393,9 @@
                         <th>Description</th>
                         <th>Debit</th>
                         <th>Credit</th>
-                        <th>Status</th>
-                        
+                        <th>Status</th>   
                     </thead>
+
                 <tbody>
                     @forelse($gen_leds as $gen_led)
                     <tr>
@@ -364,13 +414,12 @@
                         @endforelse
                 </tbody>
             </x-table>
-            </div>
         </div>
     </div>
 </div>
-</div>
+{{-----------------------------------------TRIAL BALANCE TABLE-----------------------------------------------------------------------------------}}
 
-        {{--(CASH)- ADD MODAL GENERAL LEDGER--}}
+{{--------------------------------(CASH)---ADD MODAL TRIAL BALANCE-------------------------------------------------------------------------------}}
 
         <x-jet-dialog-modal wire:model="addGenled" maxWidth="xl" >
             <x-slot name="title">
@@ -408,18 +457,7 @@
 
         </x-jet-dialog-modal>
 
-        {{--END (CASH)- ADD MODAL GENERAL LEDGER--}}
-      
-
-        {{--End of General Ledger--}} 
-      </div>
-
-
-      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="Trial Balance">
-        
-        </div>
-    
-
-
+{{----------------------------END---(CASH)---ADD MODAL TRIAL BALANCE-------------------------------------------------------------------------------}}
+    </div>
 
 </div>

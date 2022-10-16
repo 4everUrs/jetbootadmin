@@ -31,15 +31,13 @@ class Expensess extends Component
     }
     public function render()
     {
-        
-       $this->grandexpenses;
         return view('livewire.finance.bm.expensess',[
             'expenses'=>Expenses::orderBy('id','desc')->paginate(10),
         ]);
+        $this->grandexpenses;
     }
     public function expensescreate()
     {
-        
         $this->addPurchase= true;
     }
     public function loadDeleteModal($id){
@@ -58,7 +56,6 @@ class Expensess extends Component
 
     public function addExpenses()
     {
-        
         $data=$this->validate();
         Expenses::create($data);
         toastr()->addSuccess('Expenses Successfully Added');
