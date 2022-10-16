@@ -9,7 +9,7 @@
         
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>5</h3>
+                    <h3>{{$applicants}}</h3>
                     <p>Applicant</p>
                 </div>
                     <div class="icon">
@@ -22,9 +22,9 @@
     <div class="row">
         <div class="col-lg-3 col-6">
         
-            <div class="small-box bg-info">
+            <div class="small-box bg-outline">
                 <div class="inner">
-                    <h3>5</h3>
+                    <h3>{{$vacants}}</h3>
                     <p>Vacant Job</p>
                 </div>
                     <div class="icon">
@@ -37,9 +37,9 @@
     <div class="row">
         <div class="col-lg-3 col-6">
         
-            <div class="small-box bg-info">
+            <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>5</h3>
+                    <h3>{{$localemployees}}</h3>
                     <p>Employee</p>
                 </div>
                     <div class="icon">
@@ -52,9 +52,9 @@
     <div class="row">
         <div class="col-lg-3 col-6">
         
-            <div class="small-box bg-info">
+            <div class="small-box bg-primary">
                 <div class="inner">
-                    <h3>5</h3>
+                    <h3>{{$clients}}</h3>
                     <p>Client</p>
                 </div>
                     <div class="icon">

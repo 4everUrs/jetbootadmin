@@ -54,7 +54,6 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <input type="search" class="form-control">
            <x-table head="">
             <thead>
                 <th class="text-center">No.</th>

@@ -89,12 +89,10 @@
             <br>
             <br>
             <br>
-                ____________________
-            <br>Company: Tech-Trendz
-            <br>
-            <br>
-                ____________________
-            <br>Client: 
+            <div>
+                ____________________                     ____________________
+                <br>Company: Tech-Trendz                Client: 
+            </div>
             <br><br>
             <div class="form-group">
                 <label for="">Client Name</label>
@@ -124,7 +122,7 @@
         </x-slot>
     </x-jet-dialog-modal>
 
-    <x-jet-dialog-modal wire:model="contractModal">
+    <x-jet-dialog-modal wire:model="contractModal" maxWidth="lg">
         <x-slot name="title">
             {{ __('') }}
             

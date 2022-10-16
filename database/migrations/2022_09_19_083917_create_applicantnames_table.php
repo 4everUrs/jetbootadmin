@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('applicantnames', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('applicant');
             $table->string('position');
             $table->string('email');
             $table->string('phone');
