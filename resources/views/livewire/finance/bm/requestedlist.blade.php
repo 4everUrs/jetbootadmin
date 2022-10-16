@@ -16,11 +16,10 @@
                     <th>Approval Date</th>
                     <th>Approved Amount</th>
                     <th>Status</th>
-                    <th>Remarks</th>
-                    
-                    
+                    <th>Remarks</th>               
                 </thead>
                  <tbody>
+                     @if(!empty($list_requesteds))
                      @forelse($list_requesteds as $list_requested)
                     <tr>
                         <td>{{$list_requested->id}}</td>

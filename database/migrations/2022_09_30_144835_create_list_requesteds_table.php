@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('proposalname');
             $table->string('requestor');
-            $table->integer('created_at');
             $table->string('proposedamount');
             $table->string('approvedate')->nullable();
             $table->string('approvedamount')->nullable();

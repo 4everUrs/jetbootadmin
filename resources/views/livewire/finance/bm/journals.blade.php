@@ -7,19 +7,29 @@
 
     
       {{--Journal Entry--}}
-      <nav>
-        <div class="nav nav-tabs " id="nav-tab" role="tablist">
-          <button class="nav-link active mb-3" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Account Payable</button>
-          <button class="nav-link mb-3" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Account Receivable</button>
-          <button class="nav-link mb-3" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Journal Entry</button>
-          <button class="nav-link mb-3" id="nav-trial-tab" data-bs-toggle="tab" data-bs-target="#nav-trial" type="button" role="tab" aria-controls="nav-trial" aria-selected="false">Trial Balance</button>
-        </div>
-      </nav>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li wire:ignore class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Accounts Payable</button>
+        </li>
+        <li wire:ignore class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Accounts Receivable</button>
+        </li>
+        <li wire:ignore class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Journal Entry</button>
+        </li>
+        <li wire:ignore class="nav-item" role="presentation">
+          <button class="nav-link" id="trial-tab" data-bs-toggle="tab" data-bs-target="#trial" type="button" role="tab" aria-controls="trial" aria-selected="false">Trial Balance</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        
+        
+        
+        
       
-      <div class="tab-content" id="nav-tabContent">
 {{-------------------------------------------Accounts Payable---------------------------------------------------------}}        
         
-<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div wire:ignore.self class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> 
 
         <div class="card">
             <div class="card-body">
@@ -39,9 +49,11 @@
                 </x-table>
             </div>
         </div>
-</div>
+    </div>
 {{-------------------------------------------End Accounts Payable---------------------------------------------------------}} 
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+{{-------------------------------------------Accounts Payable---------------------------------------------------------}} 
+        <div wire:ignore.self class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="card">
                 <div class="card-body">
                     <a class="btn btn-success">Add Account Receivable</a>
@@ -60,11 +72,13 @@
                     </x-table>
                 </div>
             </div>
-            
-        </div>
-        
+        </div>        
+{{-------------------------------------------End Accounts Payable---------------------------------------------------------}} 
 
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+{{-------------------------------------------JOURNAL ENTRY---------------------------------------------------------}}    
+        <div wire:ignore.self class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"> 
+            
             <div class="card">
                 <div class="card-body">
         
@@ -80,7 +94,7 @@
                             <th>Debit</th>
                             <th>Credit</th>
                             <th>Encoded By</th>
-                            <th>Status</th>
+                            {{--<th>Status</th>--}}
                             <th class="text-center">Action</th>
                         </thead> 
         
@@ -127,7 +141,7 @@
                                    </table>
                                 </td>
                                 <td>{{$entry->jencoded}}</td>
-                                <td>{{$entry->jstatus}}</td>
+                                {{--<td>{{$entry->jstatus}}</td>--}}
 
                                
                                 <td>
@@ -144,9 +158,10 @@
                     
                 </div>
             </div>
-        </div> 
+        </div>
+{{-------------------------------------------END JOURNAL ENTRY------------------------------------------------------------------------------------}} 
 
- {{----------------------------------------JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}       
+ {{---------------------------------------- JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}       
             {{--add liability--}}
             <x-jet-dialog-modal wire:model="addLiability" maxWidth="xl">
                 <x-slot name="title">
@@ -366,7 +381,7 @@
 {{----------------------------------------JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}
 
 {{-----------------------------------------TRIAL BALANCE TABLE-----------------------------------------------------------------------------------}}      
-<div class="tab-pane fade" id="nav-trial" role="tabpanel" aria-labelledby="nav-trial-tab">
+<div wire:ignore.self class="tab-pane fade" id="trial" role="tabpanel" aria-labelledby="trial-tab">...
     <div class="card">
         <div class="card-body">    
             <a wire:click="loadModalCash" class="btn btn-success">Add Cash Record</a>
