@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('list_requesteds', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('origdept');
+            $table->string('requestor');
+            $table->integer('ramount');
+            $table->string('rdescription');
+            $table->string('approveddate')->nullable();
+            $table->string('rstatus'); 
         });
     }
 
