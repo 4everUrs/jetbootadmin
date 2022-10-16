@@ -27,7 +27,7 @@
                 <td>{{$transaction->id}}</td>
                 <td>{{$transaction->originated}}</td>
                 <td>{{$transaction->category}}</td>
-                <td>{{$transaction->created_at}}</td>
+                <td>{{Carbon\Carbon::parse($transaction->created_at)->toFormattedDateString()}}</td>
                 <td>{{$transaction->amount}}</td>
                 <td>{{$transaction->account}}</td>
                 <td>{{$transaction->description}}</td>

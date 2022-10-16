@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Finance\Bm;
 
 use Livewire\Component;
 use App\Models\ListRequested;
+use App\Models\Transaction;
   
 
 class Requestedlist extends Component
