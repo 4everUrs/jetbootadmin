@@ -21,29 +21,26 @@
                     
                 </thead>
                  <tbody>
-                     @forelse($list_requesteds as $list_requested)
-                    <tr>
-                        <td>{{$list_requested->id}}</td>
-                        <td>{{$list_requested->proposalname}}</td>
-                        <td>{{$list_requested->requestor}}</td>
-                        <td>{{$list_requested->created_at}}</td>
-                        <td>{{$list_requested->proposedamount}}</td>
-                        <td>{{$list_requested->approvedate}}</td>
-                        <td>{{($list_requested->approvedamount)}}</td>
-                        <td>{{$list_requested->rstatus}}</td>
-                        <td>{{$list_requested->remarks}}</td>
-                    </tr>
-                     @empty
-                     <tr>
-                        <td class="text-center" colspan="9">"Unlisted Records"</td>
-                    </tr>
-                    @endforelse 
+                        @forelse($list_requesteds as $list_requested)
+                        <tr>
+                            <td>{{$list_requested->id}}</td>
+                            <td>{{$list_requested->proposalname}}</td>
+                            <td>{{$list_requested->requestor}}</td>
+                            <td>{{$list_requested->created_at}}</td>
+                            <td>{{$list_requested->proposedamount}}</td>
+                            <td>{{$list_requested->approvedate}}</td>
+                            <td>{{($list_requested->approvedamount)}}</td>
+                            <td>{{$list_requested->rstatus}}</td>
+                            <td>{{$list_requested->remarks}}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td class="text-center" colspan="9">"Unlisted Records"</td>
+                        </tr>
+                        @endforelse  
                 </tbody>
             </x-table><br><br>
         </div>
     </div>
-
-
-
 
 </div>
