@@ -26,6 +26,7 @@ class Paymentfee extends Component
         $payroll->attendance = $validateddata['attendance'];
         $payroll->salary = $validateddata['salary'];
         $payroll->contribution = $validateddata['contribution'];
+        $payroll->gross_salary = $validateddata['attendance'] * $validateddata['salary'];
         $payroll->save();
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
@@ -41,4 +42,5 @@ class Paymentfee extends Component
     public function loadPayroll(){
         $this->showPayroll = true;
     }
+    public function total(){}
 }
