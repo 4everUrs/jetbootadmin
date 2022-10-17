@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('attendance');
-            $table->string('salary');
-            $table->string('contribution');
+            $table->string('attendance')->nullable();
+            $table->string('salary')->nullable();
+            $table->string('gross_salary')->nullable();
+            $table->string('contribution')->nullable();
             $table->string('placement');
-            $table->string('status');
+            $table->string('status')->nullable();
+            $table->string('net_salary')->nullable();
             $table->timestamps();
         });
     }
