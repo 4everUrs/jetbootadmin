@@ -14,6 +14,7 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Finance</button>
         </li>
+
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -21,7 +22,7 @@
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-            
+                            <a wire:click="loadAnnualBudget" class="btn btn-success">Add Cash Record</a>
                             <x-table head="Annual Budget" class="text-center">
             
                                 <thead>
@@ -33,16 +34,21 @@
                                     <th>Finance20%</th>
                                 </thead>
                                 <tbody>
-                                    <td>2022</td>
-                                    <td>10,200,000</td>
-                                    <td>2,040,000</td>
-                                    <td>3,060,000</td>
-                                    <td>3,060,000</td>
-                                    <td>2,040,000</td>
-                                </tbody>
-
-
-
+                                    @forelse($bannuals as $bannual)
+                                    <tr>
+                                        <td>{{$bannual->year}}</td>
+                                        <td>{{$bannual->budgetannual}}</td>
+                                        <td>{{$bannual->blogistics}}</td>
+                                        <td>{{$bannual->bcore}}</td>
+                                        <td>{{$bannual->bhr}}</td>
+                                        <td>{{$bannual->bfinance}}</td>
+                                    </tr>
+                                    @empty
+                                <tr>
+                                    <td class="text-center" colspan="6">Unlisted Records</td>
+                                </tr>
+                                    @endforelse
+                            </tbody>
                             </x-table>
             
                          </div>
@@ -72,7 +78,7 @@
                                     <td>306,000</td>
                                     <td>204,000</td>
                                     <td>306,000</td>
-                                    <td>612,000/td>
+                                    <td>612,000</td>
                                 </tbody>
                             </x-table>
             
@@ -84,6 +90,40 @@
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
       </div>
 
+
+
+    {{--ADD MODAL ANNUAL BUDGET--}}
+    <x-jet-dialog-modal wire:model="addAnnualBudget" maxWidth="xl">
+        <x-slot name="title">
+            {{ __('Annually Budget') }}
+        </x-slot>
+
+        <x-slot name="content">
+           <label>Year</label>
+                <select wire:model="year" class="form-control">
+                    <option>Select Option</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                    <option>2025</option>
+                    <option>2026</option>
+                </select>
+            <label>Annual Budget</label>
+            <input wire:model="budgetannual" class="form-control" type="number">
+
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('addAnnualBudget')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+            {{--wire:click function dito sa button hindi match sa function sa class--}}
+            <x-jet-button class="ms-2" wire:click="addAnnualBudgets" wire:loading.attr="disabled">
+                {{ __('Add Annul Budget') }}
+            </x-jet-button>
+        </x-slot>
+
+    </x-jet-dialog-modal>
+    {{--end ADD MODAL ANNUAL BUDGET--}}
           
        
 

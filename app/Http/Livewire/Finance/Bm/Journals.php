@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class Journals extends Component
 {
     public $jdescription, $jdebit, $jcredit, $jencoded, $journal_id = '1', $jsubdescription; //$jstatus='Process';
-    public $ldate, $ldescription, $ldebit, $lcredit, $lstatus;
+    public $ldate, $ldescription, $ldebit, $lcredit,$lstatus ='Pending';
     public $invoice,$idate,$pname,$invoiceamount,$pamount,$pduedate,$premarks,$paymade;   
     public $gen_leds;
     public $preview = [];
