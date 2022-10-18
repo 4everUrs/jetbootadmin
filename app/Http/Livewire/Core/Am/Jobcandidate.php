@@ -20,16 +20,23 @@ class Jobcandidate extends Component
     {
        $job = ApplicantForm::find($id);
         
-       LocalPlacement::create([
-            'name' => $job->name,
-            'phone' => $job->phone,
-            'email' => $job->email,
-            'company_name' => $job->company,
-            'company_location' => $job->location,
-            'position' => $job->position,
-            
-        ]);
-        flash()->addSuccess('Data Approved Successfully');
+        if($job->resume_file == 'Approved'){
+        flash()->addWarning('Data is already approved');
+        }
+        else{
+            $job->resume_file = 'Approved';
+            LocalPlacement::create([
+                'name' => $job->name,
+                'phone' => $job->phone,
+                'email' => $job->email,
+                'company_name' => $job->company,
+                'company_location' => $job->location,
+                'position' => $job->position,
+                
+            ]);
+            $job->save();
+            flash()->addSuccess('Data approved successfully');
+        }
     
     }
     public function denied($id)

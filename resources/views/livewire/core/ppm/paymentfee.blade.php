@@ -15,131 +15,131 @@
         <li wire:ignore class="nav-item" role="presentation">
           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Collection</button>
         </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-            <div wire:ignore.self class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="card">
-                    <div class="card-body">
-                        <button wire:click="loadPayroll" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Payroll</button>
-                        <br><br>
-                        <x-table head="List of Payroll">
-                            <thead>
-                                <th class="text-center">No.</th>
-                                <th class="text-center">Employee Name</th>
-                                <th class="text-center">Daily Attendance</th>
-                                <th class="text-center">Minimum Wage</th>
-                                <th class="text-center">Gross Salary</th>
-                                <th class="text-center">Contribution</th>
-                                <th class="text-center">Placement Fee</th>
-                                <th class="text-center">Net Salary</th>
-                                <th class="text-center">Action</th>
-                            </thead>
-                            <tbody>
-                                @forelse ($payrolls as $payroll)
-                                <tr>
-                                    <td class="text-center">{{$payroll->id}}</td>
-                                    <td class="text-center">{{$payroll->name}}</td>
-                                    <td class="text-center">{{$payroll->attendance}}</td>
-                                    <td class="text-center">{{$payroll->salary}}</td>
-                                    <td>{{$payroll->gross_salary}}</td>
-                                    <td class="text-center">{{$payroll->contribution}}</td>
-                                    <td class="text-center">{{$payroll->placement}}</td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <button wire:click="total" class="btn btn-sm btn-info">Total</button>
-                                        <button wire:click="request" class="btn btn-sm btn-primary">Request</button>
-                                    </td>
-                                    
-                                </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="9" class="text-center">No Record Found</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </x-table>
-                    </div>
-                </div>
-            </div>
-            <div wire:ignore.self class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <div class="card">
-                    <div class="card-body">
-                        <x-table head="List of Payment">
-                            <thead>
-                                <th class="text-center">No.</th>
-                                <th class="text-center">Employee Name</th>
-                                <th class="text-center">Daily Attendance</th>
-                                <th class="text-center">Minimum Wage</th>
-                                <th class="text-center">Contribution</th>
-                                <th class="text-center">Placement Fee</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Total Salary</th>
-                                <th class="text-center">Action</th>
-                            </thead>
-                            <tbody>
-                                @forelse ($payrolls as $payroll)
-                                <tr>
-                                    <td class="text-center">{{$payroll->id}}</td>
-                                    <td class="text-center">{{$payroll->name}}</td>
-                                    <td class="text-center">{{$payroll->attendance}}</td>
-                                    <td class="text-center">{{$payroll->salary}}</td>
-                                    <td class="text-center">{{$payroll->contribution}}</td>
-                                    <td class="text-center">{{$payroll->placement}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <button wire:click="payout" class="btn btn-sm btn-primary">Payout</button>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div wire:ignore.self class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="card">
+                <div class="card-body">
+                    <button wire:click="loadPayroll" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Payroll</button>
+                    <br><br>
+                    <x-table head="List of Payroll">
+                        <thead>
+                            <th class="text-center">No.</th>
+                            <th class="text-center">Employee Name</th>
+                            <th class="text-center">Daily Attendance</th>
+                            <th class="text-center">Minimum Wage</th>
+                            <th class="text-center">Gross Salary</th>
+                            <th class="text-center">Contribution</th>
+                            <th class="text-center">Placement Fee</th>
+                            <th class="text-center">Net Salary</th>
+                            <th class="text-center">Action</th>
+                        </thead>
+                        <tbody>
+                            @forelse ($payrolls as $payroll)
+                            <tr>
+                                <td class="text-center">{{$payroll->id}}</td>
+                                <td class="text-center">{{$payroll->name}}</td>
+                                <td class="text-center">{{$payroll->attendance}}</td>
+                                <td class="text-center">{{$payroll->salary}}</td>
+                                <td>{{$payroll->gross_salary}}</td>
+                                <td class="text-center">{{$payroll->contribution}}</td>
+                                <td class="text-center">{{$payroll->placement}}</td>
+                                <td>{{$payroll->net_salary}}</td>
+                                <td class="text-center">
+                                    <button wire:click="total" class="btn btn-sm btn-info">Total</button>
+                                    <button wire:click="request" class="btn btn-sm btn-primary">Request</button>
                                 </td>
-                                    
-                                </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="9" class="text-center">No Record Found</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </x-table>
-                    </div>
-                </div>
-            </div>
-            <div wire:ignore.self class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                <div class="card">
-                    <div class="card-body">
-                        <x-table head="Collection">
-                            <thead>
-                                <th class="text-center">No.</th>
-                                <th class="text-center">Employee Name</th>
-                                <th class="text-center">Contribution</th>
-                                <th class="text-center">Placement Fee</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Total Collection</th>
-                                <th class="text-center">Action</th>
-                            </thead>
-                            <tbody>
-                                @forelse ($payrolls as $payroll)
+                                
+                            </tr>
+                            @empty
                                 <tr>
-                                    <td class="text-center">{{$payroll->id}}</td>
-                                    <td class="text-center">{{$payroll->name}}</td>
-                                    <td class="text-center">{{$payroll->contribution}}</td>
-                                    <td class="text-center">{{$payroll->placement}}</td>
-                                    <td class="text-center">{{$payroll->status}}</td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <button wire:click="disbursement" class="btn btn-sm btn-primary">Trans. Collection</button>
-                                    </td>
-                                    
+                                    <td colspan="9" class="text-center">No Record Found</td>
                                 </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="7" class="text-center">No Record Found</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </x-table>
-                    </div>
+                            @endforelse
+                        </tbody>
+                    </x-table>
                 </div>
             </div>
-      </div>
+        </div>
+        <div wire:ignore.self class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="card">
+                <div class="card-body">
+                    <x-table head="List of Payment">
+                        <thead>
+                            <th class="text-center">No.</th>
+                            <th class="text-center">Employee Name</th>
+                            <th class="text-center">Daily Attendance</th>
+                            <th class="text-center">Minimum Wage</th>
+                            <th class="text-center">Contribution</th>
+                            <th class="text-center">Placement Fee</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Total Salary</th>
+                            <th class="text-center">Action</th>
+                        </thead>
+                        <tbody>
+                            @forelse ($payrolls as $payroll)
+                            <tr>
+                                <td class="text-center">{{$payroll->id}}</td>
+                                <td class="text-center">{{$payroll->name}}</td>
+                                <td class="text-center">{{$payroll->attendance}}</td>
+                                <td class="text-center">{{$payroll->salary}}</td>
+                                <td class="text-center">{{$payroll->contribution}}</td>
+                                <td class="text-center">{{$payroll->placement}}</td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center">
+                                    <button wire:click="payout" class="btn btn-sm btn-primary">Payout</button>
+                            </td>
+                                
+                            </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="text-center">No Record Found</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </x-table>
+                </div>
+            </div>
+        </div>
+        <div wire:ignore.self class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="card">
+                <div class="card-body">
+                    <x-table head="Collection">
+                        <thead>
+                            <th class="text-center">No.</th>
+                            <th class="text-center">Employee Name</th>
+                            <th class="text-center">Contribution</th>
+                            <th class="text-center">Placement Fee</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Total Collection</th>
+                            <th class="text-center">Action</th>
+                        </thead>
+                        <tbody>
+                            @forelse ($payrolls as $payroll)
+                            <tr>
+                                <td class="text-center">{{$payroll->id}}</td>
+                                <td class="text-center">{{$payroll->name}}</td>
+                                <td class="text-center">{{$payroll->contribution}}</td>
+                                <td class="text-center">{{$payroll->placement}}</td>
+                                <td class="text-center">{{$payroll->status}}</td>
+                                <td></td>
+                                <td class="text-center">
+                                    <button wire:click="disbursement" class="btn btn-sm btn-primary">Trans. Collection</button>
+                                </td>
+                                
+                            </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">No Record Found</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </x-table>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <x-jet-dialog-modal wire:model="showPayroll">
         <x-slot name="title">

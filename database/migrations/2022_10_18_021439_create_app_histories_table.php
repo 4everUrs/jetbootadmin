@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('app_histories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('position')->nullable();
-            $table->string('salary')->nullable();
-            $table->string('details')->nullable();
+            $table->string('position');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('company');
             $table->string('location');
-            $table->string('status')->nullable();
+            $table->string('resume_file');
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('app_histories');
     }
 };

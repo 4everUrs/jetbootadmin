@@ -27,6 +27,7 @@ class Paymentfee extends Component
         $payroll->salary = $validateddata['salary'];
         $payroll->contribution = $validateddata['contribution'];
         $payroll->gross_salary = $validateddata['attendance'] * $validateddata['salary'];
+        $payroll->net_salary = $validateddata['gross_salary'] - $validateddata['contribution'];
         $payroll->save();
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
