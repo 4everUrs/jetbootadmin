@@ -42,15 +42,16 @@ class Clientdata extends Component
     {
        $client = Client::find($id);
 
-       Job::create([
-            'name' => $client->name,
-            'location' => $client->location,
-       ]);
+       
         if($client->status == 'Approved'){
             flash()->addWarning('Data is already approved');
         }
         else{
             $client->status = 'Approved';
+            Job::create([
+                'name' => $client->name,
+                'location' => $client->location,
+           ]);
             $client->save();
             flash()->addSuccess('Data approved successfully');
        }

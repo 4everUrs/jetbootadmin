@@ -22,13 +22,14 @@
         <div class="card-body">
             <x-table head="Job Record">
                 <thead>
-                    <th>No.</th>
-                        <th class="text-center">Company Name</th>
-                        <th class="text-center">Position</th>
-                        <th class="text-center">Monthly Salary</th>
-                        <th class="text-center">Job Details</th>
-                        <th class="text-center">Company Location</th>
-                        <th class="text-center">Action</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Company Name</th>
+                    <th class="text-center">Position</th>
+                    <th class="text-center">Monthly Salary</th>
+                    <th class="text-center">Job Details</th>
+                    <th class="text-center">Company Location</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Action</th>
 
 
                 </thead>
@@ -41,9 +42,10 @@
                         <td class="text-center">{{$client->salary}}</td>
                         <td class="text-center">{{$client->details}}</td>
                         <td class="text-center">{{$client->location}}</td>
+                        <td class="text-center">{{$client->status}}</td>
                         <td class="text-center">
-                            <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i>Approve</button>
-                            <button wire:click="delete({{$client->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i>Delete</button>
+                            <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Approve</button>
+                            <button wire:click="delete({{$client->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                         </td>
                     </tr>
                     @empty

@@ -44,14 +44,22 @@ class Joblist extends Component
     }
     public function approve($id){
         $onboard = Job::find($id);
-        Vacant::create([
-            'name' => $onboard->name,
-            'position' => $onboard->position,
-            'salary' => $onboard->salary,
-            'details' => $onboard->details,
-            'location' => $onboard->location,
-        ]);
-        flash()->addSuccess('Data Send Successfully');
+        
+        if($onboard->status == 'Approved'){
+            flash()->addWarning('Data is already approved');
+        }
+        else{
+            $onboard->status = 'Approved';
+            Vacant::create([
+                'name' => $onboard->name,
+                'position' => $onboard->position,
+                'salary' => $onboard->salary,
+                'details' => $onboard->details,
+                'location' => $onboard->location,
+            ]);
+            $onboard->save();
+            flash()->addSuccess('Data approved successfully');
+       }
     }
     public function delete($id)
     {

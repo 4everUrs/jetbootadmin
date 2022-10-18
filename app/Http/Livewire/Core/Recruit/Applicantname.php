@@ -33,20 +33,27 @@ class Applicantname extends Component
     public function approve($id)
     {
        $job = ApplicantForm::find($id);
-       ApplicantList::create([
-            'name' => $job->name,
-            'position' => $job->position,
-            'email' => $job->email,
-            'phone' => $job->phone,
-            'address' => $job->address,
-            'resume_file' => $job->resume_file,
-            'location' => $job->location,
-       ]);
-       flash()->addSuccess('Data Approved Successfully');
+
+       if($job->status == 'Approved'){
+            flash()->addWarning('Data is already approved');
+       }
+       else{
+            $job->status = 'Approved';
+            ApplicantList::create([
+                'name' => $job->name,
+                'position' => $job->position,
+                'email' => $job->email,
+                'phone' => $job->phone,
+                'address' => $job->address,
+                'resume_file' => $job->resume_file,
+                'location' => $job->location,
+            ]);
+            $job->save();
+            flash()->addSuccess('Data approved successfully');
+       }
+      
+       
       
     }
-    public function denied($id)
-    {
-        $job = ApplicantForm::find($id);
-    }
+    
 }
