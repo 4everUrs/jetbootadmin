@@ -15,8 +15,8 @@
         </div>
     </div>
     
-    <div class="card-body table-responsive p-0">
-        <table class="table text-wrap table-striped table-hover table-bordered" id="dtBasicExample">
+    <div class="card-body p-0 table-responsive" style="overflow-x: auto">
+        <table class="table table-striped text-wrap table-hover table-bordered" id="dtBasicExample">
            {{$slot}}
         </table>
     </div>

@@ -11,7 +11,7 @@
             </a>
             
             <x-table head="Inventory" >
-                <thead class="bg-info">
+                <tr class="bg-info">
                     <th class="text-center align-middle">Item No</th>
                     <th class="text-center align-middle">Name</th>
                     <th class="text-center align-middle">Supplier</th>
@@ -22,7 +22,7 @@
                     <th class="text-center align-middle">Status</th>
                     <th class="text-center align-middle">Discontinued?</th>
                     <th class="text-center align-middle">Action</th>
-                </thead>
+                </tr>
                 <tbody>
                     @forelse ($items as $item)
                         @if ($item->status == 'OK')
@@ -38,7 +38,7 @@
                                 <td class="text-center align-middle">{{$item->remarks}}</td>
                                 <td class="text-center align-middle">
                                     <button wire:click="update({{$item->id}})" class="btn btn-primary btn-sm">Update</button>
-                                    <button wire:click="delete({{$item->id}})" class="btn btn-dark btn-sm">Delete</button>
+                                   
                                     <button wire:click="restock({{$item->id}})" class="btn btn-info btn-sm">Restock</button>
                                 </td>
                             
@@ -56,7 +56,7 @@
                                 <td class="text-center align-middle">{{$item->remarks}}</td>
                                 <td class="text-center align-middle">
                                     <button wire:click="update({{$item->id}})" class="btn btn-primary btn-sm">Update</button>
-                                    <button wire:click="delete({{$item->id}})" class="btn btn-dark btn-sm">Delete</button>
+                                   
                                     <button wire:click="restock({{$item->id}})" class="btn btn-info btn-sm">Restock</button>
                                 </td>
                             

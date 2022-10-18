@@ -7,5 +7,6 @@
     </x-slot>
 
 
+    </div>
 </x-app-layout>
 </div>
