@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ListRequested extends Model
+class MroInventory extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'proposalname', 'requestor', 'proposedamount','approvedate','approvedamount','rstatus','remarks','origin'
-    ]; 
+        'stock_id', 'item_name', 'description', 'quantity', 'unit_price', 'inventory_value',
+    ];
 }

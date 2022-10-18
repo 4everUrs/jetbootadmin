@@ -6,19 +6,21 @@ use Livewire\Component;
 use App\Models\JournalEntry;
 use App\Models\SubJournal;
 use App\Models\GenLed;
+use App\Models\Payables;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 class Journals extends Component
 {
-
-    public $jdescription, $jdebit, $jcredit, $jencoded, $journal_id = '1', $jsubdescription, $jstatus = 'Process';
+    public $jdescription, $jdebit, $jcredit, $jencoded, $journal_id = '1', $jsubdescription; //$jstatus='Process';
     public $ldate, $ldescription, $ldebit, $lcredit, $lstatus;
+    public $invoice,$idate,$pname,$invoiceamount,$pamount,$pduedate,$premarks,$paymade;   
     public $gen_leds;
     public $preview = [];
     public $grandtotal;
     public $childData = [];
     public $addLiability = false;
+    public $addPayables = false;
     public $updateLiability = false;
     public $deleteLiability = false;
     public $deleteLiabilities = false;
@@ -54,7 +56,9 @@ class Journals extends Component
         if (!empty($this->selected_id)) {
             $this->subjournalData = SubJournal::where('journal_entry_id', '=', $this->selected_id)->get();
         }
+        $this->unpaids = Payables::all();
         $this->gen_leds = GenLed::all();
+       
         $this->preview;
         $this->grandtotal;
         $this->journal_entries = JournalEntry::with('subjournal')->get();
@@ -71,7 +75,7 @@ class Journals extends Component
     {
 
         $record = SubJournal::find($id);
-        $record->jstatus = 'Recorded';
+        //$record->jstatus='Recorded';
         $record->save();
     }
 
@@ -106,7 +110,7 @@ class Journals extends Component
                 'jsubdescription' => $this->jsubdescription,
                 'jdebit' => $prev['jdebit'],
                 'jcredit' => $prev['jcredit'],
-                'jstatus' => $prev['jstatus'],
+                //'jstatus' => $prev['jstatus'],
                 'journal_entry_id' => $temp->id,
             ]);
         }
@@ -173,7 +177,7 @@ class Journals extends Component
     {
         $temp = SubJournal::where('journal_entry_id', '=', $this->selected_id)->get();
         foreach ($temp as $tmp) {
-            $this->grandtotal += $tmp->jcredit + $tmp->jdebit;
+            $this->grandtotal -= $tmp->jcredit - $tmp->jdebit;
         }
     }
     public function saveSub()
@@ -197,7 +201,7 @@ class Journals extends Component
         $this->jcredit = null;
         $this->jdebit = null;
         $this->jencoded = 'ADMIN';
-        $this->jstatus = 'Process';
+        //$this->jstatus = 'Process';
     }
 
 
@@ -234,6 +238,43 @@ class Journals extends Component
 
 
     //end General Ledger
+
+
+
+    //account payables
+    public function tablePayables()
+    {
+        $this->addPayables = true;
+    }
+
+    public function addPay()
+    {
+        Payables::create(
+            [
+                'invoice' => $this->invoice,
+                'idate' => $this->idate,
+                'pname' => $this->pname,
+                'invoiceamount' => $this->invoiceamount,
+                'paymade' => $this->paymade,
+                'pamount' => $this->pamount,
+                'pduedate' => $this->pduedate,
+                'premarks' => $this->premarks,
+            ]
+        );
+        $this->resetPayables();
+        toastr()->addSuccess('Add Record successfully');
+        $this->addPayables = false; 
+    }
+
+    public function resetPayables()
+    {
+        $this->ldate = null;
+        $this->ldescription = null;
+        $this->ldebit = null;
+        $this->lcredit = null;
+        $this->lstatus = 'Process';
+    }
+    //end account payables
 
 
 

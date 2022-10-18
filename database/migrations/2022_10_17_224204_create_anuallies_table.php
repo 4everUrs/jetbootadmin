@@ -13,18 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('journal_entries', function (Blueprint $table) {
-                
-               
+        Schema::create('anuallies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('jencoded');
-            //$table->string('jstatus');
-            
-            });
+        });
+    }
 
-
-        }
     /**
      * Reverse the migrations.
      *
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journal_entries');
+        Schema::dropIfExists('anuallies');
     }
 };

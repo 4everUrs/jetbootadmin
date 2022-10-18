@@ -13,18 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('journal_entries', function (Blueprint $table) {
-                
-               
+        Schema::create('payables', function (Blueprint $table) {
             $table->id();
+            $table->integer('invoice');
+            $table->string('idate');
+            $table->string('pname');
+            $table->string('invoiceamount');
+            $table->integer('paymade');
+            $table->integer('pamount');
+            $table->string('pduedate');
+            $table->string('premarks');
             $table->timestamps();
-            $table->string('jencoded');
-            //$table->string('jstatus');
-            
-            });
+        });
+    }
 
-
-        }
     /**
      * Reverse the migrations.
      *
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journal_entries');
+        Schema::dropIfExists('payables');
     }
 };

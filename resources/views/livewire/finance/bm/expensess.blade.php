@@ -102,12 +102,12 @@
     </x-slot>
 
     <x-slot name="footer">
-        <x-jet-secondary-button wire:click="$toggle('addExpense')" wire:loading.attr="disabled">
+        <x-jet-secondary-button wire:click="$toggle('addPurchase')" wire:loading.attr="disabled">
             {{ __('Cancel') }}
         </x-jet-secondary-button>
        
         <x-jet-button class="ms-2" wire:click="addExpenses" wire:loading.attr="disabled">
-            {{ __('Update Expenses') }}
+            {{ __('Add Expenses') }}
         </x-jet-button>
 
     </x-slot>

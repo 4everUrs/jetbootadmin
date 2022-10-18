@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('journal_entries', function (Blueprint $table) {
-                
-               
+        Schema::create('mro_inventories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('stock_id');
+            $table->string('item_name');
+            $table->string('description');
+            $table->integer('quantity');
+            $table->bigInteger('unit_price');
+            $table->bigInteger('inventory_value');
             $table->timestamps();
-            $table->string('jencoded');
-            //$table->string('jstatus');
-            
-            });
+        });
+    }
 
-
-        }
     /**
      * Reverse the migrations.
      *
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('journal_entries');
+        Schema::dropIfExists('mro_inventories');
     }
 };

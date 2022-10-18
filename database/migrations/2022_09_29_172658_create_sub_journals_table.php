@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('jsubdescription');
             $table->integer('jcredit');
             $table->integer('jdebit');
-            $table->string('jstatus');
+           // $table->string('jstatus');
             $table->unsignedInteger('journal_entry_id');
             $table->timestamps();
         });

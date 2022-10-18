@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Logistics\Warehouse;
 
+use App\Models\MroInventory;
 use Livewire\Component;
 use App\Models\RequestList;
 use App\Models\ProcurementRequest;
@@ -17,7 +18,8 @@ class Requestslist extends Component
     public $origin = 'Warehouse', $content, $status = 'Pending';
     public $requestModal = false;
     public $reOrderModal = false;
-    public $category, $quantity, $supplier, $item;
+    public $dispatchModal = false;
+    public $category, $quantity, $supplier, $item, $stock_id, $qty, $selected_id;
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
@@ -32,6 +34,7 @@ class Requestslist extends Component
             'suppliers' => Supplier::all(),
             'sents' => WarehouseSent::all(),
             'items' => Stock::where('supplier_id', '=', $this->supplier)->where('status', '=', 'LOW')->get(),
+            'inventories' => Stock::all(),
         ]);
     }
 
@@ -78,6 +81,42 @@ class Requestslist extends Component
         ]);
         toastr()->addSuccess('Re-Order Sent Successfully');
         $this->reOrderModal = false;
+        $this->reset();
+    }
+    public function confirm($id)
+    {
+        $temp = RequestList::find($id);
+        $temp->status = 'Confirmed';
+        $temp->save();
+        toastr()->addSuccess('Operation Success');
+    }
+    public function dispatch($id)
+    {
+        $this->selected_id = $id;
+        $this->dispatchModal = true;
+    }
+    public function sendDispatch()
+    {
+        $temp = Stock::find($this->stock_id);
+        if ($temp->stock_quantity >= $this->qty) {
+            MroInventory::create([
+                'stock_id' => $this->stock_id,
+                'item_name' => $temp->name,
+                'description' => $temp->description,
+                'quantity' => $this->qty,
+                'unit_price' => $temp->cost_per_item,
+                'inventory_value' => $this->qty * $temp->cost_per_item,
+            ]);
+            $x = RequestList::find($this->selected_id);
+            $x->status = 'Dispatched';
+            $x->save();
+            $temp->stock_quantity = $temp->stock_quantity - $this->qty;
+            $temp->save();
+            toastr()->addSuccess('Operation Successfull');
+        } else {
+            toastr()->addWarning('Selected Item Out of Stock');
+        }
+        $this->dispatchModal = false;
         $this->reset();
     }
     public function resetInput()

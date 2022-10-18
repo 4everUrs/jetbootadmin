@@ -27,7 +27,7 @@
                 <td>{{$transaction->id}}</td>
                 <td>{{$transaction->originated}}</td>
                 <td>{{$transaction->category}}</td>
-                <td>{{$transaction->created_at}}</td>
+                <td>{{Carbon\Carbon::parse($transaction->created_at)->toFormattedDateString()}}</td>
                 <td>{{$transaction->amount}}</td>
                 <td>{{$transaction->account}}</td>
                 <td>{{$transaction->description}}</td>
@@ -73,6 +73,16 @@
     <x-slot name="content">
         <div class="row form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
             <div class="col">
+                    {{-- <label>Requests.</label>
+                    <select class="form-control" wire:model="requests">
+                        <option>Select Request</option>
+                        @forelse ($requestslist  as $req)
+                            <option value="{{$req->id}}">{{$req->proposalname}}</option>
+                        @empty
+                        <option>No Record Found </option>
+                        @endforelse
+                        
+                    </select> --}}
                 <label>Select Originated Dept.</label>
                 <select class="form-control" wire:model="originated">
                     <option>HR DEPT</option>

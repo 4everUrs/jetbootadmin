@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('list_requesteds', function (Blueprint $table) {
             $table->id();
+            $table->string('origin');
+            $table->string('proposalname');
+            $table->string('requestor');
+            $table->string('proposedamount');
+            $table->string('approvedate')->nullable();
+            $table->string('approvedamount')->nullable();
+            $table->string('rstatus'); 
+            $table->string('remarks'); 
             $table->timestamps();
         });
     }
