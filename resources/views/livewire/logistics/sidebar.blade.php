@@ -34,8 +34,8 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-box"></i>
-                    <p>Warehouse</p>
-                    <i class="right fas fa-angle-left"></i>
+                    <p>Warehouse <span class="badge badge-danger ">6</span></p>
+                    <i class="right fas fa-angle-left" ></i>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">

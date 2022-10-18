@@ -107,6 +107,7 @@
                 <i class="far fa-bell"></i>
                 
             </a>
+            
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">Notifications</span>
                 <div class="dropdown-divider"></div>
