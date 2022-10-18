@@ -12,7 +12,9 @@
                     <th>No.</th>
                     <th>Origin.</th>
                     <th>Category.</th>
-                    <th>Content.</th>
+                    <th>Item Name.</th>
+                    <th>Quantity.</th>
+                    <th>Description.</th>
                     <th>Status.</th>
                     <th>Date Requested</th>
                     <th>Date Granted</th>
@@ -24,6 +26,8 @@
                             <td>{{$request->id}}</td>
                             <td>{{$request->origin}}</td>
                             <td>{{$request->category}}</td>
+                            <td>{{$request->item_name}}</td>
+                            <td>{{$request->item_qty}}</td>
                             <td>{{$request->content}}</td>
                             <td>{{$request->status}}</td>
                             <td>{{Carbon\Carbon::parse($request->create_at)->toFormattedDateString()}}</td>
@@ -38,7 +42,7 @@
                         </tr>                        
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center">No Record Found</td>
+                            <td colspan="10" class="text-center">No Record Found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -58,9 +62,11 @@
                 <select wire:model="type" class="form-control">
                     <option>Select type</option>
                     <option>Supplier</option>
-                    <option>Contractor</option>
-                    <option>Buyer</option>
                 </select>
+                <label>Item Name</label>
+                <input wire:model="name" class="form-control" type="text">
+                <label>Quantity</label>
+                <input wire:model="qty" class="form-control" type="number">
                 @error('type') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                     <label>Description</label>
                     <textarea wire:model="description" class="form-control"></textarea>

@@ -25,6 +25,8 @@
                                     <th>No.</th>
                                     <th>Origin</th>
                                     <th>Type</th>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
                                     <th>Bidding Range</th>
                                     <th>Location</th>
                                     <th>Data Posted</th>
@@ -39,6 +41,9 @@
                                         <td>{{$recieved->id}}</td>
                                         <td>{{$recieved->origin}}</td>
                                         <td>{{$recieved->type}}</td>
+                                        <td>{{$recieved->item_name}}</td>
+                                        <td>{{$recieved->quantity}}</td>
+
                                         <td>@money($recieved->start) - @money($recieved->end)</td>
                                         <td>{{$recieved->location}}</td>
                                         <td>{{Carbon\Carbon::parse($recieved->updated_at)->toFormattedDateString()}}</td>

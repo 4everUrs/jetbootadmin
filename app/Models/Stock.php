@@ -12,7 +12,7 @@ class Stock extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     protected $fillable = [
         'name', 'supplier_id', 'description', 'cost_per_item', 'stock_value', 'item_no', 'stock_quantity',
-        'reorder_level', 'status', 'remarks'
+        'reorder_level', 'status', 'remarks', 'reorder_quantity', 'reorder_days'
     ];
     public function Supplier()
     {

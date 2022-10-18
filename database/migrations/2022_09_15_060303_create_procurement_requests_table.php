@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('procurement_requests', function (Blueprint $table) {
             $table->id();
             $table->string('origin');
+            $table->unsignedInteger('warehouse_sent_id');
+            $table->string('item_name');
+            $table->integer('item_qty');
             $table->string('category');
             $table->string('content');
             $table->string('status');

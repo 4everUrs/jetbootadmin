@@ -15,4 +15,8 @@ class Reorder extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
+    public function Stock()
+    {
+        return $this->hasOne(Stock::class);
+    }
 }

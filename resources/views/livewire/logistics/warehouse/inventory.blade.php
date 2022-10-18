@@ -19,6 +19,9 @@
                     <th class="text-center align-middle">Cost per item</th>
                     <th class="text-center align-middle">Stock<br>Quantity</th>
                     <th class="text-center align-middle">Inventory<br>Value</th>
+                    <th class="text-center align-middle">Reorder<br>Level</th>
+                    <th class="text-center align-middle">Reorder<br>Quantity</th>
+                    <th class="text-center align-middle">Days per<br>Reorder</th>
                     <th class="text-center align-middle">Status</th>
                     <th class="text-center align-middle">Discontinued?</th>
                     <th class="text-center align-middle">Action</th>
@@ -34,6 +37,9 @@
                                 <td class="text-center align-middle">@money($item->cost_per_item)</td>
                                 <td class="text-center align-middle">{{$item->stock_quantity}}</td>
                                 <td class="text-center align-middle">@money($item->stock_value)</td>
+                                <td class="text-center align-middle">{{$item->reorder_level}}</td>
+                                <td class="text-center align-middle">{{$item->reorder_quantity}}</td>
+                                <td class="text-center align-middle">{{$item->reorder_days}} Days</td>
                                 <td class="text-center align-middle">{{$item->status}}</td>
                                 <td class="text-center align-middle">{{$item->remarks}}</td>
                                 <td class="text-center align-middle">
@@ -52,6 +58,7 @@
                                 <td class="text-center align-middle">@money($item->cost_per_item)</td>
                                 <td class="text-center align-middle">{{$item->stock_quantity}}</td>
                                 <td class="text-center align-middle">@money($item->stock_value)</td>
+                                <td class="text-center align-middle">{{$item->reorder_level}}</td>
                                 <td class="text-center align-middle">{{$item->status}}</td>
                                 <td class="text-center align-middle">{{$item->remarks}}</td>
                                 <td class="text-center align-middle">
@@ -64,7 +71,7 @@
                         @endif
                     @empty
                         <tr>
-                            <td class="text-center" colspan="10">No record found</td>
+                            <td class="text-center" colspan="13">No record found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -109,6 +116,12 @@
                     <label>Reorder Level</label>
                     <input wire:model="reorder_level" type="number" class="form-control">
                     @error('reorder_level') <span class="alert text-danger">{{ $message }}<br /></span> @enderror          
+                    <label>Reorder Quantity</label>
+                    <input wire:model="reorder_quantity" type="number" class="form-control">
+                    @error('reorder_quantity') <span class="alert text-danger">{{ $message }}<br /></span> @enderror          
+                    <label>Days per Reorder</label>
+                    <input wire:model="reorder_days" type="number" class="form-control">
+                    @error('reorder_days') <span class="alert text-danger">{{ $message }}<br /></span> @enderror          
                 </div>
             </x-slot>
 
@@ -142,6 +155,33 @@
                 </x-jet-secondary-button>
 
                 <x-jet-button class="ms-2" wire:click="restockItem" wire:loading.attr="disabled">
+                    {{ __('Update Item') }}
+                </x-jet-button>
+            </x-slot>
+        </x-jet-dialog-modal>
+
+        {{--Update Modal--}}
+        <x-jet-dialog-modal wire:model="updateModal">
+            <x-slot name="title">
+                {{ __('Add new item') }}
+            </x-slot>
+            <x-slot name="content">
+                <div class="form-group">
+                    <label>Add Quantity</label>
+                    <input type="number" class="form-control" wire:model="add">
+                    @error('qty') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                    <label>Subtract Quantity</label>
+                    <input type="number" class="form-control" wire:model="sub">
+                    @error('qty') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                </div>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('updateModal')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+
+                <x-jet-button class="ms-2" wire:click="updateItem" wire:loading.attr="disabled">
                     {{ __('Update Item') }}
                 </x-jet-button>
             </x-slot>

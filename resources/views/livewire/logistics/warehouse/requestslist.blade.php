@@ -32,9 +32,9 @@
                                 <th class="text-center">Action</th>
                             </thead>
                             <tbody>
-                                @forelse ($requests as $request)
+                                @forelse ($requests as $key => $request)
                                 <tr>
-                                    <td>{{$request->id}}</td>
+                                    <td>{{$key+1}}</td>
                                     <td>{{$request->origin}}</td>
                                     <td>{{$request->content}}</td>
                                     <td>{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
@@ -57,6 +57,9 @@
                                 @endforelse
                             </tbody>
                         </x-table>
+                        <div class="mt-3 float-right">
+                            {{$requests->links()}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,15 +72,17 @@
                                 <th>Category.</th>
                                 <th>Destination.</th>
                                 <th>Content.</th>
+                                <th>Date.</th>
                                 <th>Status.</th>
                             </thead>
                             <tbody>
-                                @forelse ($sents as $sent)
+                                @forelse ($sents as $key => $sent)
                                     <tr>
-                                        <td>{{$sent->id}}</td>
+                                        <td>{{$key+1}}</td>
                                         <td>{{$sent->category}}</td>
                                         <td>{{$sent->destination}}</td>
                                         <td>{{$sent->content}}</td>
+                                        <td>{{Carbon\Carbon::parse($sent->created_at)->toFormattedDateString()}}</td>
                                         <td>{{$sent->status}}</td>
                                     </tr>
                                 @empty
@@ -87,6 +92,9 @@
                                 @endforelse
                             </tbody>
                         </x-table>
+                        <div class="mt-3 float-right">
+                            {{$sents->links()}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,7 +108,11 @@
     </x-slot>
     <x-slot name="content">
         <div class="form-group">
-            <label>Content</label>
+            <label>Item Name</label>
+            <input wire:model="item_name" class="form-control" type="text">
+            <label>Stock Quantity</label>
+            <input wire:model="item_qty" class="form-control" type="number">
+            <label>Description</label>
             <textarea wire:model="content" class="form-control" rows="3"></textarea>
         </div>
     </x-slot>
@@ -143,7 +155,7 @@
                 </select>
                 <label>Quantity</label>
                 <input wire:model="quantity" type="text" class="form-control">
-                <label>Content</label>
+                <label>Description (Optional)</label>
                 <textarea wire:model="content" class="form-control" rows="3"></textarea>
             </div>
         </x-slot>

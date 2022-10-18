@@ -6,31 +6,20 @@ use Livewire\Component;
 use App\Models\ProcurementRequest;
 use App\Models\Recieved;
 use App\Models\PostRequirement;
+use App\Models\WarehouseSent;
 use Livewire\WithPagination;
 use Carbon\Carbon;
 
 class Requestlists extends Component
 {
     public $origin = 'Procurement', $description, $status = "Pending", $type, $start, $end, $location;
+    public $name, $qty;
     public $requestModal = false;
     public $search = '';
     public $requirements = [];
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    protected $rules = [
-        'origin' => 'required|string',
-        'type' => 'required|string',
-        'description' => 'required|string',
-        'status' => 'required|string',
-        'start' => 'required|integer',
-        'end' => 'required|integer',
-        'location' => 'required|string'
 
-    ];
-    public function updated($fields)
-    {
-        $this->validateOnly($fields);
-    }
     public function addRow()
     {
         $this->requirements[] = [''];
@@ -59,11 +48,16 @@ class Requestlists extends Component
     }
     public function approve($id)
     {
+
         $request = ProcurementRequest::find($id);
+        $warehouse = WarehouseSent::find($request->warehouse_sent_id);
         if ($request->status == 'Approved') {
             toastr()->addWarning('Data is already approved');
         } else {
             $request->status = 'Approved';
+            $request->date_granted = Carbon::parse(now())->toFormattedDateString();
+            $warehouse->status = 'Approved';
+            $warehouse->save();
             $request->save();
             toastr()->addSuccess('Data update successfully');
         }
@@ -72,8 +66,17 @@ class Requestlists extends Component
     public function saveRequest()
     {
 
-        $validatedData = $this->validate();
-
+        $validatedData = $this->validate([
+            'origin' => 'required|string',
+            'type' => 'required|string',
+            'description' => 'required|string',
+            'status' => 'required|string',
+            'start' => 'required|integer',
+            'end' => 'required|integer',
+            'location' => 'required|string'
+        ]);
+        $validatedData['item_name'] = $this->name;
+        $validatedData['quantity'] = $this->qty;
         Recieved::create($validatedData);
         $recieved_id = Recieved::latest('id')->first();
 

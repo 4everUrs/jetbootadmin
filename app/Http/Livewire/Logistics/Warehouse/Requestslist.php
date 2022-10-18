@@ -20,6 +20,7 @@ class Requestslist extends Component
     public $reOrderModal = false;
     public $dispatchModal = false;
     public $category, $quantity, $supplier, $item, $stock_id, $qty, $selected_id;
+    public $item_name, $item_qty;
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
@@ -30,9 +31,9 @@ class Requestslist extends Component
             $this->dispatchBrowserEvent('show-supplier');
         }
         return view('livewire.logistics.warehouse.requestslist', [
-            'requests' => RequestList::get(),
+            'requests' => RequestList::orderBy('id', 'desc')->paginate(5),
             'suppliers' => Supplier::all(),
-            'sents' => WarehouseSent::all(),
+            'sents' => WarehouseSent::orderBy('id', 'desc')->paginate(5),
             'items' => Stock::where('supplier_id', '=', $this->supplier)->where('status', '=', 'LOW')->get(),
             'inventories' => Stock::all(),
         ]);
@@ -40,19 +41,24 @@ class Requestslist extends Component
 
     public function saveRequest()
     {
-        $this->validate(['content' => 'required|string|min:5']);
-        ProcurementRequest::create([
-            'origin' => $this->origin,
-            'content' => $this->content,
-            'status' => $this->status,
-            'category' => 'Supplier'
-        ]);
+        // $this->validate(['content' => 'required|string|min:5']);
         WarehouseSent::create([
             'destination' => 'Procurement',
             'content' => $this->content,
             'status' => $this->status,
             'category' => 'Supplier'
         ]);
+        $temp = WarehouseSent::latest()->first();
+        ProcurementRequest::create([
+            'origin' => $this->origin,
+            'item_name' => $this->item_name,
+            'item_qty' => $this->item_qty,
+            'warehouse_sent_id' => $temp->id,
+            'content' => $this->content,
+            'status' => $this->status,
+            'category' => 'Supplier'
+        ]);
+
         toastr()->addSuccess('Request Sent Successfully');
         $this->requestModal = false;
         $this->reset();
@@ -68,6 +74,7 @@ class Requestslist extends Component
         ]);
         Reorder::create([
             'supplier_id' => $this->supplier,
+            'stock_id' => $temp->id,
             'quantity' => $this->quantity,
             'price' => $temp->cost_per_item,
             'description' => $this->content,

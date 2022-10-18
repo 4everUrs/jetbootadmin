@@ -10,18 +10,23 @@
                 <thead class="bg-info">
                     <th>No</th>
                     <th>Supplier</th>
+                    <th>Item Name</th>
+                    <th>Description</th>
                     <th>Reorder Quantity</th>
                     <th>Price</th>
                     <th>Total Cost</th>
                     <th>Request Date</th>
                     <th>Completion Date</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </thead>
                 <tbody>
                 @forelse ($reorders as $reorder)
                 <tr>
                     <td>{{$reorder->id}}</td>
                     <td>{{$reorder->Supplier->name}}</td>
+                    <td>{{$reorder->Stock->name}}</td>
+                    <td>{{$reorder->Stock->description}}</td>
                     <td>{{$reorder->quantity}}</td>
                     <td>@money($reorder->price)</td>
                     <td>@money($reorder->price * $reorder->quantity)</td>
@@ -31,7 +36,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td class="text-center" colspan="7">No Record Found</td>
+                    <td class="text-center" colspan="11">No Record Found</td>
                 </tr>
                 @endforelse
                 </tbody>
