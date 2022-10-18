@@ -11,4 +11,8 @@ class Payroll extends Model
     protected $fillable = [
         'name', 'attendance', 'salary', 'gross_salary', 'contribution', 'placement', 'status', 'net_salary'
     ];
+    public function Contribution()
+    {
+        return $this->hasMany(Contribution::class);
+    }
 }

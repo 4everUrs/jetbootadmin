@@ -11,11 +11,12 @@ class Employeedata extends Component
 {
     public function render()
     {
-        return view('livewire.core.em.employeedata',[
+        return view('livewire.core.em.employeedata', [
             'onboards' => LocalEmployee::all(),
         ]);
     }
-    public function submit($id){
+    public function submit($id)
+    {
         $onboard = LocalPlacement::find($id);
         Payroll::create([
             'name' => $onboard->name,

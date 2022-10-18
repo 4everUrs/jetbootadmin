@@ -29,7 +29,7 @@
                             <th class="text-center">Daily Attendance</th>
                             <th class="text-center">Minimum Wage</th>
                             <th class="text-center">Gross Salary</th>
-                            <th class="text-center">Contribution</th>
+                            <th style="width: 40%" class="text-center">Contribution</th>
                             <th class="text-center">Placement Fee</th>
                             <th class="text-center">Net Salary</th>
                             <th class="text-center">Action</th>
@@ -42,7 +42,11 @@
                                 <td class="text-center">{{$payroll->attendance}}</td>
                                 <td class="text-center">{{$payroll->salary}}</td>
                                 <td>{{$payroll->gross_salary}}</td>
-                                <td class="text-center">{{$payroll->contribution}}</td>
+                                <td>
+                                    @foreach ($payroll->Contribution as $contri)
+                                        <li>{{$contri->contribution}}</li>
+                                    @endforeach
+                                </td>
                                 <td class="text-center">{{$payroll->placement}}</td>
                                 <td>{{$payroll->net_salary}}</td>
                                 <td class="text-center">
@@ -167,9 +171,25 @@
                 @error('salary') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Contribution</label>
-                <input wire:model="contribution"class="form-control" type="number">
-                @error('contribution') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
+                <div class="form-check">
+                    <input wire:model="sss" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                       SSS
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input wire:model="philhealth" class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Philhealth
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input wire:model="pagibig" class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Pag-Ibig
+                    </label>
+                </div>
+             
             
                 
             </div>

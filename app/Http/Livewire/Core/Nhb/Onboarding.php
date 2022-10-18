@@ -10,26 +10,23 @@ use App\Models\LocalPlacement;
 class Onboarding extends Component
 {
     public $showOnboard = false;
-    public $name,$age,$gender,$company_name,$position,$status='Hired',$contract,$resume_file;
-    
-  
+    public $name, $age, $gender, $company_name, $position, $status = 'Hired', $contract, $resume_file;
+
+
     public function render()
     {
-        return view('livewire.core.nhb.onboarding',[
+        return view('livewire.core.nhb.onboarding', [
             'onboards' => Onboard::all(),
         ]);
     }
-    public function saveOnboard(){
+    public function saveOnboard()
+    {
         $validateddata = $this->validate([
-        'age' => 'required|string',
-        'gender' => 'required|string',
-        'contract' => 'required|string',    
+            'age' => 'required|string',
+            'gender' => 'required|string',
+            'contract' => 'required|string',
         ]);
-        $onboard = Onboard::find($this->name);
-        $onboard->age = $validateddata['age'];
-        $onboard->gender = $validateddata['gender'];
-        $onboard->contract = $validateddata['contract'];
-        $onboard->save();
+        Onboard::find($this->name)->update($validateddata);
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
         $this->showOnboard = false;
@@ -37,14 +34,16 @@ class Onboarding extends Component
     public function resetInput()
     {
         $this->name = '';
-        $this->age = '';  
-        $this->gender = '';     
-        $this->contract = '';  
+        $this->age = '';
+        $this->gender = '';
+        $this->contract = '';
     }
-    public function loadOnboard(){
+    public function loadOnboard()
+    {
         $this->showOnboard = true;
     }
-    public function submit($id){
+    public function submit($id)
+    {
         $onboard = LocalPlacement::find($id);
         LocalEmployee::create([
             'name' => $onboard->name,
