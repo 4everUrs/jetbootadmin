@@ -6,9 +6,11 @@ use Livewire\Component;
 use App\Models\ProcurementRequest;
 use App\Models\Recieved;
 use App\Models\PostRequirement;
+use App\Models\RequestNotification;
 use App\Models\WarehouseSent;
 use Livewire\WithPagination;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Requestlists extends Component
 {
@@ -60,6 +62,14 @@ class Requestlists extends Component
             $warehouse->save();
             $request->save();
             toastr()->addSuccess('Data update successfully');
+            RequestNotification::create([
+                'user_id' => Auth::user()->id,
+                'sender' =>  Auth::user()->currentTeam->name,
+                'department' => 'Logistics',
+                'reciever' => 'Warehouse',
+                'request_content' => 'Aprove your request',
+                'routes' => 'requestlists'
+            ]);
         }
     }
 

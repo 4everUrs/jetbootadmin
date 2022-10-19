@@ -129,11 +129,19 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-danger navbar-badge">3</span>
+                    <span class="badge badge-danger navbar-badge">{{$notifications->count()}}</span>
+      
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">Notifications</span>
                 <div class="dropdown-divider"></div>
+                @foreach ($notifications as $noti)
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item" wire:click='test({{$noti->id}})'>
+                        {{$noti->user->name}} from {{$noti->user->currentTeam->name}}<br> has {{$noti->request_content}}
+                        <span class="float-right text-muted text-sm">{{Carbon\Carbon::parse($noti->created_at)->diffForHumans()}}</span>
+                    </button>
+                @endforeach
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>

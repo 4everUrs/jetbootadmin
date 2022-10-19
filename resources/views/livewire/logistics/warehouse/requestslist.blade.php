@@ -9,7 +9,7 @@
             <button wire:click="$toggle('requestModal')" class="btn btn-primary btn-sm">Request Supplier</button>
             <button wire:click="$toggle('reOrderModal')" class="btn btn-success btn-sm">Request Re-Order</button>
            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
-            <li class="nav-item mr-2" role="presentation">
+            <li class="nav-item mr-2" role="presentation" wire:ignore>
                 <button class="nav-link active" id="recieved-tab" data-bs-toggle="tab" data-bs-target="#recieved" type="button"
                     role="tab" aria-controls="recieved" aria-selected="false">Recieved</button>
             </li>
@@ -19,7 +19,7 @@
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="recieved" role="tabpanel" aria-labelledby="recieved-tab">
+            <div class="tab-pane fade show active" id="recieved" role="tabpanel" aria-labelledby="recieved-tab" wire:ignore.self>
                 <div class="card">
                     <div class="card-body">
                         <x-table head="Request List Table">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">
+            <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab" wire:ignore.self>
                 <div class="card">
                     <div class="card-body">
                         <x-table head="Sent Request">

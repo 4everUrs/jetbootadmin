@@ -20,6 +20,12 @@
                     <p>Request List</p>
                 </a>
             </li>
+            <li class="nav-item ">
+                <a href="{{route('warehousePO')}}" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>Pruchase Order</p>
+                </a>
+            </li>
 
         </ul>
     </nav>

@@ -9,9 +9,11 @@ use App\Models\ProcurementRequest;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Reorder;
+use App\Models\RequestNotification;
 use App\Models\Stock;
 use App\Models\Supplier;
 use App\Models\WarehouseSent;
+use Illuminate\Support\Facades\Auth;
 
 class Requestslist extends Component
 {
@@ -58,7 +60,14 @@ class Requestslist extends Component
             'status' => $this->status,
             'category' => 'Supplier'
         ]);
-
+        RequestNotification::create([
+            'user_id' => Auth::user()->id,
+            'sender' =>  Auth::user()->currentTeam->name,
+            'reciever' => 'Procurement',
+            'department' => 'Logistics',
+            'request_content' => 'Sent you a request',
+            'routes' => 'requests'
+        ]);
         toastr()->addSuccess('Request Sent Successfully');
         $this->requestModal = false;
         $this->reset();
@@ -96,6 +105,14 @@ class Requestslist extends Component
         $temp->status = 'Confirmed';
         $temp->save();
         toastr()->addSuccess('Operation Success');
+        RequestNotification::create([
+            'user_id' => Auth::user()->id,
+            'sender' =>  Auth::user()->currentTeam->name,
+            'department' => 'Logistics',
+            'reciever' => 'MRO',
+            'request_content' => 'Aprove your request',
+            'routes' => 'requestlists'
+        ]);
     }
     public function dispatch($id)
     {
