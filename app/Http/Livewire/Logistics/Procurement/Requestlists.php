@@ -54,14 +54,11 @@ class Requestlists extends Component
     public function approve($id)
     {
         $request = ProcurementRequest::find($id);
-        $warehouse = WarehouseSent::find($request->warehouse_sent_id);
         if ($request->status == 'Approved') {
             toastr()->addWarning('Data is already approved');
         } else {
             $request->status = 'Approved';
             $request->date_granted = Carbon::parse(now())->toFormattedDateString();
-            $warehouse->status = 'Approved';
-            $warehouse->save();
             $request->save();
             toastr()->addSuccess('Data update successfully');
             RequestNotification::create([

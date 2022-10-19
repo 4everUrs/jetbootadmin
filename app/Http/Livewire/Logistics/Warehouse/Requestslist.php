@@ -46,27 +46,16 @@ class Requestslist extends Component
     public function saveRequest()
     {
         // $this->validate(['content' => 'required|string|min:5']);
-        WarehouseSent::create([
-            'destination' => 'Procurement',
-            'content' => $this->content,
-            'status' => $this->status,
-            'category' => 'Supplier'
-        ]);
         $temp = WarehouseSent::latest()->first();
         ProcurementRequest::create([
             'origin' => $this->origin,
             'item_name' => $this->item_name,
             'item_qty' => $this->item_qty,
-            'warehouse_sent_id' => $temp->id,
+            'requestor' => Auth::user()->name,
             'content' => $this->content,
             'status' => $this->status,
             'category' => 'Supplier'
         ]);
-        $data = [
-            'status' => 'Approve',
-        ];
-        $user = Auth::user();
-        Notification::send($user, new NotificationsRequestNotification($data));
         RequestNotification::create([
             'user_id' => Auth::user()->id,
             'sender' =>  Auth::user()->currentTeam->name,

@@ -72,6 +72,8 @@
                 @livewire('hr.sidebar')
                 @elseif (Auth::user()->current_team_id == '6')
                 @livewire('logistics.sidebars.procurement')
+                @elseif (Auth::user()->current_team_id == '10')
+                @livewire('logistics.sidebars.vendor')
                 @elseif (Auth::user()->current_team_id == '14')
                 @livewire('logistics.sidebars.warehouse')
                 @endif
@@ -100,7 +102,7 @@
             
         </div>
         <footer class="main-footer">
-            <strong>Disclaimer: This is for educational pusposes only make by student of <a href="https://bcp.edu.ph/">Bestlink College of the Philippines</a>.</strong> All rights reserved.
+            <strong>Disclaimer: This is for educational purposes only made by student of <a href="https://bcp.edu.ph/">Bestlink College of the Philippines</a>.</strong> All rights reserved.
         </footer>
 
 
