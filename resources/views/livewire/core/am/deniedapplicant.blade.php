@@ -7,8 +7,7 @@
     <div class="card">
         <div class="card-body">
            <x-table head="List of Denied Applicant">
-            <thead>
-                <th class="text-center">No.</th>
+            <thead class="bg-info">
                 <th class="text-center">Name</th>
                 <th class="text-center">Position</th>
                 <th class="text-center">Email</th>
@@ -22,7 +21,6 @@
             <tbody>
                 @forelse ($jobs as $job)
                   <tr>
-                    <td class="text-center">{{$job->id}}</td>
                     <td class="text-center">{{$job->name}}</td>
                     <td class="text-center">{{$job->position}}</td>
                     <td class="text-center">{{$job->email}}</td>

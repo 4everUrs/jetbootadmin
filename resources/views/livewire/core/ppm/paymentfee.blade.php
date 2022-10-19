@@ -23,7 +23,7 @@
                     <button wire:click="loadPayroll" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Payroll</button>
                     <br><br>
                     <x-table head="List of Payroll">
-                        <thead>
+                        <thead class="bg-info">
                             <th class="text-center">No.</th>
                             <th class="text-center">Employee Name</th>
                             <th class="text-center">Daily Attendance</th>
@@ -69,7 +69,7 @@
             <div class="card">
                 <div class="card-body">
                     <x-table head="List of Payment">
-                        <thead>
+                        <thead class="bg-info">
                             <th class="text-center">No.</th>
                             <th class="text-center">Employee Name</th>
                             <th class="text-center">Daily Attendance</th>
@@ -110,13 +110,15 @@
             <div class="card">
                 <div class="card-body">
                     <x-table head="Collection">
-                        <thead>
+                        <thead class="bg-info">
                             <th class="text-center">No.</th>
-                            <th class="text-center">Employee Name</th>
-                            <th class="text-center">Contribution</th>
-                            <th class="text-center">Placement Fee</th>
+                            <th class="text-center">Proposed Name</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Requestor</th>
+                            <th class="text-center">Proposed Amount</th>
+                            <th class="text-center">Approved Amount</th>
                             <th class="text-center">Status</th>
-                            <th class="text-center">Total Collection</th>
+                            <th class="text-center">Remarks</th>
                             <th class="text-center">Action</th>
                         </thead>
                         <tbody>
@@ -128,6 +130,8 @@
                                 <td class="text-center">{{$payroll->placement}}</td>
                                 <td class="text-center">{{$payroll->status}}</td>
                                 <td></td>
+                                <td></td>
+                                <td></td>
                                 <td class="text-center">
                                     <button wire:click="disbursement" class="btn btn-sm btn-primary">Trans. Collection</button>
                                 </td>
@@ -135,7 +139,7 @@
                             </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">No Record Found</td>
+                                    <td colspan="9" class="text-center">No Record Found</td>
                                 </tr>
                             @endforelse
                         </tbody>

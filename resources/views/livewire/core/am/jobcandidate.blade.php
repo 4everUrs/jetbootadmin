@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
            <x-table head="List of Applicant">
-            <thead>
+            <thead class="bg-info">
                 <th class="text-center">No.</th>
                 <th class="text-center">Name</th>
                 <th class="text-center">Position</th>

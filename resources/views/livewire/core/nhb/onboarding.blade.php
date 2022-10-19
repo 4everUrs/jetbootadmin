@@ -9,7 +9,7 @@
             <button wire:click="loadOnboard" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Add Onboard</button>
             <br><br>
            <x-table head="">
-            <thead>
+            <thead class="bg-info">
                 <th class="text-center">No.</th>
                 <th class="text-center">Name</th>
                 <th class="text-center">Age</th>
@@ -17,7 +17,6 @@
                 <th class="text-center">Company Name</th>
                 <th class="text-center">Position</th>
                 <th class="text-center">Contract Term</th>
-                <th class="text-center">Status</th>
                 <th class="text-center">Resume</th>
                 <th class="text-center">Contract Date</th>
                 <th class="text-center">Action</th> 
@@ -35,7 +34,6 @@
                         <td class="text-center">{{$onboard->company_name}}</td>
                         <td class="text-center">{{$onboard->position}}</td>
                         <td class="text-center">{{$onboard->contract}}</td>
-                        <td class="text-center">{{$onboard->status}}</td>
                         <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$onboard->resume_file}}" target="__blank">Resume</a></td>
                         <td class="text-center">{{$onboard->created_at}}</td>
                         <td class="text-center">

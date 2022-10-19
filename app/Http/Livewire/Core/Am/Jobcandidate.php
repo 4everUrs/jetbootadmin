@@ -16,9 +16,9 @@ class Jobcandidate extends Component
             'jobs' => ApplicantList::all(),
         ]);
     }
-    public function approve($id)
+    public function approve($name)
     {
-       $job = ApplicantForm::find($id);
+       $job = ApplicantForm::find($name);
         
         if($job->resume_file == 'Approved'){
         flash()->addWarning('Data is already approved');
@@ -39,9 +39,9 @@ class Jobcandidate extends Component
         }
     
     }
-    public function denied($id)
+    public function denied($name)
     {
-       $job = ApplicantList::find($id);
+       $job = ApplicantList::find($name);
  
        Denied::create([
             'name' => $job->name,
@@ -53,6 +53,6 @@ class Jobcandidate extends Component
             'status' => $job->status='Denied',
        ]);
        flash()->addSuccess('Data Deleted Successfully');
-       ApplicantList::find($id)->delete();
+       ApplicantList::find($name)->delete();
     }
 }

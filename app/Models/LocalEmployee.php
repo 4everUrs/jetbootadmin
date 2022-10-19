@@ -9,6 +9,6 @@ class LocalEmployee extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'phone', 'position', 'company_name', 'company_location'
+        'name', 'phone', 'position', 'company_name', 'company_location', 'status'
     ];
 }

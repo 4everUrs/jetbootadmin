@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('position');
             $table->string('company_name');
             $table->string('company_location');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

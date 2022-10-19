@@ -21,7 +21,7 @@
     <div class="card">
         <div class="card-body">
             <x-table head="Job Record">
-                <thead>
+                <thead class="bg-info">
                     <th class="text-center">No.</th>
                     <th class="text-center">Company Name</th>
                     <th class="text-center">Position</th>
@@ -50,7 +50,7 @@
                     </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center">No Record Found</td>
+                            <td colspan="8" class="text-center">No Record Found</td>
                         </tr>
                     @endforelse
                 </tbody>

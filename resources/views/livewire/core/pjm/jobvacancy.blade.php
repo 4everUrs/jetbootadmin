@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
            <x-table head="">
-            <thead>
+            <thead class="bg-info">
                 <th class="text-center">No.</th>
                 <th class="text-center">Company Name</th>
                 <th class="text-center">Position</th>

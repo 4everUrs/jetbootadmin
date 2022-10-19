@@ -41,14 +41,21 @@ class Placementfee extends Component
 
     public function deploy($id){
         $job = ApplicantForm::find($id);
-       
-        Onboard::create([
-            'name' => $job->name,
-            'company_name' => $job->company,
-            'position' => $job->position,
-            'resume_file' => $job->resume_file,
-
-        ]);
-        flash()->addSuccess('Data Approved Successfully');
+        
+        if($job->status == 'Deployed'){
+            flash()->addWarning('Data is already deployed');
+        }
+        else{
+            $job->status = 'Deployed';
+            Onboard::create([
+                'name' => $job->name,
+                'company_name' => $job->company,
+                'position' => $job->position,
+                'resume_file' => $job->resume_file,
+                
+            ]);
+            $job->save();
+            flash()->addSuccess('Data deployed successfully');
+        }
     }
 }

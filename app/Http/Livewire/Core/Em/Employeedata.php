@@ -18,10 +18,18 @@ class Employeedata extends Component
     public function submit($id)
     {
         $onboard = LocalPlacement::find($id);
-        Payroll::create([
+
+        if($onboard->status == 'Employed'){
+            flash()->addWarning('Data is already submitted');
+        }
+        else{
+            $onboard->status = 'Employed';
+            Payroll::create([
             'name' => $onboard->name,
             'placement' => $onboard->placement
         ]);
-        flash()->addSuccess('Data Send Successfully');
+            $onboard->save();
+            flash()->addSuccess('Data submitted successfully');
+        }
     }
 }

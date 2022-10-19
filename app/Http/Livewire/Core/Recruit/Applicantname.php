@@ -30,9 +30,9 @@ class Applicantname extends Component
             'jobs' => ApplicantForm::all(),
         ]);
     }
-    public function approve($id)
+    public function approve($name)
     {
-       $job = ApplicantForm::find($id);
+       $job = ApplicantForm::find($name);
 
        if($job->status == 'Approved'){
             flash()->addWarning('Data is already approved');

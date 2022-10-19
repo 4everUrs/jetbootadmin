@@ -8,7 +8,7 @@
         <div class="card-body">
             <button wire:click="loadPayroll" class="btn btn-success"><i class='fa fa-edit'></i> Create Contract</button>
             <x-table head="">
-                <thead>
+                <thead class="bg-info">
                     <th class="text-center">Client Name</th>
                     <th class="text-center">Client Location</th>
                     <th class="text-center">Contract Term</th>

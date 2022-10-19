@@ -45,13 +45,21 @@ class Onboarding extends Component
     public function submit($id)
     {
         $onboard = LocalPlacement::find($id);
-        LocalEmployee::create([
+
+        if($onboard->status == 'Deployed'){
+            flash()->addWarning('Data is already approved');
+        }
+        else{
+            $onboard->status = 'Deployed';
+           LocalEmployee::create([
             'name' => $onboard->name,
             'phone' => $onboard->phone,
             'position' => $onboard->position,
             'company_name' => $onboard->company_name,
             'company_location' => $onboard->company_location,
         ]);
-        flash()->addSuccess('Data Send Successfully');
+            $onboard->save();
+            flash()->addSuccess('Data approved successfully');
+        }
     }
 }

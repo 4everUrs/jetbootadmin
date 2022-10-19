@@ -10,7 +10,7 @@ class Paymentfee extends Component
 {
     public $showPayroll = false;
     public $name, $attendance, $salary, $placement, $contribution = [], $collection;
-    public $sss = '400', $philhealth = ' 250', $pagibig = '150';
+    public $sss = '400', $philhealth = '250', $pagibig = '150';
 
     public function render()
     {

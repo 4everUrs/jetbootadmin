@@ -9,7 +9,7 @@
             <button wire:click="loadPlacement" type="create" class="btn btn-success" style="float:right"><i class='fa fa-plus'></i> Placement</button>
             <br><br>
             <x-table head="">
-                <thead>
+                <thead class="bg-info">
                     <th class="text-center">No.</th>
                     <th class="text-center">Applicant Name</th>
                     <th class="text-center">Contact</th>
@@ -34,7 +34,7 @@
                         <td class="text-center">{{$job->position}}</td>
                         <td class="text-center">{{$job->placement}}</td>
                         <td class="text-center">{{$job->status}}</td>
-                        <td>
+                        <td class="text-center">
                             <button wire:click="deploy({{$job->id}})" class="btn btn-sm btn-primary"><i class='fa fa-car'></i> Deployment</button>
                         </td>
                         
