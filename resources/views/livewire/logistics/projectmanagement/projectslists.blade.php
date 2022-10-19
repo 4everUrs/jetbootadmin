@@ -10,27 +10,27 @@
             <button wire:click="loadModal" class="btn btn-success btn-sm">+ Create budget proposal</button>
             <x-table head="Projects">
                 <thead class="bg-info">
-                    <th>Title</th>
-                    <th>Manager</th>
-                    <th>Budget</th>
-                    <th>Duration</th>
-                    <th>Progress</th>
-                    <th>Status</th>
+                    <th class="text-center align-middle">Title</th>
+                    <th class="text-center align-middle">Manager</th>
+                    <th class="text-center align-middle">Budget</th>
+                    <th class="text-center align-middle">Duration</th>
+                    <th class="text-center align-middle">Progress</th>
+                    <th class="text-center align-middle">Status</th>
                 </thead>
                 <tbody>
                     @forelse ($projects as $project)
                         <tr wire:click='viewRow({{$project->id}})'>
-                            <td>{{$project->title}}</td>
-                            <td>{{$project->manager}}</td>
-                            <td>@money($project->budget)</td>
-                            <td>{{$project->duration}}</td>
+                            <td class="text-center align-middle">{{$project->title}}</td>
+                            <td class="text-center align-middle">{{$project->manager}}</td>
+                            <td class="text-center align-middle">@money($project->budget)</td>
+                            <td class="text-center align-middle">{{$project->duration}}</td>
                             <td>
-                                <div class="progress">
+                                <div class="text-center align-middle progress">
                                     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{$project->progress}}%" aria-valuenow="{{$project->progress}}"
                                         aria-valuemin="0" aria-valuemax="100">{{$project->progress}}%</div>
                                 </div>
                             </td>
-                            <td>{{$project->status}}</td>
+                            <td class="text-center">{{$project->status}}</td>
                         </tr>
                         
                     @empty

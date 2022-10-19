@@ -9,24 +9,24 @@
         <div class="card-body">
             <x-table head="Vehicle Informartion">
                 <thead class="bg-info">
-                    <th>Assigned Driver</th>
-                    <th>Vehicle Type</th>
-                    <th>Vechicle Brand</th>
-                    <th>Vechile Model</th>
-                    <th>Vechicle Plate No.</th>
-                    <th>Status.</th>
-                    <th>Action.</th>
+                    <th class="text-center align-middle">Assigned Driver</th>
+                    <th class="text-center align-middle">Vehicle Type</th>
+                    <th class="text-center align-middle">Vechicle Brand</th>
+                    <th class="text-center align-middle">Vechile Model</th>
+                    <th class="text-center align-middle">Vechicle Plate No</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($vehicles as $vehicle)
                     <tr>
-                        <td>{{$vehicle->driver_name}}</td>
-                        <td>{{$vehicle->type}}</td>
-                        <td>{{$vehicle->brand}}</td>
-                        <td>{{$vehicle->model}}</td>
-                        <td>{{$vehicle->plate}}</td>
-                        <td>{{$vehicle->status}}</td>
-                        <td>
+                        <td class="text-center align-middle">{{$vehicle->driver_name}}</td>
+                        <td class="text-center align-middle">{{$vehicle->type}}</td>
+                        <td class="text-center align-middle">{{$vehicle->brand}}</td>
+                        <td class="text-center align-middle">{{$vehicle->model}}</td>
+                        <td class="text-center align-middle">{{$vehicle->plate}}</td>
+                        <td class="text-center">{{$vehicle->status}}</td>
+                        <td class="text-center">
                             <button wire:click="loadModal({{$vehicle->id}})" class="btn btn-success btn-sm">Assign
                                 Driver</button>
                             <button wire:click="repairModal({{$vehicle->id}})" class="btn btn-danger btn-sm">Repair</button> 

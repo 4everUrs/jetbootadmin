@@ -24,21 +24,21 @@
                     <div class="card-body">
                         <x-table head="Request List Table">
                             <thead class="bg-info">
-                                <th>No.</th>
-                                <th>Origin</th>
-                                <th>Content</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center align-middle">No.</th>
+                                <th class="text-center align-middle">Origin</th>
+                                <th class="text-center align-middle">Content</th>
+                                <th class="text-center align-middle">Date</th>
+                                <th class="text-center align-middle">Status</th>
+                                <th class="text-center align-middle">Action</th>
                             </thead>
                             <tbody>
                                 @forelse ($requests as $key => $request)
                                 <tr>
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$request->origin}}</td>
-                                    <td>{{$request->content}}</td>
-                                    <td>{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
-                                    <td>{{$request->status}}</td>
+                                    <td class="text-center">{{$key+1}}</td>
+                                    <td class="text-center align-middle">{{$request->origin}}</td>
+                                    <td class="text-center align-middle">{{$request->content}}</td>
+                                    <td class="text-center">{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
+                                    <td class="text-center">{{$request->status}}</td>
                                     <td class="text-center">
                                         @if ($request->status == 'Pending')
                                             <button wire:click="confirm({{$request->id}})" class="btn btn-primary btn-sm">Confirm</button>
@@ -68,22 +68,22 @@
                     <div class="card-body">
                         <x-table head="Sent Request">
                             <thead class="bg-info">
-                                <th>No.</th>
-                                <th>Category.</th>
-                                <th>Destination.</th>
-                                <th>Content.</th>
-                                <th>Date.</th>
-                                <th>Status.</th>
+                                <th class="text-center align-middle">No.</th>
+                                <th class="text-center align-middle">Category</th>
+                                <th class="text-center align-middle">Destination</th>
+                                <th class="text-center align-middle">Content</th>
+                                <th class="text-center align-middle">Date</th>
+                                <th class="text-center align-middle">Status</th>
                             </thead>
                             <tbody>
                                 @forelse ($sents as $key => $sent)
                                     <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$sent->category}}</td>
-                                        <td>{{$sent->destination}}</td>
-                                        <td>{{$sent->content}}</td>
-                                        <td>{{Carbon\Carbon::parse($sent->created_at)->toFormattedDateString()}}</td>
-                                        <td>{{$sent->status}}</td>
+                                        <td class="text-center">{{$key+1}}</td>
+                                        <td class="text-center align-middle">{{$sent->category}}</td>
+                                        <td class="text-center align-middle">{{$sent->destination}}</td>
+                                        <td class="text-center align-middle">{{$sent->content}}</td>
+                                        <td class="text-center">{{Carbon\Carbon::parse($sent->created_at)->toFormattedDateString()}}</td>
+                                        <td class="text-center">{{$sent->status}}</td>
                                     </tr>
                                 @empty
                                     <tr>

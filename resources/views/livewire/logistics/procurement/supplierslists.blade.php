@@ -8,20 +8,20 @@
         <div class="card-body">
             <x-table head="Suppliers Lists">
                 <thead class="bg-info">
-                    <th>Company Name</th>
-                    <th>Company Address</th>
-                    <th>Company Phone</th>
-                    <th>Company Email</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th class="text-center align-middle">Company Name</th>
+                    <th class="text-center align-middle">Company Address</th>
+                    <th class="text-center align-middle">Company Phone</th>
+                    <th class="text-center align-middle">Company Email</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($suppliers as $supplier)
                         <tr>
-                            <td>{{$supplier->name}}</td>
-                            <td>{{$supplier->address}}</td>
-                            <td>{{$supplier->phone}}</td>
-                            <td>{{$supplier->email}}</td>
+                            <td class="text-center align-middle">{{$supplier->name}}</td>
+                            <td class="text-center align-middle">{{$supplier->address}}</td>
+                            <td class="text-center align-middle">{{$supplier->phone}}</td>
+                            <td class="text-center align-middle">{{$supplier->email}}</td>
                             @if ($supplier->status == 'Inactive')
                                 <td class="text-danger text-center">{{$supplier->status}}</td>
                             @else

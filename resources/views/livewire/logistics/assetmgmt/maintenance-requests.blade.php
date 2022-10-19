@@ -9,24 +9,24 @@
             <button wire:click="$toggle('maintenanceRequest')" class="btn btn-dark btn-sm">Request Maintenance</button>
             <x-table head="Maintenance Request">
                 <thead class="bg-info">
-                    <th>No</th>
-                    <th>Subject</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Request Date</th>
-                    <th>Completion Date</th>
-                    <th>Status</th>
+                    <th class="text-center align-middle">No</th>
+                    <th class="text-center align-middle">Subject</th>
+                    <th class="text-center align-middle">Category</th>
+                    <th class="text-center align-middle">Description</th>
+                    <th class="text-center align-middle">Request Date</th>
+                    <th class="text-center align-middle">Completion Date</th>
+                    <th class="text-center align-middle">Status</th>
                 </thead>
                 <tbody>
                     @forelse ($requests as $request)
                         <tr>
-                            <td>{{$request->id}}</td>
-                            <td>{{$request->subject}}</td>
-                            <td>{{$request->category}}</td>
-                            <td>{{$request->description}}</td>
-                            <td>{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
-                            <td>{{$request->completion_date}}</td>
-                            <td>{{$request->status}}</td>
+                            <td class="text-center">{{$request->id}}</td>
+                            <td class="text-center align-middle">{{$request->subject}}</td>
+                            <td class="text-center align-middle">{{$request->category}}</td>
+                            <td class="text-center align-middle">{{$request->description}}</td>
+                            <td class="text-center">{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
+                            <td class="text-center">{{$request->completion_date}}</td>
+                            <td class="text-center">{{$request->status}}</td>
                         </tr>
                     @empty
                         <tr>

@@ -19,10 +19,10 @@
                 <div class="card-body">
                     <x-table head="Vehicle Reservation List">
                         <thead>
-                            <th>Department Name</th>
-                            <th>Vehicle Type</th>
-                            <th>Destination</th>
-                            <th>Status.</th>
+                            <th class="text-center align-middle">Department Name</th>
+                            <th class="text-center align-middle">Vehicle Type</th>
+                            <th class="text-center align-middle">Destination</th>
+                            <th class="text-center align-middle">Status</th>
                         </thead>
                     </x-table>
                 </div>

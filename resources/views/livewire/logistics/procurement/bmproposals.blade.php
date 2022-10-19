@@ -9,15 +9,15 @@
             <button wire:click="$toggle('budgetProposalModal')" class="btn btn-dark btn-sm">Create Budget Proposal</button>
            <x-table head="Budget Proposals">
                 <thead class="bg-info">
-                    <th>No.</th>
-                    <th>Proposal Name.</th>
-                    <th>Description</th>
-                    <th>Requestor.</th>
-                    <th>Proposed Amount.</th>
-                    <th>Approved Amount.</th>
-                    <th>Status.</th>
-                    <th>Remarks.</th>
-                    <th>Action.</th>
+                    <th class="text-center align-middle">No.</th>
+                    <th class="text-center align-middle">Proposal Name</th>
+                    <th class="text-center align-middle">Description</th>
+                    <th class="text-center align-middle">Requestor</th>
+                    <th class="text-center align-middle">Proposed Amount</th>
+                    <th class="text-center align-middle">Approved Amount</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Remarks</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                    <tr>

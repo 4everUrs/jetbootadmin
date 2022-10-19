@@ -28,12 +28,12 @@
                         <div class="card-body">
                             <x-table head="Asset List">
                                 <thead class="bg-info">
-                                    <th>No</th>
-                                    <th>Type</th>
-                                    <th>Name</th>
-                                    <th>Initial Value</th>
-                                    <th>Current Value</th>
-                                    <th>Appreciation %</th>
+                                    <th class="text-center align-middle">No.</th>
+                                    <th class="text-center align-middle">Type</th>
+                                    <th class="text-center align-middle">Name</th>
+                                    <th class="text-center align-middle">Initial Value</th>
+                                    <th class="text-center align-middle">Current Value</th>
+                                    <th class="text-center align-middle">Appreciation %</th>
                                 </thead>
                             </x-table>
                         </div>
@@ -44,12 +44,12 @@
                         <div class="card-body">
                             <x-table head="Asset List">
                                 <thead class="bg-info">
-                                    <th>No</th>
-                                    <th>Type</th>
-                                    <th>Name</th>
-                                    <th>Initial Value</th>
-                                    <th>Current Value</th>
-                                    <th>Depreciation %</th>
+                                    <th class="text-center align-middle">No.</th>
+                                    <th class="text-center align-middle">Type</th>
+                                    <th class="text-center align-middle">Name</th>
+                                    <th class="text-center align-middle">Initial Value</th>
+                                    <th class="text-center align-middle">Current Value</th>
+                                    <th class="text-center align-middle">Depreciation %</th>
                                 </thead>
                             </x-table>
                         </div>
@@ -60,25 +60,25 @@
                         <div class="card-body">
                            <x-table head="Disposal">
                             <thead class="bg-info">
-                                <th>No.</th>
-                                <th>Origin</th>
-                                <th>Item Name</th>
-                                <th>Condition</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Price</th>
+                                <th class="text-center align-middle">No.</th>
+                                <th class="text-center align-middle">Origin</th>
+                                <th class="text-center align-middle">Item Name</th>
+                                <th class="text-center align-middle">Condition</th>
+                                <th class="text-center align-middle">Description</th>
+                                <th class="text-center align-middle">Status</th>
+                                <th class="text-center align-middle">Price</th>
                             
                             </thead>
                             <tbody>
                                 @forelse ($items as $item)
                                 <tr>
-                                    <td>{{$item->id}}</td>
-                                    <td>{{$item->origin}}</td>
-                                    <td>{{$item->item_name}}</td>
-                                    <td>{{$item->condition}}</td>
-                                    <td style="width: 30%">{{$item->description}}</td>
-                                    <td>{{$item->status}}</td>
-                                    <td>@money($item->amount)</td>
+                                    <td class="text-center">{{$item->id}}</td>
+                                    <td class="text-center align-middle">{{$item->origin}}</td>
+                                    <td class="text-center align-middle">{{$item->item_name}}</td>
+                                    <td class="text-center align-middle">{{$item->condition}}</td>
+                                    <td class="text-center align-middle" style="width: 30%">{{$item->description}}</td>
+                                    <td class="text-center">{{$item->status}}</td>
+                                    <td class="text-center align-middle">@money($item->amount)</td>
                                 </tr>
                                 @empty
                                 <tr>
