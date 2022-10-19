@@ -13,7 +13,10 @@ use App\Models\RequestNotification;
 use App\Models\Stock;
 use App\Models\Supplier;
 use App\Models\WarehouseSent;
+use App\Notifications\RequestNotification as NotificationsRequestNotification;
+
 use Illuminate\Support\Facades\Auth;
+use Notification;
 
 class Requestslist extends Component
 {
@@ -40,7 +43,6 @@ class Requestslist extends Component
             'inventories' => Stock::all(),
         ]);
     }
-
     public function saveRequest()
     {
         // $this->validate(['content' => 'required|string|min:5']);
@@ -60,6 +62,11 @@ class Requestslist extends Component
             'status' => $this->status,
             'category' => 'Supplier'
         ]);
+        $data = [
+            'status' => 'Approve',
+        ];
+        $user = Auth::user();
+        Notification::send($user, new NotificationsRequestNotification($data));
         RequestNotification::create([
             'user_id' => Auth::user()->id,
             'sender' =>  Auth::user()->currentTeam->name,

@@ -7,49 +7,96 @@
     <div class="card">
         <div class="card-body">
             <button class="btn btn-dark btn-sm" wire:click="loadModal">Add new Request</button>
-            <x-table head="Request Lists">
-                <thead class="bg-info">
-                    <th>No.</th>
-                    <th>Origin.</th>
-                    <th>Category.</th>
-                    <th>Item Name.</th>
-                    <th>Quantity.</th>
-                    <th>Description.</th>
-                    <th>Status.</th>
-                    <th>Date Requested</th>
-                    <th>Date Granted</th>
-                    <th class="text-center">Action.</th>
-                </thead>
-                <tbody>
-                    @forelse ($requests as $request)
-                        <tr>
-                            <td>{{$request->id}}</td>
-                            <td>{{$request->origin}}</td>
-                            <td>{{$request->category}}</td>
-                            <td>{{$request->item_name}}</td>
-                            <td>{{$request->item_qty}}</td>
-                            <td>{{$request->content}}</td>
-                            <td>{{$request->status}}</td>
-                            <td>{{Carbon\Carbon::parse($request->create_at)->toFormattedDateString()}}</td>
-                            @if (!empty($request->date_granted))
+            <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+                <li class="nav-item mr-2" role="presentation" wire:ignore>
+                    <button class="nav-link active" id="Recieved-tab" data-bs-toggle="tab" data-bs-target="#Recieved" type="button"
+                        role="tab" aria-controls="Recieved" aria-selected="true">Recieved</button>
+                </li>
+                <li class="nav-item" role="presentation" wire:ignore>
+                    <button class="nav-link" id="sent-tab" data-bs-toggle="tab" data-bs-target="#sent" type="button"
+                        role="tab" aria-controls="sent" aria-selected="false">Sent</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div wire:ignore.self class="tab-pane fade show active" id="Recieved" role="tabpanel" aria-labelledby="Recieved-tab">
+                    <x-table head="Request Lists">
+                        <thead class="bg-info">
+                            <th>No.</th>
+                            <th>Origin.</th>
+                            <th>Category.</th>
+                            <th>Item Name.</th>
+                            <th>Quantity.</th>
+                            <th>Description.</th>
+                            <th>Status.</th>
+                            <th>Date Requested</th>
+                            <th>Date Granted</th>
+                            <th class="text-center">Action.</th>
+                        </thead>
+                        <tbody>
+                            @forelse ($requests as $request)
+                            <tr>
+                                <td>{{$request->id}}</td>
+                                <td>{{$request->origin}}</td>
+                                <td>{{$request->category}}</td>
+                                <td>{{$request->item_name}}</td>
+                                <td>{{$request->item_qty}}</td>
+                                <td>{{$request->content}}</td>
+                                <td>{{$request->status}}</td>
+                                <td>{{Carbon\Carbon::parse($request->create_at)->toFormattedDateString()}}</td>
+                                @if (!empty($request->date_granted))
                                 <td>{{Carbon\Carbon::parse($request->date_granted)->toFormattedDateString()}}</td>
-                            @else
+                                @else
                                 <td>{{$request->date_granted}}</td>
-                            @endif
-                            <td class="text-center">
-                                <button wire:click="approve({{$request->id}})"  class="btn btn-primary btn-sm">Approve</button>
-                            </td>
-                        </tr>                        
-                    @empty
-                        <tr>
-                            <td colspan="10" class="text-center">No Record Found</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </x-table>
-           <div class="mt-3 float-right">
-            {{ $requests->links() }}
-           </div>
+                                @endif
+                                <td class="text-center">
+                                    <button wire:click="approve({{$request->id}})" class="btn btn-primary btn-sm">Approve</button>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="10" class="text-center">No Record Found</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </x-table>
+                    <div class="mt-3 float-right">
+                        {{ $requests->links() }}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab" wire:ignore.self>
+                    <div class="card">
+                        <div class="card-body">
+                            <x-table head="Sent Request">
+                                <tr class="bg-info">
+                                    <th>No</th>
+                                    <th>Destination</td>
+                                    <th>Description</th>
+                                    <th>Date Requested</th>
+                                    <th>Date of Approval</th>
+                                    <th>Remarks</th>
+                                    <th>Status</th>
+                                </tr>
+                                <tbody>
+                                    @forelse ($sents as $sent)
+                                        <tr>
+                                            <td>{{$sent->id}}</td>
+                                            <td>{{$sent->destination}}</td>
+                                            <td>{{$sent->description}}</td>
+                                            <td>{{$sent->created_at}}</td>
+                                            <td>{{$sent->approval_date}}</td>
+                                            <td>{{$sent->remarks}}</td>
+                                            <td>{{$sent->status}}</td>
+                                        </tr>
+                                    @empty
+                                        
+                                    @endforelse
+                                </tbody>
+                            </x-table>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
         </div>
     </div>
     <x-jet-dialog-modal wire:model="requestModal">

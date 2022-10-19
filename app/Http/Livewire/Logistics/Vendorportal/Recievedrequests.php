@@ -6,6 +6,10 @@ use App\Models\MroRequest;
 use Livewire\Component;
 use App\Models\Recieved;
 use App\Models\Post;
+use App\Models\ProcurementSentRequest;
+use App\Models\RequestNotification;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Recievedrequests extends Component
 {
@@ -50,21 +54,36 @@ class Recievedrequests extends Component
     {
 
         $data = Recieved::find($this->selected_id);
+        if ($data->status != 'Posted') {
+            Post::create([
+                'origin' => $data->origin,
+                'recieved_id' => $this->selected_id,
+                'type' => $data->type,
+                'start' => $data->start,
+                'end' => $data->end,
+                'location' => $data->location,
+                'description' => $data->description,
+            ]);
 
-        Post::create([
-            'origin' => $data->origin,
-            'recieved_id' => $this->selected_id,
-            'type' => $data->type,
-            'start' => $data->start,
-            'end' => $data->end,
-            'location' => $data->location,
-            'description' => $data->description,
-        ]);
-
-        $post = Recieved::find($this->selected_id);
-        $post->status = 'Posted';
-        $post->save();
-
-        $this->postModal = false;
+            $post = Recieved::find($this->selected_id);
+            $post->status = 'Posted';
+            $post->save();
+            RequestNotification::create([
+                'user_id' => Auth::user()->id,
+                'sender' =>  Auth::user()->currentTeam->name,
+                'department' => 'Logistics',
+                'reciever' => 'Procurement',
+                'request_content' => 'Aprove your request',
+                'routes' => 'requests'
+            ]);
+            $x = ProcurementSentRequest::find($this->selected_id);
+            $x->status = 'Approved';
+            $x->approval_date = Carbon::parse(now())->toFormattedDateString();
+            $x->save();
+            $this->postModal = false;
+        } else {
+            toastr()->addWarning('Already Posted');
+            $this->postModal = false;
+        }
     }
 }

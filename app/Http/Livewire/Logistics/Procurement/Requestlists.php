@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\ProcurementRequest;
 use App\Models\Recieved;
 use App\Models\PostRequirement;
+use App\Models\ProcurementSentRequest;
 use App\Models\RequestNotification;
 use App\Models\WarehouseSent;
 use Livewire\WithPagination;
@@ -38,6 +39,8 @@ class Requestlists extends Component
         $searchFields = '%' . $this->search . '%';
         return view('livewire.logistics.procurement.requestlists', [
             'requests' => ProcurementRequest::where('origin', 'like', $searchFields)->paginate(10),
+            'sents' => ProcurementSentRequest::where('description', 'like', $searchFields)->paginate(10),
+
         ]);
     }
     public function saveData()
@@ -50,7 +53,6 @@ class Requestlists extends Component
     }
     public function approve($id)
     {
-
         $request = ProcurementRequest::find($id);
         $warehouse = WarehouseSent::find($request->warehouse_sent_id);
         if ($request->status == 'Approved') {
@@ -88,6 +90,13 @@ class Requestlists extends Component
         $validatedData['item_name'] = $this->name;
         $validatedData['quantity'] = $this->qty;
         Recieved::create($validatedData);
+        ProcurementSentRequest::create([
+            'destination' => 'Vendor Portal',
+            'description' => $this->description,
+            'approval_date' => 'N/A',
+            'remarks' => 'N/A',
+            'status' => 'Pending'
+        ]);
         $recieved_id = Recieved::latest('id')->first();
 
         foreach ($this->requirements as $index => $requirement) {
@@ -98,6 +107,14 @@ class Requestlists extends Component
                 'requirements' => $requirement['req'],
             ]);
         }
+        RequestNotification::create([
+            'user_id' => Auth::user()->id,
+            'sender' =>  Auth::user()->currentTeam->name,
+            'department' => 'Logistics',
+            'reciever' => 'Vendor Portal',
+            'request_content' => 'sent you a request',
+            'routes' => 'recievedrequests'
+        ]);
         toastr()->addSuccess('Data update successfully');
         $this->resetInput();
         $this->requestModal = false;
