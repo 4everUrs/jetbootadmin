@@ -8,27 +8,27 @@
     <div class="card-body">
        <x-table head="Maintenance Request">
         <thead class="bg-info">
-            <th>No</th>
-            <th>Origin</th>
-            <th>Subject</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Request Date</th>
-            <th>Completion Date</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th class="text-center align-middle">No.</th>
+            <th class="text-center align-middle">Origin</th>
+            <th class="text-center align-middle">Subject</th>
+            <th class="text-center align-middle">Category</th>
+            <th class="text-center align-middle">Description</th>
+            <th class="text-center align-middle">Request Date</th>
+            <th class="text-center align-middle">Completion Date</th>
+            <th class="text-center align-middle">Status</th>
+            <th class="text-center align-middle">Action</th>
         </thead>
         <tbody>
             @forelse ($requests as $request)
             <tr>
-                <td>{{$request->id}}</td>
-                <td>{{$request->origin}}</td>
-                <td>{{$request->subject}}</td>
-                <td>{{$request->category}}</td>
-                <td>{{$request->description}}</td>
-                <td>{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
-                <td>{{$request->completion_date}}</td>
-                <td>{{$request->status}}</td>
+                <td class="text-center">{{$request->id}}</td>
+                <td class="text-center align-middle">{{$request->origin}}</td>
+                <td class="text-center align-middle">{{$request->subject}}</td>
+                <td class="text-center align-middle">{{$request->category}}</td>
+                <td class="text-center align-middle">{{$request->description}}</td>
+                <td class="text-center">{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
+                <td class="text-center">{{$request->completion_date}}</td>
+                <td class="text-center">{{$request->status}}</td>
                 <td class="text-center">
                     <button wire:click='markComplete({{$request->id}})'  class="btn btn-success btn-sm">Mark as Compeleted</button>    
                 </td>

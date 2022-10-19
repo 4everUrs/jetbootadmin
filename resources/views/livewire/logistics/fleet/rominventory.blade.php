@@ -23,23 +23,23 @@
                     <div class="card-body">
                        <x-table head="Inventory List">
                             <thead class="bg-info">
-                                <th>Item ID</th>
-                                <th>Item Name</th>
-                                <th>Description</th>
-                                <th>Quantity</th>
-                                <th>Unit Price</th>
-                                <th>Inventory Value</th>
-                                <th>Action</th>
+                                <th class="text-center align-middle">Item ID</th>
+                                <th class="text-center align-middle">Item Name</th>
+                                <th class="text-center align-middle">Description</th>
+                                <th class="text-center align-middle">Quantity</th>
+                                <th class="text-center align-middle">Unit Price</th>
+                                <th class="text-center align-middle">Inventory Value</th>
+                                <th class="text-center align-middle">Action</th>
                             </thead>
                             <tbody>
                                 @forelse ($inventories as $inventory)
                                     <tr>
-                                        <td>{{$inventory->id}}</td>
-                                        <td>{{$inventory->item_name}}</td>
-                                        <td>{{$inventory->description}}</td>
-                                        <td>{{$inventory->quantity}}</td>
-                                        <td>@money($inventory->unit_price)</td>
-                                        <td>@money($inventory->inventory_value)</td>
+                                        <td class="text-center">{{$inventory->id}}</td>
+                                        <td class="text-center align-middle">{{$inventory->item_name}}</td>
+                                        <td class="text-center align-middle">{{$inventory->description}}</td>
+                                        <td class="text-center align-middle">{{$inventory->quantity}}</td>
+                                        <td class="text-center align-middle">@money($inventory->unit_price)</td>
+                                        <td class="text-center align-middle">@money($inventory->inventory_value)</td>
                                         <td class="text-center">
                                             <button class="btn btn-dark btn-sm">Restock</button>
                                         </td>
@@ -59,21 +59,21 @@
                     <div class="card-body">
                         <x-table head="Request List Table">
                             <thead class="bg-info">
-                                <th>No.</th>
-                                <th>Destination</th>
-                                <th>Content</th>
-                                <th>Date</th>
-                                <th>Status</th>
+                                <th class="text-center align-middle">No.</th>
+                                <th class="text-center align-middle">Destination</th>
+                                <th class="text-center align-middle">Content</th>
+                                <th class="text-center align-middle">Date</th>
+                                <th class="text-center align-middle">Status</th>
                                
                             </thead>
                             <tbody>
                                 @forelse ($requests as $request)
                                 <tr>
-                                    <td>{{$request->id}}</td>
-                                    <td>Warehouse</td>
-                                    <td>{{$request->content}}</td>
-                                    <td>{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
-                                    <td>{{$request->status}}</td>
+                                    <td class="text-center">{{$request->id}}</td>
+                                    <td class="text-center align-middle">Warehouse</td>
+                                    <td class="text-center align-middle">{{$request->content}}</td>
+                                    <td class="text-center">{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
+                                    <td class="text-center">{{$request->status}}</td>
                                 </tr>
                                 @empty
                                 <tr>

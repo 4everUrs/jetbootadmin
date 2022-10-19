@@ -9,34 +9,34 @@
             <button wire:click="$toggle('reportModal')" class="btn btn-dark btn-sm">Send Reports</button>
             <x-table head=" Project Reports">
                 <thead class="bg-info">
-                    <th>Title.</th>
-                    <th>Manager.</th>
-                    <th>Contractor.</th>
-                    <th>Supervisor.</th>
-                    <th>Start Date.</th>
-                    <th>Completion Date.</th>
-                    <th>Total Cost.</th>
-                    <th>Duration.</th>
-                    <th>Status.</th>
-                    <th>Remarks</th>
+                    <th class="text-center align-middle">Title</th>
+                    <th class="text-center align-middle">Manager</th>
+                    <th class="text-center align-middle">Contractor</th>
+                    <th class="text-center align-middle">Supervisor</th>
+                    <th class="text-center align-middle">Start Date</th>
+                    <th class="text-center align-middle">Completion Date</th>
+                    <th class="text-center align-middle">Total Cost</th>
+                    <th class="text-center align-middle">Duration</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Remarks</th>
                 </thead>
                 <tbody>
                     @forelse ($reports as $report)
                        <tr>
-                            <td>{{$report->title}}</td>
-                            <td>{{$report->manager}}</td>
-                            <td>{{$report->contractor}}</td>
-                            <td>{{$report->contractor_manager}}</td>
-                            <td>{{Carbon\Carbon::parse($report->start_date)->toFormattedDateString()}}</td>
-                            <td>{{Carbon\Carbon::parse($report->completion_date)->toFormattedDateString()}}</td>
-                            <td>@money($report->budget)</td>
-                            <td>{{$report->duration}}</td>
-                            <td>{{$report->status}}</td>
-                            <td>{{$report->remarks}}</td>
+                            <td class="text-center align-middle">{{$report->title}}</td>
+                            <td class="text-center align-middle">{{$report->manager}}</td>
+                            <td class="text-center align-middle">{{$report->contractor}}</td>
+                            <td class="text-center align-middle">{{$report->contractor_manager}}</td>
+                            <td class="text-center">{{Carbon\Carbon::parse($report->start_date)->toFormattedDateString()}}</td>
+                            <td class="text-center">{{Carbon\Carbon::parse($report->completion_date)->toFormattedDateString()}}</td>
+                            <td class="text-center align-middle">@money($report->budget)</td>
+                            <td class="text-center align-middle">{{$report->duration}}</td>
+                            <td class="text-center">{{$report->status}}</td>
+                            <td class="text-center align-middle">{{$report->remarks}}</td>
                        </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="text-center">No Record Found</td>
+                            <td colspan="10" class="text-center">No Record Found</td>
                         </tr>
                     @endforelse
                 </tbody>

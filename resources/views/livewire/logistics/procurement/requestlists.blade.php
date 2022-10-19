@@ -21,30 +21,30 @@
                 <div wire:ignore.self class="tab-pane fade show active" id="Recieved" role="tabpanel" aria-labelledby="Recieved-tab">
                     <x-table head="Request Lists">
                         <thead class="bg-info">
-                            <th>No.</th>
-                            <th>Origin.</th>
-                            <th>Category.</th>
-                            <th>Item Name.</th>
-                            <th>Quantity.</th>
-                            <th>Description.</th>
-                            <th>Status.</th>
-                            <th>Date Requested</th>
-                            <th>Date Granted</th>
-                            <th class="text-center">Action.</th>
+                            <th class="text-center align-middle">No.</th>
+                            <th class="text-center align-middle">Origin</th>
+                            <th class="text-center align-middle">Category</th>
+                            <th class="text-center align-middle">Item Name</th>
+                            <th class="text-center align-middle">Quantity</th>
+                            <th class="text-center align-middle">Description</th>
+                            <th class="text-center align-middle">Status</th>
+                            <th class="text-center align-middle">Date Requested</th>
+                            <th class="text-center align-middle">Date Granted</th>
+                            <th class="text-center align-middle">Action</th>
                         </thead>
                         <tbody>
                             @forelse ($requests as $request)
                             <tr>
-                                <td>{{$request->id}}</td>
-                                <td>{{$request->origin}}</td>
-                                <td>{{$request->category}}</td>
-                                <td>{{$request->item_name}}</td>
-                                <td>{{$request->item_qty}}</td>
-                                <td>{{$request->content}}</td>
-                                <td>{{$request->status}}</td>
-                                <td>{{Carbon\Carbon::parse($request->create_at)->toFormattedDateString()}}</td>
+                                <td class="text-center">{{$request->id}}</td>
+                                <td class="text-center align-middle">{{$request->origin}}</td>
+                                <td class="text-center align-middle">{{$request->category}}</td>
+                                <td class="text-center align-middle">{{$request->item_name}}</td>
+                                <td class="text-center align-middle">{{$request->item_qty}}</td>
+                                <td class="text-center align-middle">{{$request->content}}</td>
+                                <td class="text-center">{{$request->status}}</td>
+                                <td class="text-center">{{Carbon\Carbon::parse($request->create_at)->toFormattedDateString()}}</td>
                                 @if (!empty($request->date_granted))
-                                <td>{{Carbon\Carbon::parse($request->date_granted)->toFormattedDateString()}}</td>
+                                <td class="text-center">{{Carbon\Carbon::parse($request->date_granted)->toFormattedDateString()}}</td>
                                 @else
                                 <td>{{$request->date_granted}}</td>
                                 @endif
@@ -68,24 +68,24 @@
                         <div class="card-body">
                             <x-table head="Sent Request">
                                 <tr class="bg-info">
-                                    <th>No</th>
-                                    <th>Destination</td>
-                                    <th>Description</th>
-                                    <th>Date Requested</th>
-                                    <th>Date of Approval</th>
-                                    <th>Remarks</th>
-                                    <th>Status</th>
+                                    <th class="text-center align-middle">No</th>
+                                    <th class="text-center align-middle">Destination</td>
+                                    <th class="text-center align-middle">Description</th>
+                                    <th class="text-center align-middle">Date Requested</th>
+                                    <th class="text-center align-middle">Date of Approval</th>
+                                    <th class="text-center align-middle">Remarks</th>
+                                    <th class="text-center align-middle">Status</th>
                                 </tr>
                                 <tbody>
                                     @forelse ($sents as $sent)
                                         <tr>
-                                            <td>{{$sent->id}}</td>
-                                            <td>{{$sent->destination}}</td>
-                                            <td>{{$sent->description}}</td>
-                                            <td>{{$sent->created_at}}</td>
-                                            <td>{{$sent->approval_date}}</td>
-                                            <td>{{$sent->remarks}}</td>
-                                            <td>{{$sent->status}}</td>
+                                            <td class="text-center">{{$sent->id}}</td>
+                                            <td class="text-center align-middle">{{$sent->destination}}</td>
+                                            <td class="text-center align-middle">{{$sent->description}}</td>
+                                            <td class="text-center">{{$sent->created_at}}</td>
+                                            <td class="text-center">{{$sent->approval_date}}</td>
+                                            <td class="text-center align-middle">{{$sent->remarks}}</td>
+                                            <td class="text-center">{{$sent->status}}</td>
                                         </tr>
                                     @empty
                                         
