@@ -72,8 +72,9 @@
                     @error('role_id') <span class="text-danger">{{ $message }}</span><br> @enderror
                 </div>
                 <div class="col">
-                    <label>Department</label>
+                    <label>Category</label>
                     <select wire:model="dept" class="form-control">
+                        <option value="">Select Category</option>
                           @if (!empty($teams)){
                             @foreach ($teams as $key => $team)
                                 @if ($team->name != 'Admin')
@@ -87,8 +88,9 @@
                     @error('dept') <span class="text-danger">{{ $message }}</span><br> @enderror
                 </div>
                <div class="col d-none" id="department">
-                    <label>XYZ</label>
+                    <label>Department</label>
                     <select wire:model="department_id" class="form-control">
+                        <option value="">Select Department</option>
                         @if (!empty($departments)){
                             @foreach ($departments as $key => $department)
                                 <option >{{$department->name}}</option>

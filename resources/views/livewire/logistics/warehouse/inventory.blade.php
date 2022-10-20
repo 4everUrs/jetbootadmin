@@ -52,18 +52,19 @@
                         @elseif ($item->status == 'LOW')
                             <tr class="bg-danger">
                                 <td class="text-center align-middle">IN{{$item->id}}</td>
-                                <td class="align-middle">{{$item->name}}</td>
+                             <td class="align-middle">{{$item->name}}</td>
                                 <td class="align-middle">{{$item->supplier->name}}</td>
                                 <td class="align-middle">{{$item->description}}</td>
                                 <td class="text-center align-middle">@money($item->cost_per_item)</td>
                                 <td class="text-center align-middle">{{$item->stock_quantity}}</td>
                                 <td class="text-center align-middle">@money($item->stock_value)</td>
                                 <td class="text-center align-middle">{{$item->reorder_level}}</td>
+                                <td class="text-center align-middle">{{$item->reorder_quantity}}</td>
+                                <td class="text-center align-middle">{{$item->reorder_days}} Days</td>
                                 <td class="text-center align-middle">{{$item->status}}</td>
                                 <td class="text-center align-middle">{{$item->remarks}}</td>
                                 <td class="text-center align-middle">
                                     <button wire:click="update({{$item->id}})" class="btn btn-primary btn-sm">Update</button>
-                                   
                                     <button wire:click="restock({{$item->id}})" class="btn btn-info btn-sm">Restock</button>
                                 </td>
                             

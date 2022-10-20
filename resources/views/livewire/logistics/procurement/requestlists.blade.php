@@ -82,7 +82,7 @@
                                             <td class="text-center">{{$sent->id}}</td>
                                             <td class="text-center align-middle">{{$sent->destination}}</td>
                                             <td class="text-center align-middle">{{$sent->description}}</td>
-                                            <td class="text-center">{{$sent->created_at}}</td>
+                                            <td class="text-center">@date($sent->created_at)</td>
                                             <td class="text-center">{{$sent->approval_date}}</td>
                                             <td class="text-center align-middle">{{$sent->remarks}}</td>
                                             <td class="text-center">{{$sent->status}}</td>

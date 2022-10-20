@@ -9,7 +9,7 @@ class Reorder extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'supplier_id', 'quantity', 'price', 'description', 'status'
+        'supplier_id', 'quantity', 'price', 'description', 'status', 'stock_id'
     ];
     public function Supplier()
     {
@@ -17,6 +17,6 @@ class Reorder extends Model
     }
     public function Stock()
     {
-        return $this->hasOne(Stock::class);
+        return $this->belongsTo(Stock::class);
     }
 }

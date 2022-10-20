@@ -24,8 +24,8 @@ class Inventory extends Component
     {
 
         return view('livewire.logistics.warehouse.inventory', [
-            'items' => Stock::with('Supplier')->orderBy('id', 'desc')->paginate(3),
-            'suppliers' => Supplier::all(),
+            'items' => Stock::with('Supplier')->orderBy('id', 'desc')->paginate(5),
+            'suppliers' => Supplier::where('status', '!=', 'Terminated')->get(),
         ]);
     }
     public function mount()

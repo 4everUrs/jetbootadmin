@@ -30,7 +30,7 @@
                             
                             <td class="text-center">
                                 <button class="btn btn-warning btn-sm">Send P.O</button>
-                                <button class="btn btn-info btn-sm">Change Status</button>
+                                <button wire:click="changeStatus({{$supplier->id}})" class="btn btn-danger btn-sm">Terminate</button>
                             </td>
                         </tr>
                     @empty
@@ -42,5 +42,4 @@
             </x-table>
         </div>
     </div>
-    
 </div>

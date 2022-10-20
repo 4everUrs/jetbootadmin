@@ -37,7 +37,7 @@ class Requestslist extends Component
         }
         return view('livewire.logistics.warehouse.requestslist', [
             'requests' => RequestList::orderBy('id', 'desc')->paginate(5),
-            'suppliers' => Supplier::all(),
+            'suppliers' => Supplier::where('status', '!=', 'Terminated')->get(),
             'sents' => WarehouseSent::orderBy('id', 'desc')->paginate(5),
             'items' => Stock::where('supplier_id', '=', $this->supplier)->where('status', '=', 'LOW')->get(),
             'inventories' => Stock::all(),
@@ -84,6 +84,14 @@ class Requestslist extends Component
             'price' => $temp->cost_per_item,
             'description' => $this->content,
             'status' => $this->status
+        ]);
+        RequestNotification::create([
+            'user_id' => Auth::user()->id,
+            'sender' =>  Auth::user()->currentTeam->name,
+            'reciever' => 'Procurement',
+            'department' => 'Logistics',
+            'request_content' => 'Sent you a request',
+            'routes' => 'reorders'
         ]);
         WarehouseSent::create([
             'destination' => 'Procurement',

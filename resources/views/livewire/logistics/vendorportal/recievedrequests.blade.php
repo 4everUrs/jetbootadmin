@@ -116,6 +116,10 @@
                 <br>
                @if (!empty($data))
                    <p class="badge badge-success">{{$data->type}}</p><br>
+                    <label>Item Name:</label><br>
+                    {{$data->item_name}}<br>
+                    <label>Item Quantity:</label><br>
+                    {{$data->quantity}}<br>
                     <label>Description:</label>
                     <p>{{$data->description}}</p>
                     <label>Bidding Range:</label><br>

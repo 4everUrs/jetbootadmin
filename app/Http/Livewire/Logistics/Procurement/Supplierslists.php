@@ -13,4 +13,13 @@ class Supplierslists extends Component
             'suppliers' => Supplier::get(),
         ]);
     }
+    public function changeStatus($id)
+    {
+        if (Supplier::find($id)->status != 'Terminated') {
+            Supplier::find($id)->update(['status' => 'Terminated']);
+            toastr()->addSuccess('Operation Successfull');
+        } else {
+            toastr()->addWarning('Operation Failed');
+        }
+    }
 }

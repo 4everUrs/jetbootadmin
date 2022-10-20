@@ -18,7 +18,7 @@
                 <th>Date</th>
             </thead>
             <tbody>
-                @foreach ($audits as $audit)
+                {{-- @foreach ($audits as $audit) --}}
                
                 {{-- <tr>
                     <td>{{$audit['id']}}</td>
@@ -29,7 +29,7 @@
                     <td style="width: 20%">{{$audit->new_values}}</td>
                     <td>{{Carbon\Carbon::parse($audit->created_at)->toFormattedDateString()}}</td>
                 </tr> --}}
-                @endforeach
+                {{-- @endforeach --}}
             </tbody>
           </x-table>
         </div>

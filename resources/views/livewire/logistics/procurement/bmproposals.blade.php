@@ -8,21 +8,41 @@
         <div class="card-body">
             <button wire:click="$toggle('budgetProposalModal')" class="btn btn-dark btn-sm">Create Budget Proposal</button>
            <x-table head="Budget Proposals">
-                <thead class="bg-info">
+                <tr class="bg-info">
                     <th class="text-center align-middle">No.</th>
                     <th class="text-center align-middle">Proposal Name</th>
                     <th class="text-center align-middle">Description</th>
                     <th class="text-center align-middle">Requestor</th>
                     <th class="text-center align-middle">Proposed Amount</th>
                     <th class="text-center align-middle">Approved Amount</th>
+                    <th class="text-center align-middle">Date Request</th>
+                    <th class="text-center align-middle">Approval Date</th>
                     <th class="text-center align-middle">Status</th>
                     <th class="text-center align-middle">Remarks</th>
                     <th class="text-center align-middle">Action</th>
-                </thead>
+                </tr>
                 <tbody>
-                   <tr>
-                        <td colspan="9" class="text-center">No Record Found</td>
+                   @forelse ($proposals as $proposal)
+                       <tr>
+                            <td>{{$proposal->id}}</td>
+                            <td>{{$proposal->proposalname}}</td>
+                            <td>{{$proposal->description}}</td>
+                            <td>{{$proposal->requestor}}</td>
+                            <td>@money($proposal->proposedamount)</td>
+                            <td>@money($proposal->approvedamount)</td>
+                            <td>@date($proposal->created_at)</td>   
+                            <td>{{$proposal->approvedate}}</td>
+                            <td>{{$proposal->rstatus}}</td>
+                            <td>{{$proposal->remarks}}</td>
+                            <td>
+                                <button wire:click="transfer({{$proposal->id}})" class="btn btn-sm btn-dark">Transfer</button>
+                            </td>
+                       </tr>
+                   @empty
+                       <tr>
+                        <td colspan="11" class="text-center">No Record Found</td>
                     </tr>
+                   @endforelse
                 </tbody>
            </x-table>
         </div>

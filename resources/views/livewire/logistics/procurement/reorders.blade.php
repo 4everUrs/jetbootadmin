@@ -33,6 +33,9 @@
                     <td class="text-center align-middle">{{Carbon\Carbon::parse($reorder->created_at)->toFormattedDateString()}}</td>
                     <td class="text-center">{{$reorder->completion_date}}</td>
                     <td class="text-center">{{$reorder->status}}</td>
+                    <td>
+                        <button wire:click="approve({{$reorder->id}})" class="btn btn-sm btn-success">Approve</button>
+                    </td>
                 </tr>
                 @empty
                 <tr>
