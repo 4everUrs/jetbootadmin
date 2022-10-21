@@ -74,28 +74,50 @@
 {{-------------------------------------------End Accounts Payable----------------------------------------------------------------}} 
 
 
-{{------------------------------------------- ADD MODAL ACCOUNTS PAYABLE---------------------------------------------------------}} 
-                    
-
-
-{{------------------------------------------- END ADD MODAL ACCOUNTS PAYABLE---------------------------------------------------------}} 
-
 {{-------------------------------------------Accounts Receivable---------------------------------------------------------}} 
             <div wire:ignore.self class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="card">
                     <div class="card-body">
-                        <a class="btn btn-success">Add Account Receivable</a>
+                        <a wire:click="tableReceivable" class="btn btn-info btn-sm">Add Account Receivable</a>
         
                         <x-table head="Lists of Account Receivable">
         
                             <thead >
-                                <th>Code No</th>
-                                <th>From</th>
-                                <th>Description</th>
-                                <th>Attachment file</th>
-                                <th>Date</th>
-                                <th>Action/th>
+                                <th>Id</th>
+                                <th>Invoice Created</th>
+                                <th>Name</th>
+                                <th>Invoice Number</th>
+                                <th>Invoice Date</th>
+                                <th>Invoice Amount</th>
+                                <th>Amount Received</th>
+                                <th>Date Received</th>
+                                <th>Due Date</th>
+                                <th>Amount Outstanding</th>
+                                <th>Remarks</th>
+                                
                             </thead>
+                            <tbody>
+                                @forelse($incomes as $income )
+                                <tr>
+                                    <td>{{$income->id}}</td>
+                                    <td>{{($income->created_at)->toFormattedDateString()}}</td>
+                                    <td>{{$income->rname}}</td>
+                                    <td>{{$income->noinvoice}}</td>
+                                    <td>{{$income->rdate}}</td>
+                                    <td>{{$income->rinvoiceamount}}</td>
+                                    <td>{{$income->ramountreceived}}</td>
+                                    <td>{{$income->rdatereceived}}</td>
+                                    <td>{{$income->rduedate}}</td>
+                                    <td>{{$income->routstanding}}</td>
+                                    <td>{{$income->rremarks}}</td>
+                                    
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td class="text-center" colspan="11">"Unlisted Receivable"</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
         
                         </x-table>
                     </div>
@@ -104,13 +126,13 @@
 {{-------------------------------------------End Accounts Receivable---------------------------------------------------------}} 
 
 
-    {{-------------------------------------------JOURNAL ENTRY---------------------------------------------------------}}    
+{{-------------------------------------------JOURNAL ENTRY---------------------------------------------------------}}    
             <div wire:ignore.self class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"> 
                 
                 <div class="card">
                     <div class="card-body">
             
-                        <a wire:click="loadingJournal" class="btn btn-success">Add Journal Entry</a>
+                        <a wire:click="loadingJournal" class="btn btn-info btn-sm">Add Journal Entry</a>
                     
                         <x-table head="History of Journal Entries">
                         
@@ -188,16 +210,11 @@
             </div>
 {{-------------------------------------------END JOURNAL ENTRY------------------------------------------------------------------------------------}} 
 
- {{---------------------------------------- JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}       
-            {{--add liability--}}
- 
-{{----------------------------------------JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}
-
-{{-----------------------------------------TRIAL BALANCE TABLE-----------------------------------------------------------------------------------}}      
+{{-----------------------------------------CASH TRIAL BALANCE TABLE-----------------------------------------------------------------------------------}}      
             <div wire:ignore.self class="tab-pane fade" id="trial" role="tabpanel" aria-labelledby="trial-tab">
                 <div class="card">
                     <div class="card-body">    
-                        <a wire:click="loadModalCash" class="btn btn-success">Add Cash Record</a>
+                        <a wire:click="loadModalCash" class="btn btn-info btn-sm">Add Cash Record</a>
 
                             <x-table head="Cash">
                                 <thead>
@@ -230,50 +247,50 @@
                     </div>
                 </div>
             </div>
-{{-----------------------------------------TRIAL BALANCE TABLE-----------------------------------------------------------------------------------}}
+{{---------------------------------------END CASH TRIAL BALANCE TABLE-----------------------------------------------------------------------------------}}
 
+    </div> {{---CLOSINGDIVFORTAB--}}
 {{--------------------------------(CASH)---ADD MODAL TRIAL BALANCE-------------------------------------------------------------------------------}}
+        <x-jet-dialog-modal wire:model="addGenled" maxWidth="xl" >
+            <x-slot name="title">
+                {{ __('Add Record for CASH') }}
+            </x-slot>
+            
+            <x-slot name="content">
+                <div class="row form-group">
+                    <div class="col">
+                        <label for ="start">Date</label>
+                        <input type="date"  id="start" name="trip-start"
+                        value="2022-10-22" min="2022-01-22" max="2022-12-31"
+                        class="form-control" wire:model= "ldate">
 
-        
+                        <label>Description</label>
+                        <textarea class="form-control" wire:model="ldescription"> </textarea>
 
-{{----------------------------END---(CASH)---ADD MODAL TRIAL BALANCE-------------------------------------------------------------------------------}}
-       
-    </div>
-    <x-jet-dialog-modal wire:model="addGenled" maxWidth="xl" >
-        <x-slot name="title">
-            {{ __('Add Record for CASH') }}
-        </x-slot>
-        
-        <x-slot name="content">
-            <div class="row form-group">
-                <div class="col">
-                    <label for ="start">Date</label>
-                    <input type="date"  id="start" name="trip-start"
-                    value="2022-10-22" min="2022-01-22" max="2022-12-31"
-                    class="form-control" wire:model= "ldate">
+                        <label>Credit</label>
+                        <input type="number" class="form-control" wire:model="ldebit">
 
-                    <label>Description</label>
-                    <textarea class="form-control" wire:model="ldescription"> </textarea>
-
-                    <label>Credit</label>
-                    <input type="number" class="form-control" wire:model="ldebit">
-
-                    <label>Debit</label>
-                    <input type="number" class="form-control" wire:model="lcredit">       
+                        <label>Debit</label>
+                        <input type="number" class="form-control" wire:model="lcredit">       
+                    </div>
                 </div>
-            </div>
-        </x-slot>
-        
-        <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('addGenled')" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
-            </x-jet-secondary-button>
-            <x-jet-button class="ms-2" wire:click="addGenleds" wire:loading.attr="disabled">
-                {{ __('Add Cash Record') }}
-            </x-jet-button>
-        </x-slot>
+            </x-slot>
+            
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('addGenled')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+                <x-jet-button class="ms-2" wire:click="addGenleds" wire:loading.attr="disabled">
+                    {{ __('Add Cash Record') }}
+                </x-jet-button>
+            </x-slot>
 
-    </x-jet-dialog-modal>
+        </x-jet-dialog-modal>
+{{----------------------------END---(CASH)---ADD MODAL TRIAL BALANCE-------------------------------------------------------------------------------}}
+    
+
+{{---------------------------------------- JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}       
+            
     <x-jet-dialog-modal wire:model="addLiability" maxWidth="xl">
         <x-slot name="title">
             {{ __('Journal Entries') }}
@@ -324,7 +341,7 @@
                                 <td>{{$prev['jcredit']}}</td>
 
                                 <td class="text-center">
-                                    <button wireclick: class="btn btn-danger btn-sm">Remove</button>
+                                    <button wire click: class="btn btn-danger btn-sm">Remove</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -357,7 +374,7 @@
             {{ __('Update Liability Record') }}
         </x-slot>
         <x-slot name="content">
-            <div class="form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
+            <div class="form-group"> 
                 <div class="row mb-4">
                     <div class="col">
                         <label>Category</label>
@@ -488,11 +505,13 @@
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
-{{--End of Journal Entry--}} 
-                <x-jet-dialog-modal wire:model="addPayables" maxWidth="xl">
+{{--------------------------------------------End of Journal Entry------------------------------------------------------------------------}} 
+
+{{--------------------------------------------Account Payable Modal ------------------------------------------------------------------------}} 
+            <x-jet-dialog-modal wire:model="addPayables" maxWidth="xl">
                     <x-slot name="title">
                         {{ __('Add Payables') }}
-                </x-slot>
+                    </x-slot>
 
                     <x-slot name="content">
                         <div class="form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
@@ -538,6 +557,74 @@
                             {{ __('Add Payables') }}
                         </x-jet-button>
                 </x-slot>
+            </x-jet-dialog-modal>
+{{--------------------------------------------end Account Payable Modal ------------------------------------------------------------------------}} 
 
+{{-------------------------------------------- Account Recievable Modal ------------------------------------------------------------------------}} 
+                <x-jet-dialog-modal wire:model="addReceivable" maxWidth="xl" >
+                <x-slot name="title">
+                    {{ __('Add Record for Receivable') }}
+                </x-slot>
+                <x-slot name="content">
+                    <div class="row form-group">
+                        <div class="col">
+                            <label>Name</label>
+                            <input placeholder="input receiver name" wire:model="rname" class="form-control" type="text"><br>
+
+                            <label>Invoice Number</label>
+                            <input placeholder="#00000" 
+                            wire:model="noinvoice" 
+                            class="form-control" type="number"><br>
+
+                            <label for ="indate">Invoice Date</label>&nbsp;
+                            <input type="date"  id="indate" name="trip-start"
+                                   value="2022-10-22" min="2022-01-22" max="2030-12-31"
+                                   class="form-control" wire:model= "rdate"><br>
+                            	
+                            <label>Invoice Amount</label>
+                            <input placeholder="₱ 0.00" 
+                            wire:model="rinvoiceamount" 
+                            class="form-control" data-type="currency"><br>
+
+
+                        </div>
+                        <div class="col">
+                                <label>Amount Received</label>
+                                <input placeholder="₱ 0.00" 
+                                wire:model="ramountreceived" 
+                                class="form-control" data-type="currency"><br>
+                                
+                                <label for ="dr">Date Received</label>&nbsp;
+                                <input type="date"  id="dr" name="trip-start"
+                                    value="2022-10-22" min="2022-01-22" max="2030-12-31"
+                                    class="form-control" wire:model= "rdatereceived"><br>
+
+                                <label for ="dr">Due Date</label>&nbsp;
+                                <input type="date"  id="dr" name="trip-start"
+                                    value="2022-10-22" min="2022-01-22" max="2030-12-31"
+                                    class="form-control" wire:model= "rduedate"><br>
+                        
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <label>Remarks</label>
+                        <textarea wire:model="rremarks" placeholder=" ✎ 𝓘𝓷𝓹𝓾𝓽 𝓝𝓸𝓽𝓮𝓼..." class="form-control"></textarea>
+                    </div>
+
+                </x-slot>
+                <x-slot name="footer">
+                    <x-jet-secondary-button  wire:click="$toggle('addReceivable')" wire:loading.attr="disabled">
+                        {{ __('Cancel') }}
+                    </x-jet-secondary-button>
+                    <x-jet-button class="ms-2" wire:click="addReceivables" wire:loading.attr="disabled">
+                        {{ __('Add Record ') }}
+                    </x-jet-button>
+                </x-slot>
                 </x-jet-dialog-modal>
+
+
+{{--------------------------------------------end Account Recievable Modal ------------------------------------------------------------------------}}
+    
+
+
 </div>

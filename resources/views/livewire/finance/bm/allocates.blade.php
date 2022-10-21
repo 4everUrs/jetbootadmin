@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-                            <a wire:click="loadAnnualBudget" class="btn btn-success">Add Cash Record</a>
+                            <a wire:click="loadAnnualBudget" class="btn btn-info btn-sm">Add Annual Budget</a>
                             <x-table head="Annual Budget" class="text-center">
             
                                 <thead>
@@ -37,11 +37,11 @@
                                     @forelse($bannuals as $bannual)
                                     <tr>
                                         <td>{{$bannual->year}}</td>
-                                        <td>{{$bannual->budgetannual}}</td>
-                                        <td>{{$bannual->blogistics}}</td>
-                                        <td>{{$bannual->bcore}}</td>
-                                        <td>{{$bannual->bhr}}</td>
-                                        <td>{{$bannual->bfinance}}</td>
+                                        <td>@money($bannual->budgetannual)</td>
+                                        <td>@money($bannual->blogistics)</td>
+                                        <td>@money($bannual->bcore)</td>
+                                        <td>@money($bannual->bhr)</td>
+                                        <td>@money($bannual->bfinance)</td>
                                     </tr>
                                     @empty
                                 <tr>

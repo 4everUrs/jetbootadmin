@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('annual_budgets', function (Blueprint $table) {
             $table->id();
-            $table->integer('year')->default(2022);
-            $table->bigInteger('budgetannual')->default(20000000);
+            $table->integer('year');
+            $table->bigInteger('budgetannual');
             $table->bigInteger('blogistics');
             $table->bigInteger('bcore');
             $table->bigInteger('bhr');

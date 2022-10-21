@@ -33,7 +33,6 @@
                 <td>{{$transaction->description}}</td>
                 <td>{{$transaction->status}}</td>
                 <td class="text-center" >
-                    {{--wala kang update function pero meron kang updateItems function sa class rename ko nalang --}}
                     <button wire:click="updateItems({{$transaction->id}})"  class="btn btn-primary"> Edit </button>
                     <button wire:click="delete({{$transaction->id}})"  class="btn btn-danger"> Delete </button>
                 </td>

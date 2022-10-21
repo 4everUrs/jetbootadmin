@@ -7,6 +7,7 @@ use App\Models\JournalEntry;
 use App\Models\SubJournal;
 use App\Models\GenLed;
 use App\Models\Payables;
+use App\Models\Income;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,12 +16,14 @@ class Journals extends Component
     public $jdescription, $jdebit, $jcredit, $jencoded, $journal_id = '1', $jsubdescription; //$jstatus='Process';
     public $ldate, $ldescription, $ldebit, $lcredit,$lstatus ='Pending';
     public $invoice,$idate,$pname,$invoiceamount,$pamount,$pduedate,$premarks,$paymade;   
+    public $rname,$noinvoice,$rdate,$rinvoiceamount,$ramountreceived,$rdatereceived,$rduedate,$routstanding,$rremarks;   
     public $gen_leds;
     public $preview = [];
     public $grandtotal;
     public $childData = [];
     public $addLiability = false;
     public $addPayables = false;
+    public $addReceivable = false;
     public $updateLiability = false;
     public $deleteLiability = false;
     public $deleteLiabilities = false;
@@ -58,6 +61,7 @@ class Journals extends Component
         }
         $this->unpaids = Payables::all();
         $this->gen_leds = GenLed::all();
+        $this->incomes = Income::all();
        
         $this->preview;
         $this->grandtotal;
@@ -92,7 +96,7 @@ class Journals extends Component
             'jcredit' => $this->jcredit,
             'jsubdescription' => $this->jsubdescription,
         ];
-        $this->grandtotal += $this->jdebit + $this->jcredit;
+        $this->grandtotal -= $this->jdebit - $this->jcredit;
         $this->resetLiability();
     }
 
@@ -121,24 +125,16 @@ class Journals extends Component
 
     public function deleteliabilities($id)
     {
-        $temp = JournalEntry::find('id')->first();
-        foreach ($this->journal_entries as $entry) {
-            SubJournal::get([
-                'jdescription' => $entry['jdescription'],
-                'jdebit' => $entry['jdebit'],
-                'jcredit' => $entry['jcredit'],
-                'journal_entries' => $temp->id,
-            ]);
-        }
-        $temp = SubJournal::where('journal_entry_id', '=', $id)->get();
+        $temp = SubJournal::where('journal_entry_id','=',$id)->get();
 
-        foreach ($temp as $temps) {
+        foreach($temp as $temps)
+        {
             $temps->delete();
         }
         JournalEntry::find($id)->delete();
         toastr()->addSuccess('Record deleted successfully');
         $this->resetLiability();
-        $this->deleteliability = false;
+        $this->deleteliability= false;
     }
     public function delete($id)
     {
@@ -275,6 +271,52 @@ class Journals extends Component
         $this->lstatus = 'Process';
     }
     //end account payables
+
+    //Account Receivables
+
+    public function tableReceivable()
+    {
+    $this->addReceivable=true;
+    }
+
+    public function addReceivables()
+    {
+        Income ::create(
+            [
+                'rname' => $this->rname,
+                'noinvoice' => $this->noinvoice,
+                'rdate' => $this->rdate,
+                'rinvoiceamount' => $this->rinvoiceamount,
+                'ramountreceived' => $this->ramountreceived,
+                'rdatereceived' => $this->rdatereceived,
+                'rduedate' => $this->rduedate,
+                'rremarks' => $this->rremarks,
+                'routstanding' => $this->rinvoiceamount - $this->ramountreceived,
+            ]
+        );
+
+        $this->resetReceivable();
+        toastr()->addSuccess('Add Record successfully');
+        $this->addReceivable = false; 
+    }
+
+    public function resetReceivable()
+    {
+        $this->rname = null;
+        $this->noinvoice = null;
+        $this->rinvoiceamount = null;
+        $this->ramountreceived = null;
+        $this->rdatereceived = null;
+        $this->ramountreceived = null;
+        $this->rduedate = null;
+        $this->rremarks = null;
+       
+        
+    }
+
+
+
+    //end Account Receivables
 
 
 
