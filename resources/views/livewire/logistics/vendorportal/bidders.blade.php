@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <x-table head="Bidders">
-                <thead class="bg-info">
+                <thead class="bg-warning">
                     <th>No</th>
                     <th>Company Name</th>
                     <th>Company Email</th>

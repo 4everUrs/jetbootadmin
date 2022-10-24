@@ -252,7 +252,7 @@ class Journals extends Component
                 'pname' => $this->pname,
                 'invoiceamount' => $this->invoiceamount,
                 'paymade' => $this->paymade,
-                'pamount' => $this->pamount,
+                'pamount' => $this->invoiceamount - $this->paymade,
                 'pduedate' => $this->pduedate,
                 'premarks' => $this->premarks,
             ]

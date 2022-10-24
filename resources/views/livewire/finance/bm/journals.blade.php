@@ -31,11 +31,11 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <a wire:click="tablePayables" class="btn btn-info btn-sm">Add Accounts Payable</a>
+                        <a wire:click="tablePayables" class="btn btn-secondary btn-sm">Add Accounts Payable</a>
 
                         <x-table head="Lists of Account Payables">
 
-                            <thead>
+                            <thead class="bg-secondary table-sm">
                                 <th>Invoice Created</th>
                                 <th>Invoice No.</th>
                                 <th>Invoice Date</th>
@@ -62,7 +62,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td class="text-center" colspan="8">"Unlisted Records"</td>
+                                    <td class="text-center" colspan="9">"Unlisted Records"</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -533,8 +533,6 @@
                                     <input wire:model="invoiceamount" class="form-control" type="number">
                                     <label>Payments Made</label>
                                     <input wire:model="paymade" class="form-control" type="number">
-                                    <label>Amount</label>
-                                    <input wire:model="pamount" class="form-control" type="number">
 
                                     <label for ="start">Due Date</label>
                                         <input type="date"  id="start" name="trip-start"
