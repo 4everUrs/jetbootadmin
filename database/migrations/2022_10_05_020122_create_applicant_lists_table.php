@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('resume_file');
+            $table->string('Status')->nullable();
             $table->string('location');
             $table->timestamps();
         });

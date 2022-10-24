@@ -109,7 +109,7 @@
         <div wire:ignore.self class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
             <div class="card">
                 <div class="card-body">
-                    <x-table head="Collection">
+                    <x-table head="Budget Proposal">
                         <thead class="bg-info">
                             <th class="text-center">No.</th>
                             <th class="text-center">Proposed Name</th>

@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Job;
 class Clientdata extends Component
 {
+    public $deleteModal = false;
     public $showClient = false;
     public $name,$email,$location,$status,$client_edit_id;
     protected $rules = [
@@ -57,23 +58,22 @@ class Clientdata extends Component
        }
         
     }
+    public function deleteData(){
+        $client = Client::find($this->name);
     
-    public function delete($id)
-    {
-        $client = Client::where('id',$id)->first();
-        if($client->showClient){
-            flash()->addWarning('Data is already deleted');
-        }
-        else{
-            $client->showClient;
-            $client->delete();
-            flash()->addSuccess('Data deleted successfully');
-        }
-        
+        $client->delete();
+        flash()->addSuccess('Data deleted successfully');
+        $this->deleteModal = false;
     }
+    public function deleteClient()
+    {
+        $this->deleteModal = true;
+    }
+    
     public function saveclient(){
         $data = $this->validate();
         Client::create($data);
+        flash()->addSuccess('Data added successfully');
         $this->showClient = false;
     }
     public function loadClient(){

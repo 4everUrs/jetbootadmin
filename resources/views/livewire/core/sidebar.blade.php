@@ -1,6 +1,6 @@
 <div>
     <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar child-indent navbar-compact flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
                 <a href="{{route('core')}}" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>

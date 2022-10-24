@@ -75,7 +75,7 @@
                     <td class="text-center">{{$client->status}}</td>
                     <td class="text-center">
                         <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Approve</button>
-                        <button wire:click="delete({{$client->id}})" class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
+                        <button wire:click="deleteClient({{$client->id}})" class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                     </td>
                 </tr>
                 @empty
@@ -87,34 +87,28 @@
            </x-table>
         </div>
     </div>
-    <x-jet-dialog-modal wire:model="client_edit_id">
+    <x-jet-dialog-modal wire:model="deleteModal">
         <x-slot name="title">
-            {{ __('Edit Client') }}
+            {{ __('Delete Client') }}
             
         </x-slot>
         <x-slot name="content">
-            <div class="form-group">
-                <label for="">Company Name</label>
-                <input wire:model="name" class="form-control" type="text">
-                @error('name') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
-                <label for="">Email Address</label>
-                <input wire:model="email" class="form-control" type="text">
-                @error('email') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
-                <label for="">Location</label>
-                <input wire:model="location" class="form-control" type="text">
-                @error('location') <span class="text-danger">{{$message}}</span> @enderror
-                
-            </div>
+            <tbody>
+                @foreach($clients as $client)
+                <tr>
+                    <td>{{$client->name}}</td><br>
+                </tr>
+                @endforeach
+            </tbody>
+            <p class="h4 text-center">Are you sure, you want to delete this client?</p><br>
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('client_edit_id')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
+            <x-jet-secondary-button wire:click="$toggle('deleteModal')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
     
-            <x-jet-button class="ms-2" wire:click="editData" wire:loading.attr="disabled"><i class='fa fa-check'></i>
-                {{ __('Update') }}
+            <x-jet-button class="ms-2" wire:click="deleteData" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+                {{ __('Yes! Delete') }}
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
