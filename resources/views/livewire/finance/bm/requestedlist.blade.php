@@ -9,6 +9,7 @@
             <x-table head="Lists of Budget Proposal">
                 <thead >
                     <th>No.</th>
+                    <th>Origin</th>
                     <th>Proposal Name</th>
                     <th>Requestor</th>
                     <th>Requested Date</th>
@@ -22,6 +23,7 @@
                      @forelse($list_requesteds as $list_requested)
                     <tr>
                         <td>{{$list_requested->id}}</td>
+                        <td>{{$list_requested->origin}}</td>
                         <td>{{$list_requested->proposalname}}</td>
                         <td>{{$list_requested->requestor}}</td>
                         <td>{{$list_requested->created_at}}</td>
@@ -42,3 +44,5 @@
     </div>
 
 </div>
+</div>
+

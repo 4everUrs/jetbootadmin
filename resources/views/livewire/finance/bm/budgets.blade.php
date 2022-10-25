@@ -33,7 +33,6 @@
                 <td>{{$transaction->description}}</td>
                 <td>{{$transaction->status}}</td>
                 <td class="text-center" >
-                    {{--wala kang update function pero meron kang updateItems function sa class rename ko nalang --}}
                     <button wire:click="updateItems({{$transaction->id}})"  class="btn btn-primary"> Edit </button>
                     <button wire:click="delete({{$transaction->id}})"  class="btn btn-danger"> Delete </button>
                 </td>
@@ -73,6 +72,16 @@
     <x-slot name="content">
         <div class="row form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
             <div class="col">
+                    {{-- <label>Requests.</label>
+                    <select class="form-control" wire:model="requests">
+                        <option>Select Request</option>
+                        @forelse ($requestslist  as $req)
+                            <option value="{{$req->id}}">{{$req->proposalname}}</option>
+                        @empty
+                        <option>No Record Found </option>
+                        @endforelse
+                        
+                    </select> --}}
                 <label>Select Originated Dept.</label>
                 <select class="form-control" wire:model="originated">
                     <option>HR DEPT</option>

@@ -11,10 +11,13 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
+    
     <!-- IonIcons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
 
     @livewireStyles
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -29,16 +32,16 @@
   * sidebar-mini
 -->
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
     <div class="wrapper">
         <!-- Navbar -->
-        @include('layouts.topbar')
+        @livewire('admin.topbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="{{route('home')}}" class="brand-link">
                 <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Tech-Trendz</span>
@@ -92,8 +95,11 @@
                     {{$slot}}
                 </div>
             </div>
-
+            
         </div>
+        <footer class="main-footer">
+            <strong>Disclaimer: This is for educational pusposes only make by student of <a href="https://bcp.edu.ph/">Bestlink College of the Philippines</a>.</strong> All rights reserved.
+        </footer>
 
 
 
@@ -120,12 +126,27 @@
             $('ul.nav-treeview a').filter(function() {
             return this.href == url;
             }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
-        </script>
+            window.addEventListener('showButton', event => {
+            var element = document.getElementById("createButton");
+            var review = document.getElementById("reviewButton");
+            element.classList.remove("d-none");
+            review.classList.add("d-none");
+            })
+            window.addEventListener('vendor-form', event => {
+            var vendor = document.getElementById('vendor');
+            var content = document.getElementById('content');
+            content.classList.add('d-none');
+            vendor.classList.remove('d-none');
+            })
+       </script>
+      
         @stack('modals')
 
         @livewireScripts
-
+        <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
+            data-turbolinks-eval="false" data-turbo-eval="false"></script>
         @stack('scripts')
+        
 </body>
 
 </html>
