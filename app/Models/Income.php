@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ListRequested extends Model
+class Income extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'proposalname', 'requestor', 'proposedamount', 'approvedate', 'approvedamount', 'rstatus', 'remarks', 'origin'
-    ];
+        'rname','noinvoice','rdate','rinvoiceamount','ramountreceived','rdatereceived','rduedate','routstanding','rremarks'
+    ]; 
 }

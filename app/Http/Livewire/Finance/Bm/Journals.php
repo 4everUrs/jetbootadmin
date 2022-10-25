@@ -6,18 +6,24 @@ use Livewire\Component;
 use App\Models\JournalEntry;
 use App\Models\SubJournal;
 use App\Models\GenLed;
+use App\Models\Payables;
+use App\Models\Income;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 class Journals extends Component
 {
     public $jdescription, $jdebit, $jcredit, $jencoded, $journal_id = '1', $jsubdescription; //$jstatus='Process';
-    public $ldate, $ldescription, $ldebit, $lcredit, $lstatus;
+    public $ldate, $ldescription, $ldebit, $lcredit, $lstatus = 'Pending';
+    public $invoice, $idate, $pname, $invoiceamount, $pamount, $pduedate, $premarks, $paymade;
+    public $rname, $noinvoice, $rdate, $rinvoiceamount, $ramountreceived, $rdatereceived, $rduedate, $routstanding, $rremarks;
     public $gen_leds;
     public $preview = [];
     public $grandtotal;
     public $childData = [];
     public $addLiability = false;
+    public $addPayables = false;
+    public $addReceivable = false;
     public $updateLiability = false;
     public $deleteLiability = false;
     public $deleteLiabilities = false;
@@ -53,7 +59,10 @@ class Journals extends Component
         if (!empty($this->selected_id)) {
             $this->subjournalData = SubJournal::where('journal_entry_id', '=', $this->selected_id)->get();
         }
+        $this->unpaids = Payables::all();
         $this->gen_leds = GenLed::all();
+        $this->incomes = Income::all();
+
         $this->preview;
         $this->grandtotal;
         $this->journal_entries = JournalEntry::with('subjournal')->get();
@@ -87,7 +96,7 @@ class Journals extends Component
             'jcredit' => $this->jcredit,
             'jsubdescription' => $this->jsubdescription,
         ];
-        $this->grandtotal += $this->jdebit + $this->jcredit;
+        $this->grandtotal -= $this->jdebit - $this->jcredit;
         $this->resetLiability();
     }
 
@@ -116,15 +125,6 @@ class Journals extends Component
 
     public function deleteliabilities($id)
     {
-        $temp = JournalEntry::find('id')->first();
-        foreach ($this->journal_entries as $entry) {
-            SubJournal::get([
-                'jdescription' => $entry['jdescription'],
-                'jdebit' => $entry['jdebit'],
-                'jcredit' => $entry['jcredit'],
-                'journal_entries' => $temp->id,
-            ]);
-        }
         $temp = SubJournal::where('journal_entry_id', '=', $id)->get();
 
         foreach ($temp as $temps) {
@@ -233,6 +233,87 @@ class Journals extends Component
 
 
     //end General Ledger
+
+
+
+    //account payables
+    public function tablePayables()
+    {
+        $this->addPayables = true;
+    }
+
+    public function addPay()
+    {
+        Payables::create(
+            [
+                'invoice' => $this->invoice,
+                'idate' => $this->idate,
+                'pname' => $this->pname,
+                'invoiceamount' => $this->invoiceamount,
+                'paymade' => $this->paymade,
+                'pamount' => $this->invoiceamount - $this->paymade,
+                'pduedate' => $this->pduedate,
+                'premarks' => $this->premarks,
+            ]
+        );
+        $this->resetPayables();
+        toastr()->addSuccess('Add Record successfully');
+        $this->addPayables = false;
+    }
+
+    public function resetPayables()
+    {
+        $this->ldate = null;
+        $this->ldescription = null;
+        $this->ldebit = null;
+        $this->lcredit = null;
+        $this->lstatus = 'Process';
+    }
+    //end account payables
+
+    //Account Receivables
+
+    public function tableReceivable()
+    {
+        $this->addReceivable = true;
+    }
+
+    public function addReceivables()
+    {
+        Income::create(
+            [
+                'rname' => $this->rname,
+                'noinvoice' => $this->noinvoice,
+                'rdate' => $this->rdate,
+                'rinvoiceamount' => $this->rinvoiceamount,
+                'ramountreceived' => $this->ramountreceived,
+                'rdatereceived' => $this->rdatereceived,
+                'rduedate' => $this->rduedate,
+                'rremarks' => $this->rremarks,
+                'routstanding' => $this->rinvoiceamount - $this->ramountreceived,
+            ]
+        );
+
+        $this->resetReceivable();
+        toastr()->addSuccess('Add Record successfully');
+        $this->addReceivable = false;
+    }
+
+    public function resetReceivable()
+    {
+        $this->rname = null;
+        $this->noinvoice = null;
+        $this->rinvoiceamount = null;
+        $this->ramountreceived = null;
+        $this->rdatereceived = null;
+        $this->ramountreceived = null;
+        $this->rduedate = null;
+        $this->rremarks = null;
+    }
+
+
+
+    //end Account Receivables
 
 
 

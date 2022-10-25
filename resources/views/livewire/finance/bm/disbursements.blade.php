@@ -23,9 +23,8 @@
         
     </body>
     </html>
-            <a class="btn btn-success"href="{{route('export')}}">Export</a>
 
-            <x-table head="History of Disbursement Transaction">
+            <x-table head="History of Disbursement Transactions">
                 <thead >
                     <th>No.</th>
                     <th>Originated Dept</th>
