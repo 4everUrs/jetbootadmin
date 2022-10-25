@@ -24,11 +24,15 @@
                     <td class="text-center">{{$vacant->id}}</td>
                     <td class="text-center">{{$vacant->name}}</td>
                     <td class="text-center">{{$vacant->position}}</td>
-                    <td class="text-center">{{$vacant->salary}}</td>
+                    <td class="text-center">{{$vacant->daily_salary}}</td>
                     <td class="text-center">{{$vacant->details}}</td>
                     <td class="text-center">{{$vacant->location}}</td>
                     <td class="text-center">
+                        @if ($vacant->status == 'Posted')
+                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-check'></i> Approve</button>
+                        @else
                         <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Approve</button>
+                        @endif
                     </td>
                 </tr>
                 @empty

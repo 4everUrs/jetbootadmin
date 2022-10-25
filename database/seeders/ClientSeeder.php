@@ -21,25 +21,25 @@ class ClientSeeder extends Seeder
                 'name'=>'Samsung Corp.',
                 'email'=>'samsung@email.com',
                 'location'=>'USA',
-                'status'=>'On-Going'
+                'status'=>'Active'
             ],
             [
                 'name'=>'Nokia Corp.',
                 'email'=>'nokia@email.com',
                 'location'=>'Canada',
-                'status'=>'On-Going'
+                'status'=>'Active'
             ],
             [
                 'name'=>'Xiaomi Corp.',
                 'email'=>'xaiomi@email.com',
                 'location'=>'China',
-                'status'=>'On-Going'
+                'status'=>'Active'
             ],
             [
                 'name'=>'Oscorp Group INC.',
                 'email'=>'oscorp@email.com',
                 'location'=>'Taiwan',
-                'status'=>'On-Going'
+                'status'=>'Active'
             ],
            
         ]);

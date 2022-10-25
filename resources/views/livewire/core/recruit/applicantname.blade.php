@@ -6,13 +6,10 @@
     </x-slot>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li wire:ignore class="nav-item" role="presentation">
-          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+          <button class="nav-link active mr-2" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Applicants</button>
         </li>
-        <li wire:ignore class="nav-item" role="presentation">
-          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-        </li>
-        <li wire:ignore class="nav-item" role="presentation">
-          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+        <li wire:ignore class="nav-item mr-2" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Not Qualified</button>
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
@@ -85,7 +82,7 @@
                         <th class="text-center">Action</th>
                     </thead>
                     <tbody>
-                      @forelse ($jobs as $job)
+                      @forelse ($notQualified as $job)
                           <tr>
                             <td class="text-center">{{$job->id}}</td>
                             <td class="text-center">{{$job->name}}</td>
@@ -108,7 +105,6 @@
                 </div>
             </div>    
         </div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
       </div>
     
 </div>

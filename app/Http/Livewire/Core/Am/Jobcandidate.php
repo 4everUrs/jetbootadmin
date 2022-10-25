@@ -13,45 +13,31 @@ class Jobcandidate extends Component
     public function render()
     {
         return view('livewire.core.am.jobcandidate', [
-            'jobs' => ApplicantList::all(),
+            'jobs' => ApplicantList::where('status','=','Pending')->orWhere('status','=','Hired')->get(),
+            
         ]);
     }
     public function approve($id)
     {
-        $applicant_id = ApplicantList::find($id);
-        $job = ApplicantForm::find($applicant_id->id);
-
-        if ($job->status == 'Approved') {
-            flash()->addWarning('Data is already approved');
-        } else {
-            $job->status = 'Approved';
+        $job = ApplicantList::find($id);
             LocalPlacement::create([
+                'listing_id' => $job->listing_id,
                 'name' => $job->name,
                 'phone' => $job->phone,
                 'email' => $job->email,
-                'company_name' => $job->company,
+                'company_name' => $job->company_name,
                 'company_location' => $job->location,
                 'position' => $job->position,
-
+                'status' => 'Pending',
             ]);
-            $job->save();
             flash()->addSuccess('Data approved successfully');
-        }
+        $job->status = 'Hired';
+        $job->save();
     }
     public function denied($id)
     {
-        $job = ApplicantList::find($id);
-
-        Denied::create([
-            'name' => $job->name,
-            'position' => $job->position,
-            'email' => $job->email,
-            'phone' => $job->phone,
-            'address' => $job->address,
-            'resume_file' => $job->resume_file,
-            'status' => $job->status = 'Denied',
-        ]);
+        ApplicantList::find($id)->update(['status'=>'Rejected']);
         flash()->addSuccess('Data Deleted Successfully');
-        ApplicantList::find($id)->delete();
+
     }
 }

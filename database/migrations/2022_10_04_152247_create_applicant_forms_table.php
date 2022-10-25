@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('applicant_forms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedInteger('listing_id');
             $table->string('position');
             $table->string('email');
             $table->string('phone');

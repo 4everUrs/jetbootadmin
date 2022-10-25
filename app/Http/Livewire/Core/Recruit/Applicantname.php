@@ -27,7 +27,9 @@ class Applicantname extends Component
     public function render()
     {
         return view('livewire.core.recruit.applicantname',[
-            'jobs' => ApplicantForm::all(),
+            'jobs' => ApplicantForm::where('status','=','Screening')
+            ->orWhere('status','=','Qualified')->get(),
+            'notQualified' => ApplicantForm::where('status','=','Not Qualified')->get(),
         ]);
     }
     public function approve($id)
@@ -35,12 +37,15 @@ class Applicantname extends Component
        $job = ApplicantForm::find($id);
             ApplicantList::create([
                 'name' => $job->name,
+                'listing_id' => $job->listing_id,
                 'position' => $job->position,
                 'email' => $job->email,
                 'phone' => $job->phone,
                 'address' => $job->address,
                 'resume_file' => $job->resume_file,
                 'location' => $job->location,
+                'company_name' => $job->company,   
+                'status' => 'Pending',
             ]);
             $job->status = 'Qualified';
             $job->save();
@@ -48,18 +53,8 @@ class Applicantname extends Component
     }
     public function disapprove($id)
     {
-       $job = ApplicantList::find($id);
- 
-        ApplicantList::create([
-            'name' => $job->name,
-            'position' => $job->position,
-            'email' => $job->email,
-            'phone' => $job->phone,
-            'address' => $job->address,
-            'resume_file' => $job->resume_file,
-            'location' => $job->location,
-        ]);
+        ApplicantForm::find($id)->update(['status'=> 'Not Qualified']);
        flash()->addSuccess('Data Deleted Successfully');
-       ApplicantList::find($id)->delete();
+    
     }
 }

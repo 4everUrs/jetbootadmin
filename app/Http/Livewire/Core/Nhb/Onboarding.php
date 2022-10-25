@@ -2,31 +2,51 @@
 
 namespace App\Http\Livewire\Core\Nhb;
 
+use App\Models\ApplicantList;
 use Livewire\Component;
 use App\Models\Onboard;
 use App\Models\LocalEmployee;
 use App\Models\LocalPlacement;
+use Carbon\Carbon;
 
 class Onboarding extends Component
 {
     public $showOnboard = false;
     public $name, $age, $gender, $company_name, $position, $status = 'Hired', $contract, $resume_file;
-
+    public $selected_id,$value,$terms;
 
     public function render()
     {
         return view('livewire.core.nhb.onboarding', [
             'onboards' => Onboard::all(),
+            'employee' => LocalPlacement::where('status','=','Deployed')->get(),
         ]);
+    }
+    public function showModal($id){
+        $this->selected_id = $id;
+        $this->showOnboard = true;
     }
     public function saveOnboard()
     {
+        $this->contract = $this->value .' '.$this->terms;
         $validateddata = $this->validate([
             'age' => 'required|string',
             'gender' => 'required|string',
             'contract' => 'required|string',
         ]);
-        Onboard::find($this->name)->update($validateddata);
+        $temp = Onboard::find($this->selected_id);
+        $temp->age = $validateddata['age'];
+        $temp->gender = $validateddata['gender'];
+        $temp->contract = $validateddata['contract'];
+        $temp->status = 'Hired';
+        if($this->terms == 'months'){
+            $temp->endo = Carbon::parse($temp->created_at)->addMonths($this->value);
+            $temp->save();
+        }elseif($this->terms == 'years'){
+            $temp->endo = Carbon::parse($temp->created_at)->addYears($this->value);
+            $temp->save();
+        }
+        
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
         $this->showOnboard = false;
@@ -44,22 +64,17 @@ class Onboarding extends Component
     }
     public function submit($id)
     {
-        $onboard = LocalPlacement::find($id);
-
-        if($onboard->status == 'Deployed'){
-            flash()->addWarning('Data is already approved');
-        }
-        else{
-            $onboard->status = 'Deployed';
-           LocalEmployee::create([
+        $onboard = Onboard::find($id);
+        $onboard->status = 'Deployed';
+            LocalEmployee::create([
+            'joblist_id' => $onboard->listing_id,
             'name' => $onboard->name,
             'phone' => $onboard->phone,
-            'position' => $onboard->position,
-            'company_name' => $onboard->company_name,
-            'company_location' => $onboard->company_location,
-        ]);
+            'email' => $onboard->email,
+            'status' => 'Active',
+            ]);
             $onboard->save();
             flash()->addSuccess('Data approved successfully');
-        }
+        
     }
 }

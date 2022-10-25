@@ -26,22 +26,29 @@
                     <th class="text-center">Company Name</th>
                     <th class="text-center">Position</th>
                     <th class="text-center">Monthly Salary</th>
+                    <th class="text-center">Daily Salary</th>
+                    <th class="text-center">Collection</th>
                     <th class="text-center">Job Details</th>
                     <th class="text-center">Company Location</th>
+                    <th class="text-center">No. of Applicants</th>
                     <th class="text-center">Status</th>
                     <th class="text-center">Action</th>
 
 
                 </thead>
                 <tbody>
-                    @forelse($clients as $client)
+                    @forelse($jobs as $client)
                     <tr>
                         <td class="text-center">{{$client->id}}</td>
                         <td class="text-center">{{$client->name}}</td>
                         <td class="text-center">{{$client->position}}</td>
-                        <td class="text-center">{{$client->salary}}</td>
+                        <td class="text-center">@money($client->salary)</td>
+                        <td class="text-center">@money($client->daily_salary)</td>
+                        <td class="text-center">@money($client->collection)</td>
                         <td class="text-center">{{$client->details}}</td>
                         <td class="text-center">{{$client->location}}</td>
+                        <td class="text-center">{{$client->applicants}}</td>
+                       
                         <td class="text-center">{{$client->status}}</td>
                         <td class="text-center">
                             <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Approve</button>
@@ -78,6 +85,10 @@
                 <input wire:model="position"class="form-control" type="text">
                 @error('position') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
+                <label for="">Location</label>
+                <input wire:model="location"class="form-control" type="text">
+                @error('location') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
                 <label for="">Monthly Salary</label>
                 <input wire:model="salary"class="form-control" type="number">
                 @error('salary') <span class="text-danger">{{$message}}</span> @enderror
@@ -85,6 +96,10 @@
                 <label for="">Job Details</label>
                 <textarea wire:model="details"class="form-control" rows="2"></textarea>
                 @error('details') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
+                <label for="">No. of Applicants</label>
+                <input wire:model="applicants"class="form-control" type="number">
+                @error('applicants') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
             </div>
         </x-slot>

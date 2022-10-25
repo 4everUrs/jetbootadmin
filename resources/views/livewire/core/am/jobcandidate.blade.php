@@ -30,7 +30,7 @@
                     <td class="text-center">{{$job->phone}}</td>
                     <td class="text-center">{{$job->address}}</td>
                     <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$job->resume_file}}" target="__blank">Resume</a></td>
-                    <td></td>
+                    <td class="text-center">{{$job->status}}</td>
                     <td class="text-center">
                         <button wire:click="approve({{$job->id}})" class="btn btn-primary"><i class='fa fa-check'></i> Approved</button>
                         <button wire:click="denied({{$job->id}})" class="btn btn-danger"><i class='fa fa-trash'></i> Denied</button>

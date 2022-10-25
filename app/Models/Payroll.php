@@ -9,7 +9,7 @@ class Payroll extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'attendance', 'salary', 'gross_salary', 'contribution', 'placement', 'status', 'net_salary'
+        'year', 'month', 'salary_term','start_date','end_date','name'
     ];
     public function Contribution()
     {
