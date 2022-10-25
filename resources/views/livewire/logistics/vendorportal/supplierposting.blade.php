@@ -8,18 +8,24 @@
         <div class="card-body">
 
             <x-table head="Post Table">
-                <thead>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Date Posted</th>
-                    <th>Action</th>
+                <thead class="bg-info">
+                    <th class="text-center align-middle">Type</th>
+                    <th class="text-center align-middle">Item Name</th>
+                    <th class="text-center align-middle">Quantity</th>
+                    <th class="text-center align-middle">Bidding Range</th>
+                    <th class="text-center align-middle">Description</th>
+                    <th class="text-center align-middle">Date Posted</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse($posts as $post)
                     <tr>
-                        <td>{{$post->type}}</td>
-                        <td>{{$post->description}}</td>
-                        <td>{{Carbon\Carbon::parse($post->created_at)->toFormattedDateString()}}</td>
+                        <td class="text-center align-middle">{{$post->type}}</td>
+                        <td class="text-center align-middle">{{$post->item_name}}</td>
+                        <td class="text-center align-middle">{{$post->quantity}}</td>
+                        <td class="text-center align-middle">@money($post->start) - @money($post->end)</td>
+                        <td class="text-center align-middle">{{$post->description}}</td>
+                        <td class="text-center">{{Carbon\Carbon::parse($post->created_at)->toFormattedDateString()}}</td>
                         <td class="text-center">
                             <button class="btn btn-danger">Remove</button>
                         </td>

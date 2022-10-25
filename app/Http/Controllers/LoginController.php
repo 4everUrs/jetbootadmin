@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -18,7 +19,14 @@ class LoginController extends Controller
             return redirect()->route('manager');
         } elseif (Auth::user()->role_id == 2) {
             return redirect()->route('staff');
+        } elseif (Auth::user()->role_id == 3) {
+            Auth::logout();
+            Session::flush();
+            return redirect('/login')->withErrors(['msg' => 'Invalid Credentials']);
         }
+    }
+    public function logout()
+    {
     }
     public function manager()
     {
@@ -39,8 +47,10 @@ class LoginController extends Controller
             return redirect()->route('logistics');
         } elseif (Auth::user()->current_team_id >= 15 && Auth::user()->current_team_id <= 19) {
             return redirect()->route('finance');
-        } elseif (Auth::user()->current_team_id >= 20) {
+        } elseif (Auth::user()->current_team_id >= 20 && Auth::user()->current_team_id <= 28) {
             return redirect()->route('core');
+        } elseif (Auth::user()->current_team_id >= 29 && Auth::user()->current_team_id <= 37) {
+            return redirect()->route('hr');
         }
     }
 }

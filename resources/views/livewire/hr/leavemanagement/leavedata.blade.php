@@ -14,6 +14,8 @@
                     <th>Type</th>
                     <th>Position </th>
                     <th>Reason</th>
+                    <th>Date Start</th>
+                    <th>Date end</th>
                     <th>Status</th>
                     <th>Action</th>
                 </thead>
@@ -25,6 +27,8 @@
                             <td>{{$data->type}}</td>
                             <td>{{$data->position}}</td>
                             <td>{{$data->reason}}</td>
+                            <td>{{$data->datestart}}</td>
+                            <td>{{$data->datestart}}</td>
                             <td>{{$data->status}}</td>
                             <td>
                                 <button class="btn btn-primary">View</button>
@@ -32,7 +36,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center">No record found nigga!</td>
+                            <td colspan="9" class="text-center">No record found nigga!</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -57,8 +61,11 @@
                             @error('name') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Type</label>
                             <select wire:model="type" class="form-control">
+                                <option></option>
+                                <option>Vacational Leave</option>
                                 <option>Sick Leave</option>
                                 <option>Maternity Leave</option>
+                                <option>Parental Leave</option>
                             </select>
                             @error('type') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Position</label>
@@ -67,6 +74,13 @@
                             <label>Reason</label>
                             <input wire:model="reason" class="form-control">
                             @error('reason') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Date Start</label>
+                            <input wire:model="datestart" class="form-control">
+                            @error('datestart') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            <label>Date End</label>
+                            <input wire:model="dateend" class="form-control">
+                            @error('dateend') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                            
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -84,3 +98,4 @@
         </script>
         @endpush
 </div>
+    

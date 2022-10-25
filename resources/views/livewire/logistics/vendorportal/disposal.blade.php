@@ -7,28 +7,28 @@
     <div class="card">
         <div class="card-body">
             <x-table head="Disposal">
-                <thead>
-                    <th>No.</th>
-                    <th>Origin</th>
-                    <th>Item Name</th>
-                    <th>Condition</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Price</th>
-                    <th>Action</th>
+                <thead class="bg-info">
+                    <th class="text-center align-middle">No.</th>
+                    <th class="text-center align-middle">Origin</th>
+                    <th class="text-center align-middle">Item Name</th>
+                    <th class="text-center align-middle">Condition</th>
+                    <th class="text-center align-middle">Description</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Price</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($items as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
-                            <td>{{$item->origin}}</td>
-                            <td>{{$item->item_name}}</td>
-                            <td>{{$item->condition}}</td>
-                            <td style="width: 30%">{{$item->description}}</td>
-                            <td>{{$item->status}}</td>
-                            <td>{{$item->amount}}</td>
+                            <td class="text-center">{{$item->id}}</td>
+                            <td class="text-center align-middle">{{$item->origin}}</td>
+                            <td class="text-center align-middle">{{$item->item_name}}</td>
+                            <td class="text-center align-middle">{{$item->condition}}</td>
+                            <td class="text-center align-middle" style="width: 30%">{{$item->description}}</td>
+                            <td class="text-center">{{$item->status}}</td>
+                            <td class="text-center align-middle">@money($item->amount)</td>
                             <td>
-                                <button wire:click="post({{$item->id}})" class="btn btn-primary">Post to Shop</button>
+                                <button wire:click="post({{$item->id}})" class="btn btn-primary btn-sm">Post to Shop</button>
                             </td>
                         </tr>
                     @empty

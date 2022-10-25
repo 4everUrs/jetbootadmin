@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class JournalEntry extends Model
 {
-    
-
     use HasFactory;
-    
-    
+    protected $fillable = [
+        'jdescription', 'jdebit', 'jcredit','jencoded','journal_entry_id','created_at','jsubdescription'
+    ]; 
+    function subjournal()
+    {
+        return $this->hasMany('App\Models\SubJournal');
+    }
 }

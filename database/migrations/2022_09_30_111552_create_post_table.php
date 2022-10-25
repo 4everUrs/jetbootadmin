@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedInteger('recieved_id');
             $table->string('type');
             $table->string('origin');
+            $table->string('item_name');
+            $table->integer('quantity');
             $table->string('description');
             $table->integer('start');
             $table->integer('end');

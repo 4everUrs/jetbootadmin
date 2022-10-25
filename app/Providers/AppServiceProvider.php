@@ -28,8 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         Blade::directive('money', function ($amount) {
-        return "<?php echo '₱' . number_format($amount, 2); ?>";
+            return "<?php echo '₱' . number_format($amount, 2); ?>";
         });
-
+        Blade::directive('date', function ($date) {
+            return "<?php echo Carbon\Carbon::parse($date)->toFormattedDateString()?>";
+        });
     }
 }

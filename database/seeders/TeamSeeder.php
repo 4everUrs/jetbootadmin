@@ -130,6 +130,88 @@ class TeamSeeder extends Seeder
                     'name' => 'Client Mgmt',
                     'personal_team' => '4',
                ],
+               [
+                    'user_id' => '4',
+                    'name' => 'New hire on board',
+                    'personal_team' => '4',
+               ],
+               [
+                    'user_id' => '4',
+                    'name' => 'Employee Mgmt',
+                    'personal_team' => '4',
+               ],
+               [
+                    'user_id' => '4',
+                    'name' => 'Recruiting Analytics & Reporting',
+                    'personal_team' => '4',
+               ],
+               [
+                    'user_id' => '4',
+                    'name' => 'Payroll & Paymeng Mgmt.',
+                    'personal_team' => '4',
+               ],
+               [
+                    'user_id' => '4',
+                    'name' => 'Placement Management',
+                    'personal_team' => '4',
+               ],
+               [
+                    'user_id' => '4',
+                    'name' => 'Clients Agreement & Contract Mgmt.',
+                    'personal_team' => '4',
+               ],
+               // HR
+               [
+                    'user_id' => '5',
+                    'name' => 'Core Human Capital',
+                    'personal_team' => '5',
+               ],
+               [
+                    'user_id' => '5',
+                    'name' => 'Leave Management',
+                    'personal_team' => '5',
+               ],
+               [
+                    'user_id' => '5',
+                    'name' => 'Timesheet Management',
+                    'personal_team' => '5',
+               ],
+               [
+                    'user_id' => '5',
+                    'name' => 'Time and Attendance',
+                    'personal_team' => '5',
+               ],
+               [
+                    'user_id' => '5',
+                    'name' => 'Shift and Schedule',
+                    'personal_team' => '5',
+               ],
+               [
+                    'user_id' => '5',
+                    'name' => 'Payroll',
+                    'personal_team' => '5',
+               ],
+               [
+                    'user_id' => '5',
+                    'name' => 'HR Analytics',
+                    'personal_team' => '5',
+               ],
+               [
+                    'user_id' => '5',
+                    'name' => 'Compensation Planning',
+                    'personal_team' => '5',
+               ],
+               [
+                    'user_id' => '5',
+                    'name' => 'Claims & Reimbursement',
+                    'personal_team' => '5',
+               ],
+               //Vendor Portal
+               [
+                    'user_id' => '2',
+                    'name' => 'Vendor Client',
+                    'personal_team' => '2',
+               ],
 
           ]);
      }

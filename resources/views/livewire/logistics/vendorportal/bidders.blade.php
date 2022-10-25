@@ -7,33 +7,33 @@
     <div class="card">
         <div class="card-body">
             <x-table head="Bidders">
-                <thead>
-                    <th>No</th>
-                    <th>Company Name</th>
-                    <th>Company Email</th>
-                    <th>Company Phone</th>
-                    <th>Bid Amount</th>
-                    <th>Bidding Proposal</th>
-                    <th>Status</th>
-                    <th class="text-center">Action</th>
+                <thead class="bg-info">
+                    <th class="text-center align-middle">No.</th>
+                    <th class="text-center align-middle">Company Name</th>
+                    <th class="text-center align-middle">Company Email</th>
+                    <th class="text-center align-middle">Company Phone</th>
+                    <th class="text-center align-middle">Bid Amount</th>
+                    <th class="text-center align-middle">Bidding Proposal</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($bidders as $bidder)
                         <tr>
-                            <td>{{$bidder->id}}</td>
-                            <td>{{$bidder->name}}</td>
-                            <td>{{$bidder->email}}</td>
-                            <td>{{$bidder->phone}}</td>
-                            <td>@money($bidder->bid_amount)</td>
+                            <td class="text-center">{{$bidder->id}}</td>
+                            <td class="text-center align-middle">{{$bidder->name}}</td>
+                            <td class="text-center align-middle">{{$bidder->email}}</td>
+                            <td class="text-center align-middle">{{$bidder->phone}}</td>
+                            <td class="text-center align-middle">@money($bidder->bid_amount)</td>
                             @if (!empty($bidder->bid_proposal_file))
-                                <td><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$bidder->bid_proposal_file}}"target="_blank">Attachment</a></td>
+                                <td class="text-center align-middle"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$bidder->bid_proposal_file}}"target="_blank">Attachment</a></td>
                             @else
                                 <td></td>    
                             @endif
                             
-                            <td>{{$bidder->status}}</td>
+                            <td class="text-center">{{$bidder->status}}</td>
                             <td>
-                                <button wire:click="loadModal({{$bidder->id}})" class="btn btn-dark">View</button>
+                                <button wire:click="loadModal({{$bidder->id}})" class="btn btn-dark btn-sm">View</button>
                             </td>
                         </tr>
                     @empty

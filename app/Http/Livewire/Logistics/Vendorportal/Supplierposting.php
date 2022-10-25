@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Logistics\Vendorportal;
 
 use Livewire\Component;
 use App\Models\Post;
+
 class Supplierposting extends Component
 {
     public $title, $requirements, $origin;
@@ -11,8 +12,8 @@ class Supplierposting extends Component
         'title' => 'required|string',
         'requirements' => 'required|string'
     ];
-   
-     public function updated($fields)
+
+    public function updated($fields)
     {
         $this->validateOnly($fields);
     }
@@ -20,27 +21,28 @@ class Supplierposting extends Component
     public function render()
 
     {
-        return view('livewire.logistics.vendorportal.supplierposting',[
-            'posts'=>Post::get(),
+        return view('livewire.logistics.vendorportal.supplierposting', [
+            'posts' => Post::orderBy('id', 'desc')->get(),
         ]);
-
     }
-    public function showmodal(){
-        $this-> postmodal=true;
+    public function showmodal()
+    {
+        $this->postmodal = true;
     }
 
-    public function savepost(){
-    
+    public function savepost()
+    {
 
-            $validateddata = $this->validate();
-            Post::create($validateddata);
-            toastr()->addWarning('Successfully Posted');
-            $this->resetInput();
-            $this-> postmodal=false;
+
+        $validateddata = $this->validate();
+        Post::create($validateddata);
+        toastr()->addWarning('Successfully Posted');
+        $this->resetInput();
+        $this->postmodal = false;
     }
-    public function resetInput(){
+    public function resetInput()
+    {
         $this->title = null;
         $this->requirements = null;
     }
 }
-

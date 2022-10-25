@@ -24,6 +24,7 @@ class AdminSeeder extends Seeder
                 'password' => Hash::make('admin'),
                 'current_team_id' => '1',
                 'role_id' => '0',
+                'type' => 'CEO',
                 'phone' => '123456789'
             ],
             [
@@ -33,6 +34,7 @@ class AdminSeeder extends Seeder
                 'password' => Hash::make('admin'),
                 'current_team_id' => '2',
                 'role_id' => '1',
+                'type' => 'Employee',
                 'phone' => '123456789'
             ],
             [
@@ -42,6 +44,7 @@ class AdminSeeder extends Seeder
                 'password' => Hash::make('admin'),
                 'current_team_id' => '3',
                 'role_id' => '1',
+                'type' => 'Employee',
                 'phone' => '123456789'
             ],
             [
@@ -51,6 +54,7 @@ class AdminSeeder extends Seeder
                 'password' => Hash::make('admin'),
                 'current_team_id' => '4',
                 'role_id' => '1',
+                'type' => 'Employee',
                 'phone' => '123456789'
             ],
             [
@@ -60,6 +64,7 @@ class AdminSeeder extends Seeder
                 'password' => Hash::make('admin'),
                 'current_team_id' => '5',
                 'role_id' => '1',
+                'type' => 'Employee',
                 'phone' => '123456789'
             ]
         ]);

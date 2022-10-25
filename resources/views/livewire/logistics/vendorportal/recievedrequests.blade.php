@@ -6,43 +6,106 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <x-table head="Request Lists">
-                <thead>
-                    <th>No.</th>
-                    <th>Origin</th>
-                    <th>Type</th>
-                    <th>Bidding Range</th>
-                    <th>Location</th>   
-                    <th>Data Posted</th>
-                    <th>Status</th>
-                    <th>Actiom</th>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item mr-2" role="presentation">
+                    <button class="nav-link active" id="procurement-tab" data-bs-toggle="tab" data-bs-target="#procurement" type="button"
+                        role="tab" aria-controls="procurement" aria-selected="true">Procurement</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="mro-tab" data-bs-toggle="tab" data-bs-target="#mro" type="button"
+                        role="tab" aria-controls="mro" aria-selected="false">M.R.O</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="procurement" role="tabpanel" aria-labelledby="procurement-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <x-table head="Procurement Request Lists">
+                                <thead class="bg-info">
+                                    <th class="text-center align-middle">No.</th>
+                                    <th class="text-center align-middle">Origin</th>
+                                    <th class="text-center align-middle">Type</th>
+                                    <th class="text-center align-middle">Item Name</th>
+                                    <th class="text-center align-middle">Quantity</th>
+                                    <th class="text-center align-middle">Bidding Range</th>
+                                    <th class="text-center align-middle">Location</th>
+                                    <th class="text-center align-middle">Data Posted</th>
+                                    <th class="text-center align-middle">Status</th>
+                                    <th class="text-center align-middle">Action</th>
+                            
+                            
+                                </thead>
+                                <tbody>
+                                    @forelse ($recieveds as $key => $recieved)
+                                    <tr>
+                                        <td class="text-center">{{$key+1}}</td>
+                                        <td class="text-center align-middle">{{$recieved->origin}}</td>
+                                        <td class="text-center align-middle">{{$recieved->type}}</td>
+                                        <td class="text-center align-middle">{{$recieved->item_name}}</td>
+                                        <td class="text-center align-middle">{{$recieved->quantity}}</td>
 
-
-                </thead>
-                <tbody>
-                    @forelse ($recieveds as $recieved)
-                    <tr>
-                        <td>{{$recieved->id}}</td>
-                        <td>{{$recieved->origin}}</td>
-                        <td>{{$recieved->type}}</td>
-                        <td>@money($recieved->start) - @money($recieved->end)</td>
-                        <td>{{$recieved->location}}</td>
-                        <td>{{Carbon\Carbon::parse($recieved->updated_at)->toFormattedDateString()}}</td>
-                        <td>{{$recieved->status}}</td>
-                        <td class="text-center">
-                            <button wire:click="loadModal({{$recieved->id}})" class="btn btn-primary">View</button>
-                        </td>
-
-                    </tr>
-                    @empty
-                    <tr>
-                        <td class="text-center" colspan="8"> no record found</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </x-table>
+                                        <td class="text-center align-middle">@money($recieved->start) - @money($recieved->end)</td>
+                                        <td class="text-center align-middle">{{$recieved->location}}</td>
+                                        <td class="text-center">{{Carbon\Carbon::parse($recieved->updated_at)->toFormattedDateString()}}</td>
+                                        <td class="text-center">{{$recieved->status}}</td>
+                                        <td class="text-center">
+                                            <button wire:click="loadModal({{$recieved->id}})" class="btn btn-primary btn-sm">View</button>
+                                        </td>
+                            
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td class="text-center" colspan="8"> no record found</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </x-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="mro" role="tabpanel" aria-labelledby="mro-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <x-table head="M.R.O Request Lists">
+                                <thead class="bg-info">
+                                    <th class="text-center align-middle">No.</th>
+                                    <th class="text-center align-middle">Type</th>
+                                    <th class="text-center align-middle">Content</th>
+                                    <th class="text-center align-middle">Location</th>
+                                    <th class="text-center align-middle">Data Posted</th>
+                                    <th class="text-center align-middle">Status</th>
+                                    <th class="text-center align-middle">Action</th>
+                                </thead>
+                                <tbody>
+                                    @forelse ($requests as $key => $request)
+                                    <tr>
+                                        <td class="text-center">{{$key+1}}</td>
+                                        <td class="text-center align-middle">{{$request->type}}</td>
+                                        <td class="text-center align-middle">{{$request->content}}</td>
+                                        <td class="text-center align-middle">{{$request->location}}</td>
+                                        <td class="text-center">{{$request->created_at}}</td>
+                                        <td class="text-center">{{$request->status}}</td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm">Post</button>
+                                            <button class="btn btn-danger btn-sm">Remove</button>
+                                        </td>
+                                    </tr>
+                    
+                                    @empty
+                                    <tr>
+                                        <td class="text-center" colspan="7"> no record found</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </x-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
+   
     <x-jet-dialog-modal wire:model="postModal">
         <x-slot name="title">
             {{ __('Post') }}
@@ -53,6 +116,10 @@
                 <br>
                @if (!empty($data))
                    <p class="badge badge-success">{{$data->type}}</p><br>
+                    <label>Item Name:</label><br>
+                    {{$data->item_name}}<br>
+                    <label>Item Quantity:</label><br>
+                    {{$data->quantity}}<br>
                     <label>Description:</label>
                     <p>{{$data->description}}</p>
                     <label>Bidding Range:</label><br>

@@ -27,13 +27,12 @@
                 <td>{{$transaction->id}}</td>
                 <td>{{$transaction->originated}}</td>
                 <td>{{$transaction->category}}</td>
-                <td>{{$transaction->created_at}}</td>
+                <td>{{Carbon\Carbon::parse($transaction->created_at)->toFormattedDateString()}}</td>
                 <td>{{$transaction->amount}}</td>
                 <td>{{$transaction->account}}</td>
                 <td>{{$transaction->description}}</td>
                 <td>{{$transaction->status}}</td>
                 <td class="text-center" >
-                    {{--wala kang update function pero meron kang updateItems function sa class rename ko nalang --}}
                     <button wire:click="updateItems({{$transaction->id}})"  class="btn btn-primary"> Edit </button>
                     <button wire:click="delete({{$transaction->id}})"  class="btn btn-danger"> Delete </button>
                 </td>
@@ -43,11 +42,20 @@
                 <td class="text-center" colspan="9">"Unlisted Records"</td>
             </tr>
             @endforelse
+
+            
         </tbody>
-    </x-table>
+    </x-table><br><br>
+
+    <button wire:click="sumRecords" class="btn btn-outline-danger ">Sum</button>
+    
+    <label>The Sum of all transaction:&emsp;</label>
+    <label>{{$grandtotals}}</label><br><br>
+    
     <div class="mt-3 float-right">
         {{$transactions->links()}}
     </div>
+    
 </div>
 
 </div>
@@ -56,7 +64,7 @@
 
 <!--pop up form budget request-->
 
-<x-jet-dialog-modal wire:model="addBudget">
+<x-jet-dialog-modal wire:model="addBudget" maxWidth="xl" >
     <x-slot name="title">
         {{ __('Add RequestBudget') }}
     </x-slot>
@@ -64,6 +72,16 @@
     <x-slot name="content">
         <div class="row form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
             <div class="col">
+                    {{-- <label>Requests.</label>
+                    <select class="form-control" wire:model="requests">
+                        <option>Select Request</option>
+                        @forelse ($requestslist  as $req)
+                            <option value="{{$req->id}}">{{$req->proposalname}}</option>
+                        @empty
+                        <option>No Record Found </option>
+                        @endforelse
+                        
+                    </select> --}}
                 <label>Select Originated Dept.</label>
                 <select class="form-control" wire:model="originated">
                     <option>HR DEPT</option>
@@ -109,7 +127,7 @@
         </x-jet-secondary-button>
         {{--wire:click function dito sa button hindi match sa function sa class--}}
         <x-jet-button class="ms-2" wire:click="addBudgets" wire:loading.attr="disabled">
-            {{ __('Update Request Budget') }}
+            {{ __('Add Request Budget') }}
         </x-jet-button>
     </x-slot>
 
@@ -198,5 +216,6 @@
 </x-jet-dialog-modal>
 <!--update modal-->
 {{-- @livewire("finance.bm.expensess") --}}
+
 <livewire:finance.bm.expensess>
 </div>

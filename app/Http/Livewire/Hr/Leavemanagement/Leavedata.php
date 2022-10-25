@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 class Leavedata extends Component
 {
-    public $name, $type, $position, $reason, $status = 'Pending';
+    public $name, $type, $position, $reason, $datestart, $dateend , $status = 'Pending';
     public $leaveModal = false;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -17,6 +17,8 @@ class Leavedata extends Component
         'type' => 'required|string',
         'position' => 'required|string',
         'reason' => 'required|string',
+        'datestart' => 'required|string',
+        'dateend' => 'required|string',
         'status' => 'required|string'
     ];
      public function updated($fields)
@@ -26,7 +28,7 @@ class Leavedata extends Component
     public function render()
     {
         return view('livewire.hr.leavemanagement.leavedata',[
-            'datas' => Leave::paginate(3),
+            'datas' => Leave::paginate(6),
         ]);
     }
     public function saveRecord(){
@@ -41,6 +43,8 @@ class Leavedata extends Component
         $this->type = null;
         $this->position = null;
         $this->reason = null;
+        $this->datestart = null;
+        $this->dateend = null;
     }
     
 }
