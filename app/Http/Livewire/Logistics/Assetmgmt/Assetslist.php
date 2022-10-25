@@ -17,12 +17,14 @@ class Assetslist extends Component
     public function render()
     {
         return view('livewire.logistics.assetmgmt.assetslist', [
-            'users' => User::where('role_id', '!=', '3')->get(),
-            'buildings' => Building::all(),
-            'vehicles' => Vehicle::all(),
-            'equipments' => Equipment::all(),
-            'suppliers' => Supplier::all(),
-            'contractors' => Supplier::where('status', '=', 'contractor')->get()
+            'users' => User::where('role_id', '!=', '3')
+                ->orderBy('id', 'desc')->paginate(10),
+            'buildings' => Building::orderBy('id', 'desc')->paginate(10),
+            'vehicles' => Vehicle::orderBy('id', 'desc')->paginate(10),
+            'equipments' => Equipment::orderBy('id', 'desc')->paginate(10),
+            'suppliers' => Supplier::orderBy('id', 'desc')->paginate(10),
+            'contractors' => Supplier::where('status', '=', 'contractor')
+                ->orderBy('id', 'desc')->paginate(10),
         ]);
     }
 }

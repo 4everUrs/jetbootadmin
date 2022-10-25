@@ -45,9 +45,9 @@
                                         <th class="text-center align-middle">Type</th>
                                     </thead>
                                     <tbody class="bg-white">
-                                        @forelse ($users as $user)
+                                        @forelse ($users as $key => $user)
                                             <tr>
-                                                <td class="text-center">{{$user->id}}</td>
+                                                <td class="text-center">{{$key+1}}</td>
                                                 <td class="text-center align-middle">{{$user->name}}</td>
                                                 <td class="text-center align-middle">{{$user->currentTeam->name}}</td>
                                                 @if ($user->role_id == '0')
@@ -113,9 +113,9 @@
                                         <th class="text-center align-middle">Status</th>
                                     </thead>
                                     <tbody>
-                                        @forelse ($vehicles as $vehicle)
+                                        @forelse ($vehicles as $key => $vehicle)
                                             <tr>
-                                                <td class="text-center">{{$vehicle->id}}</td>
+                                                <td class="text-center">{{$key+1}}</td>
                                                 <td class="text-center align-middle">{{$vehicle->type}}</td>
                                                 <td class="text-center align-middle">{{$vehicle->brand}}</td>
                                                 <td class="text-center align-middle">{{$vehicle->model}}</td>
@@ -146,9 +146,9 @@
                                         <th class="text-center align-middle">Purchase Date</th>
                                     </thead>
                                     <tbody>
-                                        @forelse ($equipments as $equipment)
+                                        @forelse ($equipments as $key => $equipment)
                                             <tr>
-                                                <td class="text-center">{{$equipment->id}}</td>
+                                                <td class="text-center">{{$key+1}}</td>
                                                 <td class="text-center align-middle">{{$equipment->type}}</td>
                                                 <td class="text-center align-middle">{{$equipment->name}}</td>
                                                 <td class="text-center align-middle">{{$equipment->description}}</td>

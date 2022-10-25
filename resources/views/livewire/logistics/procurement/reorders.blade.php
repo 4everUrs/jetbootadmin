@@ -21,9 +21,9 @@
                     <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
-                @forelse ($reorders as $reorder)
+                @forelse ($reorders as $key => $reorder)
                 <tr>
-                    <td class="text-center">{{$reorder->id}}</td>
+                    <td class="text-center">{{$key+1}}</td>
                     <td class="text-center align-middle">{{$reorder->Supplier->name}}</td>
                     <td class="text-center align-middle">{{$reorder->Stock->name}}</td>
                     <td class="text-center align-middle">{{$reorder->Stock->description}}</td>

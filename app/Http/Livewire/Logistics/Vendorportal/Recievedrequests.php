@@ -39,8 +39,8 @@ class Recievedrequests extends Component
         }
 
         return view('livewire.logistics.vendorportal.recievedrequests', [
-            'recieveds' => Recieved::get(),
-            'requests' => MroRequest::all(),
+            'recieveds' => Recieved::orderBy('id', 'desc')->paginate(10),
+            'requests' => MroRequest::orderBy('id', 'desc')->paginate(10),
         ]);
     }
     public function loadModal($id)
@@ -63,11 +63,10 @@ class Recievedrequests extends Component
                 'end' => $data->end,
                 'location' => $data->location,
                 'description' => $data->description,
+                'item_name' => $data->item_name,
+                'quantity' => $data->quantity
             ]);
-
-            $post = Recieved::find($this->selected_id);
-            $post->status = 'Posted';
-            $post->save();
+            Recieved::find($this->selected_id)->update(['status' => 'Posted']);
             RequestNotification::create([
                 'user_id' => Auth::user()->id,
                 'sender' =>  Auth::user()->currentTeam->name,

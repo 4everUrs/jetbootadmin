@@ -122,6 +122,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('reserve')}}" class="nav-link">Reservations</a>
+                        <a href="{{route('vlists')}}" class="nav-link">Vehicle List</a>
                     </li>
                 </ul>
             </li>

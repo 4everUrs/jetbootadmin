@@ -35,7 +35,7 @@ class Vinfo extends Component
     public function loadModal($id)
     {
         $this->selected_id = $id;
-        $this->vehicleModal = true;
+        $this->modalRepair = true;
     }
     public function sendRepair()
     {

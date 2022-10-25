@@ -73,6 +73,7 @@ use App\Http\Livewire\Logistics\Fleet\Rominventory;
 use App\Http\Livewire\Logistics\Fleet\Romrequest;
 use App\Http\Livewire\Logistics\Fleet\Romrequestlist;
 use App\Http\Livewire\Logistics\Fleet\Vinfo;
+use App\Http\Livewire\Logistics\Fleet\Vlists;
 use App\Http\Livewire\Logistics\Procurement\Bmproposals;
 use App\Http\Livewire\Logistics\Procurement\Reorders;
 use App\Http\Livewire\Logistics\Projectmanagement\Reports;
@@ -94,10 +95,6 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-
-Route::middleware('auth')->group(function () {
-    Route::get('/timein', [AttendanceController::class, 'timein'])->name('timein');
-});
 
 //Login Routes
 Route::get('/redirects', [LoginController::class, 'login'])->name('home');
@@ -144,6 +141,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('fleet/reservation', Reservation::class)->name('reserve');
     Route::get('fleet/romrequestlist', Romrequestlist::class)->name('romlist');
     Route::get('fleet/rominventory', Rominventory::class)->name('rominventory');
+    Route::get('fleet/lists', Vlists::class)->name('vlists');
     Route::get('asset/evaluations', Evaluations::class)->name('evaluations');
     Route::get('asset/reports', Reportst::class)->name('assetreport');
     Route::get('asset/maintenance', MaintenanceRequests::class)->name('assetmaintenance');

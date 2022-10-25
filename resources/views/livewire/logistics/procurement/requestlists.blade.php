@@ -23,6 +23,7 @@
                         <thead class="bg-info">
                             <th class="text-center align-middle">No.</th>
                             <th class="text-center align-middle">Origin</th>
+                            <th class="text-center align-middle">Type</th>
                             <th class="text-center align-middle">Category</th>
                             <th class="text-center align-middle">Item Name</th>
                             <th class="text-center align-middle">Quantity</th>
@@ -33,10 +34,11 @@
                             <th class="text-center align-middle">Action</th>
                         </thead>
                         <tbody>
-                            @forelse ($requests as $request)
+                            @forelse ($requests as $key => $request)
                             <tr>
-                                <td class="text-center">{{$request->id}}</td>
+                                <td class="text-center">{{$key+1}}</td>
                                 <td class="text-center align-middle">{{$request->origin}}</td>
+                                <td class="text-center align-middle">{{$request->type}}</td>
                                 <td class="text-center align-middle">{{$request->category}}</td>
                                 <td class="text-center align-middle">{{$request->item_name}}</td>
                                 <td class="text-center align-middle">{{$request->item_qty}}</td>
@@ -49,12 +51,18 @@
                                 <td>{{$request->date_granted}}</td>
                                 @endif
                                 <td class="text-center">
-                                    <button wire:click="approve({{$request->id}})" class="btn btn-primary btn-sm">Approve</button>
+                                    @if ($request->status == 'Approved')
+                                        <button wire:click="approve({{$request->id}})" class="btn btn-secondary btn-sm" disabled>Approved</button>
+                                    @else
+                                        <button wire:click="approve({{$request->id}})" class="btn btn-primary btn-sm">Approve</button>
+                                    @endif
+                                   
+                                    
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="10" class="text-center">No Record Found</td>
+                                <td colspan="11" class="text-center">No Record Found</td>
                             </tr>
                             @endforelse
                         </tbody>

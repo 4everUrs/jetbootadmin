@@ -25,7 +25,7 @@ class Evaluations extends Component
     public function render()
     {
         return view('livewire.logistics.assetmgmt.evaluations', [
-            'items' => Shop::all(),
+            'items' => Shop::orderBy('id', 'desc')->paginate(10),
         ]);
     }
 

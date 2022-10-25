@@ -24,7 +24,7 @@ class Inventory extends Component
     {
 
         return view('livewire.logistics.warehouse.inventory', [
-            'items' => Stock::with('Supplier')->orderBy('id', 'desc')->paginate(5),
+            'items' => Stock::with('Supplier')->orderBy('id', 'desc')->paginate(10),
             'suppliers' => Supplier::where('status', '!=', 'Terminated')->get(),
         ]);
     }
@@ -87,37 +87,6 @@ class Inventory extends Component
         $this->resetInput();
         $this->addItem = false;
     }
-
-    public function restockItem()
-    {
-        $temp = Stock::find($this->selected_id);
-        $temp->stock_quantity += $this->qty;
-        $temp->save();
-        toastr()->addSuccess('Data update successfully');
-        $this->reset();
-        $this->restockModal = false;
-    }
-
-    public function deleteModal()
-    {
-        Stock::find($this->item_id)->destroy($this->item_id);
-        toastr()->addSuccess('Data deleted successfully');
-        $this->resetInput();
-        $this->deleteModal = false;
-    }
-
-    public function delete($id)
-    {
-        $this->item_id = $id;
-        $this->deleteModal = true;
-    }
-
-    public function restock($id)
-    {
-        $this->selected_id = $id;
-        $this->restockModal = true;
-    }
-
     public function resetInput()
     {
         $this->code = null;

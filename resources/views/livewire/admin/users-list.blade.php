@@ -78,7 +78,7 @@
                           @if (!empty($teams)){
                             @foreach ($teams as $key => $team)
                                 @if ($team->name != 'Admin')
-                                    <option value="{{$key+1}}">{{$team->name}}</option>
+                                    <option value="{{$team->id}}">{{$team->name}}</option>
                                 @endif
                             @endforeach
                           }

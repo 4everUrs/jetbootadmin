@@ -9,7 +9,7 @@ class ProcurementRequest extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'origin', 'content', 'status', 'category',  'item_name', 'item_qty', 'requestor'
+        'origin', 'content', 'status', 'category',  'item_name', 'item_qty', 'requestor', 'type'
     ];
     public function WarehouseSent()
     {

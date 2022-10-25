@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('origin');
             $table->string('requestor');
+            $table->string('type');
             $table->string('item_name');
             $table->integer('item_qty');
             $table->string('category');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Logistics\Procurement;
 
+use App\Http\Livewire\Logistics\Sidebars\Warehouse;
 use Livewire\Component;
 use App\Models\ProcurementRequest;
 use App\Models\Recieved;
@@ -38,8 +39,10 @@ class Requestlists extends Component
         $this->requirements;
         $searchFields = '%' . $this->search . '%';
         return view('livewire.logistics.procurement.requestlists', [
-            'requests' => ProcurementRequest::where('origin', 'like', $searchFields)->paginate(10),
-            'sents' => ProcurementSentRequest::where('description', 'like', $searchFields)->paginate(10),
+            'requests' => ProcurementRequest::where('origin', 'like', $searchFields)
+                ->orderBy('id', 'desc')->paginate(10),
+            'sents' => ProcurementSentRequest::where('description', 'like', $searchFields)
+                ->orderBy('id', 'desc')->paginate(10),
 
         ]);
     }
@@ -58,8 +61,10 @@ class Requestlists extends Component
             toastr()->addWarning('Data is already approved');
         } else {
             $request->status = 'Approved';
+
             $request->date_granted = Carbon::parse(now())->toFormattedDateString();
             $request->save();
+
             toastr()->addSuccess('Data update successfully');
             RequestNotification::create([
                 'user_id' => Auth::user()->id,

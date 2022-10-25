@@ -22,9 +22,9 @@
                     <th class="text-center align-middle">Action</th>
                 </tr>
                 <tbody>
-                   @forelse ($proposals as $proposal)
+                   @forelse ($proposals as $key => $proposal)
                        <tr>
-                            <td>{{$proposal->id}}</td>
+                            <td>{{$key+1}}</td>
                             <td>{{$proposal->proposalname}}</td>
                             <td>{{$proposal->description}}</td>
                             <td>{{$proposal->requestor}}</td>
@@ -35,7 +35,12 @@
                             <td>{{$proposal->rstatus}}</td>
                             <td>{{$proposal->remarks}}</td>
                             <td>
-                                <button wire:click="transfer({{$proposal->id}})" class="btn btn-sm btn-dark">Transfer</button>
+                                @if ($proposal->rstatus == 'Pending')
+                                    <button wire:click="transfer({{$proposal->id}})" class="btn btn-sm btn-dark">Transfer</button>
+                                @else
+                                    <button wire:click="transfer({{$proposal->id}})" class="btn btn-sm btn-dark" disabled>Transfer</button>
+                                @endif
+                                
                             </td>
                        </tr>
                    @empty

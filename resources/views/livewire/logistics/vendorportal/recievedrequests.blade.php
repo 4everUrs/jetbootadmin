@@ -36,9 +36,9 @@
                             
                                 </thead>
                                 <tbody>
-                                    @forelse ($recieveds as $recieved)
+                                    @forelse ($recieveds as $key => $recieved)
                                     <tr>
-                                        <td class="text-center">{{$recieved->id}}</td>
+                                        <td class="text-center">{{$key+1}}</td>
                                         <td class="text-center align-middle">{{$recieved->origin}}</td>
                                         <td class="text-center align-middle">{{$recieved->type}}</td>
                                         <td class="text-center align-middle">{{$recieved->item_name}}</td>
@@ -77,9 +77,9 @@
                                     <th class="text-center align-middle">Action</th>
                                 </thead>
                                 <tbody>
-                                    @forelse ($requests as $request)
+                                    @forelse ($requests as $key => $request)
                                     <tr>
-                                        <td class="text-center">{{$request->id}}</td>
+                                        <td class="text-center">{{$key+1}}</td>
                                         <td class="text-center align-middle">{{$request->type}}</td>
                                         <td class="text-center align-middle">{{$request->content}}</td>
                                         <td class="text-center align-middle">{{$request->location}}</td>

@@ -70,9 +70,9 @@
                             
                             </thead>
                             <tbody>
-                                @forelse ($items as $item)
+                                @forelse ($items as $key => $item)
                                 <tr>
-                                    <td class="text-center">{{$item->id}}</td>
+                                    <td class="text-center">{{$key+1}}</td>
                                     <td class="text-center align-middle">{{$item->origin}}</td>
                                     <td class="text-center align-middle">{{$item->item_name}}</td>
                                     <td class="text-center align-middle">{{$item->condition}}</td>
@@ -82,7 +82,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td class="text-center" colspan="8">No Record Found Nigga!</td>
+                                    <td class="text-center" colspan="8">No Record Found</td>
                                 </tr>
                                 @endforelse
                             </tbody>

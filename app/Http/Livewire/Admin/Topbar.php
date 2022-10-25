@@ -13,10 +13,10 @@ class Topbar extends Component
     {
 
         return view('livewire.admin.topbar', [
-            'users' => User::with('Time')->find(Auth::user()->id),
             'notifications' => RequestNotification::where('reciever', '=', Auth::user()->currentTeam->name)
                 ->orWhere('department', '=', Auth::user()->currentTeam->name)
                 ->with('User')
+                ->orderBy('id', 'desc')
                 ->get(),
         ]);
     }

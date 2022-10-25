@@ -18,7 +18,7 @@ class Bmproposals extends Component
     {
         return view('livewire.logistics.procurement.bmproposals', [
             'reorders' => Reorder::with('Supplier')->get(),
-            'proposals' => BmProposal::get(),
+            'proposals' => BmProposal::orderBy('id', 'desc')->paginate(10),
         ]);
     }
     public function createBudgetProposal()

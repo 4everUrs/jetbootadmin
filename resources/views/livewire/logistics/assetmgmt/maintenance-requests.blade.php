@@ -18,9 +18,9 @@
                     <th class="text-center align-middle">Status</th>
                 </thead>
                 <tbody>
-                    @forelse ($requests as $request)
+                    @forelse ($requests as $key => $request)
                         <tr>
-                            <td class="text-center">{{$request->id}}</td>
+                            <td class="text-center">{{$key+1}}</td>
                             <td class="text-center align-middle">{{$request->subject}}</td>
                             <td class="text-center align-middle">{{$request->category}}</td>
                             <td class="text-center align-middle">{{$request->description}}</td>

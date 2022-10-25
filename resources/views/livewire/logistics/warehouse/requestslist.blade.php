@@ -6,8 +6,8 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="$toggle('requestModal')" class="btn btn-primary btn-sm">Request Supplier</button>
-            <button wire:click="$toggle('reOrderModal')" class="btn btn-success btn-sm">Request Re-Order</button>
+            <button wire:click="$toggle('requestModal')" class="btn btn-dark btn-sm">Request new item</button>
+            <button wire:click="$toggle('reOrderModal')" class="btn btn-warning btn-sm">Request Re-Order</button>
            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
             <li class="nav-item mr-2" role="presentation" wire:ignore>
                 <button class="nav-link active" id="recieved-tab" data-bs-toggle="tab" data-bs-target="#recieved" type="button"
@@ -22,6 +22,7 @@
             <div class="tab-pane fade show active" id="recieved" role="tabpanel" aria-labelledby="recieved-tab" wire:ignore.self>
                 <div class="card">
                     <div class="card-body">
+                        
                         <x-table head="Request List Table">
                             <thead class="bg-info">
                                 <th class="text-center align-middle">No.</th>
@@ -43,7 +44,12 @@
                                         @if ($request->status == 'Pending')
                                             <button wire:click="confirm({{$request->id}})" class="btn btn-primary btn-sm">Confirm</button>
                                         @else
-                                            <button wire:click="dispatch({{$request->id}})" class="btn btn-success btn-sm">Dispatch</button>
+                                            @if ($request->status == 'Dispatched')
+                                                <button wire:click="dispatch({{$request->id}})" class="btn btn-secondary btn-sm" disabled>Dispatch</button>
+                                            @else
+                                                <button wire:click="dispatch({{$request->id}})" class="btn btn-success btn-sm">Dispatch</button>
+                                            @endif
+                                            
                                         @endif
                                         
                                         
@@ -71,7 +77,7 @@
                                 <th class="text-center align-middle">No.</th>
                                 <th class="text-center align-middle">Category</th>
                                 <th class="text-center align-middle">Destination</th>
-                                <th class="text-center align-middle">Content</th>
+                                <th class="text-center align-middle">Description</th>
                                 <th class="text-center align-middle">Date</th>
                                 <th class="text-center align-middle">Status</th>
                             </thead>
@@ -80,7 +86,7 @@
                                     <tr>
                                         <td class="text-center">{{$key+1}}</td>
                                         <td class="text-center align-middle">{{$sent->category}}</td>
-                                        <td class="text-center align-middle">{{$sent->destination}}</td>
+                                        <td class="text-center align-middle">Procurement</td>
                                         <td class="text-center align-middle">{{$sent->content}}</td>
                                         <td class="text-center">{{Carbon\Carbon::parse($sent->created_at)->toFormattedDateString()}}</td>
                                         <td class="text-center">{{$sent->status}}</td>

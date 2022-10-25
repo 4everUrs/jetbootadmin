@@ -44,10 +44,7 @@
                                 <td class="text-center align-middle">{{$item->remarks}}</td>
                                 <td class="text-center align-middle">
                                     <button wire:click="update({{$item->id}})" class="btn btn-primary btn-sm">Update</button>
-                                   
-                                    <button wire:click="restock({{$item->id}})" class="btn btn-info btn-sm">Restock</button>
                                 </td>
-                            
                             </tr>
                         @elseif ($item->status == 'LOW')
                             <tr class="bg-danger">
@@ -65,9 +62,7 @@
                                 <td class="text-center align-middle">{{$item->remarks}}</td>
                                 <td class="text-center align-middle">
                                     <button wire:click="update({{$item->id}})" class="btn btn-primary btn-sm">Update</button>
-                                    <button wire:click="restock({{$item->id}})" class="btn btn-info btn-sm">Restock</button>
                                 </td>
-                            
                             </tr>    
                         @endif
                     @empty
@@ -84,127 +79,105 @@
     </div>
     {{--Create Modal--}}
     <x-jet-dialog-modal wire:model="addItem" maxWidth="md">
-
-            <x-slot name="title">
-                {{ __('Add new item') }}
-            </x-slot>
-
-            <x-slot name="content">
-                <div class="form-group">
-                    <label>Manufacturer</label>
-                    <select wire:model="manufacturer" class="form-control">
-                        <option value="">Select Option</option>
-                        @forelse ($suppliers as $supplier)
-                            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                        @empty
-                            <option value="">No Supplier found</option>
-                        @endforelse
-                    </select>
-                    @error('manufacturer') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                    <label>Item Name</label>
-                    <input wire:model="name" type="text" class="form-control">
-                    @error('name') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-
-                    <label>Description</label>
-                    <textarea wire:model="description" class="form-control" rows="3"></textarea>
-                    @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                    <label>Cost per item</label>
-                    <input wire:model="cost_per_item" type="text" class="form-control">
-                    @error('cost_per_item') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                    <label>Quantity</label>
-                    <input wire:model="stock_quantity" type="number" class="form-control">
-                    @error('stock_quantity') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                    <label>Reorder Level</label>
-                    <input wire:model="reorder_level" type="number" class="form-control">
-                    @error('reorder_level') <span class="alert text-danger">{{ $message }}<br /></span> @enderror          
-                    <label>Reorder Quantity</label>
-                    <input wire:model="reorder_quantity" type="number" class="form-control">
-                    @error('reorder_quantity') <span class="alert text-danger">{{ $message }}<br /></span> @enderror          
-                    <label>Days per Reorder</label>
-                    <input wire:model="reorder_days" type="number" class="form-control">
-                    @error('reorder_days') <span class="alert text-danger">{{ $message }}<br /></span> @enderror          
-                </div>
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$toggle('addItem')" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-jet-secondary-button>
-
-                <x-jet-button class="ms-2" wire:click="saveItem" wire:loading.attr="disabled">
-                    {{ __('add new Item') }}
-                </x-jet-button>
-            </x-slot>
+    
+        <x-slot name="title">
+            {{ __('Add new item') }}
+        </x-slot>
+    
+        <x-slot name="content">
+            <div class="form-group">
+                <label>Manufacturer</label>
+                <select wire:model="manufacturer" class="form-control">
+                    <option value="">Select Option</option>
+                    @forelse ($suppliers as $supplier)
+                    <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                    @empty
+                    <option value="">No Supplier found</option>
+                    @endforelse
+                </select>
+                @error('manufacturer') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Item Name</label>
+                <input wire:model="name" type="text" class="form-control">
+                @error('name') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+    
+                <label>Description</label>
+                <textarea wire:model="description" class="form-control" rows="3"></textarea>
+                @error('description') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Cost per item</label>
+                <input wire:model="cost_per_item" type="text" class="form-control">
+                @error('cost_per_item') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Quantity</label>
+                <input wire:model="stock_quantity" type="number" class="form-control">
+                @error('stock_quantity') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Reorder Level</label>
+                <input wire:model="reorder_level" type="number" class="form-control">
+                @error('reorder_level') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Reorder Quantity</label>
+                <input wire:model="reorder_quantity" type="number" class="form-control">
+                @error('reorder_quantity') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Days per Reorder</label>
+                <input wire:model="reorder_days" type="number" class="form-control">
+                @error('reorder_days') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+            </div>
+        </x-slot>
+    
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('addItem')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="saveItem" wire:loading.attr="disabled">
+                {{ __('add new Item') }}
+            </x-jet-button>
+        </x-slot>
     </x-jet-dialog-modal>
-
-    {{--Restock Modal--}}
-        <x-jet-dialog-modal wire:model="restockModal">
-            <x-slot name="title">
-                {{ __('Add new item') }}
-            </x-slot>
-            <x-slot name="content">
-                <div class="form-group">
-                    <label>Add Quantity</label>
-                    <input type="text" class="form-control" wire:model="qty">
-                    @error('qty') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+    
+    {{--Update Modal--}}
+    <x-jet-dialog-modal wire:model="updateModal">
+        <x-slot name="title">
+            {{ __('Add new item') }}
+        </x-slot>
+        <x-slot name="content">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation" wire:ignore>
+                    <button class="nav-link active" id="add-tab" data-bs-toggle="tab" data-bs-target="#add" type="button"
+                        role="tab" aria-controls="add" aria-selected="true">Add Quantity</button>
+                </li>
+                <li class="nav-item" role="presentation" wire:ignore>
+                    <button class="nav-link" id="subtract-tab" data-bs-toggle="tab" data-bs-target="#subtract" type="button"
+                        role="tab" aria-controls="subtract" aria-selected="false">Subtract</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div wire:ignore.self class="tab-pane fade show active" id="add" role="tabpanel" aria-labelledby="add-tab">
+                    <div class="card">
+                        <div class="card-body">
+                           <label>Add Quantity</label>
+                            <input type="number" class="form-control" wire:model="add">
+                            @error('qty') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                        </div>
+                    </div>
                 </div>
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$toggle('restockModal')" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-jet-secondary-button>
-
-                <x-jet-button class="ms-2" wire:click="restockItem" wire:loading.attr="disabled">
-                    {{ __('Update Item') }}
-                </x-jet-button>
-            </x-slot>
-        </x-jet-dialog-modal>
-
-        {{--Update Modal--}}
-        <x-jet-dialog-modal wire:model="updateModal">
-            <x-slot name="title">
-                {{ __('Add new item') }}
-            </x-slot>
-            <x-slot name="content">
-                <div class="form-group">
-                    <label>Add Quantity</label>
-                    <input type="number" class="form-control" wire:model="add">
-                    @error('qty') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                    <label>Subtract Quantity</label>
-                    <input type="number" class="form-control" wire:model="sub">
-                    @error('qty') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <div wire:ignore.self class="tab-pane fade" id="subtract" role="tabpanel" aria-labelledby="subtract-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <label>Subtract Quantity</label>
+                            <input type="number" class="form-control" wire:model="sub">
+                            @error('qty') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                        </div>
+                    </div>
                 </div>
-            </x-slot>
-
-            <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$toggle('updateModal')" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-jet-secondary-button>
-
-                <x-jet-button class="ms-2" wire:click="updateItem" wire:loading.attr="disabled">
-                    {{ __('Update Item') }}
-                </x-jet-button>
-            </x-slot>
-        </x-jet-dialog-modal>
-
-    {{--Delete Modal--}}
-    <x-jet-dialog-modal wire:model="deleteModal">
-            <x-slot name="title">
-                {{ __('Delete item') }}
-            </x-slot>
-            <x-slot name="content">
-                <h4>Are you sure to Delete this item?</h4>
-            </x-slot>
-            
-            <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$toggle('deleteModal')" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-jet-secondary-button>
-            
-                <x-jet-button class="ms-2" wire:click="deleteModal" wire:loading.attr="disabled">
-                    {{ __('Yes') }}
-                </x-jet-button>
-            </x-slot>
+            </div>
+        </x-slot>
+    
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('updateModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="updateItem" wire:loading.attr="disabled">
+                {{ __('Update Item') }}
+            </x-jet-button>
+        </x-slot>
     </x-jet-dialog-modal>
 </div>
