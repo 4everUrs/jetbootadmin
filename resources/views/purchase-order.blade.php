@@ -1,9 +1,8 @@
-<div>
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Purchase Order</title>
 </head>
 
@@ -23,21 +22,17 @@
             <tr>
                 <td style="padding: 0px;">Tech-Trendz Services</td>
                 <td style="padding: 0px;"></td>
-                @if (!empty($po))
-                    <td style="padding: 0px;  text-align: right;">Date:<span
-                            style="display: inline-block; padding: 0 10px; border: 1px solid #000000; width: 100px; margin-left: 7px;">{{Carbon\Carbon::parse($po->created_at)->format('m/d/y')}}</span>
-                    </td>
-                @endif
+                <td style="padding: 0px;  text-align: right;">Date:<span
+                        style="display: inline-block; padding: 0 10px; border: 1px solid #000000; width: 100px; margin-left: 7px;">@date($po->created_at)</span>
+                </td>
             </tr>
 
             <tr>
                 <td style="padding: 0px;">Lot 762 cor. Topaz St. and Sapphire St.</td>
                 <td style="padding: 0px;"></td>
-               @if (!empty($po))
-                   <td style="padding: 0px; text-align: right;">PO#<span
-                            style="display: inline-block; padding: 0 10px; border: 1px solid #000000; border-top-width: 0px; width: 100px; margin-left: 7px;">{{$po->po_id}}</span>
-                    </td>
-               @endif
+                <td style="padding: 0px; text-align: right;">PO#<span
+                        style="display: inline-block; padding: 0 10px; border: 1px solid #000000; border-top-width: 0px; width: 100px; margin-left: 7px;">{{$po->po_id}}</span>
+                </td>
             </tr>
             <tr>
                 <td colspan="3">Millionaire’s Village, Novaliches Quezon City,</td>
@@ -65,32 +60,30 @@
                     Ship To</th>
             </tr>
         </thead>
-       @if (!empty($supplier))
-           <tbody>
-                <tr>
-                    <td style="border: none; padding: 3px 10px;">{{$supplier->name}}</td>
-                    <td></td>
-                    <td style="border: none; padding: 3px 10px;">Tech-Trendz Services</td>
-                </tr>
-            
-                <tr>
-                    <td style="border: none; padding: 3px 10px;">{{$supplier->address}}</td>
-                    <td></td>
-                    <td style="border: none; padding: 3px 10px;">Lot 762 cor. Topaz St. and Sapphire St.</td>
-                </tr>
-            
-                <tr>
-                    <td style="border: none; padding: 3px 10px;">{{$supplier->email}}</td>
-                    <td></td>
-                    <td style="border: none; padding: 3px 10px;">Millionaire’s Village, Novaliches Quezon City,</span></td>
-                </tr>
-                <tr>
-                    <td style="border: none; padding: 3px 10px;">{{$supplier->phone}}</td>
-                    <td></td>
-                    <td style="border: none; padding: 3px 10px;">Contact #: 463-8787, 799-6617</td>
-                </tr>
-            </tbody>
-       @endif
+        <tbody>
+            <tr>
+                <td style="border: none; padding: 3px 10px;">{{$supplier->name}}</td>
+                <td></td>
+                <td style="border: none; padding: 3px 10px;">Tech-Trendz Services</td>
+            </tr>
+
+            <tr>
+                <td style="border: none; padding: 3px 10px;">{{$supplier->address}}</td>
+                <td></td>
+                <td style="border: none; padding: 3px 10px;">Lot 762 cor. Topaz St. and Sapphire St.</td>
+            </tr>
+
+            <tr>
+                <td style="border: none; padding: 3px 10px;">{{$supplier->email}}</td>
+                <td></td>
+                <td style="border: none; padding: 3px 10px;">Millionaire’s Village, Novaliches Quezon City,</span></td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 3px 10px;">{{$supplier->phone}}</td>
+                <td></td>
+                <td style="border: none; padding: 3px 10px;">Contact #: 463-8787, 799-6617</td>
+            </tr>
+        </tbody>
     </table>
 
     <table
@@ -112,18 +105,15 @@
             </tr>
         </thead>
         <tbody>
-
-           @if (!empty($items))
-               @foreach ($items->getItem as $item)
+           
+            @foreach ($items as $item)
                 <tr>
                     <td style="border: 1px solid; padding: 0 10px;">{{$item->item}}</td>
                     <td style="border: 1px solid; padding: 0 10px; text-align: center;">{{$item->qty}}</td>
                     <td style="border: 1px solid; padding: 0 10px; text-align: right;">@print($item->cost)</td>
-                    <td style="border: 1px solid; padding: 0 10px;  background-color: #F2F2F2; text-align: right;">
-                        @print($item->totalcost)</td>
+                    <td style="border: 1px solid; padding: 0 10px;  background-color: #F2F2F2; text-align: right;">@print($item->totalcost)</td>
                 </tr>
-                @endforeach
-           @endif
+            @endforeach
 
 
             <tr>
@@ -151,8 +141,7 @@
                 <td style="border: none; padding: 0 10px;">&nbsp;</td>
                 <td style="border: none; padding: 0 10px;">&nbsp;</td>
                 <td style="border: none; padding: 0 10px;">SUBTOTAL</td>
-                <td style="border: none; padding: 0 10px; background-color: #F2F2F2; text-align: right;">
-                    @print($subtotal)</td>
+                <td style="border: none; padding: 0 10px; background-color: #F2F2F2; text-align: right;">@print($subtotal)</td>
             </tr>
 
             <tr>
@@ -182,8 +171,7 @@
 
             <tr>
                 <td style="border: none; padding: 0 10px;"><strong>TOTAL</strong></td>
-                <td style="border: none; padding: 0 10px; background-color: #F2F2F2; text-align: right;">
-                    @print($subtotal)</td>
+                <td style="border: none; padding: 0 10px; background-color: #F2F2F2; text-align: right;">@print($subtotal)</td>
             </tr>
 
         </tbody>
@@ -192,4 +180,3 @@
 </body>
 
 </html>
-</div>

@@ -23,7 +23,7 @@ class Bidders extends Component
             $this->bidderDetail = Bidder::find($this->selected_id);
         }
         if (!empty($this->post_id)) {
-            $this->postDetail = Recieved::find($this->post_id);
+            $this->postDetail = Recieved::with('getRequirements')->find($this->post_id);
         }
         return view('livewire.logistics.vendorportal.bidders');
     }
@@ -46,22 +46,7 @@ class Bidders extends Component
         if ($postType == 'Buyer') {
             dd('test Buyer');
         } elseif ($postType == 'Supplier') {
-            $supplier = Bidder::find($this->selected_id);
-            if ($supplier->status != 'Awarded') {
-                Supplier::create([
-                    'name' => $supplier->name,
-                    'email' => $supplier->email,
-                    'phone' => $supplier->phone,
-                    'address' => $supplier->address,
-                    'status' => 'On-Going',
-                ]);
-                toastr()->addSuccess('Request Success sent!.');
-                $supplier->status = 'Awarded';
-                $supplier->save();
-            } else {
-                toastr()->addWarning('Already Awarded');
-            }
-
+            Bidder::find($this->selected_id)->update(['status' => 'Sent']);
             $this->viewBidderDetails = false;
         } elseif ($postType == 'Contractor') {
             dd('test Contractor');

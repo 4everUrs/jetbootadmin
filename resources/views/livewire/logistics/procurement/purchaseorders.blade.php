@@ -117,7 +117,7 @@
         
     </x-jet-dialog-modal>
 
-    <x-jet-dialog-modal wire:model="poView" maxWidth="xl">
+    <x-jet-dialog-modal wire:model="poView" maxWidth="lg">
         <x-slot name="title">
             {{ __('Purchase Order') }}
         </x-slot>

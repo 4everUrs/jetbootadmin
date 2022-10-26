@@ -33,7 +33,12 @@
                             
                             <td class="text-center">{{$bidder->status}}</td>
                             <td>
-                                <button wire:click="loadModal({{$bidder->id}})" class="btn btn-dark btn-sm">View</button>
+                                @if ($bidder->status == 'Pending')
+                                    <button wire:click="loadModal({{$bidder->id}})" class="btn btn-dark btn-sm">View</button>
+                                @else
+                                    <button wire:click="loadModal({{$bidder->id}})" class="btn btn-secondary btn-sm" disabled>View</button>
+                                @endif
+                              
                             </td>
                         </tr>
                     @empty
@@ -54,38 +59,67 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <div class="form-group">
-                            @if (!empty($postDetail))
-                                <p>Type: <label>{{$postDetail->type}}</label></p>
-                                <p>Description: <label>{{$postDetail->description}}</label></p>
-                                <p>Location: <label>{{$postDetail->location}}</label></p>
-                                <p>Bid Range: <label>@money($postDetail->start) - @money($postDetail->end)</label></p>
-                                <p>Requirements: <label></label></p>
-                                
-                                {{-- @foreach ($datas as $data)
-                                <li>{{$data->requirements}}</li>
-                                @endforeach --}}
-                            @endif
-                            
+                        @if (!empty($postDetail))
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Type</td>
+                                    <td>{{$postDetail->type}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td>{{$postDetail->description}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Location</td>
+                                    <td>{{$postDetail->location}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Bid Range</td>
+                                    <td>@money($postDetail->start) - @money($postDetail->end)</td>
+                                </tr>
+                                <tr>
+                                    <td>Requirements</td>
+                                    <td>
+                                        @foreach ($postDetail->getRequirements as $req)
+                                            <li>{{$req->requirements}}</li>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                            </table>
+                        @endif
                         
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <div class="form-group">
-                            @if (!empty($bidderDetail))
-                                <p>Company Name: <label>{{$bidderDetail->name}}</label></p>
-                                <p>Company Email: <label>{{$bidderDetail->email}}</label></p>
-                                <p>Company Phone: <label>{{$bidderDetail->phone}}</label></p>
-                                <p>Bid Amount: <label>@money($bidderDetail->bid_amount)</label></p>
-                                <p>Company Name: <label>{{$bidderDetail->name}}</label></p>
+                       @if (!empty($bidderDetail))
+                           <table class="table table-bordered">
+                                <tr>
+                                    <td>Company Name</td>
+                                    <td>{{$bidderDetail->name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Company Email</td>
+                                    <td>{{$bidderDetail->email}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Company Phone</td>
+                                    <td>{{$bidderDetail->phone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Company Address</td>
+                                    <td>{{$bidderDetail->address}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Bid Amount</td>
+                                    <td>@money($bidderDetail->bid_amount)</td>
+                                </tr>
                                 
-                            @endif
-                           
-                        </div>
+                            </table>
+                       @endif
+                        
                     </div>
                 </div>
             </div>
@@ -97,7 +131,7 @@
             </x-jet-secondary-button>
     
             <x-jet-button wire:click="awarding" class="ms-2" id="createButton"  wire:loading.attr="disabled">
-                {{ __('Award') }}
+                {{ __('Send') }}
             </x-jet-button>
     
         </x-slot>

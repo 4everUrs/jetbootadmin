@@ -95,6 +95,9 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::get('/testfile', [PDFController::class, 'testDownload']);
+
+
 
 //Login Routes
 Route::get('/redirects', [LoginController::class, 'login'])->name('home');
@@ -123,7 +126,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('vendor/supplierposting', Supplierposting::class)->name('supplierposting');
     Route::get('procurement/po/view/{id}', PurchaseItems::class)->name('poView');
     Route::get('procurement/po/view/{id}', [PDFController::class, 'index'])->name('pdf');
-    Route::get('procurement/po/download/{id}', [PDFController::class, 'downloadPdf'])->name('download');
+    Route::get('procurement/po/download/{id}', [PDFController::class, 'testDownload'])->name('download');
     Route::get('vendor/supplierlist', Supplierlist::class)->name('supplierlist');
     Route::get('vendor/disposal', Disposal::class)->name('disposal');
     Route::get('vendor/bidders', Bidders::class)->name('bidders');

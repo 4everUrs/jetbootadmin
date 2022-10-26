@@ -1,5 +1,6 @@
 <?php
 
+use App\View\Components\table;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,14 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('suppliers', function (Blueprint $table) {
+        Schema::create('vendor_pos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('po_id');
             $table->unsignedInteger('user_id');
-            $table->string('name');
-            $table->string('address');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('status');
+            $table->string('file_name');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('vendor_pos');
     }
 };

@@ -113,11 +113,6 @@
         </x-slot>
         <x-slot name="content">
             <div class="form-group">
-                <label>Type</label>
-                <select wire:model="type" class="form-control">
-                    <option>Select type</option>
-                    <option>Supplier</option>
-                </select>
                 <label>Item Name</label>
                 <input wire:model="name" class="form-control" type="text">
                 <label>Quantity</label>

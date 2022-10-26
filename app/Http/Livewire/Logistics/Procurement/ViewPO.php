@@ -10,32 +10,33 @@ use PDF;
 
 class ViewPO extends Component
 {
-    public $po_id ;
+    public $po_id;
     public $supplier_id;
-    public $items,$po,$supplier;
-    protected $listeners =[
+    public $subtotal;
+    public $temp;
+    protected $listeners = [
         'passId' => 'getId',
-        'download'=>'download',
+        'download' => 'download',
     ];
     public function getId($id)
     {
+        $this->subtotal = null;
         $this->po_id = $id;
         $test = PurchaseOrder::find($id);
         $this->supplier_id = $test->supplier_id;
-        
+        $this->temp = PurchaseOrder::with('getItem')->find($id);
+        foreach ($this->temp->getItem as $x) {
+            $this->subtotal += $x->totalcost;
+        }
+        // dd($this->temp->getItem[0]->item);
     }
 
     public function render()
     {
-        if(!empty($this->po_id)){
-            $this->items = PurchaseOrder::findOrFail($this->po_id)->getItem;
-            $this->po =PurchaseOrder::find($this->po_id);
-        }
-        if(!empty($this->supplier_id)){
-            $this->supplier = Supplier::findorFail($this->supplier_id);
-        }
-        return view('livewire.logistics.procurement.view-p-o');
+        return view('livewire.logistics.procurement.view-p-o', [
+            'items' => $this->temp,
+            'supplier' => Supplier::find($this->supplier_id),
+            'po' => PurchaseOrder::find($this->po_id),
+        ]);
     }
-
-
 }

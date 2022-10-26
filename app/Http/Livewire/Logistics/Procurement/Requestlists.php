@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Requestlists extends Component
 {
-    public $origin = 'Procurement', $description, $status = "Pending", $type, $start, $end, $location;
+    public $origin = 'Procurement', $description, $status = "Pending", $type = 'Supplier', $start, $end, $location;
     public $name, $qty;
     public $requestModal = false;
     public $search = '';
