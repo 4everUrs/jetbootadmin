@@ -13,8 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('anuallies', function (Blueprint $table) {
+        Schema::create('logisticannuals', function (Blueprint $table) {
             $table->id();
+            $table->integer('lyear');
+            $table->bigInteger('ldeptbudget');
+            $table->bigInteger('lobudget');
+            $table->bigInteger('lfbudget');
+            $table->bigInteger('lcbudget');
+            $table->bigInteger('llbudget');
+            $table->bigInteger('lsbudget');           
             $table->timestamps();
         });
     }
@@ -26,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anuallies');
+        Schema::dropIfExists('logisticannuals');
     }
 };
