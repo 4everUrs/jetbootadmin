@@ -77,7 +77,7 @@
                                 <tbody>
                                     @forelse($lannuals as $lannual)
                                     <tr>
-                                        <td>@money($lannual->lyear)</td>
+                                        <td>{{$lannual->lyear}}</td>
                                         <td>@money($lannual->ldeptbudget)</td>
                                         <td>@money($lannual->lobudget)</td> 
                                         <td>@money($lannual->lfbudget)</td>
