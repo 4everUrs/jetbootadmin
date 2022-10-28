@@ -58,6 +58,13 @@ class Supplierslists extends Component
         $file['file_name'] = $this->file_name->storeAs('po_file', $fileName, 'do');
         $file['user_id'] = $user->user_id;
         VendorPo::create($file);
+
+
+
+
+
+
+
         $client = User::find($user->user_id);
         $url = 'https://mnlph.nyc3.digitaloceanspaces.com/' . $file['file_name'];
         $data = [
