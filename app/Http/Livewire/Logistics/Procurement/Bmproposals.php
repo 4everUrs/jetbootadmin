@@ -44,6 +44,7 @@ class Bmproposals extends Component
                 'proposedamount' => $temp->proposedamount,
                 'rstatus' => 'Pending',
                 'remarks' => $temp->description,
+                'origin' => 'Logistics-Procurement'
             ]);
             toastr()->addSuccess('Trasnfer Successfully');
             BmProposal::find($id)->update(['rstatus' => 'Reviewing']);

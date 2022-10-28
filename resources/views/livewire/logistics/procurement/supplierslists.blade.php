@@ -180,7 +180,8 @@
                 <label>Purchase Order ID</label>
                 <input wire:model="po_id" type="text" class="form-control">
                 <label>Purchase Order File</label>
-                <input wire:model="po_file" type="file" class="form-control">
+                <input wire:model="file_name" type="file" class="form-control">
+                 @error('file_name') <span class="error">{{ $message }}</span> @enderror
             </div>
         </x-slot>
         <x-slot name="footer">

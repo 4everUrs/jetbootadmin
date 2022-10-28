@@ -17,7 +17,7 @@ class Supplierslists extends Component
     use WithFileUploads;
     public $awardModal = false;
     public $poSend = false;
-    public $selected_id, $po_file, $po_id;
+    public $selected_id, $file_name, $po_id;
     public function render()
     {
         return view('livewire.logistics.procurement.supplierslists', [
@@ -48,11 +48,14 @@ class Supplierslists extends Component
     }
     public function send()
     {
+        $fileName = $this->file_name->getClientOriginalName();
+
         $user = Supplier::find($this->selected_id);
         $file = $this->validate([
             'po_id' => 'required|integer',
+            'file_name' => 'required',
         ]);
-        $file['file_name'] = $this->po_file->store('po_file', 'do');
+        $file['file_name'] = $this->file_name->storeAs('po_file', $fileName, 'do');
         $file['user_id'] = $user->user_id;
         VendorPo::create($file);
         $client = User::find($user->user_id);
