@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('collects', function (Blueprint $table) {
             $table->id();
+            $table->string('rfrom');
+            $table->string('address');
+            $table->bigInteger('cramount');
+            $table->integer('receiptno');
+            $table->string('paytype');
+            $table->string('cremarks');
             $table->timestamps();
         });
     }

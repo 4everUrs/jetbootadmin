@@ -78,11 +78,11 @@
             <div wire:ignore.self class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="card">
                     <div class="card-body">
-                        <a wire:click="tableReceivable" class="btn btn-info btn-sm">Add Account Receivable</a>
+                        <a wire:click="tableReceivable" class="btn btn-secondary btn-sm">Add Account Receivable</a>
         
                         <x-table head="Lists of Account Receivable">
         
-                            <thead >
+                            <thead class="bg-secondary table-sm" >
                                 <th>Id</th>
                                 <th>Invoice Created</th>
                                 <th>Name</th>
@@ -126,17 +126,17 @@
 {{-------------------------------------------End Accounts Receivable---------------------------------------------------------}} 
 
 
-{{-------------------------------------------JOURNAL ENTRY---------------------------------------------------------}}    
+{{-------------------------------------------JOURNAL ENTRY modal---------------------------------------------------------}}    
             <div wire:ignore.self class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"> 
                 
                 <div class="card">
                     <div class="card-body">
             
-                        <a wire:click="loadingJournal" class="btn btn-info btn-sm">Add Journal Entry</a>
+                        <a wire:click="loadingJournal"  class="btn btn-secondary btn-sm">Add Journal Entry</a>
                     
                         <x-table head="History of Journal Entries">
                         
-                            <thead>
+                            <thead class="bg-secondary table-sm">
                                 <th>No.</th>
                                 <th>Date</th>
                                 <th>Description</th>
@@ -200,8 +200,7 @@
                                         <button wire:click="deleteliabilities({{$entry->id}})" class="btn btn-warning btn-sm">Delete</button>
                                         {{--<button wire:click="recordliabilities({{$entry->id}})" class="btn btn-danger btn-sm">Record</button>--}}
                                     </td>
-                                </tr>
-                                
+                                </tr>    
                             @endforeach
                             </tbody>
                         </x-table>    
@@ -214,10 +213,10 @@
             <div wire:ignore.self class="tab-pane fade" id="trial" role="tabpanel" aria-labelledby="trial-tab">
                 <div class="card">
                     <div class="card-body">    
-                        <a wire:click="loadModalCash" class="btn btn-info btn-sm">Add Cash Record</a>
+                        <a wire:click="loadModalCash"  class="btn btn-secondary btn-sm">Add Cash Record</a>
 
                             <x-table head="Cash">
-                                <thead>
+                                <thead class="bg-secondary table-sm">
                                     <th>Id</th>
                                     <th>Date</th>
                                     <th>Description</th>
@@ -225,7 +224,6 @@
                                     <th>Credit</th>
                                     <th>Status</th>   
                                 </thead>
-
                             <tbody>
                                 @forelse($gen_leds as $gen_led)
                                 <tr>
@@ -341,7 +339,7 @@
                                 <td>{{$prev['jcredit']}}</td>
 
                                 <td class="text-center">
-                                    <button wire click: class="btn btn-danger btn-sm">Remove</button>
+                                    <button wire:click="removebtn" class="btn btn-danger btn-sm">Remove</button>
                                 </td>
                             </tr>
                         @endforeach
