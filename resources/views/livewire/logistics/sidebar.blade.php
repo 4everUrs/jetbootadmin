@@ -27,7 +27,7 @@
                         <a href="{{route('bmproposal')}}" class="nav-link">Budget Proposal</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('reorders')}}" class="nav-link">Re-Order Requests</a>
+                        <a href="{{route('invoice')}}" class="nav-link">Invoice</a>
                     </li>
                 </ul>
             </li>
@@ -46,6 +46,9 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{route('warehousePO')}}" class="nav-link">Purchase Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('warehouseInvoice')}}" class="nav-link">Invoices</a>
                     </li>
 
                 </ul>

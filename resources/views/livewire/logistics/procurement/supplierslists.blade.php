@@ -136,6 +136,7 @@
                                                     <button wire:click="award({{$applicant->id}})" class="btn btn-secondary btn-sm" disabled>Award</button>
                                                 @else
                                                     <button wire:click="award({{$applicant->id}})" class="btn btn-dark btn-sm">Award</button>
+                                                    <button wire:click="sendInvitation({{$applicant->id}})" class="btn btn-primary btn-sm">Send Invitation</button>
                                                 @endif
                                                 
                                             </td>
@@ -153,6 +154,49 @@
             </div>
         </div>
     </div>
+    <x-jet-dialog-modal wire:model="invitationModal">
+        <x-slot name="title">
+            {{__('Send Invitation')}}
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label for="">Venue</label>
+                <input type="text" class="form-control">
+                <label for="">Date</label>
+                <input type="date" class="form-control">
+                <label for="">Time</label>
+                <input wire:model="time" type="time" class="form-control">
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('invitationModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button wire:click="sendInvi" class="ms-2" id="createButton" wire:loading.attr="disabled">
+                {{ __('Yes') }}
+            </x-jet-button>
+    
+        </x-slot>
+    </x-jet-dialog-modal>
+    <x-jet-dialog-modal wire:model="awardModal">
+        <x-slot name="title">
+            {{__('Award as Supplier')}}
+        </x-slot>
+        <x-slot name="content">
+            <h3>Are you sure to award this supplier?</h3>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('awardModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button wire:click="awarding" class="ms-2" id="createButton" wire:loading.attr="disabled">
+                {{ __('Yes') }}
+            </x-jet-button>
+    
+        </x-slot>
+    </x-jet-dialog-modal>
     <x-jet-dialog-modal wire:model="awardModal">
         <x-slot name="title">
             {{__('Award as Supplier')}}

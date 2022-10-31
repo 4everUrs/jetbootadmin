@@ -8,6 +8,7 @@ use App\Models\Supplier;
 use App\Models\User;
 use App\Models\VendorPo;
 use App\Notifications\SendPoNotification;
+use Carbon\Carbon;
 use Notification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
@@ -17,7 +18,8 @@ class Supplierslists extends Component
     use WithFileUploads;
     public $awardModal = false;
     public $poSend = false;
-    public $selected_id, $file_name, $po_id;
+    public $invitationModal = false;
+    public $selected_id, $file_name, $po_id, $time;
     public function render()
     {
         return view('livewire.logistics.procurement.supplierslists', [
@@ -93,5 +95,21 @@ class Supplierslists extends Component
         ]);
         toastr()->addSuccess('Operation Successfull');
         $this->awardModal = false;
+    }
+    public function sendInvitation()
+    {
+
+        $this->invitationModal = true;
+    }
+    public function sendInvi($id)
+    {
+        $temp = Supplier::find($id);
+        $dt = Carbon::createFromFormat('H:i', $this->time)->format('g:i A');
+        $data = [
+            'name' => $temp->name,
+            'date' => $this->date,
+            'time' => $this->time,
+
+        ];
     }
 }

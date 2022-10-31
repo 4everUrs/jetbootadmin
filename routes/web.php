@@ -14,6 +14,7 @@ use App\Http\Controllers\DisbursementController;
 use App\Http\Controllers\DownloadProposalController;
 use App\Http\Controllers\GeneralLedgerController;
 use App\Http\Livewire\Admin\AuditTrails;
+use App\Http\Livewire\Admin\Mailbox;
 use App\Http\Livewire\Logistics\Procurement\Requestlists;
 use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
@@ -75,10 +76,13 @@ use App\Http\Livewire\Logistics\Fleet\Romrequestlist;
 use App\Http\Livewire\Logistics\Fleet\Vinfo;
 use App\Http\Livewire\Logistics\Fleet\Vlists;
 use App\Http\Livewire\Logistics\Procurement\Bmproposals;
+use App\Http\Livewire\Logistics\Procurement\Invoices;
 use App\Http\Livewire\Logistics\Procurement\Reorders;
 use App\Http\Livewire\Logistics\Projectmanagement\Reports;
 use App\Http\Livewire\Logistics\Vendorportal\Workshops;
+use App\Http\Livewire\Logistics\Warehouse\Invoices as WarehouseInvoices;
 use App\Http\Livewire\Logistics\Warehouse\PurchaseOrders as WarehousePurchaseOrders;
+use App\Models\WhInvoice;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +113,7 @@ Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function () {
     Route::view('dashboard', 'livewire.admin.dashboard')->name('dashboard');
     Route::get('users', UsersList::class)->name('users');
     Route::get('audit', AuditTrails::class)->name('audits');
+    Route::get('mailbox', Mailbox::class)->name('mailbox');
 });
 
 //Logistics Routes
@@ -120,7 +125,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('warehouse/requests', Requestslist::class)->name('requestlists');
     Route::get('procurement/suppliers', Supplierslists::class)->name('suppliers');
     Route::get('procurement/proposals', Bmproposals::class)->name('bmproposal');
-    Route::get('procurement/reorders', Reorders::class)->name('reorders');
+    Route::get('procurement/invoices', Invoices::class)->name('invoice');
     Route::get('procurement/purchaseorder', Purchaseorders::class)->name('po');
     Route::get('vendor/recievedrequests', RecievedRequests::class)->name('recievedrequests');
     Route::get('vendor/supplierposting', Supplierposting::class)->name('supplierposting');
@@ -149,6 +154,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('asset/reports', Reportst::class)->name('assetreport');
     Route::get('asset/maintenance', MaintenanceRequests::class)->name('assetmaintenance');
     Route::get('projectmanagement/reports', Reports::class)->name('pmreports');
+    Route::get('warehouse/invoices', WarehouseInvoices::class)->name('warehouseInvoice');
 });
 
 //Finance Routes
