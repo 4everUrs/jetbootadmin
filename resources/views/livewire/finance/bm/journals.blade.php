@@ -538,7 +538,7 @@
                                                 class="form-control" wire:model= "pduedate">
                                                 
                                     <label>Remarks</label>
-                                    <textarea class="form-control" wire:model="premarks"></textarea>
+                                    <textarea wire:model="premarks" placeholder=" ✎ 𝓘𝓷𝓹𝓾𝓽 𝓝𝓸𝓽𝓮𝓼..." class="form-control"></textarea>
 
                                 </div>
                             </div>

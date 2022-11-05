@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('collects', function (Blueprint $table) {
+        Schema::create('collectedincomes', function (Blueprint $table) {
             $table->id();
             $table->string('rfrom');
-            $table->string('address');
-            $table->bigInteger('cramount');
-            $table->integer('receiptno');
+            $table->string('caddress');
+            $table->string('cramount');
+            $table->string('receiptno');
             $table->string('paytype');
             $table->string('cremarks');
             $table->timestamps();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collects');
+        Schema::dropIfExists('collectedincomes');
     }
 };
