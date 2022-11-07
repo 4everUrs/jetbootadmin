@@ -18,7 +18,7 @@ return [
     # events to log
     'events' => [
         'create' => true,
-        'edit'   => true,
+        'edit'   => false,
         'delete' => true,
         'retrieve' => false,
         'login'  => true,
