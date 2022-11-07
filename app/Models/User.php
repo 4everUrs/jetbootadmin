@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Yungts97\LaravelUserActivityLog\Traits\Loggable;
 
 class User extends Authenticatable
 {
@@ -18,8 +19,8 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use HasTeams;
     use Notifiable;
+    use Loggable;
     use TwoFactorAuthenticatable;
-
     /**
      * The attributes that are mass assignable.
      *

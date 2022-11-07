@@ -5,33 +5,43 @@
         </h2>
     </x-slot>
     <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="height:500px;overflow-y:scroll">
            
-          <x-table head="Audit Logs">
-            <thead>
-                <th>No</th>
-                <th>Name</th>
-                <th>Operation</th>
-                <th>Model</th>
-                <th>Old Values</th>
-                <th>New Values</th>
-                <th>Date</th>
+               <x-table head="Logs">
+                    <thead class="bg-info">
+                        <th class="text-center align-middle">No</th>
+                        <th class="text-center align-middle">Name</th>
+                        <th class="text-center align-middle">Type</th>
+                        <th class="text-center align-middle">Date</th>
+                        <th class="text-center align-middle">Time</th>
+                        <th class="text-center align-middle">Platform</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($logs as $log)
+                            <tr>
+                                <td class="text-center align-middle">{{$log->id}}</td>
+                                <td class="text-center align-middle">{{$log->user->name}}</td>
+                                <td class="text-center align-middle">{{$log->log_type}}</td>
+                                <td class="text-center align-middle">@date($log->log_datetime)</td>
+                                <td class="text-center align-middle">{{$log->humanize_datetime}}</td>
+                                <td class="text-center align-middle">{{$log->request_info['user_agent']}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+               </x-table>
+   
+          {{-- <x-table head="Audit Logs">
+            <thead class="bg-info">
+                <th style="width: 10%" class="text-center align-middle">Date</th>
+                <th style="width: 10%" class="text-center align-middle">Time</th>
+                <th class="text-center align-middle">Name</th>
+                <th style="width: 10%" class="text-center align-middle">Operation</th>
+                <th style="width: 40%" class="text-center align-middle">Content</th>
             </thead>
             <tbody>
-                {{-- @foreach ($audits as $audit) --}}
                
-                {{-- <tr>
-                    <td>{{$audit['id']}}</td>
-                    <td>{{$audit->user_type}}</td>
-                    <td>{{$audit->event}}</td>
-                    <td>{{$audit->auditable_type}}</td>
-                    <td>{{$audit->old_values}}</td>
-                    <td style="width: 20%">{{$audit->new_values}}</td>
-                    <td>{{Carbon\Carbon::parse($audit->created_at)->toFormattedDateString()}}</td>
-                </tr> --}}
-                {{-- @endforeach --}}
             </tbody>
-          </x-table>
+          </x-table> --}}
         </div>
     </div>
 </div>

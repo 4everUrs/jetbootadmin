@@ -8,8 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Audit extends Model
 {
     use HasFactory;
-    public function Stock()
-    {
-        return $this->belongsTo(Stock::class);
-    }
 }

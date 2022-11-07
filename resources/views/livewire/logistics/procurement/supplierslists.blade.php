@@ -30,6 +30,8 @@
                                     <th class="text-center align-middle">Company Address</th>
                                     <th class="text-center align-middle">Company Phone</th>
                                     <th class="text-center align-middle">Company Email</th>
+                                    <th class="text-center align-middle">Start of contract</th>
+                                    <th class="text-center align-middle">End of contract</th>
                                     <th class="text-center align-middle">Status</th>
                                     <th class="text-center align-middle">Action</th>
                                 </thead>
@@ -40,10 +42,13 @@
                                         <td class="text-center align-middle">{{$supplier->address}}</td>
                                         <td class="text-center align-middle">{{$supplier->phone}}</td>
                                         <td class="text-center align-middle">{{$supplier->email}}</td>
+                                        <td class="text-center align-middle">@date($supplier->start)</td>
+                                        <td class="text-center align-middle">@date($supplier->end)</td>
+
                                         @if ($supplier->status == 'Inactive')
                                         <td class="text-danger text-center">{{$supplier->status}}</td>
                                         @else
-                                        <td class="text-center">{{$supplier->status}}</td>
+                                        <td class="text-center align-middle">{{$supplier->status}}</td>
                                         @endif
                             
                                         <td class="text-center">
@@ -184,7 +189,20 @@
             {{__('Award as Supplier')}}
         </x-slot>
         <x-slot name="content">
-            <h3>Are you sure to award this supplier?</h3>
+            <div class="form-group">
+                <label>Contract Terms</label>
+                <div class="row">
+                    <div class="col">
+                        <input wire:model="contract" class="form-control" type="number">
+                    </div>
+                    <div class="col">
+                        <select wire:model="terms" class="form-control">
+                            <option value="months">Months</option>
+                            <option value="years">Years</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </x-slot>
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('awardModal')" wire:loading.attr="disabled">
@@ -192,7 +210,7 @@
             </x-jet-secondary-button>
     
             <x-jet-button wire:click="awarding" class="ms-2" id="createButton" wire:loading.attr="disabled">
-                {{ __('Yes') }}
+                {{ __('Ok') }}
             </x-jet-button>
     
         </x-slot>

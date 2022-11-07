@@ -65,6 +65,8 @@ use App\Http\Livewire\Logistics\Assetmgmt\Createasset;
 use App\Http\Livewire\Logistics\Assetmgmt\Evaluations;
 use App\Http\Livewire\Logistics\Assetmgmt\MaintenanceRequests;
 use App\Http\Livewire\Logistics\Assetmgmt\Reportst;
+use App\Http\Livewire\Logistics\Daksboard;
+use App\Http\Livewire\Logistics\Dashboard;
 use App\Http\Livewire\Logistics\Projectmanagement\Createnewproject;
 use App\Http\Livewire\Logistics\Projectmanagement\Proposal;
 use App\Http\Livewire\Logistics\Fleet\Activity;
@@ -118,7 +120,7 @@ Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function () {
 
 //Logistics Routes
 Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function () {
-    Route::view('dashboard', 'livewire.logistics.dashboard')->name('logistics');
+    Route::get('dashboard', Dashboard::class)->name('logistics');
     Route::get('procurement/requests', Requestlists::class)->name('requests');
     Route::get('warehouse/inventory', Inventory::class)->name('inventory');
     Route::get('warehouse/purchase-orders', WarehousePurchaseOrders::class)->name('warehousePO');

@@ -19,7 +19,7 @@ class Supplierslists extends Component
     public $awardModal = false;
     public $poSend = false;
     public $invitationModal = false;
-    public $selected_id, $file_name, $po_id, $time;
+    public $selected_id, $file_name, $po_id, $time, $contract, $terms = 'months';
     public function render()
     {
         return view('livewire.logistics.procurement.supplierslists', [
@@ -82,6 +82,7 @@ class Supplierslists extends Component
     }
     public function awarding()
     {
+
         $supplier = Bidder::find($this->selected_id);
         $supplier->status = 'Awarded';
         $supplier->save();
@@ -92,9 +93,24 @@ class Supplierslists extends Component
             'address' => $supplier->address,
             'user_id' => $supplier->user_id,
             'status' => 'Active',
+            'start' => now(),
+            'end' => now(),
         ]);
+        $this->contractTerms();
         toastr()->addSuccess('Operation Successfull');
         $this->awardModal = false;
+    }
+    public function contractTerms()
+    {
+        if ($this->terms == 'months') {
+            $temp = Supplier::latest()->first();
+            $temp->end = Carbon::parse(now())->addMonths($this->contract);
+            $temp->save();
+        } elseif ($this->terms == 'years') {
+            $temp = Supplier::latest()->first();
+            $temp->end = Carbon::parse(now())->addYears($this->contract);
+            $temp->save();
+        }
     }
     public function sendInvitation()
     {

@@ -1,5 +1,4 @@
 <div>
-   <x-app-layout>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
             {{ __('Dashboard') }}
@@ -10,7 +9,7 @@
     
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>0</h3>
+                    <h3>{{$assetsCount}}</h3>
                     <p>Assets</p>
                 </div>
                 <div class="icon">
@@ -23,7 +22,7 @@
     
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>0</h3>
+                    <h3>{{$vehicleCount}}</h3>
                     <p>Vehicle</p>
                 </div>
                 <div class="icon">
@@ -36,7 +35,7 @@
     
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>0</h3>
+                    <h3>{{$inventoryCount}}</h3>
                     <p>Product</p>
                 </div>
                 <div class="icon">
@@ -49,7 +48,7 @@
     
             <div class="small-box bg-purple">
                 <div class="inner">
-                    <h3>0</h3>
+                    <h3>{{$supplierCount}}</h3>
                     <p>Suppliers</p>
                 </div>
                 <div class="icon">
@@ -75,7 +74,7 @@
     
             <div class="small-box bg-orange">
                 <div class="inner">
-                    <h3>0</h3>
+                    <h3>{{$orderCount}}</h3>
                     <p>Orders</p>
                 </div>
                 <div class="icon">
@@ -90,5 +89,5 @@
     </div>
 
  
-</x-app-layout>
+
 </div>
