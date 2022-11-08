@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 
 class Evaluations extends Component
 {
-    public $origin = 'Warehouse', $content, $status = 'Pending';
+    public $origin = 'Asset Management', $content, $status = 'Pending';
     public $destination;
     public $disposeModal = false;
     public $requestModal = false;
@@ -19,13 +19,13 @@ class Evaluations extends Component
     public $displayImage;
     public $thumbnail;
     public $category;
-    public $item_name, $condition, $description, $amount, $file_name;
+    public $item_name, $condition, $description, $amount, $file_name, $qty;
     use WithPagination;
     use WithFileUploads;
     public function render()
     {
         return view('livewire.logistics.assetmgmt.evaluations', [
-            'items' => Shop::orderBy('id', 'desc')->paginate(10),
+            'items' => Shop::orderBy('id', 'desc')->withTrashed()->paginate(10),
         ]);
     }
 
@@ -48,6 +48,7 @@ class Evaluations extends Component
             'origin' => 'required|string',
             'thumbnail' => 'required|image'
         ]);
+        $validatedData['quantity'] = $this->qty;
         $validatedData['thumbnail'] = $this->thumbnail->store('shop', 'do');
         Shop::create($validatedData);
         if (!empty($this->images)) {

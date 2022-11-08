@@ -16,6 +16,21 @@
                     <th class="text-center align-middle">Status</th>
                     <th class="text-center align-middle">Action</th>
                 </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                        <tr>
+                            <td class="text-center align-middle">{{$user->id}}</td>
+                            <td class="text-center align-middle">{{$user->name}}</td>
+                            <td class="text-center align-middle">{{$user->email}}</td>
+                            <td class="text-center align-middle">{{$user->currentTeam->name}}</td>
+                            <td class="text-center align-middle">{{$user->status}}</td>
+                            <td class="text-center align-middle">
+                                <button class="btn btn-warning btn-sm">HOLD</button>
+                                <button class="btn btn-danger btn-sm">TERMINATE</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
            </x-table>
         </div>
     </div>
@@ -45,7 +60,7 @@
                 <select wire:model="department_id" class="form-control">
                     <option value="">Select Department</option>
                     @foreach ($departments as $department)
-                        <option value="{{$department->od}}">{{$department->name}}</option>
+                        <option value="{{$department->id}}">{{$department->name}}</option>
                     @endforeach
                 </select>
             </div>

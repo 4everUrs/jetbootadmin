@@ -80,6 +80,7 @@ use App\Http\Livewire\Logistics\Fleet\Vlists;
 use App\Http\Livewire\Logistics\Procurement\Bmproposals;
 use App\Http\Livewire\Logistics\Procurement\Invoices;
 use App\Http\Livewire\Logistics\Procurement\Reorders;
+use App\Http\Livewire\Logistics\Projectmanagement\Pmrequests;
 use App\Http\Livewire\Logistics\Projectmanagement\Reports;
 use App\Http\Livewire\Logistics\Users;
 use App\Http\Livewire\Logistics\Vendorportal\Workshops;
@@ -146,6 +147,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('assets/new', Createasset::class)->name('newasset');
     Route::get('project/new', Createnewproject::class)->name('newproject');
     Route::get('project/proposal', Proposal::class)->name('proposal');
+    Route::get('project/requests', Pmrequests::class)->name('pmrequests');
     Route::get('project/proposal/download/{id}', [DownloadProposalController::class, 'proposalDownload'])->name('proposalDownload');
     Route::get('fleet/vinfo', Vinfo::class)->name('vehicleinformation');
     Route::get('fleet/maps', Maps::class,)->name('mappers');

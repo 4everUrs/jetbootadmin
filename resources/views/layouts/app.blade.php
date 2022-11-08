@@ -32,14 +32,14 @@
   * sidebar-mini
 -->
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed layout-footer-fixed text-sm">
     <div class="wrapper">
         <!-- Navbar -->
         @livewire('admin.topbar')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{route('home')}}" class="brand-link">
                 <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
@@ -79,9 +79,13 @@
                 @endif
             </div>
             <!-- /.sidebar -->
+            <div class="sidebar-custom">
+                <a href="{{route('profile.show')}}" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+                <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+            </div>
         </aside>
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="min-height: 187px">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
@@ -111,7 +115,7 @@
 
         <!-- jQuery -->
         <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-
+        <script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
         <!-- Bootstrap -->
         <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         <!-- AdminLTE -->

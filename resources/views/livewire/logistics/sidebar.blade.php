@@ -89,6 +89,8 @@
                         <a href="{{route('evaluations')}}" class="nav-link">Asset Evaluation</a>
                         <a href="{{route('assetreport')}}" class="nav-link">Reports</a>
                         <a href="{{route('assetmaintenance')}}" class="nav-link">Maintenance Request</a>
+                        <a href="#" class="nav-link">Invoices</a>
+                        <a href="#" class="nav-link">Orders</a>
                     </li>
                 </ul>
             </li>
@@ -100,6 +102,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
+                        <a href="{{route('pmrequests')}}" class="nav-link">Requests List</a>
                         <a href="{{route('projects')}}" class="nav-link">List of Project</a>
                         <a href="{{route('newproject')}}" class="nav-link">Creat new project</a>
                         <a href="{{route('proposal')}}" class="nav-link">Project Proposal</a>
@@ -137,7 +140,7 @@
             </li>
            <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-broom"></i>
+                    <i class="nav-icon fas fa-wrench"></i>
                     <p>M.R.O</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>

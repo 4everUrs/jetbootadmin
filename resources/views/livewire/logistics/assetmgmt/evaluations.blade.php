@@ -61,28 +61,34 @@
                            <x-table head="Disposal">
                             <thead class="bg-info">
                                 <th class="text-center align-middle">No.</th>
-                                <th class="text-center align-middle">Origin</th>
                                 <th class="text-center align-middle">Item Name</th>
                                 <th class="text-center align-middle">Condition</th>
                                 <th class="text-center align-middle">Description</th>
                                 <th class="text-center align-middle">Status</th>
                                 <th class="text-center align-middle">Price</th>
+                                <th class="text-center align-middle">Quantity</th>
+                                <th class="text-center align-middle">Sold</th>
+                                <th class="text-center align-middle">Action</th>
                             
                             </thead>
                             <tbody>
                                 @forelse ($items as $key => $item)
                                 <tr>
-                                    <td class="text-center">{{$key+1}}</td>
-                                    <td class="text-center align-middle">{{$item->origin}}</td>
+                                    <td class="text-center align-middle">{{$key+1}}</td>
                                     <td class="text-center align-middle">{{$item->item_name}}</td>
                                     <td class="text-center align-middle">{{$item->condition}}</td>
                                     <td class="text-center align-middle" style="width: 30%">{{$item->description}}</td>
-                                    <td class="text-center">{{$item->status}}</td>
+                                    <td class="text-center align-middle">{{$item->status}}</td>
                                     <td class="text-center align-middle">@money($item->amount)</td>
+                                    <td class="text-center align-middle">{{$item->quantity}}</td>
+                                    <td class="text-center align-middle">{{$item->sold}}</td>
+                                    <td class="text-center align-middle">
+                                        <button class="btn btn-primary btn-sm">Update</button>
+                                    </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td class="text-center" colspan="8">No Record Found</td>
+                                    <td class="text-center" colspan="9">No Record Found</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -95,7 +101,7 @@
     </div>
     <x-jet-dialog-modal wire:model="disposeModal">
         <x-slot name="title">
-            {{__('Send Request')}}
+            {{__('Disposal Request')}}
         </x-slot>
         <x-slot name="content">
             <div class="form-group">
@@ -139,6 +145,9 @@
                     <label>Amount</label>
                     <input wire:model="amount" type="number" class="form-control mb-3">
                     @error('amount') <span class="text-danger">{{ $message }}</span><br> @enderror
+                    <label>Quantity</label>
+                    <input wire:model="qty" type="number" class="form-control mb-3">
+                    @error('qty') <span class="text-danger">{{ $message }}</span><br> @enderror
                     <label>Thumbnail Image</label>
                     <input wire:model="thumbnail" type="file" class="form-control mb-3">
                     <label>Additional Photo </label><button wire:click="addRow" class="btn btn-sm btn-success ml-2">Add
