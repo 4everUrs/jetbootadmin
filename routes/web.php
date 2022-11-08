@@ -81,6 +81,7 @@ use App\Http\Livewire\Logistics\Procurement\Bmproposals;
 use App\Http\Livewire\Logistics\Procurement\Invoices;
 use App\Http\Livewire\Logistics\Procurement\Reorders;
 use App\Http\Livewire\Logistics\Projectmanagement\Reports;
+use App\Http\Livewire\Logistics\Users;
 use App\Http\Livewire\Logistics\Vendorportal\Workshops;
 use App\Http\Livewire\Logistics\Warehouse\Invoices as WarehouseInvoices;
 use App\Http\Livewire\Logistics\Warehouse\PurchaseOrders as WarehousePurchaseOrders;
@@ -121,6 +122,7 @@ Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function () {
 //Logistics Routes
 Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function () {
     Route::get('dashboard', Dashboard::class)->name('logistics');
+    Route::get('users', Users::class)->name('users-lists');
     Route::get('procurement/requests', Requestlists::class)->name('requests');
     Route::get('warehouse/inventory', Inventory::class)->name('inventory');
     Route::get('warehouse/purchase-orders', WarehousePurchaseOrders::class)->name('warehousePO');

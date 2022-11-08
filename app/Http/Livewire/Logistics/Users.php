@@ -1,36 +1,24 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Logistics;
 
+use Livewire\Component;
 use App\Models\Team;
 use App\Models\User;
-use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UsersList extends Component
+class Users extends Component
 {
-    public $addUserModal = false;
+    public $addUserModal;
     public $role_id, $dept, $department_id;
     public $teams;
-    public $departments;
     public $name, $email, $phone, $username, $password;
     public $search = '';
     public function render()
     {
-        if (!empty($this->role_id)) {
-            if ($this->role_id == '1') {
-                $this->teams = Team::where('user_id', '=', '1')->get();
-            } elseif ($this->role_id == '2') {
-                $this->teams = Team::where('user_id', '=', '1')->get();
-                $this->departments = Team::where('user_id', '=', $this->dept)->get();
-                $this->dispatchBrowserEvent('showDepartment');
-            }
-        }
-        return view('livewire.admin.users-list', [
-            'users' => User::where('name', 'like', '%' . $this->search . '%')
-                ->where('role_id', '!=', '3')
-                ->get(),
-
+        return view('livewire.logistics.users', [
+            'departments' => Team::where('user_id', Auth::user()->id)->get()
         ]);
     }
     public function saveUser()
@@ -58,7 +46,7 @@ class UsersList extends Component
 
         $this->attachTeam($user);
         toastr()->addSuccess('Data update successfully');
-        $this->resetInput();
+        $this->reset();
         $this->addUserModal = false;
     }
     function attachTeam(User $user)
@@ -72,21 +60,5 @@ class UsersList extends Component
         $user->teams()->attach($team, array('role' => $user->role_id));
 
         $user->switchTeam($team);
-    }
-    public function resetInput()
-    {
-        $this->name = null;
-        $this->email = null;
-        $this->phone = null;
-        $this->username = null;
-        $this->password = null;
-        $this->role_id = null;
-        $this->department_id = null;
-        $this->departments = null;
-        $this->dept = null;
-    }
-    public function loadModal()
-    {
-        $this->addUserModal = true;
     }
 }

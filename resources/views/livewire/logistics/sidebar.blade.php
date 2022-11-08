@@ -7,9 +7,15 @@
                     <p>Dashboard</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('users-lists')}}" class="nav-link">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>Users List</p>
+                </a>
+            </li>
             <li class="nav-item ">
                 <a href="#procurement" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                    <i class="nav-icon fas fa-truck"></i>
                     <p>Procurement</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
@@ -33,7 +39,7 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-box"></i>
+                    <i class="nav-icon fas fa-warehouse"></i>
                     <p>Warehouse </p>
                     <i class="right fas fa-angle-left" ></i>
                 </a>
@@ -54,7 +60,7 @@
                 </ul>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                    <i class="nav-icon fas fa-store"></i>
                     <p>Vendor</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
@@ -72,7 +78,7 @@
             </li>
             <li class="nav-item ">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                    <i class="nav-icon fas fa-building"></i>
                     <p>Asset Management</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
@@ -88,7 +94,7 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                    <i class="nav-icon fas fa-file"></i>
                     <p>Project Management</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
@@ -103,7 +109,7 @@
             </li>
            <li class="nav-item ">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-car"></i>
+                    <i class="nav-icon fas fa-truck"></i>
                     <p>Fleet Management</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
@@ -118,7 +124,7 @@
             </li>
           <li class="nav-item ">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-car"></i>
+                    <i class="nav-icon fas fa-parking"></i>
                     <p>Vehicle Reservation</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
@@ -131,7 +137,7 @@
             </li>
            <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                    <i class="nav-icon fas fa-broom"></i>
                     <p>M.R.O</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>

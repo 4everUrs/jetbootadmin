@@ -15,6 +15,9 @@
                         <th class="text-center align-middle">Date</th>
                         <th class="text-center align-middle">Time</th>
                         <th class="text-center align-middle">Platform</th>
+                        <th class="text-center align-middle">IP</th>
+                        <th class="text-center align-middle">Old Value</th>
+                        <th class="text-center align-middle">New Value</th>
                     </thead>
                     <tbody>
                         @foreach ($logs as $log)
@@ -25,23 +28,14 @@
                                 <td class="text-center align-middle">@date($log->log_datetime)</td>
                                 <td class="text-center align-middle">{{$log->humanize_datetime}}</td>
                                 <td class="text-center align-middle">{{$log->request_info['user_agent']}}</td>
+                                <td class="text-center align-middle">{{$log->request_info['ip']}}</td>
+                                <td class="text-center align-middle"></td>
+                                <td class="text-center align-middle"></td>
                             </tr>
                         @endforeach
                     </tbody>
                </x-table>
-   
-          {{-- <x-table head="Audit Logs">
-            <thead class="bg-info">
-                <th style="width: 10%" class="text-center align-middle">Date</th>
-                <th style="width: 10%" class="text-center align-middle">Time</th>
-                <th class="text-center align-middle">Name</th>
-                <th style="width: 10%" class="text-center align-middle">Operation</th>
-                <th style="width: 40%" class="text-center align-middle">Content</th>
-            </thead>
-            <tbody>
-               
-            </tbody>
-          </x-table> --}}
+
         </div>
     </div>
 </div>

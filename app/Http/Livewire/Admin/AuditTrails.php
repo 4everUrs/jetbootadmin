@@ -23,6 +23,6 @@ class AuditTrails extends Component
     // public function mount()
     // {
     //     $agent = new Agent();
-    //     dd($agent->browser());
+    //     dd($agent->platform());
     // }
 }
