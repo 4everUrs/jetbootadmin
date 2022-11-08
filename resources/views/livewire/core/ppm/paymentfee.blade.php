@@ -221,6 +221,9 @@
                 <label>Payroll</label>
                 <select class="form-control">
                     <option value="">Select Payroll</option>
+                    @foreach($payrolls as $payroll)
+                        <option value="{{$payroll->id}}">{{$payroll->name}}</option>
+                    @endforeach
                 </select>
                 <label>Daily Attendance</label>
                 <input wire:model="attendance"class="form-control" type="number">

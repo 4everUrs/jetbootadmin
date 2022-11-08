@@ -27,7 +27,9 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('jobcandidate')}}" class="nav-link"><i class='fa fa-list'></i> List of Applicants</a>
+                        <a href="{{route('jobcandidate')}}" class="nav-link"><i class='fa fa-list'></i> Applicant Scheduling</a>
+                        <a href="{{route('initial')}}" class="nav-link"><i class='fa fa-list'></i> Initial Interview</a>
+                        <a href="{{route('candidate')}}" class="nav-link"><i class='fa fa-list'></i> List of Job Candidates</a>
                         <a href="{{route('deniedapplicant')}}" class="nav-link"><i class='fa fa-list-ul'></i> List of Denied Applicants</a>
                     </li>
                 </ul>
@@ -89,6 +91,8 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('paymentfee')}}" class="nav-link"><i class='fa fa-credit-card'></i> Payroll</a>
+                        <a href="{{route('payment')}}" class="nav-link"><i class='fa fa-credit-card'></i> Payment</a>
+                        <a href="{{route('budgetproposal')}}" class="nav-link"><i class='fa fa-credit-card'></i> Budget Proposal</a>
                     </li>
                 </ul>
             </li>

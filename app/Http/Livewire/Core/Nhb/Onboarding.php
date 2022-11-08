@@ -12,13 +12,15 @@ use Carbon\Carbon;
 class Onboarding extends Component
 {
     public $showOnboard = false;
+    public $search = '';
     public $name, $age, $gender, $company_name, $position, $status = 'Hired', $contract, $resume_file;
     public $selected_id,$value,$terms;
 
     public function render()
     {
+        $searchFields = '%' . $this->search . '%';  
         return view('livewire.core.nhb.onboarding', [
-            'onboards' => Onboard::all(),
+            'onboards' => Onboard::where('name', 'like', $searchFields)->get(),
             'employee' => LocalPlacement::where('status','=','Deployed')->get(),
         ]);
     }

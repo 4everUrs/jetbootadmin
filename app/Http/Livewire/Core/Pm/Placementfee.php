@@ -10,11 +10,13 @@ use App\Models\Onboard;
 class Placementfee extends Component
 {
     public $showPlacement = false;
+    public $search = '';
     public $name,$placement,$status;
     public function render()
     {
+        $searchFields = '%' . $this->search . '%';
         return view('livewire.core.pm.placementfee',[
-            'jobs' => LocalPlacement::all(),
+            'jobs' => LocalPlacement::where('name', 'like', $searchFields)->get(),
         ]);
     }
     public function savePlacement(){

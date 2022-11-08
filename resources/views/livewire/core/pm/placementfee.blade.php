@@ -32,7 +32,11 @@
                         <td class="text-center">{{$job->position}}</td>
                         <td class="text-center">{{$job->status}}</td>
                         <td class="text-center">
+                            @if ($job->status == 'Deployed')
+                            <button wire:click="deploy({{$job->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-car'></i> Change Status</button>
+                            @else
                             <button wire:click="deploy({{$job->id}})" class="btn btn-sm btn-primary"><i class='fa fa-car'></i> Change Status</button>
+                            @endif
                         </td>
                         
                       </tr>

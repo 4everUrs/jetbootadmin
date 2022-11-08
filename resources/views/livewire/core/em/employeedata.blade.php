@@ -50,7 +50,7 @@
                           </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center">No Record Found</td>
+                                <td colspan="15" class="text-center">No Record Found</td>
                             </tr>
                         @endforelse
                 </tbody>
@@ -114,7 +114,7 @@
                 
                 <label for="">Payout Method</label>
                 <select wire:model="method"class="form-control" type="text">
-                    <option value="">Select Name</option>
+                    <option value="">Select Method</option>
                     <option value="cash">Cash</option>
                     <option value="bank">Bank</option>
                 </select>

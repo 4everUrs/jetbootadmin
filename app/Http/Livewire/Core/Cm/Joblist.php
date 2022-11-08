@@ -11,13 +11,15 @@ use App\Models\Vacant;
 class Joblist extends Component
 {
     public $showModal = false;
+    public $search = '';
     public $name,$position,$salary,$details,$location,$applicants;
    
     public function render()
     {
+        $searchFields = '%' . $this->search . '%';
         return view('livewire.core.cm.joblist',[
             'clients' => Client::where('status','=','Active')->get(),
-            'jobs' => ModelsJobList::all(),
+            'jobs' => ModelsJobList::where('name', 'like', $searchFields)->get(),
         ]);
     }
     public function saveRequest(){

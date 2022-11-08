@@ -20,7 +20,9 @@ use App\Http\Livewire\Logistics\Warehouse\Requestslist;
 use App\Http\Livewire\Hr\Leavemanagement\Leavedata;
 use App\Http\Livewire\Finance\Bm\Budgets;
 use App\Http\Livewire\Core\Recruit\Applicantname;
+use App\Http\Livewire\Core\Am\Candidate;
 use App\Http\Livewire\Core\Am\Deniedapplicant;
+use App\Http\Livewire\Core\Am\Initial;
 use App\Http\Livewire\Core\Am\Jobcandidate;
 use App\Http\Livewire\Core\Nhb\Onboarding;
 use App\Http\Livewire\Core\Em\Employeedata;
@@ -28,6 +30,8 @@ use App\Http\Livewire\Core\Rap\Applicantreport;
 use App\Http\Livewire\Core\Rap\Clientreport;
 use App\Http\Livewire\Core\Pjm\Jobvacancy;
 use App\Http\Livewire\Core\Ppm\Paymentfee;
+use App\Http\Livewire\Core\Ppm\Payment;
+use App\Http\Livewire\Core\Ppm\Budgetproposal;
 use App\Http\Livewire\Core\Ppm\Internpayment;
 use App\Http\Livewire\Core\Pm\Placementfee;
 use App\Http\Livewire\Core\Pm\Internplacement;
@@ -168,6 +172,9 @@ Route::prefix('finance')->middleware('auth', 'isFinance')->group(function () {
 Route::prefix('core')->middleware('auth', 'isCore')->group(function () {
     Route::view('dashboard', 'livewire.core.dashboard')->name('core');
     Route::get('recruit/applicantname', Applicantname::class)->name('applicantname');
+    Route::get('am/candidate', Candidate::class)->name('candidate');
+    Route::get('am/deniedapplicant', Deniedapplicant::class)->name('deniedapplicant');
+    Route::get('am/initial', Initial::class)->name('initial');
     Route::get('am/deniedapplicant', Deniedapplicant::class)->name('deniedapplicant');
     Route::get('am/jobcandidate', Jobcandidate::class)->name('jobcandidate');
     Route::get('nhb/onboarding', Onboarding::class)->name('onboarding');
@@ -176,6 +183,8 @@ Route::prefix('core')->middleware('auth', 'isCore')->group(function () {
     Route::get('rap/clientreport', Clientreport::class)->name('clientreport');
     Route::get('pjm/jobvacancy', Jobvacancy::class)->name('jobvacancy');
     Route::get('ppm/paymentfee', Paymentfee::class)->name('paymentfee');
+    Route::get('ppm/payment', Payment::class)->name('payment');
+    Route::get('ppm/budgetproposal', Budgetproposal::class)->name('budgetproposal');
     Route::get('ppm/internpayment', internpayment::class)->name('internpayment');
     Route::get('pm/placementfee', Placementfee::class)->name('placementfee');
     Route::get('pm/internplacement', Internplacement::class)->name('internplacement');

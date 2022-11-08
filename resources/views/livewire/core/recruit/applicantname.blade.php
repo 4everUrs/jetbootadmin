@@ -46,7 +46,6 @@
                             <td class="text-center">
                                 @if ($job->status == 'Qualified')
                                 <button wire:click="approve({{$job->id}})" class="btn btn-secondary" disabled><i class='fa fa-check'></i> Qualified</button>
-                                <button wire:click="disapprove({{$job->id}})" class="btn btn-secondary" disabled><i class='fa fa-times'></i> Not Qualified</button>
                                 @else
                                 <button wire:click="approve({{$job->id}})" class="btn btn-primary"><i class='fa fa-check'></i> Qualified</button>
                                 <button wire:click="disapprove({{$job->id}})" class="btn btn-danger"><i class='fa fa-times'></i> Not Qualified</button>

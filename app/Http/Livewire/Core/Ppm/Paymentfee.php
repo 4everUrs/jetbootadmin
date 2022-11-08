@@ -22,6 +22,7 @@ class Paymentfee extends Component
         $searchFields = '%' . $this->searchID . '%';
         return view('livewire.core.ppm.paymentfee', [
             'employees' => LocalEmployee::where('id', 'like', $searchFields)->get(),
+            'payrolls' => Payroll::all(),
         ]);
     }
 

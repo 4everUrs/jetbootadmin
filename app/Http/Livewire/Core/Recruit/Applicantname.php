@@ -10,6 +10,7 @@ use Livewire\Component;
 class Applicantname extends Component
 {
     public $name,$position,$email,$phone,$address,$resume;
+    public $search = '';
     protected $rules = [
         'name' => 'required|string|min:6',
         'position' => 'required|string',
@@ -26,6 +27,7 @@ class Applicantname extends Component
     }
     public function render()
     {
+        $searchFields = '%' . $this->search . '%';
         return view('livewire.core.recruit.applicantname',[
             'jobs' => ApplicantForm::where('status','=','Screening')
             ->orWhere('status','=','Qualified')->get(),

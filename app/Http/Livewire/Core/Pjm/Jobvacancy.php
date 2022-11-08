@@ -10,6 +10,7 @@ use App\Models\JobPost;
 class Jobvacancy extends Component
 {
     public $name,$position,$salary,$details,$location,$vacant_edit_id;
+    public $search = '';
     protected $rules = [
         'name' => 'required|string|min:6',
         'position' => 'required|string',
@@ -27,6 +28,7 @@ class Jobvacancy extends Component
     }
     public function render()
     {
+        $searchfields = '%' . $this->search . '%';
         return view('livewire.core.pjm.jobvacancy',[
             'vacants' => JobList::where('status','=','Open')
             ->orWhere('status','=','Posted')->get(),

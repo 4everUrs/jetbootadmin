@@ -11,6 +11,7 @@ class Employeedata extends Component
 {
     public $Employee = false;
     public $showEmployee = false;
+    public $search = '';
     public $name, $attendance, $salary, $placement, $contribution = [], $collection;
     public $method,$bank_name,$bank_account;
     public $selected_id;
@@ -20,8 +21,9 @@ class Employeedata extends Component
         if($this->method == 'bank'){
             $this->dispatchBrowserEvent('show-bank');
         }
+        $searchFields = '%' . $this->search . '%';
         return view('livewire.core.em.employeedata', [
-            'onboards' => LocalEmployee::all(),
+            'onboards' => LocalEmployee::where('name', 'like', $searchFields)->get(),
         ]);
     }
     
