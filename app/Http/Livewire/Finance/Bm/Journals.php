@@ -89,7 +89,8 @@ class Journals extends Component
         $this->viewRecord = true;
     }
     public function saveRecord()
-    {
+    {   
+       
         $this->preview[] = [
             'jdescription' => $this->jdescription,
             'jdebit' => $this->jdebit,
@@ -97,7 +98,11 @@ class Journals extends Component
             'jsubdescription' => $this->jsubdescription,
         ];
         $this->grandtotal -= $this->jdebit - $this->jcredit;
-        $this->resetLiability();
+        $this->resetLiability();  
+    }
+    public function removebtn()
+    {
+        
     }
 
     public function addLiabilities()
@@ -192,6 +197,7 @@ class Journals extends Component
     public function resetLiability()
     {
         $this->journal_id = null;
+
         $this->jdescription = null;
         $this->jcredit = null;
         $this->jdebit = null;

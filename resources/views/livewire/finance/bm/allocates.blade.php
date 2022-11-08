@@ -132,7 +132,7 @@
             </x-jet-secondary-button>
             {{--wire:click function dito sa button hindi match sa function sa class--}}
             <x-jet-button class="ms-2" wire:click="addAnnualBudgets" wire:loading.attr="disabled">
-                {{ __('Add Logistics Budget') }}
+                {{ __('Add Annual Budget') }}
             </x-jet-button>
         </x-slot>
 
