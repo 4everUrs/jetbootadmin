@@ -16,12 +16,19 @@ return new class extends Migration
         Schema::create('pays', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('payhour');
-            $table->string('totalhours');
-            $table->string('overtime');
-            $table->string('latededuction');
-            $table->string('penstiondeduction');
-            $table->string('salary');
+            $table->string('company');
+            $table->string('position');
+            $table->string('datein');
+            $table->string('dateout');
+            $table->integer('payhour');
+            $table->integer('totalhours');
+            $table->integer('overtime');
+            $table->integer('latededuction');
+            $table->integer('penstiondeduction');
+            $table->integer('sss');
+            $table->integer('pagibig');
+            $table->integer('phil');
+            $table->integer('salary');
             $table->timestamps();
         });
     }

@@ -10,9 +10,7 @@ class Topbar extends Component
 {
     public function render()
     {
-        return view('livewire.admin.topbar', [
-            'users' => User::with('Time')->find(Auth::user()->id),
-        ]);
+        return view('livewire.admin.topbar');
     }
     public function mount()
     {

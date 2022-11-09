@@ -6,9 +6,9 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button data-toggle="modal" data-target="#shiftModal" class="btn btn-success">Add Record</button>
+            <button wire:click="showModal" class="btn btn-success">Add Record</button>
             <x-table head="Shift And Schedule">
-                <thead>
+                <thead class = "bg-info">
                     <th>No.</th>
                     <th>Name</th>
                     <th>Position </th>
@@ -35,13 +35,10 @@
                             <td>{{$data->friday}}</td>
                             <td>{{$data->saturday}}</td>
                             <td>{{$data->sunday}}</td>
-                            <td>
-                                <button class="btn btn-primary">View</button>
-                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="11" class="text-center">No record found nigga!</td>
+                            <td colspan="11" class="text-center">No record found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -49,18 +46,11 @@
             {{$datas->links()}}
         </div>
     </div>
-   
-        <div wire:ignore.self class="modal fade" id="shiftModal" tabindex="-1" role="dialog"
-            aria-labelledby="shiftModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="shiftModalLabel">Add new Record</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+    <x-jet-dialog-modal wire:model="addRecord">
+        <x-slot name="title">
+            {{ __('Add new Record') }}
+        </x-slot>
+        <x-slot name="content">
                         <div class="form-group">
                             <label>Name</label>
                             <input wire:model="name" class="form-control">
@@ -72,34 +62,77 @@
                             <input wire:model="department" class="form-control">
                             @error('position') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Monday</label>
-                            <input wire:model="monday" class="form-control">
+                            <select wire:model="monday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('monday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Tuesday</label>
-                            <input wire:model="tuesday" class="form-control">
+                            <select wire:model="tuesday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('tuesday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Wednesday</label>
-                            <input wire:model="wednesday" class="form-control">
+                            <select wire:model="wednesday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('wednesday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Thursday</label>
-                            <input wire:model="thursday" class="form-control">
+                            <select wire:model="thursday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('thursday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Friday</label>
-                            <input wire:model="friday" class="form-control">
+                            <select wire:model="friday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('friday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Saturday</label>
-                            <input wire:model="saturday" class="form-control">
+                            <select wire:model="saturday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('saturday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                             <label>Sunday</label>
-                            <input wire:model="sunday" class="form-control">
+                            <select wire:model="sunday" class="form-control">
+                                <option></option>
+                                <option>8am - 5pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
+                                <option>Rest Day</option>
+                            </select>
                             @error('sunday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button wire:click="saveRecord" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </x-slot>
+                        <x-slot name="footer">
+                            <x-jet-secondary-button wire:click="$toggle('addRecord')" wire:loading.attr="disabled">
+                                {{ __('Cancel') }}
+                            </x-jet-secondary-button>
+                            <x-jet-button class="ms-2" wire:click="saveData" wire:loading.attr="disabled">
+                                {{ __('Add new Record') }}
+                            </x-jet-button>
+                        </x-slot>
+                    </x-jet-dialog-modal>         
 </div>

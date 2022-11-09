@@ -9,7 +9,10 @@ use Livewire\WithPagination;
 class Shiftdata extends Component
 {
     public $name, $position, $department, $monday, $tuesday , $wednesday, $thursday , $friday ,$saturday , $sunday;
-    public $shiftModal = false;
+    public $addRecord = false;
+    public $viewModal = false;
+    public $employee_id;
+    public $data;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $rules = [
@@ -29,11 +32,31 @@ class Shiftdata extends Component
     {
         $this->validateOnly($fields);
     }
+    
+    public function showModal()
+    {
+        $this->addRecord = true;
+    }
+    public function saveData()
+    {
+        
+        $validatedData = $this->validate();
+        Shift::create($validatedData);
+        $this->resetInput();
+        toastr()->addSuccess('Data added successfully');
+        $this->addRecord = false;
+    }
     public function render()
     {
         return view('livewire.hr.shiftschedule.shiftdata',[
             'datas' => Shift::paginate(6),
         ]);
+    }
+    public function viewData($id){
+        
+        $this->viewModal = true;
+        $this->data = Shift::find($id);
+        $this->name = $this->data->name;
     }
     public function saveRecord(){
         $validatedData = $this->validate();

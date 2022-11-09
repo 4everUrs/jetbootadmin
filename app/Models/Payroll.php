@@ -9,6 +9,12 @@ class Payroll extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'attendance', 'salary', 'contribution', 'placement', 'status'
+        'attendance', 'salary', 'contribution', 'placement', 'status',
+        'name', 'company','position', 'department' , 'gender' , 'address','mobile','email',
     ];
+
+    public function Employer()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

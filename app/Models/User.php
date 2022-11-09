@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Time::class);
     }
+    public function Qualification()
+    {
+        return $this->hasOne(Qualification::class);
+    }
+
 }
