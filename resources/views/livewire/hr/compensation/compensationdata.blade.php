@@ -6,9 +6,9 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button data-toggle="modal" data-target="#compensationModal" class="btn btn-success">Add Record</button>
+            <button wire:click="showModal" class="btn btn-success">Add Record</button>
             <x-table head="Compensation Planning">
-                <thead>
+                <thead class = "bg-info">
                     <th>No.</th>
                     <th>Name</th>
                     <th>Position</th>
@@ -16,6 +16,8 @@
                     <th>Benefits</th>
                     <th>Insentives</th>
                     <th>Insurance</th>
+                    <th>Total</th>
+                    <th>Status</th>
                     <th>View</th>
                 </thead>
                 <tbody>
@@ -28,13 +30,15 @@
                             <td>{{$data->benefits}}</td>
                             <td>{{$data->insentives}}</td>
                             <td>{{$data->insurance}}</td>
+                            <td>{{$data->overall}}</td>
+                            <td>{{$data->status}}</td>
                             <td>
-                                <button class="btn btn-primary">View</button>
+                                <button wire:click = "approveModal({{$data->id}})" class="btn btn-primary">Approve</button>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center">No record found nigga!</td>
+                            <td colspan="10" class="text-center">No record found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -42,19 +46,12 @@
             {{$datas->links()}}
         </div>
     </div>
-   
-        <div wire:ignore.self class="modal fade" id="compensationModal" tabindex="-1" role="dialog"
-            aria-labelledby="compensationModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="compensationModalLabel">Add new Record</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
+    <x-jet-dialog-modal wire:model="addRecord">
+        <x-slot name="title">
+            {{ __('Add new Record') }}
+        </x-slot>
+        <x-slot name="content">
+                            <div class="form-group">
                             <label>Name</label>
                             <input wire:model="name" class="form-control">
                             @error('name') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
@@ -73,14 +70,35 @@
                             <label>Insurance</label>
                             <input wire:model="insurance" class="form-control">
                             @error('insurance') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-                            
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button wire:click="saveRecord" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                           
+                           
+                             </div>
+                
+                    </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('addRecord')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+            <x-jet-button class="ms-2" wire:click="saveData" wire:loading.attr="disabled">
+                {{ __('Add new Record') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+    
+    <x-jet-dialog-modal wire:model="modalApprove">
+        <x-slot name="title">
+            {{ __('Claiming Compensation') }}  
+        </x-slot>
+        <x-slot name="content">
+        <h2>Confirm</h2>         
+                    </x-slot> 
+                        <x-slot name="footer">
+                            <x-jet-secondary-button wire:click="$toggle('modalApprove')" wire:loading.attr="disabled">
+                                {{ __('Cancel') }}
+                            </x-jet-secondary-button>
+                            <x-jet-button class="ms-2" wire:click="confirm" wire:loading.attr="disabled">
+                                {{ __('Confirm') }}
+                            </x-jet-button>
+                        </x-slot>
+            </x-jet-dialog-modal>
 </div>

@@ -17,13 +17,16 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('position');
-            $table->string('basepay');
-            $table->string('benefits');
-            $table->string('insentives');
-            $table->string('insurance');
+            $table->integer('basepay');
+            $table->integer('benefits');
+            $table->integer('insentives');
+            $table->integer('insurance');
+            $table->string('overall');
+            $table->string('status');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
