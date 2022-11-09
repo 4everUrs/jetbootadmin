@@ -3,21 +3,46 @@
 namespace App\Http\Livewire\Core\Ppm;
 
 use App\Models\Contribution;
+use App\Models\EmployeePayroll;
+use App\Models\LocalEmployee;
 use Livewire\Component;
 use App\Models\Payroll;
+use Carbon\Carbon;
 
 class Paymentfee extends Component
 {
     public $showPayroll = false;
     public $name, $attendance, $salary, $placement, $contribution = [], $collection;
     public $sss = '400', $philhealth = '250', $pagibig = '150';
-
+    public $newPayroll;
+    public $searchID = '';
+    public $start,$end,$payroll_name,$salary_term;
     public function render()
     {
-
+        $searchFields = '%' . $this->searchID . '%';
         return view('livewire.core.ppm.paymentfee', [
+            'employees' => LocalEmployee::where('id', 'like', $searchFields)->get(),
             'payrolls' => Payroll::all(),
         ]);
+    }
+
+    public function createPayroll()
+    {
+        $year = Carbon::parse($this->start)->format('Y');
+        $month = Carbon::parse($this->start)->format('F');
+        $this->start = Carbon::parse($this->start)->toFormattedDateString();
+        $this->end = Carbon::parse($this->end)->toFormattedDateString();
+        Payroll::create([
+            'year' => $year,
+            'month'=> $month,
+            'salary_term' => $this->salary_term,
+            'start_date' => $this->start,
+            'end_date' => $this->end,
+            'name' => $this->payroll_name
+        ]);
+        $this->newPayroll = false;
+        flash()->addSuccess('Data update successfully');
+        $this->reset();
     }
 
     public function savePayroll()

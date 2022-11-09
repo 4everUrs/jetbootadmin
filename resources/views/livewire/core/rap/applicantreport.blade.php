@@ -25,7 +25,7 @@
             
                 <div class="small-box bg-outline">
                     <div class="inner">
-                        <h3>{{$jobs}}</h3>
+                        <h3>{{$vacants}}</h3>
                         <p>Vacant Job</p>
                     </div>
                         <div class="icon">

@@ -9,6 +9,7 @@ class Onboard extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'age', 'gender', 'company_name', 'position', 'contract', 'status', 'resume_file'
+        'name', 'age', 'gender', 'company_name', 'position', 'contract', 'status', 'listing_id','resume_file',
+        'endo','phone','email'
     ];
 }

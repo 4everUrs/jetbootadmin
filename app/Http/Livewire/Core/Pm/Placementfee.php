@@ -3,17 +3,20 @@
 namespace App\Http\Livewire\Core\Pm;
 
 use App\Models\ApplicantForm;
+use App\Models\ApplicantList;
 use Livewire\Component;
 use App\Models\LocalPlacement;
 use App\Models\Onboard;
 class Placementfee extends Component
 {
     public $showPlacement = false;
+    public $search = '';
     public $name,$placement,$status;
     public function render()
     {
+        $searchFields = '%' . $this->search . '%';
         return view('livewire.core.pm.placementfee',[
-            'jobs' => LocalPlacement::all(),
+            'jobs' => LocalPlacement::where('name', 'like', $searchFields)->get(),
         ]);
     }
     public function savePlacement(){
@@ -40,22 +43,22 @@ class Placementfee extends Component
     }
 
     public function deploy($id){
-        $job = ApplicantForm::find($id);
+
+
+        $data = LocalPlacement::find($id);
+        $resume = ApplicantList::where('name','=',$data->name)->first();
+        Onboard::create([
+            'name' => $data->name,
+            'phone' => $data->phone,
+            'email' => $data->email,
+            'company_name' => $data->company_name,
+            'position' => $data->position,
+            'listing_id' => $data->listing_id,
+            'resume_file' => $resume->resume_file
+        ]);
+        $data->status = 'Deployed';
+        $data->save();
+        flash()->addSuccess('Data deployed successfully');
         
-        if($job->status == 'Deployed'){
-            flash()->addWarning('Data is already deployed');
-        }
-        else{
-            $job->status = 'Deployed';
-            Onboard::create([
-                'name' => $job->name,
-                'company_name' => $job->company,
-                'position' => $job->position,
-                'resume_file' => $job->resume_file,
-                
-            ]);
-            $job->save();
-            flash()->addSuccess('Data deployed successfully');
-        }
     }
 }

@@ -13,14 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payrolls', function (Blueprint $table) {
+        Schema::create('iinterviews', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('year');
-            $table->string('month');
-            $table->string('salary_term');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->string('position');
+            $table->string('email');
+            $table->string('resume_file');
+            $table->string('time');
+            $table->string('date');
+            $table->string('venue');
+            $table->string('person');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payrolls');
+        Schema::dropIfExists('iinterviews');
     }
 };
