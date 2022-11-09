@@ -1,6 +1,8 @@
 
 <?php
 
+use App\Http\Controllers\ApplyLeaveController;
+use App\Http\Controllers\AtmController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ContractController;
@@ -13,7 +15,12 @@ use App\Http\Controllers\TimeInController;
 use App\Http\Controllers\DisbursementController;
 use App\Http\Controllers\DownloadProposalController;
 use App\Http\Controllers\GeneralLedgerController;
+use App\Http\Controllers\InvoiceDownloadController;
+use App\Http\Controllers\PrintController;
+use App\Http\Controllers\UclaimsController;
+use App\Http\Controllers\UleaveController;
 use App\Http\Livewire\Admin\AuditTrails;
+use App\Http\Livewire\Admin\Mailbox;
 use App\Http\Livewire\Logistics\Procurement\Requestlists;
 use App\Http\Livewire\Logistics\Warehouse\Inventory;
 use App\Http\Livewire\Logistics\Warehouse\Requestslist;
@@ -39,6 +46,16 @@ use App\Http\Livewire\Core\Cm\Addclient;
 use App\Http\Livewire\Core\Cm\Clientdata;
 use App\Http\Livewire\Core\Cm\Joblist;
 use App\Http\Livewire\Core\Cacm\Agreement;
+use App\Http\Livewire\Hr\Claimreimburse\Claimdata;
+use App\Http\Livewire\Hr\Compensation\Compensationdata;
+use App\Http\Livewire\Hr\Core\Coredata;
+use App\Http\Livewire\Hr\Hr\Analyticdata;
+use App\Http\Livewire\Hr\Payroll\Paydata;
+use App\Http\Livewire\Hr\Shiftschedule\Shiftdata;
+use App\Http\Livewire\Hr\Timeaattendance\Timedata;
+use App\Http\Livewire\Hr\Timesheet\Timesheetdata;
+use App\Models\Compensation;
+use App\Models\Core;
 use App\Http\Livewire\Logistics\Procurement\Supplierslists;
 use App\Http\Livewire\Logistics\Procurement\Purchaseorders;
 use App\Http\Livewire\Logistics\Vendorportal\Recievedrequests;
@@ -49,25 +66,36 @@ use App\Http\Livewire\Logistics\Vendorportal\Bidders;
 use App\Http\Livewire\Logistics\Vendorportal\Buyers;
 use App\Http\Livewire\Finance\Bm\Requestedlist;
 use App\Http\Livewire\Finance\Bm\Journals;
-use App\Http\Livewire\Hr\Claimreimburse\Claimdata;
-use App\Http\Livewire\Hr\Compensation\Compensationdata;
-use App\Http\Livewire\Hr\Core\Coredata;
-use App\Http\Livewire\Hr\Hr\Analyticdata;
-use App\Http\Livewire\Hr\Payroll\Paydata;
-use App\Http\Livewire\Hr\Shiftschedule\Shiftdata;
-use App\Http\Livewire\Hr\Timeaattendance\Timedata;
-use App\Http\Livewire\Hr\Timesheet\Timesheetdata;
 use App\Http\Livewire\Logistics\Projectmanagement\Projectslists;
 use App\Http\Livewire\Finance\Bm\Disbursements;
 use App\Http\Livewire\Finance\Bm\Generalledgers;
 use App\Http\Livewire\Finance\Bm\Collections;
 use App\Http\Livewire\Finance\Bm\Allocates;
 use App\Http\Livewire\Finance\Bm\Balancesheets;
+use App\Http\Livewire\Hr\Claimreimburse\Claimapprove;
+use App\Http\Livewire\Hr\Claimreimburse\Claimdis;
+use App\Http\Livewire\Hr\Compensation\Claimed;
+use App\Http\Livewire\Hr\Employeelist\Employee;
+use App\Http\Livewire\Hr\Leavemanagement\Approval;
+use App\Http\Livewire\Hr\Leavemanagement\Approve;
+use App\Http\Livewire\Hr\Leavemanagement\Disapproval;
+use App\Http\Livewire\Hr\Leavemanagement\Disapprove;
+use App\Http\Livewire\Hr\Payroll\Timemachine;
+use App\Http\Livewire\Hr\Payroll\Trypay;
+use App\Http\Livewire\Hr\Timeaattendance\Monthlydata;
+use App\Http\Livewire\Hr\Timeaattendance\Onemonthlydata;
+use App\Http\Livewire\Hr\Timeaattendance\Oneweeklydata;
+use App\Http\Livewire\Hr\Timeaattendance\Weeklydata;
 use App\Http\Livewire\Logistics\Assetmgmt\Assetslist;
 use App\Http\Livewire\Logistics\Assetmgmt\Createasset;
+use App\Http\Livewire\Logistics\Assetmgmt\Delivery;
 use App\Http\Livewire\Logistics\Assetmgmt\Evaluations;
+use App\Http\Livewire\Logistics\Assetmgmt\Invoices as AssetmgmtInvoices;
 use App\Http\Livewire\Logistics\Assetmgmt\MaintenanceRequests;
+use App\Http\Livewire\Logistics\Assetmgmt\Orderlist;
 use App\Http\Livewire\Logistics\Assetmgmt\Reportst;
+use App\Http\Livewire\Logistics\Daksboard;
+use App\Http\Livewire\Logistics\Dashboard;
 use App\Http\Livewire\Logistics\Projectmanagement\Createnewproject;
 use App\Http\Livewire\Logistics\Projectmanagement\Proposal;
 use App\Http\Livewire\Logistics\Fleet\Activity;
@@ -79,10 +107,16 @@ use App\Http\Livewire\Logistics\Fleet\Romrequestlist;
 use App\Http\Livewire\Logistics\Fleet\Vinfo;
 use App\Http\Livewire\Logistics\Fleet\Vlists;
 use App\Http\Livewire\Logistics\Procurement\Bmproposals;
+use App\Http\Livewire\Logistics\Procurement\Invoices;
 use App\Http\Livewire\Logistics\Procurement\Reorders;
+use App\Http\Livewire\Logistics\Projectmanagement\Pmrequests;
 use App\Http\Livewire\Logistics\Projectmanagement\Reports;
+use App\Http\Livewire\Logistics\Users;
 use App\Http\Livewire\Logistics\Vendorportal\Workshops;
+use App\Http\Livewire\Logistics\Warehouse\Invoices as WarehouseInvoices;
 use App\Http\Livewire\Logistics\Warehouse\PurchaseOrders as WarehousePurchaseOrders;
+use App\Models\WhInvoice;
+use App\Models\Claiming;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +129,25 @@ use App\Http\Livewire\Logistics\Warehouse\PurchaseOrders as WarehousePurchaseOrd
 |
 */
 
+// Route::get('/timemachine',Timemachine::class)->name('Timemachine');
+// Route::get('/timein',[Timemachine::class,'timein'])->name('timein');
+
+Route::get('/atm', [AtmController::class, 'index'])->name('atm');
+Route::get('/uleave', [UleaveController::class, 'uleave'])->name('uleave');
+Route::get('/uclaims', [UclaimsController::class, 'uclaims'])->name('uclaims');
+
+Route::post('/timein', [AtmController::class, 'timein'])->name('timein');
+Route::post('/leaving', [UleaveController::class, 'leaving'])->name('leaving');
+
+Route::post('/breakin', [AtmController::class, 'breakin'])->name('breakin');
+Route::post('/breakout', [AtmController::class, 'breakout'])->name('breakout');
+Route::post('/timeout', [AtmController::class, 'timeout'])->name('timeout');
+
+
+// Route::post('/breakout',[AtmController::class,'breakout'])->name('breakout');
+// Route::post('/timeout',[AtmController::class,'timeout'])->name('timeout');
+// Route::get('/timein',[Timemachine::class,'timein'])->name('timein');
+
 Route::get('/', function () {
     return redirect('/login');
 });
@@ -102,6 +155,12 @@ Route::get('/', function () {
 Route::get('/testfile', [PDFController::class, 'testDownload']);
 
 
+// Route::middleware('auth')->group(function () {
+//     Route::get('/timein', [AttendanceController::class, 'timein'])->name('timein');
+//     Route::get('/breakin', [AttendanceController::class, 'breakin'])->name('breakin');
+//     Route::get('/breakout', [AttendanceController::class, 'breakout'])->name('breakout');
+//     Route::get('/timeout', [AttendanceController::class, 'timeout'])->name('timeout');
+// });
 
 //Login Routes
 Route::get('/redirects', [LoginController::class, 'login'])->name('home');
@@ -113,24 +172,27 @@ Route::prefix('admin')->middleware('auth', 'isAdmin')->group(function () {
     Route::view('dashboard', 'livewire.admin.dashboard')->name('dashboard');
     Route::get('users', UsersList::class)->name('users');
     Route::get('audit', AuditTrails::class)->name('audits');
+    Route::get('mailbox', Mailbox::class)->name('mailbox');
 });
 
 //Logistics Routes
 Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function () {
-    Route::view('dashboard', 'livewire.logistics.dashboard')->name('logistics');
+    Route::get('dashboard', Dashboard::class)->name('logistics');
+    Route::get('users', Users::class)->name('users-lists');
     Route::get('procurement/requests', Requestlists::class)->name('requests');
     Route::get('warehouse/inventory', Inventory::class)->name('inventory');
     Route::get('warehouse/purchase-orders', WarehousePurchaseOrders::class)->name('warehousePO');
     Route::get('warehouse/requests', Requestslist::class)->name('requestlists');
     Route::get('procurement/suppliers', Supplierslists::class)->name('suppliers');
     Route::get('procurement/proposals', Bmproposals::class)->name('bmproposal');
-    Route::get('procurement/reorders', Reorders::class)->name('reorders');
+    Route::get('procurement/invoices', Invoices::class)->name('invoice');
     Route::get('procurement/purchaseorder', Purchaseorders::class)->name('po');
     Route::get('vendor/recievedrequests', RecievedRequests::class)->name('recievedrequests');
     Route::get('vendor/supplierposting', Supplierposting::class)->name('supplierposting');
     Route::get('procurement/po/view/{id}', PurchaseItems::class)->name('poView');
     Route::get('procurement/po/view/{id}', [PDFController::class, 'index'])->name('pdf');
     Route::get('procurement/po/download/{id}', [PDFController::class, 'testDownload'])->name('download');
+    Route::get('asset/invoice/download/{data}', [InvoiceDownloadController::class, 'invoiceDownload'])->name('invoiceDownload');
     Route::get('vendor/supplierlist', Supplierlist::class)->name('supplierlist');
     Route::get('vendor/disposal', Disposal::class)->name('disposal');
     Route::get('vendor/bidders', Bidders::class)->name('bidders');
@@ -139,8 +201,12 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('projects/lists', Projectslists::class)->name('projects');
     Route::get('assets/lists', Assetslist::class)->name('assets');
     Route::get('assets/new', Createasset::class)->name('newasset');
+    Route::get('assets/orders', Orderlist::class)->name('assetorders');
+    Route::get('assets/delivery', Delivery::class)->name('delivery-request');
+    Route::get('assets/invoices', AssetmgmtInvoices::class)->name('assetinvoice');
     Route::get('project/new', Createnewproject::class)->name('newproject');
     Route::get('project/proposal', Proposal::class)->name('proposal');
+    Route::get('project/requests', Pmrequests::class)->name('pmrequests');
     Route::get('project/proposal/download/{id}', [DownloadProposalController::class, 'proposalDownload'])->name('proposalDownload');
     Route::get('fleet/vinfo', Vinfo::class)->name('vehicleinformation');
     Route::get('fleet/maps', Maps::class,)->name('mappers');
@@ -153,6 +219,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('asset/reports', Reportst::class)->name('assetreport');
     Route::get('asset/maintenance', MaintenanceRequests::class)->name('assetmaintenance');
     Route::get('projectmanagement/reports', Reports::class)->name('pmreports');
+    Route::get('warehouse/invoices', WarehouseInvoices::class)->name('warehouseInvoice');
 });
 
 //Finance Routes
@@ -202,13 +269,22 @@ Route::prefix('core')->middleware('auth', 'isCore')->group(function () {
 //HR Routes
 Route::prefix('hr')->middleware('auth', 'isHr')->group(function () {
     Route::view('dashboard', 'livewire.hr.dashboard')->name('hr');
-    Route::get('leavemangement', Leavedata::class)->name('leave');
     Route::get('timesheet', Timesheetdata::class)->name('timesheet');
-    Route::get('claim', Claimdata::class)->name('claim');
-    Route::get('pay', Paydata::class)->name('pay');
     Route::get('shift', Shiftdata::class)->name('shift');
     Route::get('analytics', Analyticdata::class)->name('analytics');
-    Route::get('time', Timedata::class)->name('time');
-    Route::get('compensation', Compensationdata::class)->name('compensation');
     Route::get('corehuman', Coredata::class)->name('corehuman');
+    Route::get('time', Timedata::class)->name('time');
+    Route::get('oneweekly', Oneweeklydata::class)->name('oneweekly');
+    Route::get('onemonthly', Onemonthlydata::class)->name('onemonthly');
+    Route::get('leavemangement', Leavedata::class)->name('leave');
+    Route::get('approval', Approval::class)->name('approval');
+    Route::get('disapproval', Disapproval::class)->name('disapproval');
+    Route::get('pay', Paydata::class)->name('pay');
+    Route::get('print', [PrintController::class, 'print'])->name('print');
+    Route::get('claim', Claimdata::class)->name('claim');
+    Route::get('claimapprove', Claimapprove::class)->name('claimapprove');
+    Route::get('claimdis', Claimdis::class)->name('claimdis');
+    Route::get('compensation', Compensationdata::class)->name('compensation');
+    Route::get('claiming', Claimed::class)->name('claiming');
+    Route::get('employee', Employee::class)->name('employee');
 });

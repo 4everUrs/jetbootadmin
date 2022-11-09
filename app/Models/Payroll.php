@@ -9,10 +9,11 @@ class Payroll extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'year', 'month', 'salary_term','start_date','end_date','name'
+        'year', 'month', 'salary_term', 'start_date', 'end_date', 'name'
     ];
-    public function Contribution()
+
+    public function Employer()
     {
-        return $this->hasMany(Contribution::class);
+        return $this->belongsTo(Employee::class);
     }
 }

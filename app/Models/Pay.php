@@ -9,6 +9,8 @@ class Pay extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'name', 'payhour', 'totalhours', 'overtime', 'latededuction','penstiondeduction', 'salary',
+        'name', 'company', 'position', 'datein', 'dateout', 'payhour', 'totalhours', 'overtime', 'latededuction',
+        'penstiondeduction', 'sss', 'pagibig', 'phil', 'salary',
     ];
+    
 }

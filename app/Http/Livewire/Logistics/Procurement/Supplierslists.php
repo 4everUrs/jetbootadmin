@@ -8,6 +8,7 @@ use App\Models\Supplier;
 use App\Models\User;
 use App\Models\VendorPo;
 use App\Notifications\SendPoNotification;
+use Carbon\Carbon;
 use Notification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
@@ -17,7 +18,8 @@ class Supplierslists extends Component
     use WithFileUploads;
     public $awardModal = false;
     public $poSend = false;
-    public $selected_id, $po_file, $po_id;
+    public $invitationModal = false;
+    public $selected_id, $file_name, $po_id, $time, $contract, $terms = 'months';
     public function render()
     {
         return view('livewire.logistics.procurement.supplierslists', [
@@ -48,13 +50,23 @@ class Supplierslists extends Component
     }
     public function send()
     {
+        $fileName = $this->file_name->getClientOriginalName();
+
         $user = Supplier::find($this->selected_id);
         $file = $this->validate([
             'po_id' => 'required|integer',
+            'file_name' => 'required',
         ]);
-        $file['file_name'] = $this->po_file->store('po_file', 'do');
+        $file['file_name'] = $this->file_name->storeAs('po_file', $fileName, 'do');
         $file['user_id'] = $user->user_id;
         VendorPo::create($file);
+
+
+
+
+
+
+
         $client = User::find($user->user_id);
         $url = 'https://mnlph.nyc3.digitaloceanspaces.com/' . $file['file_name'];
         $data = [
@@ -70,6 +82,7 @@ class Supplierslists extends Component
     }
     public function awarding()
     {
+
         $supplier = Bidder::find($this->selected_id);
         $supplier->status = 'Awarded';
         $supplier->save();
@@ -80,8 +93,39 @@ class Supplierslists extends Component
             'address' => $supplier->address,
             'user_id' => $supplier->user_id,
             'status' => 'Active',
+            'start' => now(),
+            'end' => now(),
         ]);
+        $this->contractTerms();
         toastr()->addSuccess('Operation Successfull');
         $this->awardModal = false;
+    }
+    public function contractTerms()
+    {
+        if ($this->terms == 'months') {
+            $temp = Supplier::latest()->first();
+            $temp->end = Carbon::parse(now())->addMonths($this->contract);
+            $temp->save();
+        } elseif ($this->terms == 'years') {
+            $temp = Supplier::latest()->first();
+            $temp->end = Carbon::parse(now())->addYears($this->contract);
+            $temp->save();
+        }
+    }
+    public function sendInvitation()
+    {
+
+        $this->invitationModal = true;
+    }
+    public function sendInvi($id)
+    {
+        $temp = Supplier::find($id);
+        $dt = Carbon::createFromFormat('H:i', $this->time)->format('g:i A');
+        $data = [
+            'name' => $temp->name,
+            'date' => $this->date,
+            'time' => $this->time,
+
+        ];
     }
 }

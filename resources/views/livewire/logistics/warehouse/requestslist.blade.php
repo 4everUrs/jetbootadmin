@@ -93,7 +93,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center" colspan="5">No Record Found!</td>
+                                        <td class="text-center" colspan="6">No Record Found!</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -221,3 +221,4 @@
         </script>
     @endpush
 </div>
+ 

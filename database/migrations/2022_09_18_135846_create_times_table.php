@@ -16,7 +16,6 @@ return new class extends Migration
     {
         Schema::create('times', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
             $table->string('name');
             $table->string('position');
             $table->string('department');

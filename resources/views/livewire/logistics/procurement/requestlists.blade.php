@@ -96,7 +96,9 @@
                                             <td class="text-center">{{$sent->status}}</td>
                                         </tr>
                                     @empty
-                                        
+                                        <tr>
+                                            <td colspan="7" class="text-center">No Record Found</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </x-table>

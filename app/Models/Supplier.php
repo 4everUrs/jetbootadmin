@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Supplier extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'address', 'status', 'phone', 'email', 'user_id'];
+    protected $fillable = ['name', 'address', 'status', 'phone', 'email', 'user_id', 'start', 'end'];
 
     function getPurchaseOrder()
     {

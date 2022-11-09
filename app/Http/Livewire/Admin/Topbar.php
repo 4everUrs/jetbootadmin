@@ -19,6 +19,7 @@ class Topbar extends Component
                 ->orderBy('id', 'desc')
                 ->get(),
         ]);
+        return view('livewire.admin.topbar');
     }
     public function mount()
     {

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('status');
+            $table->string('start');
+            $table->string('end');
             $table->timestamps();
         });
     }

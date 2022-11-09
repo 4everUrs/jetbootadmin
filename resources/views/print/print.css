@@ -1,0 +1,11 @@
+.t
+{
+    
+    border: 3px solid red;
+}
+td{
+    border: 1px solid red;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

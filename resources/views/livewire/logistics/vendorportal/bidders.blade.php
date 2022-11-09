@@ -9,6 +9,8 @@
             <x-table head="Bidders">
                 <thead class="bg-info">
                     <th class="text-center align-middle">No.</th>
+                    <th class="text-center align-middle">Item Name</th>
+                    <th class="text-center align-middle">Quantity</th>
                     <th class="text-center align-middle">Company Name</th>
                     <th class="text-center align-middle">Company Email</th>
                     <th class="text-center align-middle">Company Phone</th>
@@ -21,6 +23,8 @@
                     @forelse ($bidders as $bidder)
                         <tr>
                             <td class="text-center">{{$bidder->id}}</td>
+                            <td class="text-center">{{$bidder->Post->item_name}}</td>
+                            <td class="text-center">{{$bidder->Post->quantity}}</td>
                             <td class="text-center align-middle">{{$bidder->name}}</td>
                             <td class="text-center align-middle">{{$bidder->email}}</td>
                             <td class="text-center align-middle">{{$bidder->phone}}</td>
@@ -57,13 +61,24 @@
         <x-slot name="content">
            <div class="row">
             <div class="col">
-                <div class="card">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        {{__('Post Detail')}}
+                    </div>
                     <div class="card-body">
                         @if (!empty($postDetail))
                             <table class="table table-bordered">
                                 <tr>
                                     <td>Type</td>
                                     <td>{{$postDetail->type}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Item Name</td>
+                                    <td>{{$postDetail->item_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Quantity</td>
+                                    <td>{{$postDetail->quantity}}</td>
                                 </tr>
                                 <tr>
                                     <td>Description</td>
@@ -92,7 +107,10 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        {{__('Bidder Detail')}}
+                    </div>
                     <div class="card-body">
                        @if (!empty($bidderDetail))
                            <table class="table table-bordered">

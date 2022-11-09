@@ -19,6 +19,7 @@ class Bidders extends Component
     public function render()
     {
         $this->bidders = Bidder::all();
+
         if (!empty($this->selected_id)) {
             $this->bidderDetail = Bidder::find($this->selected_id);
         }

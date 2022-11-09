@@ -30,6 +30,8 @@
                                     <th class="text-center align-middle">Company Address</th>
                                     <th class="text-center align-middle">Company Phone</th>
                                     <th class="text-center align-middle">Company Email</th>
+                                    <th class="text-center align-middle">Start of contract</th>
+                                    <th class="text-center align-middle">End of contract</th>
                                     <th class="text-center align-middle">Status</th>
                                     <th class="text-center align-middle">Action</th>
                                 </thead>
@@ -40,10 +42,13 @@
                                         <td class="text-center align-middle">{{$supplier->address}}</td>
                                         <td class="text-center align-middle">{{$supplier->phone}}</td>
                                         <td class="text-center align-middle">{{$supplier->email}}</td>
+                                        <td class="text-center align-middle">@date($supplier->start)</td>
+                                        <td class="text-center align-middle">@date($supplier->end)</td>
+
                                         @if ($supplier->status == 'Inactive')
                                         <td class="text-danger text-center">{{$supplier->status}}</td>
                                         @else
-                                        <td class="text-center">{{$supplier->status}}</td>
+                                        <td class="text-center align-middle">{{$supplier->status}}</td>
                                         @endif
                             
                                         <td class="text-center">
@@ -53,7 +58,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="6" class="text-center">No Record Found</td>
+                                        <td colspan="8" class="text-center">No Record Found</td>
                                     </tr>
                                     @endforelse
                                 </tbody>
@@ -69,6 +74,7 @@
                             <th class="text-center align-middle">Company Phone</th>
                             <th class="text-center align-middle">Company Email</th>
                             <th class="text-center align-middle">Status</th>
+                            <th class="text-center align-middle">Termination Date</th>
                             <th class="text-center align-middle">Action</th>
                         </thead>
                         <tbody>
@@ -80,6 +86,7 @@
                                 <td class="text-center align-middle">{{$supplier->email}}</td>
                                 @if ($supplier->status == 'Inactive')
                                 <td class="text-danger text-center">{{$supplier->status}}</td>
+                                <td class="text-danger text-center">@date($supplier->updated_at)</td>
                                 @else
                                 <td class="text-center">{{$supplier->status}}</td>
                                 @endif
@@ -90,7 +97,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="text-center">No Record Found</td>
+                                <td colspan="7" class="text-center">No Record Found</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -136,6 +143,7 @@
                                                     <button wire:click="award({{$applicant->id}})" class="btn btn-secondary btn-sm" disabled>Award</button>
                                                 @else
                                                     <button wire:click="award({{$applicant->id}})" class="btn btn-dark btn-sm">Award</button>
+                                                    <button wire:click="sendInvitation({{$applicant->id}})" class="btn btn-primary btn-sm">Send Invitation</button>
                                                 @endif
                                                 
                                             </td>
@@ -153,6 +161,62 @@
             </div>
         </div>
     </div>
+    <x-jet-dialog-modal wire:model="invitationModal">
+        <x-slot name="title">
+            {{__('Send Invitation')}}
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label for="">Venue</label>
+                <input type="text" class="form-control">
+                <label for="">Date</label>
+                <input type="date" class="form-control">
+                <label for="">Time</label>
+                <input wire:model="time" type="time" class="form-control">
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('invitationModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button wire:click="sendInvi" class="ms-2" id="createButton" wire:loading.attr="disabled">
+                {{ __('Yes') }}
+            </x-jet-button>
+    
+        </x-slot>
+    </x-jet-dialog-modal>
+    <x-jet-dialog-modal wire:model="awardModal">
+        <x-slot name="title">
+            {{__('Award as Supplier')}}
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label>Contract Terms</label>
+                <div class="row">
+                    <div class="col">
+                        <input wire:model="contract" class="form-control" type="number">
+                    </div>
+                    <div class="col">
+                        <select wire:model="terms" class="form-control">
+                            <option value="months">Months</option>
+                            <option value="years">Years</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('awardModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button wire:click="awarding" class="ms-2" id="createButton" wire:loading.attr="disabled">
+                {{ __('Ok') }}
+            </x-jet-button>
+    
+        </x-slot>
+    </x-jet-dialog-modal>
     <x-jet-dialog-modal wire:model="awardModal">
         <x-slot name="title">
             {{__('Award as Supplier')}}
@@ -180,7 +244,8 @@
                 <label>Purchase Order ID</label>
                 <input wire:model="po_id" type="text" class="form-control">
                 <label>Purchase Order File</label>
-                <input wire:model="po_file" type="file" class="form-control">
+                <input wire:model="file_name" type="file" class="form-control">
+                 @error('file_name') <span class="error">{{ $message }}</span> @enderror
             </div>
         </x-slot>
         <x-slot name="footer">

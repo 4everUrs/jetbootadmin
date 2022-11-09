@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('anuallies', function (Blueprint $table) {
-            $table->id();
+        Schema::create('asset_invoices', function (Blueprint $table) {
+            $table->id()->startingValue(10001);
+            $table->unsignedInteger('buyer_id');
+            $table->unsignedInteger('order_id');
+            $table->unsignedInteger('user_id');
+            $table->string('creator');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anuallies');
+        Schema::dropIfExists('asset_invoices');
     }
 };

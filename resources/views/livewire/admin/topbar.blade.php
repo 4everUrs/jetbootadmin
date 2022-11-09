@@ -15,6 +15,8 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        
+
         <!-- Navbar Search -->
         @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
         @if (Auth::user()->role_id == '0')

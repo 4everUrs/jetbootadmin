@@ -14,6 +14,7 @@
                     <th>Email</th>
                     <th>Department</th>
                     <th>Position</th>
+                    <th>Status</th>
                 </thead>
                 <tbody>
                     @forelse ($users as $user)
@@ -31,6 +32,7 @@
                             @elseif ($user->role_id == '3') 
                                 <td>Client</td>
                             @endif
+                            <td>{{$user->status}}</td>
                         </tr>
                     @empty
                         
