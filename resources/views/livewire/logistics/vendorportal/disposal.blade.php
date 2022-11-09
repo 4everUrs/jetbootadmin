@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <x-table head="Disposal">
-                <thead>
+                <thead class="bg-info">
                     <th>No.</th>
                     <th>Origin</th>
                     <th>Item Name</th>
@@ -26,7 +26,7 @@
                             <td>{{$item->condition}}</td>
                             <td style="width: 30%">{{$item->description}}</td>
                             <td>{{$item->status}}</td>
-                            <td>{{$item->amount}}</td>
+                            <td>@money($item->amount)</td>
                             <td>
                                 <button wire:click="post({{$item->id}})" class="btn btn-primary">Post to Shop</button>
                             </td>

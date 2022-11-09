@@ -2,38 +2,49 @@
 
 namespace App\Http\Livewire\Core\Am;
 
-use Livewire\Component;
 use App\Models\ApplicantForm;
-use App\Models\Onboard;
-use App\Models\JobPost;
+use Livewire\Component;
+use App\Models\ApplicantList;
+use App\Models\LocalPlacement;
+use App\Models\Denied;
+
 class Jobcandidate extends Component
 {
     public function render()
     {
-        return view('livewire.core.am.jobcandidate',[
-            'jobs' => ApplicantForm::all(),
+        return view('livewire.core.am.jobcandidate', [
+            'jobs' => ApplicantList::all(),
         ]);
     }
     public function approve($id)
     {
-       $job = ApplicantForm::find($id);
-       Onboard::create([
-            'company' => $job->company,
+        $job = ApplicantForm::find($id);
+
+        LocalPlacement::create([
             'name' => $job->name,
+            'phone' => $job->phone,
             'email' => $job->email,
-            'location' => $job->location,
-       ]);
-       flash()->addSuccess('Data Approved Successfully');
+            'company_name' => $job->company,
+            'company_location' => $job->location,
+            'position' => $job->position,
+
+        ]);
+        flash()->addSuccess('Data Approved Successfully');
     }
-    public function approved($id)
+    public function denied($id)
     {
-       $job = ApplicantForm::find($id);
-       Onboard::create([
-            'company' => $job->company,
+        $job = ApplicantList::find($id);
+
+        Denied::create([
             'name' => $job->name,
+            'position' => $job->position,
             'email' => $job->email,
-            'location' => $job->location,
-       ]);
-       flash()->addSuccess('Data Approved Successfully');
+            'phone' => $job->phone,
+            'address' => $job->address,
+            'resume_file' => $job->resume_file,
+            'status' => $job->status = 'Denied',
+        ]);
+        flash()->addSuccess('Data Deleted Successfully');
+        ApplicantList::find($id)->delete();
     }
 }

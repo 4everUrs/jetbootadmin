@@ -9,6 +9,6 @@ class ApplicantList extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name','position','email','phone','location','resume_file'
+        'name','position','email','phone','address','resume_file','location'
     ];
 }

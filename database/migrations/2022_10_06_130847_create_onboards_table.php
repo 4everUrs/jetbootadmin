@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('onboards', function (Blueprint $table) {
             $table->id();
-            $table->string('company');
             $table->string('name');
-            $table->string('email');
-            $table->string('location');
-            $table->string('document');
+            $table->string('age');
+            $table->string('gender');
+            $table->string('company_name');
+            $table->string('position');
+            $table->string('contract');
+            $table->string('status');
+            $table->string('resume_file');
             $table->timestamps();
         });
     }

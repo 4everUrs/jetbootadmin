@@ -1,67 +1,65 @@
 <div>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('HR Analytics') }}
+            {{ __('Analytics & Report') }}
         </h2>
     </x-slot>
-    <!-- Show Graph Data -->
-    <script src="https://cdnjs.com/libraries/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-
-    <div class="map_canvas">
-  
-            <canvas id="myChart" width="auto" height="100"></canvas>
+    <div class="row form-group">
+        <div class="col">
+            <div class="row-lg-3 row-6">
+            
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{$employees}}</h3>
+                        <p>employees</p>
+                    </div>
+                        <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row-lg-3 row-6">
+            
+                <div class="small-box bg-outline">
+                    <div class="inner">
+                        <h3>{{$times}}</h3>
+                        <p>Attendance</p>
+                    </div>
+                        <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row-lg-3 row-6">
+            
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{$leaves}}</h3>
+                        <p>Leaves</p>
+                    </div>
+                        <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                     </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row-lg-3 row-6">
+            
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{$compensations}}</h3>
+                        <p>Compensations</p>
+                    </div>
+                        <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                     </div>
+            </div>
+        </div>
     </div>
-
-    <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: <?php echo json_encode($label) ?>,
-        datasets: [{
-            label: '',
-            data: <?php echo json_encode($price); ?>,
-            backgroundColor: [
-                'rgba(31, 58, 147, 1)',
-                'rgba(37, 116, 169, 1)',
-                'rgba(92, 151, 191, 1)',
-                'rgb(200, 247, 197)',
-                'rgb(77, 175, 124)',
-                'rgb(30, 130, 76)'
-            ],
-            borderColor: [
-                'rgba(31, 58, 147, 1)',
-                'rgba(37, 116, 169, 1)',
-                'rgba(92, 151, 191, 1)',
-                'rgb(200, 247, 197)',
-                'rgb(77, 175, 124)',
-                'rgb(30, 130, 76)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                max: 200,
-                min: 0,
-                ticks: {
-                    stepSize: 50
-                }
-            }
-        },
-        plugins: {
-            title: {
-                display: false,
-                text: 'Custom Chart Title'
-            },
-            legend: {
-                display: false,
-            }
-        }
-    }
-    });
-    </script>
-      
 </div>

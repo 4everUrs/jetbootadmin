@@ -6,11 +6,12 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button class="btn btn-success" wire:click="loadModal">Add new Request</button>
+            <button class="btn btn-dark btn-sm" wire:click="loadModal">Add new Request</button>
             <x-table head="Request Lists">
-                <thead>
+                <thead class="bg-info">
                     <th>No.</th>
-                    <th>From.</th>
+                    <th>Origin.</th>
+                    <th>Category.</th>
                     <th>Content.</th>
                     <th>Status.</th>
                     <th>Date Requested</th>
@@ -22,12 +23,17 @@
                         <tr>
                             <td>{{$request->id}}</td>
                             <td>{{$request->origin}}</td>
+                            <td>{{$request->category}}</td>
                             <td>{{$request->content}}</td>
                             <td>{{$request->status}}</td>
                             <td>{{Carbon\Carbon::parse($request->create_at)->toFormattedDateString()}}</td>
-                            <td>{{Carbon\Carbon::parse($request->updated_at)->toFormattedDateString()}}</td>
+                            @if (!empty($request->date_granted))
+                                <td>{{Carbon\Carbon::parse($request->date_granted)->toFormattedDateString()}}</td>
+                            @else
+                                <td>{{$request->date_granted}}</td>
+                            @endif
                             <td class="text-center">
-                                <button wire:click="approve({{$request->id}})"  class="btn btn-primary">Approve</button>
+                                <button wire:click="approve({{$request->id}})"  class="btn btn-primary btn-sm">Approve</button>
                             </td>
                         </tr>                        
                     @empty

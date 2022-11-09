@@ -2,148 +2,123 @@
 
 namespace App\Http\Livewire\Logistics\Warehouse;
 
+use App\Models\MroInventory;
 use Livewire\Component;
 use App\Models\RequestList;
 use App\Models\ProcurementRequest;
 use Livewire\WithPagination;
-use Carbon\Carbon;
 use Livewire\WithFileUploads;
-use App\Models\Shop;
-use App\Models\Image;
-use App\Models\VendorShop;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Reorder;
+use App\Models\Stock;
+use App\Models\Supplier;
+use App\Models\WarehouseSent;
 
 class Requestslist extends Component
 {
     public $origin = 'Warehouse', $content, $status = 'Pending';
-    public $destination;
     public $requestModal = false;
-    public $images =[];
-    public $fileCounter = [];
-    public $displayImage;
-    public $thumbnail;
-    
-    
-
-    public $item_name, $condition, $description, $amount, $file_name;
-
+    public $reOrderModal = false;
+    public $dispatchModal = false;
+    public $category, $quantity, $supplier, $item, $stock_id, $qty, $selected_id;
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
-    protected $listeners = ['postAdded' => 'listing'];
-
-    protected $rules = [
-        'origin' => 'required|min:6',
-        'content' => 'required|string',
-        'status' => 'required|string'
-    ];
-
-    public function addRow()
-    {
-        $this->fileCounter[] = ['1'];
-    }
-    public function removeRow($index)
-    {
-         unset($this->fileCounter[$index]);
-    }
-     public function updated($fields)
-    {
-        $this->validateOnly($fields);
-    }
     public function render()
     {
-        $this->fileCounter;
-        if($this->destination == '3'){
-            $this->dispatchBrowserEvent('vendor-form');
+        if ($this->category == "Re-order") {
+            $this->dispatchBrowserEvent('show-supplier');
         }
-        return view('livewire.logistics.warehouse.requestslist',[
+        return view('livewire.logistics.warehouse.requestslist', [
             'requests' => RequestList::get(),
-            
+            'suppliers' => Supplier::all(),
+            'sents' => WarehouseSent::all(),
+            'items' => Stock::where('supplier_id', '=', $this->supplier)->where('status', '=', 'LOW')->get(),
+            'inventories' => Stock::all(),
         ]);
     }
-    public function listing($selected_id)
-    {
-       dd('test');
-    }
-    public function showModal()
-    {
-        
-        $this->requestModal = true;
-    }
 
-    public function sendRequest()
+    public function saveRequest()
     {
-        $validated = $this->validate();
-        
-        if($this->destination == "Procurement"){
-            ProcurementRequest::create($validated);
-            toastr()->addSuccess('Request send successfully');
-             $this->resetInput();
-        }
-        elseif($this->destination == "Fleet Management"){
-            toastr()->addSuccess('Data update successfully');
-             $this->resetInput();
-        }
-        else{
-            
-            toastr()->addError('Please fill up correctly');
-            $this->resetInput();
-        }
+        $this->validate(['content' => 'required|string|min:5']);
+        ProcurementRequest::create([
+            'origin' => $this->origin,
+            'content' => $this->content,
+            'status' => $this->status,
+            'category' => 'Supplier'
+        ]);
+        WarehouseSent::create([
+            'destination' => 'Procurement',
+            'content' => $this->content,
+            'status' => $this->status,
+            'category' => 'Supplier'
+        ]);
+        toastr()->addSuccess('Request Sent Successfully');
+        $this->requestModal = false;
+        $this->reset();
     }
-    public function saveItem()
+    public function saveReorder()
     {
-        if($this->destination == '1')
-        {
-            dd('1');
-        }
-        elseif($this->destination == '2')
-        {
-            dd('2');
-        }
-        elseif($this->destination == '3')
-        {
-           
-            $validatedData = $this->validate([
-                'item_name' => 'required|string',
-                'condition' => 'required|string',
-                'description' => 'required|string',
-                'amount' => 'required|integer',
-                'status' => 'required|string',
-                'origin' => 'required|string',
-                'thumbnail' => 'required|image'
+        $temp = Stock::find($this->item);
+        $this->validate([
+            'item' => 'required',
+            'supplier' => 'required',
+            'quantity' => 'required',
+            'content' => 'required',
+        ]);
+        Reorder::create([
+            'supplier_id' => $this->supplier,
+            'quantity' => $this->quantity,
+            'price' => $temp->cost_per_item,
+            'description' => $this->content,
+            'status' => $this->status
+        ]);
+        WarehouseSent::create([
+            'destination' => 'Procurement',
+            'content' => $this->content,
+            'status' => $this->status,
+            'category' => 'Re-Order'
+        ]);
+        toastr()->addSuccess('Re-Order Sent Successfully');
+        $this->reOrderModal = false;
+        $this->reset();
+    }
+    public function confirm($id)
+    {
+        $temp = RequestList::find($id);
+        $temp->status = 'Confirmed';
+        $temp->save();
+        toastr()->addSuccess('Operation Success');
+    }
+    public function dispatch($id)
+    {
+        $this->selected_id = $id;
+        $this->dispatchModal = true;
+    }
+    public function sendDispatch()
+    {
+        $temp = Stock::find($this->stock_id);
+        if ($temp->stock_quantity >= $this->qty) {
+            MroInventory::create([
+                'stock_id' => $this->stock_id,
+                'item_name' => $temp->name,
+                'description' => $temp->description,
+                'quantity' => $this->qty,
+                'unit_price' => $temp->cost_per_item,
+                'inventory_value' => $this->qty * $temp->cost_per_item,
             ]);
-            $validatedData['thumbnail'] = $this->thumbnail->store('shop','do');
-            Shop::create($validatedData);
-            if(!empty($this->images)){
-                $this->saveImages();
-            }
-            
-            toastr()->addSuccess('Request Success sent!.');
-            $this->resetInput();
-            $this->requestModal = false;
+            $x = RequestList::find($this->selected_id);
+            $x->status = 'Dispatched';
+            $x->save();
+            $temp->stock_quantity = $temp->stock_quantity - $this->qty;
+            $temp->save();
+            toastr()->addSuccess('Operation Successfull');
+        } else {
+            toastr()->addWarning('Selected Item Out of Stock');
         }
-        else{
-            dd('error');
-        }
+        $this->dispatchModal = false;
+        $this->reset();
     }
-    public function saveImages()
-    {
-            $temp = Shop::latest('id')->first();
-            
-            $this->validate([
-                'images.*' => 'image|max:1024', // 1MB Max
-            ]);
-            foreach($this->images as $image)
-            {
-                Image::create([
-                    'shop_id' => $temp->id,
-                    'vendor_shop_id' => $temp->id,
-                    'file_name' => $image->store('shop','do'),
-                ]);
-            }
-    }
-    
     public function resetInput()
     {
         $this->origin = null;
@@ -154,6 +129,5 @@ class Requestslist extends Component
         $this->amount = null;
         $this->file_name = null;
         $this->status = null;
-        
     }
 }

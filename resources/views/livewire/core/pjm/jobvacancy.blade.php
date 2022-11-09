@@ -8,12 +8,12 @@
         <div class="card-body">
            <x-table head="">
             <thead>
-                <th>No.</th>
-                <th>Company Name</th>
-                <th>Position</th>
-                <th>Monthly Salary</th>
-                <th>Job Details</th>
-                <th>Location</th>
+                <th class="text-center">No.</th>
+                <th class="text-center">Company Name</th>
+                <th class="text-center">Position</th>
+                <th class="text-center">Monthly Salary</th>
+                <th class="text-center">Job Details</th>
+                <th class="text-center">Location</th>
                 <th class="text-center">Action</th>
 
                
@@ -21,20 +21,20 @@
             <tbody>
                 @forelse($vacants as $vacant)
                 <tr>
-                    <td>{{$vacant->id}}</td>
-                    <td>{{$vacant->name}}</td>
-                    <td>{{$vacant->position}}</td>
-                    <td>{{$vacant->salary}}</td>
-                    <td>{{$vacant->details}}</td>
-                    <td>{{$vacant->location}}</td>
+                    <td class="text-center">{{$vacant->id}}</td>
+                    <td class="text-center">{{$vacant->name}}</td>
+                    <td class="text-center">{{$vacant->position}}</td>
+                    <td class="text-center">{{$vacant->salary}}</td>
+                    <td class="text-center">{{$vacant->details}}</td>
+                    <td class="text-center">{{$vacant->location}}</td>
                     <td class="text-center">
-                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-primary">Approve</button>
-                        <button wire:click="edit({{$vacant->id}})"class="btn btn-sm btn-secondary">Edit</button>
-                        <button wire:click="delete({{$vacant->id}})"class="btn btn-sm btn-danger">Delete</button>
+                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Approve</button>
                     </td>
                 </tr>
                 @empty
-
+                    <tr>
+                        <td colspan="7" class="text-center">No Record Found</td>
+                    </tr>
                 @endforelse
             </tbody>
            </x-table>

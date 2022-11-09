@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string('position');
             $table->string('email');
             $table->string('phone');
-            $table->string('location');
+            $table->string('address');
             $table->string('resume_file');
             $table->string('company');
+            $table->string('location');
+            $table->string('status');
             $table->timestamps();
         });
     }

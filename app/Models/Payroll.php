@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Payroll extends Model
 {
     use HasFactory;
-    protected $fillabe = [
-        'name', 'attendance', 'salary', 'contribution', 'placement'
+    protected $fillable = [
+        'attendance', 'salary', 'contribution', 'placement', 'status',
+        'name', 'company','position', 'department' , 'gender' , 'address','mobile','email',
     ];
+
+    public function Employer()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

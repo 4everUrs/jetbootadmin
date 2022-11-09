@@ -15,9 +15,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('addclient')}}" class="nav-link"><i class='fa fa-plus'></i> Add Client</a>
                         <a href="{{route('applicantname')}}" class="nav-link"><i class='fa fa-list-ol'></i> List of Applicant</a>
-                        <a href="{{route('denied')}}" class="nav-link"><i class='fa fa-trash'></i> List of Denied ??</a>
                     </li>
                 </ul>
             </li>
@@ -29,8 +27,8 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('jobcandidate')}}" class="nav-link">List of Applicant</a>
-                        <a href="#" class="nav-link">Applicant Record</a>
+                        <a href="{{route('jobcandidate')}}" class="nav-link"><i class='fa fa-list'></i> List of Applicants</a>
+                        <a href="{{route('deniedapplicant')}}" class="nav-link"><i class='fa fa-list-ul'></i> List of Denied Applicants</a>
                     </li>
                 </ul>
             </li>
@@ -42,7 +40,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('onboarding')}}" class="nav-link">Onboarding</a>
+                        <a href="{{route('onboarding')}}" class="nav-link"><i class='fa fa-table'></i> Onboarding</a>
                     </li>
                 </ul>
             </li>
@@ -54,8 +52,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('employeedata')}}" class="nav-link">Local</a>
-                        <a href="#" class="nav-link">International</a>
+                        <a href="{{route('employeedata')}}" class="nav-link"><i class='fa fa-table'></i> Employee Data</a>
                     </li>
                 </ul>
             </li>
@@ -67,8 +64,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('applicantreport')}}" class="nav-link">Applicant Report</a>
-                        <a href="{{route('clientreport')}}" class="nav-link">Client Report</a>
+                        <a href="{{route('applicantreport')}}" class="nav-link"><i class='fa fa-file'></i>Analytics & Report</a>
                     </li>
                 </ul>
             </li>
@@ -80,7 +76,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('jobvacancy')}}" class="nav-link">Job Vacancy</a>
+                        <a href="{{route('jobvacancy')}}" class="nav-link"><i class='fa fa-table'></i> Job Vacancy</a>
                     </li>
                 </ul>
             </li>
@@ -92,10 +88,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('paymentfee')}}" class="nav-link">Local Payroll</a>
-                        <a href="#" class="nav-link">Local Payment</a>
-                        <a href="#" class="nav-link">International Payroll</a>
-                        <a href="#" class="nav-link">International Payment</a>
+                        <a href="{{route('paymentfee')}}" class="nav-link"><i class='fa fa-credit-card'></i> Payroll</a>
                     </li>
                 </ul>
             </li>
@@ -107,8 +100,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('placementfee')}}" class="nav-link">Local Deployment</a>
-                        <a href="{{route('placementfee')}}" class="nav-link">International Deployment</a>
+                        <a href="{{route('placementfee')}}" class="nav-link"><i class='fa fa-car'></i> Deployment</a>
                     </li>
                 </ul>
             </li>
@@ -120,8 +112,8 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('clientdata')}}" class="nav-link">Client List</a>
-                        <a href="{{route('joblist')}}" class="nav-link">Create Job</a>
+                        <a href="{{route('clientdata')}}" class="nav-link"><i class='fa fa-table'></i> Client List</a>
+                        <a href="{{route('joblist')}}" class="nav-link"><i class='fa fa-plus'></i> Create Job</a>
                     </li>
                 </ul>
             </li>
@@ -133,8 +125,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('contract')}}" class="nav-link"><i class='fa fa-pen'></i> Agency Contract Agreement <br> Form</a>
-                        <a href="{{route('agreement')}}" class="nav-link">Clients Agreement List</a>
+                        <a href="{{route('agreement')}}" class="nav-link"><i class='fa fa-table'></i> Clients Agreement List</a>
                     </li>
                 </ul>
             </li>

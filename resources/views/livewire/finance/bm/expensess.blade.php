@@ -42,6 +42,7 @@
         <button wire:click="sumExpenses" class="btn btn-outline-danger ">Grandtotal</button>
         <label>The Sum of all transaction:</label>
         <label>{{$grandexpenses}}</label><br><br>
+        
         <div class="mt-3 float-right">
             {{$expenses->links()}}
         </div>
@@ -51,7 +52,7 @@
 <!--EXPENSES TABLE-->
 
 <!--pop up form EXPENSES-->
-<x-jet-dialog-modal wire:model="addExpense" maxWidth="xl">
+<x-jet-dialog-modal wire:model="addPurchase">
     <x-slot name="title">
         {{ __('Add Expenses') }}
     </x-slot>
@@ -101,12 +102,12 @@
     </x-slot>
 
     <x-slot name="footer">
-        <x-jet-secondary-button wire:click="$toggle('addExpense')" wire:loading.attr="disabled">
+        <x-jet-secondary-button wire:click="$toggle('addPurchase')" wire:loading.attr="disabled">
             {{ __('Cancel') }}
         </x-jet-secondary-button>
        
         <x-jet-button class="ms-2" wire:click="addExpenses" wire:loading.attr="disabled">
-            {{ __('Update Expenses') }}
+            {{ __('Add Expenses') }}
         </x-jet-button>
 
     </x-slot>

@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('procurement_requests', function (Blueprint $table) {
             $table->id();
             $table->string('origin');
+            $table->string('category');
             $table->string('content');
             $table->string('status');
+            $table->string('date_granted')->nullable();
             $table->timestamps();
         });
     }

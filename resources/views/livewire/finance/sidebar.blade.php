@@ -49,14 +49,9 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('journal')}}" class="nav-link">Journal Entry</a>
+                        <a href="{{route('journal')}}" class="nav-link">Records and Reports</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('generalledge')}}"class="nav-link">General Ledger</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('bsheets')}}"class="nav-link">Balance Sheets</a>
-                    </li>
+                    
                 </ul>
             </li>
 

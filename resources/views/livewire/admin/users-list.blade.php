@@ -28,6 +28,8 @@
                                 <td>Manager</td>
                             @elseif ($user->role_id == '2') 
                                 <td>Staff</td>
+                            @elseif ($user->role_id == '3') 
+                                <td>Client</td>
                             @endif
                         </tr>
                     @empty

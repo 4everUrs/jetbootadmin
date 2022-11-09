@@ -4,21 +4,29 @@
             {{ __('Supplier Lists') }}
         </h2>
     </x-slot>
-    <div class="card">
-        
+    <div class="card">  
         <div class="card-body">
-            <button wire:click="showModal" class="btn btn-success">Show Modal</button>
             <x-table head="Suppliers Lists">
-                <thead>
+                <thead class="bg-info">
                     <th>Company Name</th>
                     <th>Company Address</th>
                     <th>Company Phone</th>
                     <th>Company Email</th>
                     <th>Status</th>
-                    <th>Action</th>
                 </thead>
                 <tbody>
-
+                    @forelse ($suppliers as $supplier)
+                        <tr>
+                            <td>{{$supplier->name}}</td>
+                            <td>{{$supplier->address}}</td>
+                            <td>{{$supplier->phone}}</td>
+                            <td>{{$supplier->email}}</td>
+                            <td>{{$supplier->status}}</td>
+                           
+                        </tr>
+                    @empty
+                        
+                    @endforelse
                 </tbody>
             </x-table>
         </div>

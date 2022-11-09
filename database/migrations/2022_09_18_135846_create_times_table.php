@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('position');
             $table->string('department');
-            $table->string('timein');
-            $table->string('breakin');
-            $table->string('breakout');
-            $table->string('timeout');
+            $table->string('timein')->nullable();
+            $table->string('timeout')->nullable();
+            $table->string('breakin')->nullable();
+            $table->string('breakout')->nullable();
             $table->string('date');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

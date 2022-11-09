@@ -6,9 +6,9 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click='showModal' class="btn btn-primary">Create Purchase Order</button>
+            <button wire:click='showModal' class="btn btn-dark btn-sm">Create Purchase Order</button>
             <x-table head="Purchase Order">
-                <thead>
+                <thead class="bg-info">
                     <th>No.</th>
                     <th>Supplier Name.</th>
                     <th>Purchase Order ID.</th>
