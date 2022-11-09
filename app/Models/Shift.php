@@ -12,4 +12,7 @@ class Shift extends Model
     protected $fillable =[
         'name', 'position', 'department', 'monday', 'tuesday', 'wednesday','thursday', 'friday', 'saturday','sunday',
     ];
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
 }

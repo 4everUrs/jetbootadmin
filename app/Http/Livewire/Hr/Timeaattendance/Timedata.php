@@ -5,16 +5,16 @@ namespace App\Http\Livewire\Hr\Timeaattendance;
 
 
 use App\Models\Time;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 
 class Timedata extends Component
 {
-    public $name, $position, $department, $timein, $breakin, $breakout, $timeout, $date, $status;
+    public $name, $position, $department, $timein,$breakin, $breakout, $timeout, $date, $status;
     public $addRecord = false;
     public $viewModal = false;
-    
     public $data;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -23,10 +23,10 @@ class Timedata extends Component
         'name' => 'required|string',
         'position' => 'required|string',
         'department' => 'required|string',
-        'timein' => 'string',
-        'breakin' => 'string',
-        'breakout' => 'string',
-        'timeout' => 'string',
+        'timein' => 'required|string',
+        'breakin' => 'required|string',
+        'breakout' => 'required|string',
+        'timeout' => 'required|string',
         'date' => 'required|string',
         'status' => 'required|string',
 
@@ -52,7 +52,7 @@ class Timedata extends Component
     {
         $this->data;
         return view('livewire.hr.timeaattendance.timedata',[
-            'datas' => Time::paginate(6),]);
+            'datas' => Time::paginate(10),]);
     }
     public function viewData($id){
         
@@ -77,5 +77,10 @@ class Timedata extends Component
         $this->timeout = null;
         $this->date= null;
         $this->status = null;
+    }
+    public function resetData()
+    {
+        $bukas = carbon::tomorrow();
+        Time::all()->resetInput(['id'=>Carbon::parse($bukas())->format('g:i A')]);
     }
 }

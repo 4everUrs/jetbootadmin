@@ -9,6 +9,7 @@ class Compensation extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'name', 'position', 'basepay', 'benefits', 'insentives','insurance',
+        'name', 'position', 'basepay', 'benefits', 'insentives','insurance','overall','status'
     ];
+
 }

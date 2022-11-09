@@ -8,7 +8,7 @@
         <div class="card-body">
             <button wire:click="showModal" class="btn btn-success">Add Record</button>
             <x-table head="Shift And Schedule">
-                <thead>
+                <thead class = "bg-info">
                     <th>No.</th>
                     <th>Name</th>
                     <th>Position </th>
@@ -35,13 +35,10 @@
                             <td>{{$data->friday}}</td>
                             <td>{{$data->saturday}}</td>
                             <td>{{$data->sunday}}</td>
-                            <td>
-                                <button class="btn btn-primary">View</button>
-                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="11" class="text-center">No record found nigga!</td>
+                            <td colspan="11" class="text-center">No record found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -68,8 +65,8 @@
                             <select wire:model="monday" class="form-control">
                                 <option></option>
                                 <option>8am - 5pm</option>
-                                <option>10am - 7pm</option>
-                                <option>2pm - 11pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
                                 <option>Rest Day</option>
                             </select>
                             @error('monday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
@@ -77,8 +74,8 @@
                             <select wire:model="tuesday" class="form-control">
                                 <option></option>
                                 <option>8am - 5pm</option>
-                                <option>10am - 7pm</option>
-                                <option>2pm - 11pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
                                 <option>Rest Day</option>
                             </select>
                             @error('tuesday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
@@ -86,8 +83,8 @@
                             <select wire:model="wednesday" class="form-control">
                                 <option></option>
                                 <option>8am - 5pm</option>
-                                <option>10am - 7pm</option>
-                                <option>2pm - 11pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
                                 <option>Rest Day</option>
                             </select>
                             @error('wednesday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
@@ -95,8 +92,8 @@
                             <select wire:model="thursday" class="form-control">
                                 <option></option>
                                 <option>8am - 5pm</option>
-                                <option>10am - 7pm</option>
-                                <option>2pm - 11pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
                                 <option>Rest Day</option>
                             </select>
                             @error('thursday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
@@ -104,8 +101,8 @@
                             <select wire:model="friday" class="form-control">
                                 <option></option>
                                 <option>8am - 5pm</option>
-                                <option>10am - 7pm</option>
-                                <option>2pm - 11pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
                                 <option>Rest Day</option>
                             </select>
                             @error('friday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
@@ -113,8 +110,8 @@
                             <select wire:model="saturday" class="form-control">
                                 <option></option>
                                 <option>8am - 5pm</option>
-                                <option>10am - 7pm</option>
-                                <option>2pm - 11pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
                                 <option>Rest Day</option>
                             </select>
                             @error('saturday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
@@ -122,23 +119,20 @@
                             <select wire:model="sunday" class="form-control">
                                 <option></option>
                                 <option>8am - 5pm</option>
-                                <option>10am - 7pm</option>
-                                <option>2pm - 11pm</option>
+                                <option>10pm - 7pm</option>
+                                <option>1pm - 10pm</option>
                                 <option>Rest Day</option>
                             </select>
                             @error('sunday') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
                         </div>
-        </x-slot>
-
-                    <x-slot name="footer">
-                        <x-jet-secondary-button wire:click="$toggle('addRecord')" wire:loading.attr="disabled">
-                            {{ __('Cancel') }}
-                        </x-jet-secondary-button>
-            
-                        <x-jet-button class="ms-2" wire:click="saveData" wire:loading.attr="disabled">
-            
-                            {{ __('Add new Record') }}
-                        </x-jet-button>
                     </x-slot>
-    </x-jet-dialog-modal>
+                        <x-slot name="footer">
+                            <x-jet-secondary-button wire:click="$toggle('addRecord')" wire:loading.attr="disabled">
+                                {{ __('Cancel') }}
+                            </x-jet-secondary-button>
+                            <x-jet-button class="ms-2" wire:click="saveData" wire:loading.attr="disabled">
+                                {{ __('Add new Record') }}
+                            </x-jet-button>
+                        </x-slot>
+                    </x-jet-dialog-modal>         
 </div>

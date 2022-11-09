@@ -27,7 +27,7 @@
                 <td>{{$transaction->id}}</td>
                 <td>{{$transaction->originated}}</td>
                 <td>{{$transaction->category}}</td>
-                <td>{{$transaction->created_at}}</td>
+                <td>{{Carbon\Carbon::parse($transaction->created_at)->toFormattedDateString()}}</td>
                 <td>{{$transaction->amount}}</td>
                 <td>{{$transaction->account}}</td>
                 <td>{{$transaction->description}}</td>
@@ -43,11 +43,20 @@
                 <td class="text-center" colspan="9">"Unlisted Records"</td>
             </tr>
             @endforelse
+
+            
         </tbody>
-    </x-table>
+    </x-table><br><br>
+
+    <button wire:click="sumRecords" class="btn btn-outline-danger ">Sum</button>
+    
+    <label>The Sum of all transaction:&emsp;</label>
+    <label>{{$grandtotals}}</label><br><br>
+    
     <div class="mt-3 float-right">
         {{$transactions->links()}}
     </div>
+    
 </div>
 
 </div>
@@ -56,7 +65,7 @@
 
 <!--pop up form budget request-->
 
-<x-jet-dialog-modal wire:model="addBudget">
+<x-jet-dialog-modal wire:model="addBudget" maxWidth="xl" >
     <x-slot name="title">
         {{ __('Add RequestBudget') }}
     </x-slot>
@@ -109,7 +118,7 @@
         </x-jet-secondary-button>
         {{--wire:click function dito sa button hindi match sa function sa class--}}
         <x-jet-button class="ms-2" wire:click="addBudgets" wire:loading.attr="disabled">
-            {{ __('Update Request Budget') }}
+            {{ __('Add Request Budget') }}
         </x-jet-button>
     </x-slot>
 
@@ -198,5 +207,6 @@
 </x-jet-dialog-modal>
 <!--update modal-->
 {{-- @livewire("finance.bm.expensess") --}}
+
 <livewire:finance.bm.expensess>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Hr\Core;
 
 use App\Models\Core;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,6 +12,7 @@ class Coredata extends Component
     public $name, $work, $skill, $qualification, $education , $status = 'available';
     public $addRecord = false;
     public $viewModal = false;
+    
     public $data;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -38,11 +40,10 @@ class Coredata extends Component
         toastr()->addSuccess('Data added successfully');
         $this->addRecord = false;
     }
-
     public function render()
     {
         return view('livewire.hr.core.coredata',[
-            'datas' => Core::paginate(6),
+            'datas' => Core::paginate(10)
         ]);
     }
     public function viewData($id){
@@ -57,6 +58,10 @@ class Coredata extends Component
         $this->resetInput();
         toastr()->addSuccess('Data added successfully');
         $this->dispatchBrowserEvent('close-modal');
+    }
+    public function remove($id){
+        $temp = Core::find($id);
+        $temp->destroy($id);
     }
     public function resetInput(){
         $this->name = null;

@@ -11,6 +11,7 @@ class Shiftdata extends Component
     public $name, $position, $department, $monday, $tuesday , $wednesday, $thursday , $friday ,$saturday , $sunday;
     public $addRecord = false;
     public $viewModal = false;
+    public $employee_id;
     public $data;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -31,12 +32,14 @@ class Shiftdata extends Component
     {
         $this->validateOnly($fields);
     }
+    
     public function showModal()
     {
         $this->addRecord = true;
     }
     public function saveData()
     {
+        
         $validatedData = $this->validate();
         Shift::create($validatedData);
         $this->resetInput();

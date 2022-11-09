@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <x-table head="Suppliers Lists">
-                <thead>
+                <thead class="bg-info">
                     <th>Company Name</th>
                     <th>Company Address</th>
                     <th>Company Phone</th>
@@ -28,8 +28,9 @@
                                 <td class="text-center">{{$supplier->status}}</td>
                             @endif
                             
-                            <td>
-                                <button class="btn btn-primary">Send P.O</button>
+                            <td class="text-center">
+                                <button class="btn btn-warning btn-sm">Send P.O</button>
+                                <button class="btn btn-info btn-sm">Change Status</button>
                             </td>
                         </tr>
                     @empty
@@ -41,4 +42,5 @@
             </x-table>
         </div>
     </div>
+    
 </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Hr\Timesheet;
 
+use App\Models\Employee;
+use App\Models\Time;
 use Livewire\Component;
 use App\Models\Timesheet;
 use Livewire\WithPagination;
@@ -9,15 +11,16 @@ use Livewire\WithPagination;
 
 class Timesheetdata extends Component
 {
-    public $name, $position, $datefrom, $dateto, $totalhours;
-  
+    public $employeeid,$name, $position, $datefrom, $dateto, $totalhours;
     public $addRecord = false;
     public $viewModal = false;
+    
     public $data;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $rules = [
-        'name' => 'required|string',
+
+        'employeeid' => 'required|string',
         'position' => 'required|string',
         'datefrom' => 'required|string',
         'dateto' => 'required|string',
@@ -33,12 +36,20 @@ class Timesheetdata extends Component
     }
     public function saveData()
     {
-        $validatedData = $this->validate();
-        Timesheet::create($validatedData);
+        Timesheet::create([
+            'id' => $this->id,
+            'name' => $this->name,
+            'position' => $this->position,
+            'datefrom' => $this->datefrom,
+            'dateto' =>  $this->dateto,
+            'totalhours' => $this->totalhours,
+        ]);
+    
         $this->resetInput();
         toastr()->addSuccess('Data added successfully');
         $this->addRecord = false;
     }
+    
     public function render()
     {
         return view('livewire.hr.timesheet.timesheetdata',[
@@ -51,8 +62,8 @@ class Timesheetdata extends Component
         $this->data = Timesheet::find($id);
         $this->name = $this->data->name;
     }
-    
     public function saveRecord(){
+       
         $validatedData = $this->validate();
         Timesheet::create($validatedData);
         $this->resetInput();

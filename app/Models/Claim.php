@@ -9,6 +9,6 @@ class Claim extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'item', 'purchasedate', 'purchaseby', 'amount', 'paidby','status',
+        'item', 'purchasedate', 'purchaseby', 'amount', 'paidby','status'
     ];
 }

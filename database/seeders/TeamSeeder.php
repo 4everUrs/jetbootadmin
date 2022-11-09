@@ -206,6 +206,12 @@ class TeamSeeder extends Seeder
                     'name' => 'Claims & Reimbursement',
                     'personal_team' => '5',
                ],
+               //Vendor Portal
+               [
+                    'user_id' => '2',
+                    'name' => 'Vendor Client',
+                    'personal_team' => '2',
+               ],
 
           ]);
      }

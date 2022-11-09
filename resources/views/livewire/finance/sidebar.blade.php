@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#budgetmanagement" class="nav-link">
                      {{--Budget Management --}}
                     <i class="fas fa-calculator"></i>
                     <p>Budget Management</p>
@@ -16,29 +16,32 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('transaction')}}" class="nav-link"><i class="fas fa-rotate"></i>Transaction</a>
+                        <a href="{{route('transaction')}}" class="nav-link"></i>Transaction</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('requestlist')}}" class="nav-link">Request lists</a>
                         
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route('allocatebudget')}}" class="nav-link">Budget Allocation</a>
+                    </li>
                 </ul>
             </li> 
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#disbursement" class="nav-link">
                     {{--DISBURSEMENT --}}
                     <i class="fas fa-calculator"></i>
-                    <p>Disubursement</p>
+                    <p>Disbursement</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="" class="nav-link"></i>Requests</a>
+                        <a href="{{route('moneyTransaction')}}" class="nav-link"></i>Budget Transaction</a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#ap&ar" class="nav-link">
                     {{--AP & AR  --}}
                     <i class="fas fa-calculator"></i>
                     <p>AP & AR</p>
@@ -46,8 +49,23 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('journal')}}" class="nav-link">Journal Entry</a>
+                        <a href="{{route('journal')}}" class="nav-link">Records and Reports</a>
                     </li>
+                    
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="#collection" class="nav-link">
+                <i class="fas fa-calculator"></i>
+                    <p>Collection</p>
+                    <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('collects')}}" class="nav-link">Earnings</a>
+                    </li>
+                    
                 </ul>
             </li>
            

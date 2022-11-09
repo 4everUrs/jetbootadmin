@@ -14,6 +14,7 @@ class UsersList extends Component
     public $teams;
     public $departments;
     public $name, $email, $phone, $username, $password;
+    public $search = '';
     public function render()
     {
         if (!empty($this->role_id)) {
@@ -26,7 +27,9 @@ class UsersList extends Component
             }
         }
         return view('livewire.admin.users-list', [
-            'users' => User::all(),
+            'users' => User::where('name', 'like', '%' . $this->search . '%')
+                ->where('role_id', '!=', '3')
+                ->get(),
 
         ]);
     }
@@ -49,6 +52,7 @@ class UsersList extends Component
         $user->username = $this->username;
         $user->password = Hash::make($this->password);
         $user->role_id = $this->role_id;
+        $user->type = 'Employee';
         $user->save();
 
         $this->attachTeam($user);

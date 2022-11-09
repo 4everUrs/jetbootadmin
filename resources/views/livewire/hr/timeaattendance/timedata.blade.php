@@ -8,7 +8,7 @@
         <div class="card-body">
             
             <x-table head="Time And Attendance">
-                <thead>
+                <thead class="bg-info">
                     <th>No.</th>
                     <th>Name</th>
                     <th>Position </th>
@@ -19,7 +19,6 @@
                     <th>Time Out</th>
                     <th>Date</th>
                     <th>Status</th>
-                    <th>View</th>   
                 </thead>
                 <tbody>
                     @forelse ($datas as $data)
@@ -34,13 +33,11 @@
                             <td>{{$data->timeout}}</td>
                             <td>{{$data->date}}</td>
                             <td>{{$data->status}}</td>
-                            <td>
-                                <button wire:click="viewData({{$data->id}})" class="btn btn-primary">View</button>
-                            </td>
+
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="11" class="text-center">No record found</td>
+                            <td colspan="8" class="text-center">No record found</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -48,5 +45,54 @@
             {{$datas->links()}}
         </div>
     </div>
+        <x-jet-dialog-modal>
+            <x-slot name="title">
 
+            </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label>Name</label>
+                <input wire:model="name" class="form-control">
+                @error('name') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Position</label>
+                <input wire:model="position" class="form-control">
+                @error('position') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Department</label>
+                <input wire:model="department" class="form-control">
+                @error('department') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Time In</label>
+                <input wire:model="timein" class="form-control">
+                @error('timein') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Break In</label>
+                <input wire:model="timeout" class="form-control">
+                @error('breakin') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Break Out</label>
+                <input wire:model="timeout" class="form-control">
+                @error('breakout') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Time Out</label>
+                <input wire:model="timeout" class="form-control">
+                @error('timeout') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>date</label>
+                <input wire:model="date" class="form-control">
+                @error('date') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+                <label>Status</label>
+                <input wire:model="status" class="form-control">
+                
+                @error('Status') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('addRecord')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+
+            <x-jet-button class="ms-2" wire:click="saveData" wire:loading.attr="disabled">
+                
+                {{ __('Add new Record') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>

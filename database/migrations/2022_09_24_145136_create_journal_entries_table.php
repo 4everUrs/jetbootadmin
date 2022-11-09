@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('journal_entries', function (Blueprint $table) {
                 
                
-                $table->id();
-                $table->timestamps();
+            $table->id();
+            $table->timestamps();
+            $table->string('jencoded');
+            //$table->string('jstatus');
+            
             });
 
 

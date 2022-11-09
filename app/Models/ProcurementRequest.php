@@ -9,6 +9,6 @@ class ProcurementRequest extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'origin', 'content', 'status',
+        'origin', 'content', 'status', 'category'
     ];
 }

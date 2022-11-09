@@ -17,7 +17,7 @@ class HrMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role_id == '0' || Auth::user()->department_id == '5' || Auth::user()->current_team_id >= 29 && Auth::user()->current_team_id <= 37) {
+        if (Auth::user()->role_id == '0' || Auth::user()->current_team_id == '5' || Auth::user()->current_team_id >= 29 && Auth::user()->current_team_id <= 37) {
             return $next($request);
         } else {
             abort(403, 'Dont Do that nigga!');
