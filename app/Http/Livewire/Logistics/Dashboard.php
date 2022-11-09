@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Stock;
 use App\Models\Supplier;
 use App\Models\Vehicle;
+use App\Models\Visitor;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -19,6 +20,7 @@ class Dashboard extends Component
     {
         return view('livewire.logistics.dashboard', [
             'assets' => Asset::all(),
+            'nov' => Visitor::where('month', 'Nov')->get(),
         ]);
     }
     public function mount()
@@ -26,7 +28,6 @@ class Dashboard extends Component
         $this->assetsCount += Building::count();
         $this->assetsCount += Vehicle::count();
         $this->assetsCount += Equipment::count();
-
         $this->vehicleCount = Vehicle::count();
         $this->inventoryCount = Stock::count();
         $this->supplierCount = Supplier::count();

@@ -29,12 +29,8 @@ class Buyers extends Component
     }
     public function loadModal($order_id, $id)
     {
-
-        $this->buyer_id = $id;
-        $this->buyerDetail = Buyer::find($id);
-
-        $this->selected_id = $order_id;
-        $this->viewOrder = true;
+        Buyer::find($id)->update(['status' => 'Approved']);
+        toastr()->addSuccess('Approved Successfully');
     }
     public function savePost()
     {

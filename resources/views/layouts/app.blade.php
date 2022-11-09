@@ -81,8 +81,9 @@
             <!-- /.sidebar -->
             <div class="sidebar-custom">
                 <a href="{{route('profile.show')}}" class="btn btn-link"><i class="fas fa-cogs"></i></a>
-                <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+                <button  class="btn btn-primary hide-on-collapse pos-right"><i class="fas fa-headset"></i></button>
             </div>
+            <!-- Modal -->
         </aside>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="min-height: 187px">
@@ -101,6 +102,7 @@
             <div class="content">
                 <div class="container-fluid">
                     {{$slot}}
+                    
                 </div>
             </div>
             
@@ -123,6 +125,8 @@
 
 
         <script>
+
+          $('#chat-pane-toggle').DirectChat('toggle')
             var url = window.location;
             
             // for sidebar menu entirely but not cover treeview

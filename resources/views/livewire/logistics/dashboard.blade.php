@@ -6,7 +6,7 @@
     </x-slot>
     <div class="row">
         <div class="col-lg-3 col-6">
-    
+            
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{$assetsCount}}</h3>
@@ -120,7 +120,7 @@
         <div class="card-body">
             <div class="d-flex">
                 <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">820</span>
+                    <span class="text-bold text-lg">{{$nov->count()}}</span>
                     <span>Visitors Over Time</span>
                 </p>
                 <p class="ml-auto d-flex flex-column text-right">
@@ -153,6 +153,42 @@
             </div>
         </div>
     </div>
+ @push('scripts')
  
+     <script>
+        const ctx = document.getElementById('visitors-chart').getContext('2d');
+        const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul','August','Sept','Oct','Nov','Dec'],
+        datasets: [{
+        label: 'Last Month',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 , 1 ,0],
+        backgroundColor: '#7c8184',
+        borderColor: '#7c8184',
+        borderWidth: 1,
+        fill: false,  
+        tension: 0.1  
+        },
+        {
+        label: 'This Month',
+        data: [0, 0, 0, 0, 0, 0,0,0,0,0,{{$nov->count()}},0],
+        backgroundColor: '#0275d8',
+        borderColor: '#0275d8',
+        borderWidth: 1,
+        fill: false,
+        tension: 0.1
+        }]
+        },
+        options: {
+        scales: {
+        y: {
+        beginAtZero: true
+        }
+        }
+        }
+        });
+     </script>
+ @endpush
 
 </div>

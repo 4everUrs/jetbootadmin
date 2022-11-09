@@ -30,7 +30,9 @@
                             </td>
                         </tr>
                     @empty
-                        
+                        <tr>
+                            <td colspan="5" class="text-center">No Record Found</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </x-table>

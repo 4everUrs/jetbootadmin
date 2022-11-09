@@ -58,7 +58,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="6" class="text-center">No Record Found</td>
+                                        <td colspan="8" class="text-center">No Record Found</td>
                                     </tr>
                                     @endforelse
                                 </tbody>
@@ -74,6 +74,7 @@
                             <th class="text-center align-middle">Company Phone</th>
                             <th class="text-center align-middle">Company Email</th>
                             <th class="text-center align-middle">Status</th>
+                            <th class="text-center align-middle">Termination Date</th>
                             <th class="text-center align-middle">Action</th>
                         </thead>
                         <tbody>
@@ -85,6 +86,7 @@
                                 <td class="text-center align-middle">{{$supplier->email}}</td>
                                 @if ($supplier->status == 'Inactive')
                                 <td class="text-danger text-center">{{$supplier->status}}</td>
+                                <td class="text-danger text-center">@date($supplier->updated_at)</td>
                                 @else
                                 <td class="text-center">{{$supplier->status}}</td>
                                 @endif
@@ -95,7 +97,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="text-center">No Record Found</td>
+                                <td colspan="7" class="text-center">No Record Found</td>
                             </tr>
                             @endforelse
                         </tbody>

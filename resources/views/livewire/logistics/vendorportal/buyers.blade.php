@@ -24,9 +24,9 @@
                             <td class="text-center align-middle">{{$buyer->phone}}</td>
                             <td class="text-center align-middle">{{$buyer->address}}</td>
                             <td class="text-center align-middle">{{$buyer->payment_method}}</td>
-                            <td class="text-center">{{$buyer->status}}</td>
+                            <td class="text-center align-middle">{{$buyer->status}}</td>
                             <td>
-                                <button wire:click='loadModal({{$buyer->order_id}},{{$buyer->id}})' class="btn btn-dark btn-sm">View</button>
+                                <button wire:click='loadModal({{$buyer->order_id}},{{$buyer->id}})' class="btn btn-dark btn-sm">Approve</button>
                             </td>
                         </tr>
                         
@@ -177,4 +177,6 @@
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
+
+    
 </div>

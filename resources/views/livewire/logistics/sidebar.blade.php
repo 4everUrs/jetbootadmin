@@ -61,7 +61,7 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-store"></i>
-                    <p>Vendor</p>
+                    <p>Vendor Portal</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
                 <ul class="nav nav-treeview">
@@ -70,7 +70,7 @@
                         <a href="{{route('supplierposting')}}" class="nav-link">Posting</a>
                         <a href="{{route('disposal')}}" class="nav-link">Disposal</a>
                         <a href="{{route('bidders')}}" class="nav-link">Bidders</a>
-                        <a href="{{route('buyers')}}" class="nav-link">Orders</a>
+                        <a href="{{route('buyers')}}" class="nav-link">Buyers</a>
                         <a href="{{route('workshop')}}" class="nav-link">Workshops</a>
                         <a href="{{route('supplierlist')}}" class="nav-link">Supplier List</a>
                     </li>
@@ -89,8 +89,9 @@
                         <a href="{{route('evaluations')}}" class="nav-link">Asset Evaluation</a>
                         <a href="{{route('assetreport')}}" class="nav-link">Reports</a>
                         <a href="{{route('assetmaintenance')}}" class="nav-link">Maintenance Request</a>
-                        <a href="#" class="nav-link">Invoices</a>
-                        <a href="#" class="nav-link">Orders</a>
+                        <a href="{{route('assetinvoice')}}" class="nav-link">Invoices</a>
+                        <a href="{{route('assetorders')}}" class="nav-link">Orders</a>
+                        <a href="{{route('delivery-request')}}" class="nav-link">Delivery Request</a>
                     </li>
                 </ul>
             </li>
@@ -122,6 +123,7 @@
                         <a href="{{route('vehicleinformation')}}" class="nav-link">Vehicle List</a>
                         <a href="#" class="nav-link">Request List</a>
                         <a href="#" class="nav-link">Reports</a>
+                        <a href="#" class="nav-link">Delivery</a>
                     </li>
                 </ul>
             </li>
