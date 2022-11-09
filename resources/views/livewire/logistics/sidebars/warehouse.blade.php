@@ -13,11 +13,10 @@
                     <p>Inventory</p>
                 </a>
             </li>
-         
             <li class="nav-item ">
-                <a href="{{route('requestlists')}}" class="nav-link">
+                <a href="{{route('invoice')}}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
-                    <p>Request List</p>
+                    <p>Invoices</p>
                 </a>
             </li>
             <li class="nav-item ">
@@ -26,7 +25,14 @@
                     <p>Pruchase Order</p>
                 </a>
             </li>
-
+            <li class="nav-item ">
+                <a href="{{route('requestlists')}}" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>Request List</p>
+                </a>
+            </li>
+           
+           
         </ul>
     </nav>
 </div>
