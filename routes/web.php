@@ -99,6 +99,7 @@ use App\Http\Livewire\Logistics\Dashboard;
 use App\Http\Livewire\Logistics\Projectmanagement\Createnewproject;
 use App\Http\Livewire\Logistics\Projectmanagement\Proposal;
 use App\Http\Livewire\Logistics\Fleet\Activity;
+use App\Http\Livewire\Logistics\Fleet\DeliveryList;
 use App\Http\Livewire\Logistics\Fleet\Maps;
 use App\Http\Livewire\Logistics\Fleet\Reservation;
 use App\Http\Livewire\Logistics\Fleet\Rominventory;
@@ -210,6 +211,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('project/proposal/download/{id}', [DownloadProposalController::class, 'proposalDownload'])->name('proposalDownload');
     Route::get('fleet/vinfo', Vinfo::class)->name('vehicleinformation');
     Route::get('fleet/maps', Maps::class,)->name('mappers');
+    Route::get('fleet/delivery', DeliveryList::class,)->name('deliverylist');
     Route::get('fleet/romrequest', Romrequest::class)->name('repairs');
     Route::get('fleet/reservation', Reservation::class)->name('reserve');
     Route::get('fleet/romrequestlist', Romrequestlist::class)->name('romlist');

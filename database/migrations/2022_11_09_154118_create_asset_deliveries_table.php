@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('asset_deliveries', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('order_id');
+            $table->unsignedInteger('invoice_id');
+            $table->unsignedInteger('buyer_id');
+            $table->string('status');
+            $table->string('invoice_file');
             $table->timestamps();
         });
     }
