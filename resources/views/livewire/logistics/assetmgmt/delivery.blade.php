@@ -16,6 +16,30 @@
                     <th class="text-center align-middle">Address</th>
                     <th class="text-center align-middle">Status</th>
                 </thead>
+                <tbody>
+                    @forelse ($requests as $req)
+                        <tr>
+                            <td class="text-center align-middle">{{$req->order_id}}</td>
+                            <td class="text-center align-middle">
+                                @foreach ($req->Order->OrderItem as $item)
+                                    <li>{{$item->item_name}}</li>
+                                @endforeach
+                            </td>
+                            <td class="text-center align-middle">
+                                @foreach ($req->Order->OrderItem as $item)
+                                    <li>{{$item->qty}}</li>
+                                @endforeach
+                            </td>
+                            <td class="text-center align-middle">{{$req->buyer->recipient}}</td>
+                            <td class="text-center align-middle">{{$req->buyer->address}}</td>
+                            <td class="text-center align-middle">{{$req->status}}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td class="text-center" colspan="6">No record found</td>
+                        </tr>
+                    @endforelse
+                </tbody>
             </x-table>
         </div>
     </div>
@@ -27,12 +51,16 @@
         <x-slot name="content">
             <div class="form-group">
                 <label>Order</label>
-                <select class="form-control">
+                <select wire:model="order_id" class="form-control">
                     <option value="">Select Order</option>
                     @foreach ($orders as $order)
                         <option value="{{$order->id}}">{{$order->order_id}} : {{$order->Order->OrderItem[0]->item_name}}</option>
                     @endforeach
                 </select>
+                <label>Invoice ID</label>
+                <input wire:model="invoice_id" type="number" class="form-control" placeholder="INV">
+                <label>Attach Invoice</label>
+                <input wire:model="invoice_file" type="file" class="form-control">
             </div>
         </x-slot>
     

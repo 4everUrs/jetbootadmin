@@ -8,8 +8,10 @@ use App\Models\Client;
 use App\Models\Job;
 class Clientdata extends Component
 {
+    public $showRenew = false;
     public $deleteModal = false;
     public $showClient = false;
+    public $search = '';
     public $name,$email,$location,$status,$client_edit_id;
     protected $rules = [
         'name' => 'required|string|min:6',
@@ -26,8 +28,9 @@ class Clientdata extends Component
     }
     public function render()
     {
+        $searchFields = '%' . $this->search . '%';
         return view('livewire.core.cm.clientdata',[
-            'clients' => Client::get(),
+            'clients' => Client::where('name', 'like', $searchFields)->get(),
 
         ]);
     }
@@ -39,34 +42,18 @@ class Clientdata extends Component
         Client::create($validatedData);
         $this->resetInput();
     }
-    public function approve($id)
+    public function renew()
     {
-       $client = Client::find($id);
-
-       
-        if($client->status == 'Approved'){
-            flash()->addWarning('Data is already approved');
-        }
-        else{
-            $client->status = 'Approved';
-            Job::create([
-                'name' => $client->name,
-                'location' => $client->location,
-           ]);
-            $client->save();
-            flash()->addSuccess('Data approved successfully');
-       }
-        
+        $this->showRenew = true;
     }
     public function deleteData(){
-        $client = Client::find($this->name);
-    
-        $client->delete();
+        Client::find($this->name)->destroy($this->name);
         flash()->addSuccess('Data deleted successfully');
         $this->deleteModal = false;
     }
     public function deleteClient()
     {
+        $this->name = $this->name;
         $this->deleteModal = true;
     }
     

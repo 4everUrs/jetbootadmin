@@ -11,7 +11,7 @@
                 <th class="text-center">No.</th>
                 <th class="text-center">Company Name</th>
                 <th class="text-center">Position</th>
-                <th class="text-center">Monthly Salary</th>
+                <th class="text-center">Daily Salary</th>
                 <th class="text-center">Job Details</th>
                 <th class="text-center">Location</th>
                 <th class="text-center">Action</th>
@@ -24,11 +24,15 @@
                     <td class="text-center">{{$vacant->id}}</td>
                     <td class="text-center">{{$vacant->name}}</td>
                     <td class="text-center">{{$vacant->position}}</td>
-                    <td class="text-center">{{$vacant->salary}}</td>
+                    <td class="text-center">@money($vacant->daily_salary)</td>
                     <td class="text-center">{{$vacant->details}}</td>
                     <td class="text-center">{{$vacant->location}}</td>
                     <td class="text-center">
-                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Approve</button>
+                        @if ($vacant->status == 'Posted')
+                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-check'></i> Posted</button>
+                        @else
+                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Post</button>
+                        @endif
                     </td>
                 </tr>
                 @empty

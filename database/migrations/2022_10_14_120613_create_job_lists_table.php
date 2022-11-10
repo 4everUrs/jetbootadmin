@@ -15,11 +15,16 @@ return new class extends Migration
     {
         Schema::create('job_lists', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('client_id');
             $table->string('name');
             $table->string('position');
             $table->string('salary');
+            $table->string('daily_salary');
+            $table->string('collection');
             $table->string('details');
             $table->string('location');
+            $table->integer('applicants');
+            $table->string('status');
             $table->timestamps();
         });
     }

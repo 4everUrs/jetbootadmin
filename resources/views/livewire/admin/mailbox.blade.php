@@ -106,23 +106,23 @@
     
                     </div>
                     <div class="table-responsive mailbox-messages">
-                        <table class="table table-hover table-striped" height="350px">
+                        <table class="table table-hover table-striped">
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" value="" id="check1">
-                                            <label for="check1"></label>
-                                        </div>
-                                    </td>
-                                    <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                    <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to
-                                        this problem...
-                                    </td>
-                                    <td class="mailbox-attachment"></td>
-                                    <td class="mailbox-date">5 mins ago</td>
-                                </tr>
+                               @foreach ($inboxes as $inbox)
+                                   <tr>
+                                        <td>
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" value="" id="check1">
+                                                <label for="check1"></label>
+                                            </div>
+                                        </td>
+                                        <td class="mailbox-name"><a href="read-mail.html">{{$inbox->getFrom()}}</a></td>
+                                        <td class="mailbox-subject"><b>{{$inbox->getSubject()}}</b> - {{$inbox->getTEXTBody()}}
+                                        </td>
+                                        <td class="mailbox-attachment">{{$inbox->getAttachments()->count()}}</td>
+                                        <td class="mailbox-date">{{Carbon\Carbon::parse($inbox->getDate())->diffForHumans()}}</td>
+                                    </tr>
+                               @endforeach
                             </tbody>
                         </table>
     

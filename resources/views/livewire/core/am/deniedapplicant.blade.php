@@ -19,7 +19,7 @@
                
             </thead>
             <tbody>
-                @forelse ($jobs as $job)
+                @forelse ($rejected as $job)
                   <tr>
                     <td class="text-center">{{$job->name}}</td>
                     <td class="text-center">{{$job->position}}</td>

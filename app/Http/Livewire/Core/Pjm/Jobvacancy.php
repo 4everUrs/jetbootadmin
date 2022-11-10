@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire\Core\Pjm;
 
+use App\Http\Livewire\Core\Cm\Joblist as CmJoblist;
+use App\Models\JobList;
 use Livewire\Component;
 use App\Models\Vacant;
 use App\Models\JobPost;
 class Jobvacancy extends Component
 {
     public $name,$position,$salary,$details,$location,$vacant_edit_id;
+    public $search = '';
     protected $rules = [
         'name' => 'required|string|min:6',
         'position' => 'required|string',
@@ -25,8 +28,10 @@ class Jobvacancy extends Component
     }
     public function render()
     {
+        $searchfields = '%' . $this->search . '%';
         return view('livewire.core.pjm.jobvacancy',[
-            'vacants' => Vacant::get(),
+            'vacants' => JobList::where('status','=','Open')
+            ->orWhere('status','=','Posted')->get(),
         ]);
     }
     public function resetInput()
@@ -42,16 +47,18 @@ class Jobvacancy extends Component
     }
     public function approve($id)
     {
-        $vacant = Vacant::find($id);
+
+        $vacant = JobList::find($id);
         JobPost::create([
             'name' => $vacant->name,
             'position' => $vacant->position,
-            'salary' => $vacant->salary,
+            'salary' => $vacant->daily_salary,
             'details' => $vacant->details,
             'location' => $vacant->location
         ]);
         flash()->addSuccess('Data Approved successfully');
-        Vacant::find($id)->delete();
+        $vacant->status = 'Posted';
+        $vacant->save();
     }
     public function edit($id)
     {

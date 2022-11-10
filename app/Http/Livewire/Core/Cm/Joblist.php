@@ -2,32 +2,43 @@
 
 namespace App\Http\Livewire\Core\Cm;
 
+use App\Models\Client;
 use Livewire\Component;
 use App\Models\Job;
+use App\Models\JobList as ModelsJobList;
 use App\Models\Vacant;
 
 class Joblist extends Component
 {
     public $showModal = false;
-    public $name,$position,$salary,$details,$location;
+    public $search = '';
+    public $name,$position,$salary,$details,$location,$applicants;
    
     public function render()
     {
+        $searchFields = '%' . $this->search . '%';
         return view('livewire.core.cm.joblist',[
-            'clients' => Job::all(),
+            'clients' => Client::where('status','=','Active')->get(),
+            'jobs' => ModelsJobList::where('name', 'like', $searchFields)->get(),
         ]);
     }
     public function saveRequest(){
+      
+        $collection = $this->salary * 0.20;
         $validateddata = $this->validate([
         'position' => 'required|string',
         'salary' => 'required|string',  
         'details' => 'required|string',  
+        'applicants' => 'required|integer'
         ]);
-        $client = Job::find($this->name);
-        $client->position = $validateddata['position'];
-        $client->salary = $validateddata['salary'];
-        $client->details = $validateddata['details'];
-        $client->save();
+        $data = Client::find($this->name);
+        $validateddata['name'] = $data->name;
+        $validateddata['daily_salary'] = round(($this->salary - $collection) / 26);
+        $validateddata['collection'] = $collection;
+        $validateddata['status'] = 'Pending';
+        $validateddata['client_id'] = $data->id;
+        $validateddata['location'] = $this->location;
+        ModelsJobList::create($validateddata);
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
         $this->showModal = false;
@@ -43,23 +54,10 @@ class Joblist extends Component
         $this->showModal = true;
     }
     public function approve($id){
-        $onboard = Job::find($id);
-        
-        if($onboard->status == 'Approved'){
-            flash()->addWarning('Data is already approved');
-        }
-        else{
-            $onboard->status = 'Approved';
-            Vacant::create([
-                'name' => $onboard->name,
-                'position' => $onboard->position,
-                'salary' => $onboard->salary,
-                'details' => $onboard->details,
-                'location' => $onboard->location,
-            ]);
-            $onboard->save();
-            flash()->addSuccess('Data approved successfully');
-       }
+       
+        ModelsJobList::find($id)->update(['status'=>'Open']);
+        flash()->addSuccess('Data approved successfully');
+       
     }
     public function delete($id)
     {

@@ -9,6 +9,9 @@ class LocalEmployee extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'phone', 'position', 'company_name', 'company_location', 'status'
+        'name', 'phone','status','email','joblist_id','sss','philhealth','pagibig','method','bank_name','bank_account'
     ];
+    public function Joblist(){
+        return $this->belongsTo(JobList::class);
+    }
 }
