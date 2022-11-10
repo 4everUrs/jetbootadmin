@@ -6,10 +6,36 @@
                     <i class="nav-icon fas fa-th"></i>
                     <p>Dashboard</p>
                 </a>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">List of Project</a>
-            
-                    <a href="#" class="nav-link">Supplier Posting</a>
-                    
-                </li>
+            </li>
+            <li class="nav-item ">
+                <a href="{{route('pmrequests')}}" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>Request Lists</p>
+                </a>
+            </li>
+        </li>
+        <li class="nav-item ">
+            <a href="{{route('projects')}}" class="nav-link">
+                <i class="nav-icon fas fa-copy"></i>
+                <p>Lists of Projects</p>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a href="{{route('newproject')}}" class="nav-link">
+                <i class="nav-icon fas fa-copy"></i>
+                <p>Create New Project</p>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a href="{{route('proposal')}}" class="nav-link">
+                <i class="nav-icon fas fa-copy"></i>
+                <p>Project Proposal</p>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a href="{{route('pmreports')}}" class="nav-link">
+                <i class="nav-icon fas fa-copy"></i>
+                <p>Send Reports</p>
+            </a>
+        </li>
 </div>
