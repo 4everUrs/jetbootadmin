@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Core\Rap;
 use Livewire\Component;
 use App\Models\ApplicantForm;
 use App\Models\Client;
+use App\Models\CreateJob;
 use App\Models\LocalEmployee;
 use App\Models\JobList;
 use App\Models\Vacant;
@@ -20,7 +21,7 @@ class Applicantreport extends Component
         $temp = Client::all();
         $this->clients = count($temp);
 
-        $temp = JobList::all();
+        $temp = CreateJob::all();
         $this->vacants = count($temp);
 
         $temp = LocalEmployee::all();

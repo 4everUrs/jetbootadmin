@@ -86,6 +86,7 @@
                     <div class="col">
                         <label for="">Terms</label>
                         <select wire:model="terms" class="form-control">
+                            <option value="">Choose...</option>
                             <option value="years">Years</option>
                             <option value="months">Months</option>
                         </select>

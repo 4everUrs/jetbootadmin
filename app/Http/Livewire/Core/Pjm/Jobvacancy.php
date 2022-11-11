@@ -61,29 +61,6 @@ class Jobvacancy extends Component
         $vacant->status = 'Posted';
         $vacant->save();
     }
-    public function edit($id)
-    {
-        $vacant = Vacant::where('id',$id)->first();
-        $this->vacant_edit_id = $vacant->id;
-        $this->vacant_id = $vacant->vacant_id;
-        $this->name = $vacant->name;
-        $this->position = $vacant->position;
-        $this->salary = $vacant->salary;
-        $this->details = $vacant->details;
-        $this->location = $vacant->location;
-       
-        
-        $vacant->save();
-        
-        
-    }
-    public function editData()
-    {
-        $validatedData = $this->validate();
-        
-        Vacant::create($validatedData);
-        $this->resetInput();
-    }
 
     public function delete($id)
     {

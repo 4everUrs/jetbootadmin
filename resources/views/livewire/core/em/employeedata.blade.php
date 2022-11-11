@@ -32,10 +32,10 @@
                             <td class="text-center">{{$onboard->name}}</td>
                             <td class="text-center">{{$onboard->phone}}</td>
                             <td class="text-center">{{$onboard->email}}</td>
-                            <td class="text-center">@money($onboard->JobList->daily_salary)</td>
-                            <td class="text-center">{{$onboard->JobList->position}}</td>
-                            <td class="text-center">{{$onboard->JobList->name}}</td>
-                            <td class="text-center">{{$onboard->JobList->location}}</td>
+                            <td class="text-center">@money($onboard->CreateJob->daily_salary)</td>
+                            <td class="text-center">{{$onboard->CreateJob->position}}</td>
+                            <td class="text-center">{{$onboard->CreateJob->name}}</td>
+                            <td class="text-center">{{$onboard->CreateJob->location}}</td>
                             <td class="text-center">{{$onboard->sss}}</td>
                             <td class="text-center">{{$onboard->philhealth}}</td>
                             <td class="text-center">{{$onboard->pagibig}}</td>

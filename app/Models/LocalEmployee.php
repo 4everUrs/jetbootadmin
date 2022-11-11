@@ -11,7 +11,7 @@ class LocalEmployee extends Model
     protected $fillable = [
         'name', 'phone','status','email','joblist_id','sss','philhealth','pagibig','method','bank_name','bank_account'
     ];
-    public function Joblist(){
-        return $this->belongsTo(JobList::class);
+    public function CreateJob(){
+        return $this->belongsTo(CreateJob::class);
     }
 }
