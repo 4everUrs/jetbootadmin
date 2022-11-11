@@ -203,7 +203,7 @@
             <script>
                 const ctx = document.getElementById('salesChart').getContext('2d');
                 const myChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                     datasets: [{
