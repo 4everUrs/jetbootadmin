@@ -106,7 +106,7 @@ class Clientdata extends Component
             'contract_term' => $this->contract,
         ]);
         $data = Contract::latest()->first();
-        Mail::to($this->email)->send(new AgreementMail($data));
+        Mail::to($this->email)->send(new agreementMail($data));
         flash()->addSuccess('Data added successfully');
         $this->resetInput();
         $this->showClient = false;
