@@ -6,17 +6,21 @@ use Livewire\Component;
 
 use App\Models\Client;
 use App\Models\Job;
+use Carbon\Carbon;
 class Clientdata extends Component
 {
     public $showRenew = false;
     public $deleteModal = false;
     public $showClient = false;
     public $search = '';
-    public $name,$email,$location,$status,$client_edit_id;
+    public $name,$email,$location,$status = 'Active',$contract;
+    public $selected_id,$value,$terms;
     protected $rules = [
         'name' => 'required|string|min:6',
         'email' => ['required','email'],
-        'location' => 'required|string'
+        'location' => 'required|string',
+        'contract' => 'required|string',
+        'status' => 'required|string'
         
         
         
@@ -42,26 +46,64 @@ class Clientdata extends Component
         Client::create($validatedData);
         $this->resetInput();
     }
-    public function renew()
+    public function renew($id)
     {
+        $this->selected_id = $id;
         $this->showRenew = true;
+    }
+    public function saveRenew()
+    {
+        $this->contract = $this->value .' '.$this->terms;
+        $validateddata = $this->validate([
+            'contract' => 'required|string',
+        ]);
+        $client = Client::find($this->selected_id);
+        $client->contract = $validateddata['contract'];
+        $client->status = 'Active';
+        if($this->terms == 'months'){
+            $client->endo = Carbon::parse($client->created_at)->addMonths($this->value);
+            $client->save();
+        }elseif($this->terms == 'years'){
+            $client->endo = Carbon::parse($client->created_at)->addYears($this->value);
+            $client->save();
+        }
+        flash()->addSuccess('Data update successfully');
+        $this->reset();
+        $this->showRenew = false;
     }
     public function deleteData(){
         Client::find($this->name)->destroy($this->name);
         flash()->addSuccess('Data deleted successfully');
         $this->deleteModal = false;
     }
-    public function deleteClient()
+    public function deleteClient($id)
     {
-        $this->name = $this->name;
+        $this->name = $id;
         $this->deleteModal = true;
     }
     
     public function saveclient(){
+        $this->contract = $this->value .' '.$this->terms;
         $data = $this->validate();
+        
         Client::create($data);
+        $client = Client::latest()->first();
+        if($this->terms == 'months'){
+            $client->endo = Carbon::parse($client->created_at)->addMonths($this->value);
+            $client->save();
+        }elseif($this->terms == 'years'){
+            $client->endo = Carbon::parse($client->created_at)->addYears($this->value);
+            $client->save();
+        }
         flash()->addSuccess('Data added successfully');
+        $this->resetInput();
         $this->showClient = false;
+    }
+    public function resetInput(){
+        $this->name = '';
+        $this->email = '';
+        $this->location = '';
+        $this->contract = '';
     }
     public function loadClient(){
         $this->showClient = true;

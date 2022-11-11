@@ -206,7 +206,7 @@
                 <div class="row">
                     <div class="col">
                         <label>Employee Name</label>
-                        <select wire:model="name"class="form-control" type="text">
+                        <select wire:model="employee_id"class="form-control" type="text">
                             @foreach ($employees as $employee)
                             <option value="{{$employee->id}}">{{$employee->name}}</option>
                             @endforeach
@@ -219,7 +219,7 @@
                     </div>
                 </div>
                 <label>Payroll</label>
-                <select class="form-control">
+                <select wire:model="payroll_id" class="form-control">
                     <option value="">Select Payroll</option>
                     @foreach($payrolls as $payroll)
                         <option value="{{$payroll->id}}">{{$payroll->name}}</option>
