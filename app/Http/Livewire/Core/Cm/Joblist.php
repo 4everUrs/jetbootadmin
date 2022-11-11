@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Core\Cm;
 
 use App\Models\Client;
+use App\Models\CreateJob;
 use Livewire\Component;
 use App\Models\Job;
 use App\Models\JobList as ModelsJobList;
@@ -19,7 +20,7 @@ class Joblist extends Component
         $searchFields = '%' . $this->search . '%';
         return view('livewire.core.cm.joblist',[
             'clients' => Client::where('status','=','Active')->get(),
-            'jobs' => ModelsJobList::where('name', 'like', $searchFields)->get(),
+            'jobs' => CreateJob::where('name', 'like', $searchFields)->get(),
         ]);
     }
     public function saveRequest(){
@@ -38,7 +39,7 @@ class Joblist extends Component
         $validateddata['status'] = 'Pending';
         $validateddata['client_id'] = $data->id;
         $validateddata['location'] = $this->location;
-        ModelsJobList::create($validateddata);
+        CreateJob::create($validateddata);
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
         $this->showModal = false;
@@ -55,7 +56,7 @@ class Joblist extends Component
     }
     public function approve($id){
        
-        ModelsJobList::find($id)->update(['status'=>'Open']);
+        CreateJob::find($id)->update(['status'=>'Open']);
         flash()->addSuccess('Data approved successfully');
        
     }
