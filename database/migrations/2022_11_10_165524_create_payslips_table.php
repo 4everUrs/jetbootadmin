@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contracts', function (Blueprint $table) {
+        Schema::create('payslips', function (Blueprint $table) {
             $table->id();
-            $table->string('client_name');
-            $table->string('email');
-            $table->string('client_location');
-            $table->string('contract_term');
+            $table->unsignedInteger('payroll_id');
+            $table->unsignedInteger('local_employee_id');
+            $table->string('employee_name');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contracts');
+        Schema::dropIfExists('payslips');
     }
 };

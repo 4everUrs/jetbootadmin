@@ -12,11 +12,11 @@ use Carbon\Carbon;
 class Paymentfee extends Component
 {
     public $showPayroll = false;
-    public $name, $attendance, $salary, $placement, $contribution = [], $collection;
+    public $employee_id, $attendance, $salary, $placement, $contribution = [], $collection;
     public $sss = '400', $philhealth = '250', $pagibig = '150';
     public $newPayroll;
     public $searchID = '';
-    public $start,$end,$payroll_name,$salary_term;
+    public $start,$end,$payroll_name,$salary_term,$payroll_id;
     public function render()
     {
         $searchFields = '%' . $this->searchID . '%';
@@ -47,8 +47,8 @@ class Paymentfee extends Component
 
     public function savePayroll()
     {
-
-        $payroll = Payroll::find($this->name);
+        $employee = LocalEmployee::find($this->employee_id);
+        $payroll = Payroll::find($this->payroll_id);
         $payroll->attendance = $this->attendance;
         $payroll->salary = $this->salary;
         $payroll->gross_salary = $this->attendance * $this->salary;

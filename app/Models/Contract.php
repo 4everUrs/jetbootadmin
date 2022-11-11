@@ -9,6 +9,6 @@ class Contract extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'client_name', 'client_location', 'contract_term'
+        'client_name', 'client_location', 'contract_term','email'
     ];
 }
