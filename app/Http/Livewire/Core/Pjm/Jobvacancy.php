@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Core\Pjm;
 
 use App\Http\Livewire\Core\Cm\Joblist as CmJoblist;
+use App\Models\CreateJob;
 use App\Models\JobList;
 use Livewire\Component;
 use App\Models\Vacant;
@@ -30,7 +31,7 @@ class Jobvacancy extends Component
     {
         $searchfields = '%' . $this->search . '%';
         return view('livewire.core.pjm.jobvacancy',[
-            'vacants' => JobList::where('status','=','Open')
+            'vacants' => CreateJob::where('status','=','Open')
             ->orWhere('status','=','Posted')->get(),
         ]);
     }
@@ -48,7 +49,7 @@ class Jobvacancy extends Component
     public function approve($id)
     {
 
-        $vacant = JobList::find($id);
+        $vacant = CreateJob::find($id);
         JobPost::create([
             'name' => $vacant->name,
             'position' => $vacant->position,
