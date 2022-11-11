@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Core\Cm;
 
 use Livewire\Component;
-use App\Mail\AgreementMail;
+use App\Mail\agreementMail;
 use App\Models\Client;
 use App\Models\Contract;
 use Carbon\Carbon;
