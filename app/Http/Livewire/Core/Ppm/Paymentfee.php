@@ -5,8 +5,10 @@ namespace App\Http\Livewire\Core\Ppm;
 use App\Models\Contribution;
 use App\Models\EmployeePayroll;
 use App\Models\LocalEmployee;
+use App\Models\PaymentRecord;
 use Livewire\Component;
 use App\Models\Payroll;
+use App\Models\Payslip;
 use Carbon\Carbon;
 
 class Paymentfee extends Component
@@ -15,6 +17,7 @@ class Paymentfee extends Component
     public $employee_id, $attendance, $salary, $placement, $contribution = [], $collection;
     public $sss = '400', $philhealth = '250', $pagibig = '150';
     public $newPayroll;
+    public $search = '';
     public $searchID = '';
     public $start,$end,$payroll_name,$salary_term,$payroll_id;
     public function render()
@@ -22,7 +25,8 @@ class Paymentfee extends Component
         $searchFields = '%' . $this->searchID . '%';
         return view('livewire.core.ppm.paymentfee', [
             'employees' => LocalEmployee::where('id', 'like', $searchFields)->get(),
-            'payrolls' => Payroll::all(),
+            'payslip' => Payslip::all(),
+            'payrolls'=> Payroll::all(),
         ]);
     }
 
@@ -40,6 +44,10 @@ class Paymentfee extends Component
             'end_date' => $this->end,
             'name' => $this->payroll_name
         ]);
+        $temp = Payroll::latest()->first();
+        PaymentRecord::create([
+            'payroll_id' => $temp->id,
+        ]);
         $this->newPayroll = false;
         flash()->addSuccess('Data update successfully');
         $this->reset();
@@ -49,31 +57,27 @@ class Paymentfee extends Component
     {
         $employee = LocalEmployee::find($this->employee_id);
         $payroll = Payroll::find($this->payroll_id);
-        $payroll->attendance = $this->attendance;
-        $payroll->salary = $this->salary;
-        $payroll->gross_salary = $this->attendance * $this->salary;
-        $payroll->save();
+        Payslip::create([
+            'payroll_id' => $payroll->id,
+            'local_employee_id' => $employee->id,
+            'gross_salary' => $this->attendance * $employee->CreateJob->daily_salary,    
+            'attendance' => $this->attendance,
+        ]);
+        $payslip = Payslip::latest()->first();
         if (!empty($this->sss)) {
-            $this->contribution[] = 'SSS:' . $this->sss;
-            $payroll->net_salary = $payroll->gross_salary - $this->sss;
-            $payroll->save();
+            $payslip->sss = $payslip->gross_salary*0.045;
+            $payslip->save();
         }
         if (!empty($this->philhealth)) {
-            $this->contribution[] = 'Philhealth:' . $this->philhealth;
-            $payroll->net_salary = $payroll->gross_salary - $this->philhealth;
-            $payroll->save();
+            $payslip->philhealth = 400;
+            $payslip->save();
         }
         if (!empty($this->pagibig)) {
-            $this->contribution[] = 'Pagibig:' . $this->pagibig;
-            $payroll->net_salary = $payroll->gross_salary - $this->pagibig;
-            $payroll->save();
+            $payslip->pagibig = 400;
+            $payslip->save();
         }
-        foreach ($this->contribution as $benefits) {
-            Contribution::create([
-                'payroll_id' => $payroll->id,
-                'contribution' => $benefits,
-            ]);
-        }
+        $payslip->net_salary = $payslip->gross_salary - $payslip->sss - $payslip->philhealth - $payslip->pagibig;
+        $payslip->save();
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
         $this->showPayroll = false;

@@ -8,6 +8,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{route('emailbox')}}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Mail Box</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-location-arrow"></i>
                     <p>Recruitment</p>

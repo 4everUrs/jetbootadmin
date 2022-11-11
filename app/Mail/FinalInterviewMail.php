@@ -9,18 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class agreementMail extends Mailable
+class FinalInterviewMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $job;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct()
     {
-        $this->job = $data;
+        //
     }
 
     /**
@@ -31,7 +31,7 @@ class agreementMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Tech-Trendz Human Resource Application',
+            subject: 'Final Interview Mail',
         );
     }
 
@@ -43,7 +43,7 @@ class agreementMail extends Mailable
     public function content()
     {
         return new Content(
-            markdown: 'email.agreement',
+            view: 'view.name',
         );
     }
 

@@ -8,10 +8,11 @@ use App\Models\Denied;
 
 class Deniedapplicant extends Component
 {
+    public $search = '';
     public function render()
     {
         return view('livewire.core.am.deniedapplicant',[
-            'rejected' => ApplicantList::where('status','=','Rejected')->get(),
+            'rejected' => ApplicantList::where('status','=','Denied')->get(),
         ]);
     }
 }

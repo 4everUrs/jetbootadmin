@@ -69,7 +69,7 @@ class Onboarding extends Component
         $onboard = Onboard::find($id);
         $onboard->status = 'Deployed';
             LocalEmployee::create([
-            'joblist_id' => $onboard->listing_id,
+            'create_job_id' => $onboard->listing_id,
             'name' => $onboard->name,
             'phone' => $onboard->phone,
             'email' => $onboard->email,

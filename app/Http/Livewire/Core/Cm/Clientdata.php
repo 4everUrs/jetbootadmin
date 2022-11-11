@@ -3,10 +3,11 @@
 namespace App\Http\Livewire\Core\Cm;
 
 use Livewire\Component;
-
+use App\Mail\AgreementMail;
 use App\Models\Client;
-use App\Models\Job;
+use App\Models\Contract;
 use Carbon\Carbon;
+use Mail;
 class Clientdata extends Component
 {
     public $showRenew = false;
@@ -95,6 +96,14 @@ class Clientdata extends Component
             $client->endo = Carbon::parse($client->created_at)->addYears($this->value);
             $client->save();
         }
+        Contract::create([
+            'client_name' => $client->name,
+            'email' => $client->email,
+            'client_location' => $client->location,
+            'contract_term' => $this->contract,
+        ]);
+        $data = Contract::latest()->first();
+        Mail::to($this->email)->send(new AgreementMail($data));
         flash()->addSuccess('Data added successfully');
         $this->resetInput();
         $this->showClient = false;

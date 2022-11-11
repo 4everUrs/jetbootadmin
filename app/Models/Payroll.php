@@ -12,8 +12,8 @@ class Payroll extends Model
         'year', 'month', 'salary_term', 'start_date', 'end_date', 'name'
     ];
 
-    public function Employer()
+    public function getPayslip()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->hasMany(Payslip::class);
     }
 }
