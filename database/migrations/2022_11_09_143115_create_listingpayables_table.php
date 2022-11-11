@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sub_journals', function (Blueprint $table) {
+        Schema::create('listingpayables', function (Blueprint $table) {
             $table->id();
-            $table->string('jsubdescription');
-            $table->integer('jcredit');
-            $table->integer('jdebit');
-           // $table->string('jstatus');
-            $table->unsignedInteger('journal_entry_id');
-            $table->timestamps();
+            $table->string('lpname');
+            $table->string('lppaymade');
+            $table->bigInteger('lptotalamount');
+            $table->string('lpduedate');
+            $table->string('lpattachment');
+            $table->string('lpremarks');
+               $table->timestamps();
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_journals');
+        Schema::dropIfExists('listingpayables');
     }
 };

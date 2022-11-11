@@ -8,13 +8,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#budgetmanagement" class="nav-link">
+                <a href="#budgetmanagement" class="nav-link">   
                      {{--Budget Management --}}
                     <i class="fas fa-calculator"></i>
                     <p>Budget Management</p>
                     <i class="right fas fa-angle-left"></i>
                 </a>
-                <ul class="nav nav-treeview">
+                <ul class="nav nav-treeview"> 
                     <li class="nav-item">
                         <a href="{{route('transaction')}}" class="nav-link"></i>Transaction</a>
                     </li>
@@ -50,6 +50,12 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('journal')}}" class="nav-link">Records and Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('listspayables')}}" class="nav-link">Lists of Payables</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('listsreceivable')}}" class="nav-link">Lists of Receivable</a>
                     </li>
                     
                 </ul>

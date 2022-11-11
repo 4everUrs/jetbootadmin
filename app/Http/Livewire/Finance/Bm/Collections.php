@@ -9,7 +9,7 @@ use App\Models\Collectedincome;
 class Collections extends Component
 {
     public $rfrom,$caddress,$cramount,$receiptno,$paytype,$cremarks;
-    public $addCollection=true;
+    public $addCollection=false;
 
 
     public function render()
