@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservation_requests', function (Blueprint $table) {
+        Schema::create('reserved_vehicles', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('buyer_id');
-            $table->unsignedInteger('vehicle_id');
+            $table->unsignedInteger('vehicle_id')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservation_requests');
+        Schema::dropIfExists('reserved_vehicles');
     }
 };

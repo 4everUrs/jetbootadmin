@@ -6,6 +6,7 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
+            <button wire:click="$toggle('requestItem')" class="btn btn-dark btn-sm">+Create Request</button>
             <x-table head="Requests">
                 <thead class="bg-info">
                     <th class="text-center align-middle">Order ID</th>
@@ -52,4 +53,25 @@
             </x-table>
         </div>
     </div>
+    <x-jet-dialog-modal wire:model="requestItem">
+        <x-slot name="title">
+            {{ __('Create new vehicle information') }}
+        </x-slot>
+    
+        <x-slot name="content">
+            <label>Content</label>
+            <textarea wire:model="content" class="form-control" rows="4"></textarea>
+        </x-slot>
+    
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('requestItem')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="sendRequest" wire:loading.attr="disabled">
+                {{ __('Send Request') }}
+            </x-jet-button>
+        </x-slot>
+    
+    </x-jet-dialog-modal>
 </div>

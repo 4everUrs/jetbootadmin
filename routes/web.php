@@ -105,6 +105,7 @@ use App\Http\Livewire\Logistics\Fleet\Reservation;
 use App\Http\Livewire\Logistics\Fleet\Rominventory;
 use App\Http\Livewire\Logistics\Fleet\Romrequest;
 use App\Http\Livewire\Logistics\Fleet\Romrequestlist;
+use App\Http\Livewire\Logistics\Fleet\VehicleRequest;
 use App\Http\Livewire\Logistics\Fleet\Vinfo;
 use App\Http\Livewire\Logistics\Fleet\Vlists;
 use App\Http\Livewire\Logistics\Procurement\Bmproposals;
@@ -214,6 +215,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('fleet/delivery', DeliveryList::class,)->name('deliverylist');
     Route::get('fleet/romrequest', Romrequest::class)->name('repairs');
     Route::get('fleet/reservation', Reservation::class)->name('reserve');
+    Route::get('fleet/request', VehicleRequest::class)->name('vehiclerequest');
     Route::get('fleet/romrequestlist', Romrequestlist::class)->name('romlist');
     Route::get('fleet/rominventory', Rominventory::class)->name('rominventory');
     Route::get('fleet/lists', Vlists::class)->name('vlists');

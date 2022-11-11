@@ -123,6 +123,7 @@
                         <a href="{{route('vehicleinformation')}}" class="nav-link">Vehicle List</a>
                         <a href="#" class="nav-link">Reports</a>
                         <a href="{{route('deliverylist')}}" class="nav-link">Delivery Request</a>
+                        <a href="{{route('vehiclerequest')}}" class="nav-link">Vehicle Request</a>
                     </li>
                 </ul>
             </li>
