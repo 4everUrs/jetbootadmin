@@ -10,6 +10,7 @@
             <x-table head="">
                 <thead class="bg-info">
                     <th class="text-center">Client Name</th>
+                    <th class="text-center">Email</th>
                     <th class="text-center">Client Location</th>
                     <th class="text-center">Contract Term</th>
                     <th class="text-center">Status</th>
@@ -18,6 +19,7 @@
                     @forelse ($onboards as $onboard)
                           <tr>
                             <td class="text-center">{{$onboard->client_name}}</td>
+                            <td class="text-center">{{$onboard->email}}</td>
                             <td class="text-center">{{$onboard->client_location}}</td>
                             <td class="text-center">{{$onboard->contract_term}}</td>
                             <td class="text-center">
@@ -26,7 +28,7 @@
                           </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center">No Record Found</td>
+                                <td colspan="5" class="text-center">No Record Found</td>
                             </tr>
                         @endforelse
                 </tbody>
@@ -98,6 +100,10 @@
                 <label for="">Client Name</label>
                 <input wire:model="client_name"class="form-control" type="text">
                 @error('client_name') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
+                <label for="">Email Address</label>
+                <input wire:model="email"class="form-control" type="text">
+                @error('email') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Client Location</label>
                 <input wire:model="client_location"class="form-control" type="text">

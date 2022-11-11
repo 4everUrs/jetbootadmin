@@ -22,7 +22,7 @@ class Jobcandidate extends Component
     public function render()
     {
         return view('livewire.core.am.jobcandidate', [
-            'jobs' => ApplicantList::where('status','=','Pending')->orWhere('status','=','Scheduled')->get(),
+            'jobs' => ApplicantList::all(),
             
         ]);
     }

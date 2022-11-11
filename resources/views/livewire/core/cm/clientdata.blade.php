@@ -42,13 +42,14 @@
                     <div class="row">
                         <div class="col">
                             <label for="">Contract</label>
-                            <input wire:model="value"class="form-control" type="text">
+                            <input wire:model="value"class="form-control" type="number">
                             @error('contract') <span class="text-danger">{{$message}}</span> @enderror
                             <br>
                         </div>
                         <div class="col">
                             <label for="">Terms</label>
                             <select wire:model="terms" class="form-control">
+                                <option value="">Choose...</option>
                                 <option value="years">Years</option>
                                 <option value="months">Months</option>
                             </select>
@@ -91,9 +92,9 @@
                     <td class="text-center">{{$client->name}}</td>
                     <td class="text-center">{{$client->email}}</td>
                     <td class="text-center">{{$client->location}}</td>
-                    <td class="text-center">{{$client->contract_term}}</td>
-                    <td class="text-center">{{$client->contract_date}}</td>
-                    <td class="text-center">{{$client->endo}}</td>
+                    <td class="text-center">{{$client->contract}}</td>
+                    <td class="text-center">@date($client->created_at)</td>
+                    <td class="text-center">@date($client->endo)</td>
                     <td class="text-center">{{$client->status}}</td>
                     <td class="text-center">
                         <button wire:click="renew({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Renewal</button>
@@ -102,7 +103,7 @@
                 </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center">No Record Found</td>
+                        <td colspan="9" class="text-center">No Record Found</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -119,13 +120,14 @@
                 <div class="row">
                     <div class="col">
                         <label for="">Contract</label>
-                        <input wire:model="value"class="form-control" type="text">
-                        @error('contract_term') <span class="text-danger">{{$message}}</span> @enderror
+                        <input wire:model="value"class="form-control" type="number">
+                        @error('contract') <span class="text-danger">{{$message}}</span> @enderror
                         <br>
                     </div>
                     <div class="col">
                         <label for="">Terms</label>
                         <select wire:model="terms" class="form-control">
+                            <option value="">Choose...</option>
                             <option value="years">Years</option>
                             <option value="months">Months</option>
                         </select>
@@ -139,7 +141,7 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
     
-            <x-jet-button class="ms-2" wire:click="saveclient" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+            <x-jet-button class="ms-2" wire:click="saveRenew" wire:loading.attr="disabled"><i class='fa fa-check'></i>
                 {{ __('Confirm') }}
             </x-jet-button>
         </x-slot>
@@ -151,7 +153,7 @@
             
         </x-slot>
         <x-slot name="content">
-            <h3>{{$name}}</h3>
+            
             <p class="h4 text-center">Are you sure, you want to delete this client?</p><br>
         </x-slot>
         <x-slot name="footer">

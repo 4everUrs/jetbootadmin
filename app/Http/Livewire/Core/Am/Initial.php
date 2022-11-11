@@ -17,8 +17,10 @@ class Initial extends Component
     }
     public function approve($id)
     {
+     
         $job = ApplicantList::find($id);
-        JobCandid::create([
+      
+       JobCandid::create([
             'name' => $job->name,
             'position' => $job->position,
             'email' => $job->email,

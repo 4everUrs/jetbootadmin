@@ -7,11 +7,12 @@ use App\Models\Contract;
 class Agreement extends Component
 {
     public $aggreement = false;
-    public $client_name,$client_location,$contract_term;
+    public $client_name,$client_location,$contract_term,$email;
     public  $contractModal = false;
     public $selected_id;
     protected $rules = [
         'client_name' => 'required|string',
+        'email' => ['required','email'],
         'client_location' => 'required|string',
         'contract_term' => 'required|string',
     ];
@@ -29,11 +30,13 @@ class Agreement extends Component
     public function aggreementSave(){
         $validateddata = $this->validate([
             'client_name' => 'required|string',
+            'email' => ['required','email'],
             'client_location' => 'required|string',
             'contract_term' => 'required|string',
         ]);
         Contract::create([
             'client_name' => $this->client_name,
+            'email' => $this->email,
             'client_location' => $this->client_location,
             'contract_term' => $this->contract_term,
         ]);
