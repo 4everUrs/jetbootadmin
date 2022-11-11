@@ -9,6 +9,7 @@ use App\Models\LocalPlacement;
 
 class Candidate extends Component
 {
+    public $search = '';
     public function render()
     {
         return view('livewire.core.am.candidate',[

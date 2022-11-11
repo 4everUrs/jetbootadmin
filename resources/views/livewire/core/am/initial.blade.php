@@ -40,7 +40,7 @@
                         <button wire:click="approve({{$job->id}})" class="btn btn-secondary" disabled><i class='fa fa-check'></i> Qualified</button>
                         @else
                         <button wire:click="approve({{$job->id}})" class="btn btn-primary"><i class='fa fa-check'></i> Qualified</button>
-                        <button wire:click="approve({{$job->id}})" class="btn btn-danger"><i class='fa fa-check'></i> Not Qualified</button>
+                        <button wire:click="denied({{$job->id}})" class="btn btn-danger"><i class='fa fa-check'></i> Not Qualified</button>
                         @endif
                     </td>
                     

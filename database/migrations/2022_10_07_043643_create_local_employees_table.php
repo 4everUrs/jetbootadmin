@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('local_employees', function (Blueprint $table) {
             $table->id()->startingValue(1000);
-            $table->unsignedInteger('joblist_id');
+            $table->unsignedInteger('create_job_id');
             $table->string('name');
             $table->string('phone');
             $table->string('email');

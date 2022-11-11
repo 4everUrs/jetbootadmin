@@ -265,6 +265,7 @@ Route::prefix('core')->middleware('auth', 'isCore')->group(function () {
     Route::get('cm/joblist', Joblist::class)->name('joblist');
     Route::get('cacm/agreement', Agreement::class)->name('agreement');
     Route::get('joblisting', JobList::class)->name('joblisting');
+    Route::get('mailbox', Mailbox::class)->name('emailbox');
     Route::get('contract/download/{id}', [ContractController::class, 'downloadContract'])->name('downloadcontract');
 });
 

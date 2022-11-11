@@ -9,27 +9,26 @@
             <x-table head="List of Payment">
                 <thead class="bg-info">
                     <th class="text-center">No.</th>
-                    <th class="text-center">Employee Name</th>
-                    <th class="text-center">Daily Attendance</th>
-                    <th class="text-center">Minimum Wage</th>
-                    <th class="text-center">Contribution</th>
+                    <th class="text-center">Payroll Name</th>
+                    <th class="text-center">Month</th>
+                    <th class="text-center">Year</th>
+                    <th class="text-center">Start Date</th>
+                    <th class="text-center">End Date</th>
                     <th class="text-center">Status</th>
-                    <th class="text-center">Total Salary</th>
                     <th class="text-center">Action</th>
                 </thead>
                 <tbody>
-                    {{-- @forelse ($payrolls as $payroll)
+                    @forelse ($payments as $payroll)
                     <tr>
                         <td class="text-center">{{$payroll->id}}</td>
-                        <td class="text-center">{{$payroll->name}}</td>
-                        <td class="text-center">{{$payroll->attendance}}</td>
-                        <td class="text-center">{{$payroll->salary}}</td>
-                        <td class="text-center">{{$payroll->contribution}}</td>
-                        <td class="text-center">{{$payroll->placement}}</td>
-                        <td></td>
-                        <td></td>
+                        <td class="text-center">{{$payroll->Payroll->name}}</td>
+                        <td class="text-center">{{$payroll->Payroll->month}}</td>
+                        <td class="text-center">{{$payroll->Payroll->year}}</td>
+                        <td class="text-center">{{$payroll->Payroll->start_date}}</td>
+                        <td class="text-center">{{$payroll->Payroll->end_date}}</td>
+                        <td class="text-center">{{$payroll->status}}</td>
                         <td class="text-center">
-                            <button wire:click="payout" class="btn btn-sm btn-primary">Payout</button>
+                            <button wire:click="viewPayment({{$payroll->id}})" class="btn btn-sm btn-primary">View</button>
                     </td>
                         
                     </tr>
@@ -37,9 +36,60 @@
                         <tr>
                             <td colspan="9" class="text-center">No Record Found</td>
                         </tr>
-                    @endforelse --}}
+                    @endforelse
                 </tbody>
             </x-table>
         </div>
     </div>
+    <x-jet-dialog-modal wire:model="paymentModal" maxWidth="xl">
+        <x-slot name="title">
+            {{ __('Payment Record') }}
+        </x-slot>
+
+        <x-slot name="content">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead class="bg-gray">
+                            <th class="text-center align-middle">Employee ID</th>
+                            <th class="text-center align-middle">Employee Nane</th>
+                            <th class="text-center align-middle">Bank Name</th>
+                            <th class="text-center align-middle">Bank Account</th>
+                            <th class="text-center align-middle">Salary</th>
+                        </thead>
+                        <tbody>
+                          @if (!empty($employees))
+                                @foreach ($employees as $employee)
+                                    <tr>
+                                        <td class="text-center align-middle">{{$employee->LocalEmployee->id}}</td>
+                                        <td class="text-center align-middle">{{$employee->LocalEmployee->name}}</td>
+                                        <td class="text-center align-middle">{{$employee->LocalEmployee->bank_name}}</td>
+                                        <td class="text-center align-middle">{{$employee->LocalEmployee->bank_account}}</td>
+                                        <td class="text-center align-middle">{{$employee->net_salary}}</td>
+                                        
+                                    </tr>
+                                  
+                                @endforeach()
+                                <tr>
+                                    <td class="align-middle text-right" colspan="4">Total:</td>
+                                        <td class="text-center align-middle">{{$total}}</td>
+                                </tr>
+                          @endif
+
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('paymentModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+            <x-jet-button class="ms-2" wire:click="export" wire:loading.attr="disabled">
+                {{ __('Export') }}
+            </x-jet-button>
+        </x-slot>
+
+    </x-jet-dialog-modal>
 </div>

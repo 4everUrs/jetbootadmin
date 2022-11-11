@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-   
-    @if(!empty($contract))
+@component('mail::message')
         <h5><strong>COMPANY CONTRACT AGREEMENT</strong></h5>
-        <p>This Agency Agreement is entered into as of <u><b>{{Carbon\Carbon::parse($contract->created_at)->toFormattedDateString()}}</b></u> by and between 
-            <strong>Tech-Trendz</strong> having its principal place of business located at Quezon City (the “Company”) and [Client.] <u><b>{{$contract->client_name}}</b></u> 
-            having its principal place of business located at <u><b>{{$contract->client_location}}</b></u>(the “Agent”), both of whom agree to be bound by this Agreement.</p>
+        <p>This Agency Agreement is entered into as of <u><b>{{Carbon\Carbon::parse($job['created_at'])->toFormattedDateString()}}</b></u> by and between 
+            <strong>Tech-Trendz</strong> having its principal place of business located at Quezon City (the “Company”) and [Client.] <u><b>{{$job['client_name']}}</b></u> 
+            having its principal place of business located at <u><b>{{$job['client_location']}}</b></u>(the “Agent”), both of whom agree to be bound by this Agreement.</p>
         <p>WHEREAS, the Company offers customers certain products, as described on the document attached hereto as Exhibit A (the “Products”); and
         WHEREAS, the Company and the Agent desire to enter into an agreement whereby the Agent will market and sell the Product according to the terms and conditions herein.</p>
         <p>NOW, THEREFORE, in consideration of the mutual covenants and promises made by the parties hereto, the Company and the Agent (individually, each a “Party” and collectively, the “Parties”) covenant and agree as follows:</p>
@@ -64,7 +54,5 @@
         <br>
         <br>
             ____________________
-        <br>Client: {{$contract->client_name}}
-    @endif
-</body>
-</html>
+        <br>Client: {{$job['client_name']}}
+@endcomponent

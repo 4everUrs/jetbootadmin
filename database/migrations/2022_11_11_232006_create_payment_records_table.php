@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payslips', function (Blueprint $table) {
+        Schema::create('payment_records', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('payroll_id');
-            $table->unsignedInteger('local_employee_id');
-            $table->bigInteger('gross_salary');
-            $table->bigInteger('sss')->nullable();
-            $table->bigInteger('philhealth')->nullable();
-            $table->bigInteger('pagibig')->nullable();
-            $table->bigInteger('net_salary')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payslips');
+        Schema::dropIfExists('payment_records');
     }
 };

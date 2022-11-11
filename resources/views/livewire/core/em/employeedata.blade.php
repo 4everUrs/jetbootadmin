@@ -13,10 +13,10 @@
                     <th class="text-center">Employee Name</th>
                     <th class="text-center">Contact No.</th>
                     <th class="text-center">Email.</th>
-                    <th class="text-center">Daily Salary.</th>
+                    {{--<th class="text-center">Daily Salary.</th>
                     <th class="text-center">Position</th>
                     <th class="text-center">Company Name</th>
-                    <th class="text-center">Company Location</th>
+                    <th class="text-center">Company Location</th>--}}
                     <th class="text-center">SSS No.</th>
                     <th class="text-center">Philhealth No.</th>
                     <th class="text-center">Pag-Ibig No.</th>
@@ -32,10 +32,10 @@
                             <td class="text-center">{{$onboard->name}}</td>
                             <td class="text-center">{{$onboard->phone}}</td>
                             <td class="text-center">{{$onboard->email}}</td>
-                            <td class="text-center">@money($onboard->CreateJob->daily_salary)</td>
+                            {{--<td class="text-center">@money($onboard->CreateJob->daily_salary)</td>
                             <td class="text-center">{{$onboard->CreateJob->position}}</td>
                             <td class="text-center">{{$onboard->CreateJob->name}}</td>
-                            <td class="text-center">{{$onboard->CreateJob->location}}</td>
+                            <td class="text-center">{{$onboard->CreateJob->location}}</td>--}}
                             <td class="text-center">{{$onboard->sss}}</td>
                             <td class="text-center">{{$onboard->philhealth}}</td>
                             <td class="text-center">{{$onboard->pagibig}}</td>
@@ -44,7 +44,6 @@
                             <td class="text-center">{{$onboard->bank_account}}</td>
      
                             <td class="text-center">
-                                <button wire:click="loadEmployee({{$onboard->id}})" class="btn btn-sm btn-primary"><i class='fa fa-share'></i> Payroll</button>
                                 <button wire:click="employee({{$onboard->id}})" class="btn btn-sm btn-primary"><i class='fa fa-share'></i> Edit</button>
                             </td>
                           </tr>
@@ -57,52 +56,6 @@
             </x-table>
         </div>
     </div>
-    <x-jet-dialog-modal wire:model="showEmployee">
-        <x-slot name="title">
-            {{ __('Create Payroll') }}
-            
-        </x-slot>
-        <x-slot name="content">
-            <div class="form-group">
-                
-                <label for="">Daily Attendance</label>
-                <input wire:model="attendance"class="form-control" type="number">
-                @error('attendance') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
-                <label for="">Contribution</label>
-                <div class="form-check">
-                    <input wire:model="sss" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                       SSS
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input wire:model="philhealth" class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Philhealth
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input wire:model="pagibig" class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Pag-Ibig
-                    </label>
-                </div>
-             
-            
-                
-            </div>
-        </x-slot>
-        <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('showEmployee')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
-                {{ __('Cancel') }}
-            </x-jet-secondary-button>
-    
-            <x-jet-button class="ms-2" wire:click="saveEmployee" wire:loading.attr="disabled"><i class='fa fa-check'></i>
-                {{ __('Confirm') }}
-            </x-jet-button>
-        </x-slot>
-    </x-jet-dialog-modal>
 
     <x-jet-dialog-modal wire:model="Employee">
         <x-slot name="title">

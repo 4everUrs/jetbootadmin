@@ -9,6 +9,7 @@ class Agreement extends Component
     public $aggreement = false;
     public $client_name,$client_location,$contract_term,$email;
     public  $contractModal = false;
+    public $search = '';
     public $selected_id;
     protected $rules = [
         'client_name' => 'required|string',
