@@ -22,11 +22,12 @@
                 <tbody>
                     @forelse($paid as $paids)
                     <tr>
-                        <td>{{$paids->created_at}}</td>
+                        <td>{{($paids->created_at)->toFormattedDateString()}}</td>
                         <td>{{$paids->lpname}}</td>
-                        <td>{{$paids->lppayamount}}</td>
                         <td>{{$paids->lpattachment}}</td>
                         <td>{{$paids->lpremarks}}</td>
+                        <td>{{$paids->lpstatus}}</td>
+                        
                     </tr>
                     @empty
                     <tr>

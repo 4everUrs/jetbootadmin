@@ -9,6 +9,6 @@ class Listingreceivable extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'lrname', 'lrpayamount','lrattachment','lrremarks'
+        'lrname','lrattachment','lrremarks','lrstatus'
     ]; 
 }

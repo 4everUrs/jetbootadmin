@@ -8,7 +8,7 @@ use App\Models\ListingPayable;
 class Listsofpayables extends Component
 {
 
-public $lpname,$lppayamount,$lpattachment,$lpremarks;
+public $lpname,$lpattachment,$lpremarks,$lpstatus;
 
 
     public function render()

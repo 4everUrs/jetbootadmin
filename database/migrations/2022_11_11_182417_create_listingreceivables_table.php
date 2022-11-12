@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('listingreceivables', function (Blueprint $table) {
             $table->id();
+            $table->string('lrname');
+            $table->string('lrattachment');
+            $table->string('lrremarks')->nullable();
+            $table->string('lrstatus');
             $table->timestamps();
         });
     }

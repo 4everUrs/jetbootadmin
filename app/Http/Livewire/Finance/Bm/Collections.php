@@ -29,7 +29,7 @@ class Collections extends Component
         Collectedincome::create(
         [
             'rfrom' => $this->rfrom,
-            'address' => $this->address,
+            'caddress' => $this->caddress,
             'cramount' => $this->cramount,
             'receiptno' => $this->receiptno,
             'paytype' => $this->paytype,
