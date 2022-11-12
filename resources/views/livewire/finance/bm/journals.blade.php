@@ -289,7 +289,7 @@
 
 {{---------------------------------------- JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}       
             
-    <x-jet-dialog-modal wire:model="addLiability" maxWidth="xl">
+    <x-jet-dialog-modal wire:model="addLiability" maxWidth="lg">
         <x-slot name="title">
             {{ __('Journal Entries') }}
         </x-slot>
@@ -327,15 +327,15 @@
                <div class="row">
                     <div class="col">
                         <label>Sub-Description</label>
-                        <input wire:model="subdata[{{$key}}][desc]" type="text" class="form-control">
+                        <input wire:model.defer="subdata.{{$key}}.desc" type="text" class="form-control">
                     </div>
                     <div class="col">
                         <label>Debit</label>
-                        <input wire:model="subdata[{{$key}}][debit]" type="text" class="form-control">
+                        <input wire:model.defer="subdata.{{$key}}.debit"  type="text" class="form-control">
                     </div>
                     <div class="col">
                         <label>Credit</label>
-                        <input wire:model="subdata[{{$key}}][credit]" type="text" class="form-control">
+                        <input wire:model.defer="subdata.{{$key}}.credit" type="text" class="form-control">
                     </div>
                     <div class="col-1">
                         
@@ -350,28 +350,32 @@
                     <thead>
                     
                         <th>Description</th>
-                        <th>Sub-Description</th>
                         <th>Debit</th>
                         <th>Credit</th>
-                        <th class="text-center">Action</th>
                     </thead>
                     <tbody>
-                        @foreach ($preview as $index => $prev)
-                            <tr>
-                                <td>{{$prev['jdescription']}}</td>
-                                <td>{{$prev['jsubdescription']}}</td>
-                                <td>{{$prev['jdebit']}}</td>
-                                <td>{{$prev['jcredit']}}</td>
-
-                                <td class="text-center">
-                                    <button wire:click="removebtn" class="btn btn-danger btn-sm">Remove</button>
-                                </td>
-                            </tr>
-                        @endforeach
+                        <tr>
+                            <td>{{$jdescription}}
+                                @foreach ($preview as $prev)
+                                    <ul>{{$prev['desc']}}</ul>
+                                @endforeach
+                            </td>
+                            <td>{{$jdebit}}
+                                @foreach ($preview as $prev)
+                                <br>{{$prev['debit']}}
+                                @endforeach
+                            </td>
+                            <td>{{$jcredit}}
+                                @foreach ($preview as $prev)
+                                <br>{{$prev['credit']}}
+                                @endforeach
+                            </td>
+                        </tr>
+                        
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="2">Total:</td>
+                            <td >Total:</td>
                             <td >{{$grandtotal}}</td>
                         </tr>
                     </tfoot>
@@ -384,11 +388,11 @@
             </x-jet-secondary-button>
             {{--wire:click function dito sa button hindi match sa function sa class--}}
             @if (!empty($subdata))
-            <x-jet-button class="ms-2" wire:click="addLiabilities" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" wire:click="prev" wire:loading.attr="disabled">
                 {{ __('Add Records') }}
             </x-jet-button>
             @else
-            <x-jet-button class="ms-2" wire:click="preview" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" wire:click="prev" wire:loading.attr="disabled">
                 {{ __('Preview') }}
             </x-jet-button>
             @endif
