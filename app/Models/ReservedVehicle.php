@@ -9,7 +9,7 @@ class ReservedVehicle extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'order_id', 'buyer_id', 'vehicle_id'
+        'order_id', 'buyer_id', 'vehicle_id', 'status'
     ];
     public function Buyer()
     {

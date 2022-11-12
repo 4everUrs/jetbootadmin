@@ -2,25 +2,34 @@
 
 namespace App\Http\Livewire\Logistics\Fleet;
 
+use App\Models\ReservedVehicle;
 use App\Models\ReserveInforms;
+use App\Models\Vehicle;
 use Livewire\Component;
 
 class Reservation extends Component
-{   
-    public $reserveModal = false;
-    public $selected_id;
-    public $reservations= [];
-    public $origin = 'vinfo', $pnumber, $vmodel, $driver_name, $status = "Pending";
+{
+    public $assignModal = false;
+    public $selected_id, $selected_vehicle;
     public function render()
-    {   
-         $this->reservations;
-        return view('livewire.logistics.fleet.reservation');([
-       
-            'ReserveInform' => ReserveInforms::orderBy('id', 'desc')->paginate(5),
-            'Reserves' => Reserve::all(),
+    {
+        return view('livewire.logistics.fleet.reservation', [
+            'reservations' => ReservedVehicle::all(),
+            'vehicles' => Vehicle::where('status', 'Available')->get(),
         ]);
     }
-
-  
-
+    public function loadModal($id)
+    {
+        $this->assignModal = true;
+        $this->selected_id = $id;
+    }
+    public function assignVehicle()
+    {
+        ReservedVehicle::find($this->selected_id)->update([
+            'vehicle_id' => $this->selected_vehicle,
+        ]);
+        Vehicle::find($this->selected_vehicle)->update(['status' => 'Reserved']);
+        toastr()->addSuccess('Save Successfully');
+        $this->assignModal = false;
+    }
 }

@@ -149,7 +149,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('repairs')}}" class="nav-link">Repairs</a>
-                        <a href="{{route('romlist')}}" class="nav-link">MRO Request List</a>
+                        <a href="{{route('romlist')}}" class="nav-link">Request List</a>
                         <a href="{{route('rominventory')}}" class="nav-link">Inventory</a>
                     </li>
                 </ul>

@@ -34,9 +34,10 @@
                         </td>
                         <td class="text-center align-middle">{{$reserve->Buyer->address}}</td>
                         <td class="text-center align-middle">@date($reserve->created_at)</td>
-                        <td class="text-center align-middle">{{$reserve->id}}</td>
-                        <td class="text-center align-middle">{{$reserve->id}}</td>
-                        <td class="text-center align-middle">{{$reserve->id}}</td>
+                        <td class="text-center align-middle">{{$reserve->vehicle->brand}} {{$reserve->vehicle->model}}</td>
+                        <td class="text-center align-middle">{{$reserve->vehicle->plate}}</td>
+                        <td class="text-center align-middle">{{$reserve->vehicle->driver_name}}</td>
+                        <td class="text-center align-middle">{{$reserve->status}}</td>
                     @empty
                         
                     @endforelse

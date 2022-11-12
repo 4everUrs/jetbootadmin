@@ -4,88 +4,74 @@
             {{ __('Vehicle Reservation') }}
         </h2>
     </x-slot>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="list-tab" data-bs-toggle="tab" data-bs-target="#list" type="button"
-                role="tab" aria-controls="list" aria-selected="true">List</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                role="tab" aria-controls="profile" aria-selected="false">Vehicle Reservation Form Request</button>
-        </li>
-    </ul>
+    <div class="card">
+        <div class="card-body">
+            <x-table head="Reservation Request">
+                <thead class="bg-info">
+                    <th class="text-center align-middle">No</th>
+                    <th class="text-center align-middle">Item Name</th>
+                    <th class="text-center align-middle">Quantity</th>
+                    <th class="text-center align-middle">Destination</th>
+                    <th class="text-center align-middle">Request Date</th>
+                    <th class="text-center align-middle">Reserve Vehicle</th>
+                    <th class="text-center align-middle">Plate No.</th>
+                    <th class="text-center align-middle">Assigned Driver</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Action</th>
+                </thead>
+                <tbody>
+                    @forelse ($reservations as $reserve)
+                    <td class="text-center align-middle">{{$reserve->id}}</td>
+                    <td class="text-center align-middle">
+                        @foreach ($reserve->Order->OrderItem as $item)
+                        <li>{{$item->item_name}}</li>
+                        @endforeach
+                    </td>
+                    <td class="text-center align-middle">
+                        @foreach ($reserve->Order->OrderItem as $item)
+                        <li>{{$item->qty}}</li>
+                        @endforeach
+                    </td>
+                    <td class="text-center align-middle">{{$reserve->Buyer->address}}</td>
+                    <td class="text-center align-middle">@date($reserve->created_at)</td>
+                    <td class="text-center align-middle">{{$reserve->vehicle->brand}} {{$reserve->vehicle->model}}</td>
+                    <td class="text-center align-middle">{{$reserve->vehicle->plate}}</td>
+                    <td class="text-center align-middle">{{$reserve->vehicle->driver_name}}</td>
+                    <td class="text-center align-middle">{{$reserve->status}}</td>
+                    <td class="text-center align-middle">
+                        <button wire:click="loadModal({{$reserve->id}})" class="btn btn-primary btn-sm">Approve</button>
+                    </td>
+                    @empty
 
-    <div class="tab-content">
-        <div class="tab-pane active" id="list" role="tabpanel" aria-labelledby="list-tab">
-            <div class="card">
-                <div class="card-body">
-                    <x-table head="Vehicle Reservation List">
-                        <thead>
-                            <th class="text-center align-middle">Department Name</th>
-                            <th class="text-center align-middle">Vehicle Type</th>
-                            <th class="text-center align-middle">Destination</th>
-                            <th class="text-center align-middle">Status</th>
-                        </thead>
-                    </x-table>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="card">
-                <div class="card-body">
-                    <label>Vehicle Reservation Request Form</label>
-                    <ul>
-                        <li> Note: You must obtain departmental approval prior to reserving a vehicle and have the
-                            necessary travel approval prior to making this vehicle reservation request.</li>
-                        <li>Additional reminders:
-                            <ul>
-                                <li>Driver must have a valid driver's license to show when picking up a vehicle.</li>
-                                <li>Driver listed on the reservation must be the person who picks up the vehicle unless
-                                    an alternative has been approved in advance.</li>
-                                <li>Please list additional drivers and special requests in "comments" box, if
-                                    applicable.</li>
-                                <li>The department renting the vehicle is responsible for any vehicle damage occurring
-                                    while in the possession of the driver</li>
-                                <li>Your request is not a reservation until you receive a confirmation.</li>
-                                <li>Motor Pool hours are 7:30 am - 4:30 pm Monday - Friday. If your car is needed prior
-                                    to Motor Pool opening at 7:30 am, the vehicle keys can be picked up between 3:30 pm
-                                    and 4:30 pm the prior workday afternoon, at no additional charge. Please note in the
-                                    comments section below if you need this early key pick up.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul>
-                        <label for="name">Department Name</label>
-                        <input wire:model="Department" type="text" class="form-control">
-                        <div class="form-group">
-                            <label for="name">Destination</label>
-                            <input wire:model="location" type="text" class="form-control">
-                            <div class="form-group">
-                                <label for="name">Driver Name</label>
-                                <input wire:model="Drivers" type="text" class="form-control">
-                                <div class="form-group">
-                                    <label>Vehicle Type</label>
-                                    <select wire:model="type" class="form-control">
-                                        <option>Please Select Type</option>
-                                        <option>SUV</option>
-                                        <option>Truck</option>
-                                        <option>Mini Van</option>
-                                        <option>Sedan</option>
-                                    </select>
-                                    <label>Comments</label>
-                                    <textarea wire:model="comments" class="form-control"></textarea>
-
-
-
-
-                    </ul>
-
-                    <x-jet-button class="ms-2" wire:click="sendRequest" wire:loading.attr="disabled">
-                        {{ __('Send Request') }}
-                    </x-jet-button>
-
-                </div>
-            </div>
+                    @endforelse
+                </tbody>
+            </x-table>
         </div>
     </div>
+    <x-jet-dialog-modal wire:model="assignModal">
+        <x-slot name="title">
+            {{ __('Create new vehicle information') }}
+        </x-slot>
+
+        <x-slot name="content">
+            <label>Vehicle</label>
+            <select wire:model="selected_vehicle" class="form-control">
+                <option value="">Choose..</option>
+                @foreach ($vehicles as $vehicle)
+                    <option value="{{$vehicle->id}}">{{$vehicle->brand}} {{$vehicle->model}}</option>
+                @endforeach
+            </select>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('assignModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+
+            <x-jet-button class="ms-2" wire:click="assignVehicle" wire:loading.attr="disabled">
+                {{ __('Save') }}
+            </x-jet-button>
+        </x-slot>
+
+    </x-jet-dialog-modal>
 </div>
