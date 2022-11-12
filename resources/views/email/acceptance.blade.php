@@ -14,6 +14,6 @@ Interviewing Person {{$job['person']}} (name and designation) <br>
 Please reply to this email if you have any questions or need to reschedule. We look forward to speaking with you.
     
 Sincerely, <br>
-Tech-Trendz
+<b>Tech-Trendz</b>
     
 @endcomponent

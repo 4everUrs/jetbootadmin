@@ -51,7 +51,7 @@
     </div>
     <x-jet-dialog-modal wire:model="viewLetter">
         <x-slot name="title">
-            {{ __('Acceptance Letter') }}
+            {{ __('Schedule for Initial Interview') }}
             
         </x-slot>
         <x-slot name="content">
@@ -65,11 +65,7 @@
                 @error('date') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Venue</label>
-                <select wire:model="venue"class="form-control" type="text">
-                    <option value="">Select</option>
-                    <option value="Venue">Venue Address - Quezon City</option>
-                    <option value="Link">Communication Link - https://us04web.zoom.us/j/78172950906?pwd=QXAFLR4jk8K20aOLyyBmO1VaLZXWtv.1</option>
-                </select>
+                <input wire:model="venue"class="form-control" type="text">
                 @error('venue') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Interviewing Person</label>

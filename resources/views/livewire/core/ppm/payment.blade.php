@@ -52,7 +52,7 @@
                     <table class="table table-striped">
                         <thead class="bg-gray">
                             <th class="text-center align-middle">Employee ID</th>
-                            <th class="text-center align-middle">Employee Nane</th>
+                            <th class="text-center align-middle">Employee Name</th>
                             <th class="text-center align-middle">Bank Name</th>
                             <th class="text-center align-middle">Bank Account</th>
                             <th class="text-center align-middle">Salary</th>

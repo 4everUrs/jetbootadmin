@@ -15,7 +15,8 @@ use Mail;
 
 class Initial extends Component
 {
-    public $search = '';
+    public $initialModal = false;
+    public $search = '', $time, $date, $selected_id;
     public function render()
     {
         return view('livewire.core.am.initial',[
@@ -23,10 +24,16 @@ class Initial extends Component
             ->orWhere('status','=','Qualified')->get(),
         ]);
     }
-    public function approve($id)
+    public function approved()
     {
-     
-        $job = ApplicantList::find($id);
+        ApplicantList::find($this->selected_id)->update([
+            'time' => Carbon::createFromFormat('H:i', $this->time)->format('g:i A'),
+            'date' => Carbon::parse($this->date)->toFormattedDateString(),
+        ]);
+  
+        
+        flash()->addSuccess('Data approved successfully');
+        $job = ApplicantList::find($this->selected_id);
       
         JobCandid::create([
             'name' => $job->name,
@@ -37,10 +44,22 @@ class Initial extends Component
             'resume_file' => $job->resume_file,
             'status' => 'Pending'
         ]);
-        Mail::to($job->email)->send(new FinalInterviewMail());
+        $applicantDetails =[
+            'name' => $job->name,
+            'position' => $job->position,
+            'company' => $job->company_name,
+            'time' => $job->time,
+            'date' => $job->date,
+        ];
+        Mail::to($job->email)->send(new FinalInterviewMail($applicantDetails));
         $job->status = 'Qualified';
         $job->save();
-        flash()->addSuccess('Data approved successfully');
+        $this->initialModal = false;
+    }
+    public function approve($id)
+    {
+        $this->selected_id = $id;
+        $this->initialModal = true;
     }
     public function denied($id)
     {
