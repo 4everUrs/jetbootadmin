@@ -2,10 +2,10 @@
   <!--EXPENSES TABLE-->
 <div class="card">
     <div class="card-body">
-        <a wire:click="expensescreate" class="btn btn-warning">+ Add Expenses</a>
+        <a wire:click="expensescreate" class="btn btn-warning btn-sm">Add Expenses</a>
         
         <x-table head="History of Expenses">
-            <thead>
+            <thead class="bg-secondary table-sm">
                 <th>No.</th>
                 <th>Name</th>
                 <th>Category</th>
@@ -22,7 +22,7 @@
                     <td>{{$expense->id}}</td>
                     <td>{{$expense->eoriginated}}</td>
                     <td>{{$expense->ecategory}}</td>
-                    <td>{{$expense->created_at}}</td>
+                    <td>{{($expense->created_at)->toFormattedDateString()}}</td>
                     <td>{{$expense->eamount}}</td>
                     <td>{{$expense->eaccount}}</td>
                     <td>{{$expense->edescription}}</td>
@@ -39,8 +39,8 @@
                 @endforelse
             </tbody>
         </x-table><br><br>
-        <button wire:click="sumExpenses" class="btn btn-outline-danger ">Grandtotal</button>
-        <label>The Sum of all transaction:</label>
+        <button wire:click="sumExpenses" class="btn btn-outline-warning btn-sm ">Sum</button>
+        <label>Total Expenses : </label>
         <label>{{$grandexpenses}}</label><br><br>
         
         <div class="mt-3 float-right">

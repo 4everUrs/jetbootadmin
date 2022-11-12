@@ -18,7 +18,7 @@ class Journals extends Component
     public $invoice, $idate, $pname, $invoiceamount, $pamount, $pduedate, $premarks, $paymade;
     public $rname, $noinvoice, $rdate, $rinvoiceamount, $ramountreceived, $rdatereceived, $rduedate, $routstanding, $rremarks;
     public $gen_leds;
-    public $preview = [];
+    
     public $grandtotal;
     public $childData = [];
     public $addLiability = false;
@@ -35,6 +35,10 @@ class Journals extends Component
     public $subJournal;
     public $editSub_id;
     public $subjournals = 'd-none';
+    public $subs=[];
+    public $subdata=[];
+    public $sub_desc=[],$sub_debit=[],$sub_credit=[];
+    public $preview = [];
     // wire:model for delete modal no declare so i declare.
 
     use WithPagination;
@@ -102,24 +106,37 @@ class Journals extends Component
     }
     public function removebtn()
     {
-        
+        $this->subdata[] = [
+            'desc' => $this->sub_
+        ];
     }
-
+    public function preview()
+    {
+        $this->subdata = null;
+        foreach($this->subs as $key => $sub){
+            $this->subdata[] = [
+                'desc' => $this->sub_desc[$key],
+                'credit'=>$this->sub_credit[$key],
+                'debit'=>$this->sub_debit[$key]
+            ];
+        }
+    }
     public function addLiabilities()
     {
-
+       
         JournalEntry::create([
             'jencoded' => Auth::user()->name,
+            'jdescription' => $this-> jdescription, 
+            'jcredit' => $this-> jcredit, 
+            'jdebit' => $this-> jdebit, 
         ]);
 
         $temp = JournalEntry::latest('id')->first();
         foreach ($this->preview as $index => $prev) {
             SubJournal::create([
-                'jdescription' => $prev['jdescription'],
                 'jsubdescription' => $this->jsubdescription,
                 'jdebit' => $prev['jdebit'],
                 'jcredit' => $prev['jcredit'],
-                //'jstatus' => $prev['jstatus'],
                 'journal_entry_id' => $temp->id,
             ]);
         }
@@ -197,8 +214,6 @@ class Journals extends Component
     public function resetLiability()
     {
         $this->journal_id = null;
-
-        $this->jdescription = null;
         $this->jcredit = null;
         $this->jdebit = null;
         $this->jencoded = 'ADMIN';
@@ -315,6 +330,15 @@ class Journals extends Component
         $this->ramountreceived = null;
         $this->rduedate = null;
         $this->rremarks = null;
+    }
+    public function addRow()
+    {
+        $this->subdata[] = ['desc','debit','credit'];
+    
+    }
+    public function removeRow($key)
+    {
+        unset($this->subs[$key]);
     }
 
 

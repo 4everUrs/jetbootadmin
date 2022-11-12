@@ -200,7 +200,7 @@
                                         <button wire:click="deleteliabilities({{$entry->id}})" class="btn btn-warning btn-sm">Delete</button>
                                         {{--<button wire:click="recordliabilities({{$entry->id}})" class="btn btn-danger btn-sm">Record</button>--}}
                                     </td>
-                                </tr>    
+                                </tr> 
                             @endforeach
                             </tbody>
                         </x-table>    
@@ -310,18 +310,43 @@
                             <option value="Collection">Collection</option>
 
                         </select>
-                        <label>Sub-Category</label>
-                        <textarea class="form-control" wire:model="jsubdescription"> </textarea>
                     </div>
                     <div class="col">
                         <label>Debit</label>
                         <input wire:model="jdebit" class="form-control" type="number">
+                        
+                    </div>
+                    <div class="col">
                         <label>Credit</label>
                         <input wire:model="jcredit" class="form-control" type="number">
                     </div>
                 </div>
-                <button wire:click="saveRecord" class="btn btn-dark mb-2">ADD</button>
-                <table class="table table-hovered">
+                <button wire:click="addRow" class="btn btn-sm btn-primary">Add Sub Description</button>
+                
+               @foreach ($subdata as $key => $sub)
+               <div class="row">
+                    <div class="col">
+                        <label>Sub-Description</label>
+                        <input wire:model="subdata[{{$key}}][desc]" type="text" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label>Debit</label>
+                        <input wire:model="subdata[{{$key}}][debit]" type="text" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label>Credit</label>
+                        <input wire:model="subdata[{{$key}}][credit]" type="text" class="form-control">
+                    </div>
+                    <div class="col-1">
+                        
+                        <button wire:click="removeRow({{$key}})" class="btn btn-danger btn-sm">Remove</button>
+                    </div>
+                </div>
+               @endforeach
+
+
+                {{-- <button wire:click="saveRecord" class="btn btn-dark mb-2">ADD</button> --}}
+                <table class="table table-hovered mt-4">
                     <thead>
                     
                         <th>Description</th>
@@ -358,9 +383,15 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
             {{--wire:click function dito sa button hindi match sa function sa class--}}
+            @if (!empty($subdata))
             <x-jet-button class="ms-2" wire:click="addLiabilities" wire:loading.attr="disabled">
                 {{ __('Add Records') }}
             </x-jet-button>
+            @else
+            <x-jet-button class="ms-2" wire:click="preview" wire:loading.attr="disabled">
+                {{ __('Preview') }}
+            </x-jet-button>
+            @endif
         </x-slot>
     </x-jet-dialog-modal>
     {{--add liability--}}

@@ -25,7 +25,7 @@
                             <a wire:click="loadAnnualBudget" class="btn btn-info btn-sm">Add Annual Budget</a>
                             <x-table head="Annual Budget" class="text-center">
             
-                                <thead>
+                                <thead class="bg-secondary table-sm">
                                     <th>Year</th>
                                     <th>Budget</th>
                                     <th>Logistics 20 %</th>
@@ -65,7 +65,7 @@
                         <div class="card-body">
                             <a wire:click="loadLogisticBudget" class="btn btn-info btn-sm">Add Annual Budget</a>
                             <x-table head="Logistics">
-                                <thead>
+                                <thead class="bg-secondary table-sm">
                                     <th>Year</th>
                                     <th>Department Amount Budget</th>
                                     <th>Operating Budget 30 %</th>

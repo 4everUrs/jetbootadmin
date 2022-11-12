@@ -16,6 +16,7 @@
                     <th>Proposed Amount</th>
                     <th>Approval Date</th>
                     <th>Approved Amount</th>
+                    <th>Attachment</th>
                     <th>Status</th>
                     <th>Remarks</th>               
                 </thead>
@@ -30,12 +31,13 @@
                         <td>{{$list_requested->proposedamount}}</td>
                         <td>{{$list_requested->approvedate}}</td>
                         <td>{{($list_requested->approvedamount)}}</td>
+                        <td>{{($list_requested->attachment)}}</td>
                         <td>{{$list_requested->rstatus}}</td>
                         <td>{{$list_requested->remarks}}</td>
                     </tr>
                      @empty
                      <tr>
-                        <td class="text-center" colspan="9">"Unlisted Records"</td>
+                        <td class="text-center" colspan="11">"Unlisted Records"</td>
                     </tr>
                     @endforelse 
                 </tbody>

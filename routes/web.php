@@ -45,6 +45,8 @@ use App\Http\Livewire\Logistics\Vendorportal\Bidders;
 use App\Http\Livewire\Logistics\Vendorportal\Buyers;
 use App\Http\Livewire\Finance\Bm\Requestedlist;
 use App\Http\Livewire\Finance\Bm\Journals;
+use App\Http\Livewire\Finance\Bm\Listsofpayables;
+use App\Http\Livewire\Finance\Bm\Listsofreceivables;
 use App\Http\Livewire\Hr\Claimreimburse\Claimdata;
 use App\Http\Livewire\Hr\Compensation\Compensationdata;
 use App\Http\Livewire\Hr\Core\Coredata;
@@ -161,6 +163,8 @@ Route::prefix('finance')->middleware('auth', 'isFinance')->group(function () {
     Route::get('collections', Collections::class)->name('collects');
     Route::get('allocates', Allocates::class)->name('allocatebudget');
     Route::get('balancesheets', Balancesheets::class)->name('bsheets');
+    Route::get('listsofpayables', Listsofpayables::class)->name('listspayables');
+    Route::get('listsofreceivables', Listsofreceivables::class)->name('listsreceivable');
     Route::get('loaddisburse', [DisbursementController::class, 'downloadPdf'])->name('export');
     Route::get('genledgerreport', [GeneralLedgerController::class, 'downloadPdf'])->name('generalreports');
 });

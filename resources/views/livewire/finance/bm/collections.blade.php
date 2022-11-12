@@ -61,6 +61,7 @@
                      <label>Address</label>
                      <input wire:model="address" class="form-control" type="text">
                 </div>
+
                 <div class="col">
 
                     <label>Amount Received</label>
@@ -74,12 +75,13 @@
                         <option>Select Option</option>
                         <option>Cash</option>
                         <option>Bank</option>
-                        <option>Cheque</option>
-                        
-                    <label>Remarks</label>
-                   <<textarea wire:model="cremarks" placeholder=" ✎ 𝓘𝓷𝓹𝓾𝓽 𝓝𝓸𝓽𝓮𝓼..." class="form-control"></textarea>
+                        <option>Cheque</option><br>
 
-                </div>
+                </div><br>
+
+                <br><label>Remarks</label>
+                <textarea wire:model="cremarks" placeholder=" ✎ 𝓘𝓷𝓹𝓾𝓽 𝓝𝓸𝓽𝓮𝓼..." class="form-control"></textarea>
+                
             </div>
         </div>
 </x-slot>
@@ -96,4 +98,5 @@
 </x-jet-dialog-modal>
 {{--------------------------------------------END COLLECTION MODAL ------------------------------------------------------------------------}} 
 
+</div>
 </div>
