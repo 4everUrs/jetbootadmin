@@ -12,15 +12,15 @@ use Illuminate\Queue\SerializesModels;
 class FinalInterviewMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $job;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($applicantDetails)
     {
-        //
+        $this->job = $applicantDetails;
     }
 
     /**
@@ -31,7 +31,7 @@ class FinalInterviewMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Final Interview Mail',
+            subject: 'Tech-Trendz Human Resource Application',
         );
     }
 
@@ -43,7 +43,7 @@ class FinalInterviewMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'email.finalinterview',
         );
     }
 

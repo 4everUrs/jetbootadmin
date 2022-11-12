@@ -76,7 +76,6 @@
                             <th class="text-center">Philhealth</th>
                             <th class="text-center">Pagibig</th>
                             <th class="text-center">Net Salary</th>
-                            <th class="text-center">Action</th>
                         </thead>
                         <tbody>
                             @forelse ($payslip as $payroll)
@@ -91,10 +90,6 @@
                                 <td class="text-center">@money($payroll->philhealth)</td>
                                 <td class="text-center">@money($payroll->pagibig)</td>
                                 <td class="text-center">@money($payroll->net_salary)</td>
-                                <td class="text-center">
-                                    <button wire:click="total" class="btn btn-sm btn-info">Total</button>
-                                    <button wire:click="request" class="btn btn-sm btn-primary">Request</button>
-                                </td>
                                 
                             </tr>
                             @empty

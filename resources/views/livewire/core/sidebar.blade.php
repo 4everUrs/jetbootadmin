@@ -98,7 +98,7 @@
                     <li class="nav-item">
                         <a href="{{route('paymentfee')}}" class="nav-link"><i class='fa fa-credit-card'></i> Payroll</a>
                         <a href="{{route('payment')}}" class="nav-link"><i class='fa fa-credit-card'></i> Payment</a>
-                        <a href="{{route('budgetproposal')}}" class="nav-link"><i class='fa fa-credit-card'></i> Budget Proposal</a>
+                        <a href="{{route('budgetproposal')}}" class="nav-link"><i class='fa fa-credit-card'></i> Contribution</a>
                     </li>
                 </ul>
             </li>
