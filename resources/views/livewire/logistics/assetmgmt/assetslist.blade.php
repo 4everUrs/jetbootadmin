@@ -37,7 +37,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <x-table head="Employee" class="rounded">
-                                    <thead class="bg-info">
+                                    <thead class="bg-info ">
                                         <th class="text-center align-middle">No.</th>
                                         <th class="text-center align-middle">Name</th>
                                         <th class="text-center align-middle">Department</th>

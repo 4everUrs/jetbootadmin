@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('buyer_id');
             $table->unsignedInteger('vehicle_id');
+            $table->string('status')->default('Pending')->nullable();
             $table->timestamps();
         });
     }

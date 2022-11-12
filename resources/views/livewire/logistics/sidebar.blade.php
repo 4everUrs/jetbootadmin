@@ -54,7 +54,7 @@
                         <a href="{{route('warehousePO')}}" class="nav-link">Purchase Order</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('warehouseInvoice')}}" class="nav-link">Invoices</a>
+                        <a href="{{route('warehouseInvoice')}}" class="nav-link">Receiving</a>
                     </li>
 
                 </ul>
@@ -124,6 +124,7 @@
                         <a href="#" class="nav-link">Reports</a>
                         <a href="{{route('deliverylist')}}" class="nav-link">Delivery Request</a>
                         <a href="{{route('vehiclerequest')}}" class="nav-link">Vehicle Request</a>
+                        <a href="{{route('dispatching')}}" class="nav-link">Dispatching</a>
                     </li>
                 </ul>
             </li>

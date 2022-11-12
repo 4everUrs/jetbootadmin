@@ -46,7 +46,7 @@
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Tech-Trendz</span>
             </a>
-
+            
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -57,7 +57,6 @@
                     </div>
                     <div class="info">
                         <a href="{{route('profile.show')}}" class="d-block">{{ Auth::user()->name }}</a>
-
                     </div>
                 </div>
                 @if (Auth::user()->current_team_id == '1')
@@ -91,10 +90,7 @@
                 @endif
             </div>
             <!-- /.sidebar -->
-            <div class="sidebar-custom">
-                <a href="{{route('profile.show')}}" class="btn btn-link"><i class="fas fa-cogs"></i></a>
-                <button  class="btn btn-primary hide-on-collapse pos-right"><i class="fas fa-headset"></i></button>
-            </div>
+            @livewire('admin.options')
             <!-- Modal -->
         </aside>
         <!-- Content Wrapper. Contains page content -->
@@ -114,7 +110,6 @@
             <div class="content">
                 <div class="container-fluid">
                     {{$slot}}
-                    
                 </div>
             </div>
             

@@ -21,26 +21,35 @@
                 </thead>
                 <tbody>
                     @forelse ($reservations as $reserve)
-                    <td class="text-center align-middle">{{$reserve->id}}</td>
-                    <td class="text-center align-middle">
-                        @foreach ($reserve->Order->OrderItem as $item)
-                        <li>{{$item->item_name}}</li>
-                        @endforeach
-                    </td>
-                    <td class="text-center align-middle">
-                        @foreach ($reserve->Order->OrderItem as $item)
-                        <li>{{$item->qty}}</li>
-                        @endforeach
-                    </td>
-                    <td class="text-center align-middle">{{$reserve->Buyer->address}}</td>
-                    <td class="text-center align-middle">@date($reserve->created_at)</td>
-                    <td class="text-center align-middle">{{$reserve->vehicle->brand}} {{$reserve->vehicle->model}}</td>
-                    <td class="text-center align-middle">{{$reserve->vehicle->plate}}</td>
-                    <td class="text-center align-middle">{{$reserve->vehicle->driver_name}}</td>
-                    <td class="text-center align-middle">{{$reserve->status}}</td>
-                    <td class="text-center align-middle">
-                        <button wire:click="loadModal({{$reserve->id}})" class="btn btn-primary btn-sm">Approve</button>
-                    </td>
+                    <tr>
+                        <td class="text-center align-middle">{{$reserve->id}}</td>
+                        <td class="text-center align-middle">
+                            @foreach ($reserve->Order->OrderItem as $item)
+                            {{$item->item_name}}
+                            @endforeach
+                        </td>
+                        <td class="text-center align-middle">
+                            @foreach ($reserve->Order->OrderItem as $item)
+                            {{$item->qty}}
+                            @endforeach
+                        </td>
+                        <td class="text-center align-middle">{{$reserve->Buyer->address}}</td>
+                        <td class="text-center align-middle">@date($reserve->created_at)</td>
+                        @if(!empty($reserve->vehicle->brand))
+                        
+                        <td class="text-center align-middle">{{$reserve->vehicle->brand}} {{$reserve->vehicle->model}}</td>
+                        <td class="text-center align-middle">{{$reserve->vehicle->plate}}</td>
+                        <td class="text-center align-middle">{{$reserve->vehicle->driver_name}}</td>
+                        @else
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        @endif
+                        <td class="text-center align-middle">{{$reserve->status}}</td>
+                        <td class="text-center align-middle">
+                            <button wire:click="loadModal({{$reserve->id}})" class="btn btn-primary btn-sm">Approve</button>
+                        </td>
+                    </tr>
                     @empty
 
                     @endforelse

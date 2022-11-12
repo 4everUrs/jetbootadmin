@@ -8,8 +8,10 @@
         <div class="card-body">
             <x-table head="Invoice List">
                 <thead class="bg-info">
-                    <th class="text-center align-middle">Invoice ID</th>
+                    <th class="text-center align-middle">No</th>
                     <th class="text-center align-middle">Supplier Name</th>
+                    <th class="text-center align-middle">Item Name</th>
+                    <th class="text-center align-middle">Quantity</th>
                     <th class="text-center align-middle">Invoice File</th>
                     <th class="text-center align-middle">Date Recieved</th>
                     <th class="text-center align-middle">Action</th>
@@ -17,8 +19,10 @@
                 <tbody>
                     @forelse ($invoices as $invoice)
                         <tr>
-                            <td class="text-center align-middle">{{$invoice->invoice_id}}</td>
-                            <td class="text-center align-middle">{{$invoice->company_name}}</td>
+                            <td class="text-center align-middle">{{$invoice->id}}</td>
+                            <td class="text-center align-middle">{{$invoice->Bidder->name}}</td>
+                            <td class="text-center align-middle">{{$invoice->post->item_name}}</td>
+                            <td class="text-center align-middle">{{$invoice->post->quantity}}</td>
                             <td class="text-center align-middle"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$invoice->file_name}}" target="__blank">{{$invoice->file_name}}</a></td>
                             <td class="text-center align-middle">@date($invoice->created_at)</td>
                             <td class="text-center align-middle">
@@ -30,7 +34,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center">No Record Found</td>
+                            <td colspan="7" class="text-center">No Record Found</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('invoice_id')->unique();
-            $table->string('company_name');
+            $table->unsignedInteger('post_id');
+            $table->unsignedInteger('bidder_id');
             $table->string('file_name');
             $table->string('status');
             $table->timestamps();

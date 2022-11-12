@@ -102,6 +102,7 @@ use App\Http\Livewire\Logistics\Projectmanagement\Createnewproject;
 use App\Http\Livewire\Logistics\Projectmanagement\Proposal;
 use App\Http\Livewire\Logistics\Fleet\Activity;
 use App\Http\Livewire\Logistics\Fleet\DeliveryList;
+use App\Http\Livewire\Logistics\Fleet\Dispatching;
 use App\Http\Livewire\Logistics\Fleet\Maps;
 use App\Http\Livewire\Logistics\Fleet\Reservation;
 use App\Http\Livewire\Logistics\Fleet\Rominventory;
@@ -119,6 +120,7 @@ use App\Http\Livewire\Logistics\Users;
 use App\Http\Livewire\Logistics\Vendorportal\Workshops;
 use App\Http\Livewire\Logistics\Warehouse\Invoices as WarehouseInvoices;
 use App\Http\Livewire\Logistics\Warehouse\PurchaseOrders as WarehousePurchaseOrders;
+use App\Http\Livewire\Messages;
 use App\Models\WhInvoice;
 use App\Models\Claiming;
 
@@ -159,12 +161,9 @@ Route::get('/', function () {
 Route::get('/testfile', [PDFController::class, 'testDownload']);
 
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/timein', [AttendanceController::class, 'timein'])->name('timein');
-//     Route::get('/breakin', [AttendanceController::class, 'breakin'])->name('breakin');
-//     Route::get('/breakout', [AttendanceController::class, 'breakout'])->name('breakout');
-//     Route::get('/timeout', [AttendanceController::class, 'timeout'])->name('timeout');
-// });
+Route::middleware('auth')->group(function () {
+    Route::get('/messages', Messages::class)->name('messaging');
+});
 
 //Login Routes
 Route::get('/redirects', [LoginController::class, 'login'])->name('home');
@@ -217,6 +216,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('fleet/delivery', DeliveryList::class,)->name('deliverylist');
     Route::get('fleet/romrequest', Romrequest::class)->name('repairs');
     Route::get('fleet/reservation', Reservation::class)->name('reserve');
+    Route::get('fleet/dispatching', Dispatching::class)->name('dispatching');
     Route::get('fleet/request', VehicleRequest::class)->name('vehiclerequest');
     Route::get('fleet/romrequestlist', Romrequestlist::class)->name('romlist');
     Route::get('fleet/rominventory', Rominventory::class)->name('rominventory');

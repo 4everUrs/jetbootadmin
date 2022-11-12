@@ -15,7 +15,7 @@ class VehicleRequest extends Component
     public function render()
     {
         return view('livewire.logistics.fleet.vehicle-request', [
-            'orders' => Buyer::all(),
+            'orders' => Buyer::where('status', '=', 'confirmed')->get(),
             'reservations' => ReservedVehicle::all(),
         ]);
     }
