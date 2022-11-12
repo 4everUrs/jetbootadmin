@@ -9,6 +9,11 @@ class Payroll extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'attendance', 'salary', 'contribution', 'placement', 'status'
+        'year', 'month', 'salary_term', 'start_date', 'end_date', 'name'
     ];
+
+    public function getPayslip()
+    {
+        return $this->hasMany(Payslip::class);
+    }
 }

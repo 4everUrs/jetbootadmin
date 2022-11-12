@@ -84,10 +84,12 @@
                     </select> --}}
                 <label>Select Originated Dept.</label>
                 <select class="form-control" wire:model="originated">
-                    <option>HR DEPT</option>
-                    <option>LOGISTICS DEPT</option>
-                    <option>CORE</option>
-                    <option>FINANCE</option>
+                    <option value="">Select Option</option>
+                  @forelse ($requestsLists as $request)
+                      <option value="{{$request->id}}">{{$request->proposalname}}</option>
+                  @empty
+                      <option value="">No Request Available</option>
+                  @endforelse
                 </select>
                 @error('originated') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
             

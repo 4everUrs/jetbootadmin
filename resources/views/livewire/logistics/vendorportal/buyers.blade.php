@@ -8,25 +8,25 @@
         <div class="card-body">
             <x-table head="Buyers List">
                 <thead class="bg-info">
-                    <th>Recipient</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Payment Method</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th class="text-center align-middle">Recipient</th>
+                    <th class="text-center align-middle">Email</th>
+                    <th class="text-center align-middle">Phone</th>
+                    <th class="text-center align-middle">Address</th>
+                    <th class="text-center align-middle">Payment Method</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($buyers as $buyer)
                         <tr>
-                            <td>{{$buyer->recipient}}</td>
-                            <td>{{$buyer->email}}</td>
-                            <td>{{$buyer->phone}}</td>
-                            <td>{{$buyer->address}}</td>
-                            <td>{{$buyer->payment_method}}</td>
-                            <td>{{$buyer->status}}</td>
+                            <td class="text-center align-middle">{{$buyer->recipient}}</td>
+                            <td class="text-center align-middle">{{$buyer->email}}</td>
+                            <td class="text-center align-middle">{{$buyer->phone}}</td>
+                            <td class="text-center align-middle">{{$buyer->address}}</td>
+                            <td class="text-center align-middle">{{$buyer->payment_method}}</td>
+                            <td class="text-center align-middle">{{$buyer->status}}</td>
                             <td>
-                                <button wire:click='loadModal({{$buyer->order_id}},{{$buyer->id}})' class="btn btn-dark">View</button>
+                                <button wire:click='loadModal({{$buyer->order_id}},{{$buyer->id}})' class="btn btn-dark btn-sm">Approve</button>
                             </td>
                         </tr>
                         
@@ -177,4 +177,6 @@
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
+
+    
 </div>

@@ -10,6 +10,6 @@ class Leave extends Model
     use HasFactory;
     protected $fillable =[
         'name', 'type', 'position', 'reason', 'datestart', 'dateend', 'status'
-
     ];
+    
 }

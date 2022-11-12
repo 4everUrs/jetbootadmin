@@ -2,34 +2,53 @@
 
 namespace App\Http\Livewire\Core\Nhb;
 
+use App\Models\ApplicantList;
 use Livewire\Component;
 use App\Models\Onboard;
 use App\Models\LocalEmployee;
 use App\Models\LocalPlacement;
+use Carbon\Carbon;
 
 class Onboarding extends Component
 {
     public $showOnboard = false;
-    public $name,$age,$gender,$company_name,$position,$status='Hired',$contract,$resume_file;
-    
-  
+    public $search = '';
+    public $name, $age, $gender, $company_name, $position, $status = 'Hired', $contract, $resume_file;
+    public $selected_id,$value,$terms;
+
     public function render()
     {
-        return view('livewire.core.nhb.onboarding',[
-            'onboards' => Onboard::all(),
+        $searchFields = '%' . $this->search . '%';  
+        return view('livewire.core.nhb.onboarding', [
+            'onboards' => Onboard::where('name', 'like', $searchFields)->get(),
+            'employee' => LocalPlacement::where('status','=','Deployed')->get(),
         ]);
     }
-    public function saveOnboard(){
+    public function showModal($id){
+        $this->selected_id = $id;
+        $this->showOnboard = true;
+    }
+    public function saveOnboard()
+    {
+        $this->contract = $this->value .' '.$this->terms;
         $validateddata = $this->validate([
-        'age' => 'required|string',
-        'gender' => 'required|string',
-        'contract' => 'required|string',    
+            'age' => 'required|string',
+            'gender' => 'required|string',
+            'contract' => 'required|string',
         ]);
-        $onboard = Onboard::find($this->name);
-        $onboard->age = $validateddata['age'];
-        $onboard->gender = $validateddata['gender'];
-        $onboard->contract = $validateddata['contract'];
-        $onboard->save();
+        $temp = Onboard::find($this->selected_id);
+        $temp->age = $validateddata['age'];
+        $temp->gender = $validateddata['gender'];
+        $temp->contract = $validateddata['contract'];
+        $temp->status = 'Hired';
+        if($this->terms == 'months'){
+            $temp->endo = Carbon::parse($temp->created_at)->addMonths($this->value);
+            $temp->save();
+        }elseif($this->terms == 'years'){
+            $temp->endo = Carbon::parse($temp->created_at)->addYears($this->value);
+            $temp->save();
+        }
+        
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
         $this->showOnboard = false;
@@ -37,22 +56,27 @@ class Onboarding extends Component
     public function resetInput()
     {
         $this->name = '';
-        $this->age = '';  
-        $this->gender = '';     
-        $this->contract = '';  
+        $this->age = '';
+        $this->gender = '';
+        $this->contract = '';
     }
-    public function loadOnboard(){
+    public function loadOnboard()
+    {
         $this->showOnboard = true;
     }
-    public function submit($id){
-        $onboard = LocalPlacement::find($id);
-        LocalEmployee::create([
+    public function submit($id)
+    {
+        $onboard = Onboard::find($id);
+        $onboard->status = 'Deployed';
+            LocalEmployee::create([
+            'create_job_id' => $onboard->listing_id,
             'name' => $onboard->name,
             'phone' => $onboard->phone,
-            'position' => $onboard->position,
-            'company_name' => $onboard->company_name,
-            'company_location' => $onboard->company_location,
-        ]);
-        flash()->addSuccess('Data Send Successfully');
+            'email' => $onboard->email,
+            'status' => 'Active',
+            ]);
+            $onboard->save();
+            flash()->addSuccess('Data approved successfully');
+        
     }
 }

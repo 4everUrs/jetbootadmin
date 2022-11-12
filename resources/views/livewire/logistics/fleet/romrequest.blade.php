@@ -29,20 +29,20 @@
                             <div class="card-body">
                                 <x-table head="Vehicle Maintenance Status">
                                     <thead class="bg-info">
-                                        <th>No</th>
-                                        <th>Vehicle</th>
-                                        <th>Plate No</th>
-                                        <th>Workshop</th>
-                                        <th>Status</th>
+                                        <th class="text-center align-middle">No</th>
+                                        <th class="text-center align-middle">Vehicle</th>
+                                        <th class="text-center align-middle">Plate No</th>
+                                        <th class="text-center align-middle">Workshop</th>
+                                        <th class="text-center align-middle">Status</th>
                                     </thead>
                                     <tbody>
                                         @forelse ($repairVehicles as $repair)
                                         <tr>
-                                            <td>{{$repair->id}}</td>
-                                            <td>{{$repair->name}}</td>
-                                            <td>{{$repair->plate}}</td>
-                                            <td>{{$repair->workshop}}</td>
-                                            <td>{{$repair->status}}</td>
+                                            <td class="text-cente">{{$repair->id}}</td>
+                                            <td class="text-center align-middle">{{$repair->name}}</td>
+                                            <td class="text-center align-middle">{{$repair->plate}}</td>
+                                            <td class="text-center align-middle">{{$repair->workshop}}</td>
+                                            <td class="text-center">{{$repair->status}}</td>
                                         </tr>
                                         @empty
         

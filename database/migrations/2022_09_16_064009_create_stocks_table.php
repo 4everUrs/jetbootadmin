@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('stock_value');
             $table->string('status');
             $table->integer('reorder_level')->nullable();
+            $table->integer('reorder_quantity')->nullable();
+            $table->integer('reorder_days')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();
         });

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('salary');
             $table->string('details');
             $table->string('location');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -20,9 +20,9 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="{{route('supplierlist')}}" class="nav-link">
+                <a href="{{route('disposal')}}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
-                    <p>Supplier List</p>
+                    <p>Disposal</p>
                 </a>
             </li>
             <li class="nav-item ">
@@ -32,12 +32,23 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="{{route('disposal')}}" class="nav-link">
+                <a href="{{route('buyers')}}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
-                    <p>Disposal</p>
+                    <p>Orders</p>
                 </a>
             </li>
-
+            <li class="nav-item ">
+                <a href="{{route('workshop')}}" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>Workshops</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a href="{{route('supplierlist')}}" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>Supplier List</p>
+                </a>
+            </li>
         </ul>
     </nav>
 </div>

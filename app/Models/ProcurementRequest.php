@@ -9,6 +9,10 @@ class ProcurementRequest extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'origin', 'content', 'status', 'category'
+        'origin', 'content', 'status', 'category',  'item_name', 'item_qty', 'requestor', 'type'
     ];
+    public function WarehouseSent()
+    {
+        return $this->hasMany(WarehouseSent::class);
+    }
 }

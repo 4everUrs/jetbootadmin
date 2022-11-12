@@ -38,28 +38,28 @@
                             <div class="card-body">
                                 <x-table head="Employee" class="rounded">
                                     <thead class="bg-info">
-                                        <th>No.</th>
-                                        <th>Name</th>
-                                        <th>Department</th>
-                                        <th>Position</th>
-                                        <th>Type</th>
+                                        <th class="text-center align-middle">No.</th>
+                                        <th class="text-center align-middle">Name</th>
+                                        <th class="text-center align-middle">Department</th>
+                                        <th class="text-center align-middle">Position</th>
+                                        <th class="text-center align-middle">Type</th>
                                     </thead>
                                     <tbody class="bg-white">
-                                        @forelse ($users as $user)
+                                        @forelse ($users as $key => $user)
                                             <tr>
-                                                <td>{{$user->id}}</td>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->currentTeam->name}}</td>
+                                                <td class="text-center">{{$key+1}}</td>
+                                                <td class="text-center align-middle">{{$user->name}}</td>
+                                                <td class="text-center align-middle">{{$user->currentTeam->name}}</td>
                                                 @if ($user->role_id == '0')
-                                                <td>Admin</td>
+                                                <td class="text-center align-middle">Admin</td>
                                                 @elseif ($user->role_id == '1')
-                                                <td>Manager</td>
+                                                <td class="text-center align-middle">Manager</td>
                                                 @elseif ($user->role_id == '2')
-                                                <td>Staff</td>
+                                                <td class="text-center align-middle">Staff</td>
                                                 @elseif ($user->role_id == '3')
-                                                <td>Client</td>
+                                                <td class="text-center align-middle">Client</td>
                                                 @endif
-                                                <td>{{$user->type}}</td>
+                                                <td class="text-center align-middle">{{$user->type}}</td>
                                             </tr>
                                         @empty
                                             
@@ -74,20 +74,20 @@
                             <div class="card-body">
                                 <x-table head="Buildings">
                                     <thead class="bg-info">
-                                        <th>Building Name</th>
-                                        <th>Building Location</th>
-                                        <th>Building Specs</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="text-center align-middle">Building Name</th>
+                                        <th class="text-center align-middle">Building Location</th>
+                                        <th class="text-center align-middle">Building Specs</th>
+                                        <th class="text-center align-middle">Status</th>
+                                        <th class="text-center align-middle">Action</th>
                                     </thead>
                                     <tbody>
                                         @forelse ($buildings as $building)
                                             <tr>
-                                                <td>{{$building->name}}</td>
-                                                <td>{{$building->location}}</td>
-                                                <td>{{$building->specs}}</td>
-                                                <td>{{$building->status}}</td>
-                                                <td>
+                                                <td class="text-center align-middle">{{$building->name}}</td>
+                                                <td class="text-center align-middle">{{$building->location}}</td>
+                                                <td class="text-center align-middle">{{$building->specs}}</td>
+                                                <td class="text-center align-middle">{{$building->status}}</td>
+                                                <td class="text-center">
                                                     <button class="btn btn-primary btn-sm">Details</button>
                                                 </td>
                                             </tr>
@@ -104,24 +104,24 @@
                             <div class="card-body">
                                 <x-table head="Vehicle">
                                     <thead class="bg-info">
-                                        <th>No</th>
-                                        <th>Vehicle Type</th>
-                                        <th>Vechicle Brand</th>
-                                        <th>Vechile Model</th>
-                                        <th>Vechicle Plate No.</th>
-                                        <th>Vechicle Condition.</th>
-                                        <th>Status.</th>
+                                        <th class="text-center align-middle">No</th>
+                                        <th class="text-center align-middle">Vehicle Type</th>
+                                        <th class="text-center align-middle">Vechicle Brand</th>
+                                        <th class="text-center align-middle">Vechile Model</th>
+                                        <th class="text-center align-middle">Vechicle Plate No</th>
+                                        <th class="text-center align-middle">Vechicle Condition</th>
+                                        <th class="text-center align-middle">Status</th>
                                     </thead>
                                     <tbody>
-                                        @forelse ($vehicles as $vehicle)
+                                        @forelse ($vehicles as $key => $vehicle)
                                             <tr>
-                                                <td>{{$vehicle->id}}</td>
-                                                <td>{{$vehicle->type}}</td>
-                                                <td>{{$vehicle->brand}}</td>
-                                                <td>{{$vehicle->model}}</td>
-                                                <td>{{$vehicle->plate}}</td>
-                                                <td>{{$vehicle->condition}}</td>
-                                                <td>{{$vehicle->status}}</td>
+                                                <td class="text-center">{{$key+1}}</td>
+                                                <td class="text-center align-middle">{{$vehicle->type}}</td>
+                                                <td class="text-center align-middle">{{$vehicle->brand}}</td>
+                                                <td class="text-center align-middle">{{$vehicle->model}}</td>
+                                                <td class="text-center align-middle">{{$vehicle->plate}}</td>
+                                                <td class="text-center align-middle">{{$vehicle->condition}}</td>
+                                                <td class="text-center">{{$vehicle->status}}</td>
                                             </tr>
                                         @empty
                                             <tr>
@@ -138,22 +138,22 @@
                             <div class="card-body">
                                 <x-table head="Equipments">
                                     <thead class="bg-info">
-                                        <th>No.</th>
-                                        <th>Type.</th>
-                                        <th>Name.</th>
-                                        <th style="width: 20%">Description.</th>
-                                        <th>Quantity.</th>
-                                        <th>Purchase Date.</th>
+                                        <th class="text-center align-middle">No.</th>
+                                        <th class="text-center align-middle">Type</th>
+                                        <th class="text-center align-middle">Name</th>
+                                        <th class="text-center align-middle" style="width: 20%">Description</th>
+                                        <th class="text-center align-middle">Quantity</th>
+                                        <th class="text-center align-middle">Purchase Date</th>
                                     </thead>
                                     <tbody>
-                                        @forelse ($equipments as $equipment)
+                                        @forelse ($equipments as $key => $equipment)
                                             <tr>
-                                                <td>{{$equipment->id}}</td>
-                                                <td>{{$equipment->type}}</td>
-                                                <td>{{$equipment->name}}</td>
-                                                <td>{{$equipment->description}}</td>
-                                                <td>{{$equipment->quantity}}</td>
-                                                <td>{{Carbon\Carbon::parse($equipment->create_at)->toFormattedDateString()}}</td>
+                                                <td class="text-center">{{$key+1}}</td>
+                                                <td class="text-center align-middle">{{$equipment->type}}</td>
+                                                <td class="text-center align-middle">{{$equipment->name}}</td>
+                                                <td class="text-center align-middle">{{$equipment->description}}</td>
+                                                <td class="text-center align-middle">{{$equipment->quantity}}</td>
+                                                <td class="text-center align-middle">{{Carbon\Carbon::parse($equipment->create_at)->toFormattedDateString()}}</td>
                                             </tr>
                                         @empty
                                             
@@ -168,20 +168,20 @@
                             <div class="card-body">
                                 <x-table head="Suppliers Lists">
                                     <thead class="bg-info">
-                                        <th>Company Name</th>
-                                        <th>Company Address</th>
-                                        <th>Company Phone</th>
-                                        <th>Company Email</th>
-                                        <th>Status</th>
+                                        <th class="text-center align-middle">Company Name</th>
+                                        <th class="text-center align-middle">Company Address</th>
+                                        <th class="text-center align-middle">Company Phone</th>
+                                        <th class="text-center align-middle">Company Email</th>
+                                        <th class="text-center align-middle">Status</th>
                                     </thead>
                                     <tbody>
                                         @forelse ($contractors as $contractor)
                                         <tr>
-                                            <td>{{$contractor->name}}</td>
-                                            <td>{{$contractor->address}}</td>
-                                            <td>{{$contractor->phone}}</td>
-                                            <td>{{$contractor->email}}</td>
-                                            <td>{{$contractor->status}}</td>
+                                            <td class="text-center align-middle">{{$contractor->name}}</td>
+                                            <td class="text-center align-middle">{{$contractor->address}}</td>
+                                            <td class="text-center align-middle">{{$contractor->phone}}</td>
+                                            <td class="text-center align-middle">{{$contractor->email}}</td>
+                                            <td class="text-center">{{$contractor->status}}</td>
                                 
                                         </tr>
                                         @empty
@@ -197,20 +197,20 @@
                         <div class="card-body">
                             <x-table head="Suppliers Lists">
                                 <thead class="bg-info">
-                                    <th>Company Name</th>
-                                    <th>Company Address</th>
-                                    <th>Company Phone</th>
-                                    <th>Company Email</th>
-                                    <th>Status</th>
+                                    <th class="text-center align-middle">Company Name</th>
+                                    <th class="text-center align-middle">Company Address</th>
+                                    <th class="text-center align-middle">Company Phone</th>
+                                    <th class="text-center align-middle">Company Email</th>
+                                    <th class="text-center align-middle">Status</th>
                                 </thead>
                                 <tbody>
                                     @forelse ($suppliers as $supplier)
                                     <tr>
-                                        <td>{{$supplier->name}}</td>
-                                        <td>{{$supplier->address}}</td>
-                                        <td>{{$supplier->phone}}</td>
-                                        <td>{{$supplier->email}}</td>
-                                        <td>{{$supplier->status}}</td>
+                                        <td class="text-center align-middle">{{$supplier->name}}</td>
+                                        <td class="text-center align-middle">{{$supplier->address}}</td>
+                                        <td class="text-center align-middle">{{$supplier->phone}}</td>
+                                        <td class="text-center align-middle">{{$supplier->email}}</td>
+                                        <td class="text-center">{{$supplier->status}}</td>
                     
                                     </tr>
                                     @empty

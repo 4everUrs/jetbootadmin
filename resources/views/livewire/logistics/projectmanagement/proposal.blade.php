@@ -10,26 +10,26 @@
             <x-table head="List of Proposal">
                 <thead class="bg-info">
 
-                    <th>Project Title</th>
-                    <th>Duration</th>
-                    <th>Estimated Budget</th>
-                    <th>Requested By</th>
-                    <th>Requested Date</th>
-                    <th>Approval Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th class="text-center align-middle">Project Title</th>
+                    <th class="text-center align-middle">Duration</th>
+                    <th class="text-center align-middle">Estimated Budget</th>
+                    <th class="text-center align-middle">Requested By</th>
+                    <th class="text-center align-middle">Requested Date</th>
+                    <th class="text-center align-middle">Approval Date</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($proposals as $proposal)
                         <tr>
                             
-                            <td>{{$proposal->title}}</td>
-                            <td>{{$proposal->duration}}</td>
-                            <td>@money($proposal->budget)</td>
-                            <td>{{$proposal->requested_by}}</td>
-                            <td>{{Carbon\Carbon::parse($proposal->create_at)->toFormattedDateString()}}</td>
-                            <td>{{Carbon\Carbon::parse($proposal->approval_date)->toFormattedDateString()}}</td>
-                            <td>{{$proposal->status}}</td>
+                            <td class="text-center align-middle">{{$proposal->title}}</td>
+                            <td class="text-center align-middle">{{$proposal->duration}}</td>
+                            <td class="text-center align-middle">@money($proposal->budget)</td>
+                            <td class="text-center align-middle">{{$proposal->requested_by}}</td>
+                            <td class="text-center">{{Carbon\Carbon::parse($proposal->create_at)->toFormattedDateString()}}</td>
+                            <td class="text-center">{{Carbon\Carbon::parse($proposal->approval_date)->toFormattedDateString()}}</td>
+                            <td class="text-center">{{$proposal->status}}</td>
                             <td class="text-center">
                                 <button wire:click='viewProposal({{$proposal->id}})' class="btn btn-primary btn-sm">View</button>
                                 <button wire:click='editProposal({{$proposal->id}})' class="btn btn-secondary btn-sm">Edit</button>

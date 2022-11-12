@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Bidder extends Model
 {
     use HasFactory;
-    protected $fillable =[
-        'name','address','phone','email','status','bid_amount','bid_proposal_file'
+    protected $fillable = [
+        'name', 'address', 'phone', 'email', 'status', 'bid_amount', 'bid_proposal_file'
     ];
+    public function Post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }

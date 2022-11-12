@@ -9,19 +9,19 @@
             <button wire:click='showModal' class="btn btn-dark btn-sm">Create Purchase Order</button>
             <x-table head="Purchase Order">
                 <thead class="bg-info">
-                    <th>No.</th>
-                    <th>Supplier Name.</th>
-                    <th>Purchase Order ID.</th>
-                    <th>Action</th>
+                    <th class="text-center align-middle">No.</th>
+                    <th class="text-center align-middle">Supplier Name</th>
+                    <th class="text-center align-middle">Purchase Order ID</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($puchase_orders as $po)
                         <tr>
-                            <td>{{$po->id}}</td>
-                            <td>{{$po->supplier_name}}</td>
-                            <td><a href="#" wire:click="download({{$po->id}})">{{$po->po_id}}</a></td>
+                            <td class="text-center">{{$po->id}}</td>
+                            <td class="text-center align-middle">{{$po->supplier_name}}</td>
+                            <td class="text-center align-middle"><a href="#" wire:click="download({{$po->id}})">{{$po->po_id}}</a></td>
                             <td class="text-center">
-                                <button wire:click='showPoView({{$po->id}})' class="btn btn-primary">View</button>
+                                <button wire:click='showPoView({{$po->id}})' class="btn btn-primary btn-sm">View</button>
                             </td>
                         </tr>
                     @empty
@@ -117,7 +117,7 @@
         
     </x-jet-dialog-modal>
 
-    <x-jet-dialog-modal wire:model="poView" maxWidth="xl">
+    <x-jet-dialog-modal wire:model="poView" maxWidth="lg">
         <x-slot name="title">
             {{ __('Purchase Order') }}
         </x-slot>

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('condition');
             $table->string('description');
             $table->integer('amount');
+            $table->integer('quantity');
+            $table->integer('sold')->default(0);
             $table->string('thumbnail');
             $table->string('status');
             $table->string('origin');

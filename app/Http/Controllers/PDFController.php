@@ -13,7 +13,7 @@ class PDFController extends Controller
 {
     public $purchaseOrderId, $supplier_id, $po_id;
     public $filename;
-
+    public $subtotal;
     public function __construct(Request $request)
     {
         $this->purchaseOrderId = $request->id;
@@ -51,5 +51,21 @@ class PDFController extends Controller
 
         $pdf = PDF::loadView('livewire.logistics.procurement.po', $data); // storing the view file with data in $pdf
         return $pdf->download($this->filename); //downloading function of dompdf
+    }
+    public function testDownload()
+    {
+        $this->filename = 'po' . $this->po_id . '.pdf';
+        $temp = PurchaseOrder::findOrFail($this->purchaseOrderId)->getItem;
+        foreach ($temp as $x) {
+            $this->subtotal += $x->totalcost;
+        }
+        $data = [
+            'items' => PurchaseOrder::findOrFail($this->purchaseOrderId)->getItem,
+            'po' => PurchaseOrder::findOrFail($this->purchaseOrderId),
+            'supplier' => Supplier::find($this->supplier_id),
+            'subtotal' => $this->subtotal,
+        ];
+        $pdf = PDF::loadView('purchase-order', $data);
+        return $pdf->download($this->filename);
     }
 }

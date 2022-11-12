@@ -15,56 +15,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <x-jet-dropdown id="teamManagementDropdown">
-            <x-slot name="trigger">
-                {{__('Attendance')}}
-                <svg class="ms-2" width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                        clip-rule="evenodd" />
-                </svg>
-            </x-slot>
-
-            <x-slot name="content">
-                <x-jet-dropdown-link href="{{route('timein')}}">
-                    {{ __('Time-in') }}
-                  @if (!empty($users->Time->timein))
-                      <svg class="me-1 text-success" width="20" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  @endif
-                </x-jet-dropdown-link>
-                <x-jet-dropdown-link href="#">
-                    {{ __('Time-out') }}
-                    @if (!empty($users->Time->timeout))
-                    <svg class="me-1 text-success" width="20" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    @endif
-                </x-jet-dropdown-link>
-                <x-jet-dropdown-link href="#">
-                    {{ __('Break-in') }}
-                    @if (!empty($users->Time->breakin))
-                    <svg class="me-1 text-success" width="20" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    @endif
-                </x-jet-dropdown-link>
-                <x-jet-dropdown-link href="#">
-                    {{ __('Break-out') }}
-                    @if (!empty($users->Time->breakout))
-                    <svg class="me-1 text-success" width="20" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    @endif
-                </x-jet-dropdown-link>
-            </x-slot>
-        </x-jet-dropdown>
-
+        
 
         <!-- Navbar Search -->
         @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
@@ -129,11 +80,19 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-
+                    <span class="badge badge-danger navbar-badge">{{$notifications->count()}}</span>
+      
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">Notifications</span>
                 <div class="dropdown-divider"></div>
+                @foreach ($notifications as $noti)
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item" wire:click='test({{$noti->id}})'>
+                        {{$noti->user->name}} from {{$noti->user->currentTeam->name}}<br> has {{$noti->request_content}}
+                        <span class="float-right text-muted text-sm">{{Carbon\Carbon::parse($noti->created_at)->diffForHumans()}}</span>
+                    </button>
+                @endforeach
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>

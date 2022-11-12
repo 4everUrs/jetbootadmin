@@ -8,23 +8,23 @@
         <div class="card-body">
             <x-table head="Workshop applicant">
                 <thead class="bg-info">
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Location</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th class="text-center align-middle">No</th>
+                    <th class="text-center align-middle">Name</th>
+                    <th class="text-center align-middle">Email</th>
+                    <th class="text-center align-middle">Phone</th>
+                    <th class="text-center align-middle">Location</th>
+                    <th class="text-center align-middle">Status</th>
+                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($workshops as $workshop)
                         <tr>
-                            <td>{{$workshop->id}}</td>
-                            <td>{{$workshop->name}}</td>
-                            <td>{{$workshop->email}}</td>
-                            <td>{{$workshop->phone}}</td>
-                            <td>{{$workshop->address}}</td>
-                            <td>{{$workshop->status}}</td>
+                            <td class="text-center">{{$workshop->id}}</td>
+                            <td class="text-center align-middle">{{$workshop->name}}</td>
+                            <td class="text-center align-middle">{{$workshop->email}}</td>
+                            <td class="text-center align-middle">{{$workshop->phone}}</td>
+                            <td class="text-center align-middle">{{$workshop->address}}</td>
+                            <td class="text-center">{{$workshop->status}}</td>
                             <td class="text-center">
                                 <button wire:click="loadModal({{$workshop->id}})" class="btn btn-primary btn-sm">Approve</button>
                                 <button wire:click="showModal({{$workshop->id}})" class="btn btn-danger btn-sm">Deny</button>

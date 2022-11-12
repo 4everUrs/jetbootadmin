@@ -12,7 +12,7 @@ class Workshops extends Component
     public $denyModal = false;
     public $selected_id;
     public function render()
-    {
+    {   
         return view('livewire.logistics.vendorportal.workshops', [
             'workshops' => Workshop::all(),
         ]);

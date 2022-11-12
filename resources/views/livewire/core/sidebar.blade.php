@@ -1,10 +1,16 @@
 <div>
     <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar child-indent navbar-compact flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
                 <a href="{{route('core')}}" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('emailbox')}}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Mail Box</p>
                 </a>
             </li>
             <li class="nav-item">
@@ -27,7 +33,9 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('jobcandidate')}}" class="nav-link"><i class='fa fa-list'></i> List of Applicants</a>
+                        <a href="{{route('jobcandidate')}}" class="nav-link"><i class='fa fa-list'></i> Applicant Scheduling</a>
+                        <a href="{{route('initial')}}" class="nav-link"><i class='fa fa-list'></i> Initial Interview</a>
+                        <a href="{{route('candidate')}}" class="nav-link"><i class='fa fa-list'></i> List of Job Candidates</a>
                         <a href="{{route('deniedapplicant')}}" class="nav-link"><i class='fa fa-list-ul'></i> List of Denied Applicants</a>
                     </li>
                 </ul>
@@ -64,7 +72,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('applicantreport')}}" class="nav-link"><i class='fa fa-file'></i>Analytics & Report</a>
+                        <a href="{{route('applicantreport')}}" class="nav-link"><i class='fa fa-file'></i> Analytics & Report</a>
                     </li>
                 </ul>
             </li>
@@ -89,6 +97,8 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('paymentfee')}}" class="nav-link"><i class='fa fa-credit-card'></i> Payroll</a>
+                        <a href="{{route('payment')}}" class="nav-link"><i class='fa fa-credit-card'></i> Payment</a>
+                        <a href="{{route('budgetproposal')}}" class="nav-link"><i class='fa fa-credit-card'></i> Budget Proposal</a>
                     </li>
                 </ul>
             </li>

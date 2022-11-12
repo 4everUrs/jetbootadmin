@@ -6,12 +6,14 @@ use App\Models\Building;
 use App\Models\Equipment;
 use App\Models\MaintenanceRequest;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class MaintenanceRequests extends Component
 {
     public $maintenanceRequest = false;
     public $type, $category, $buildingName, $equipmentName, $description;
     public $subject;
+    use WithPagination;
     public function render()
     {
         if ($this->type == 'building') {
@@ -22,7 +24,7 @@ class MaintenanceRequests extends Component
             $this->subject = $this->equipmentName;
         }
         return view('livewire.logistics.assetmgmt.maintenance-requests', [
-            'requests' => MaintenanceRequest::all(),
+            'requests' => MaintenanceRequest::orderBy('id', 'desc')->paginate(10),
             'buildings' => Building::all(),
             'equipments' => Equipment::all(),
         ]);

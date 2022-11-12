@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('location');
+            $table->string('contract');
+            $table->string('endo')->nullable();
             $table->string('status');
             $table->timestamps();
         });

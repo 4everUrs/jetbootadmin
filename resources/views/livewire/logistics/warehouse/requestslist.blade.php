@@ -6,10 +6,10 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="$toggle('requestModal')" class="btn btn-primary btn-sm">Request Supplier</button>
-            <button wire:click="$toggle('reOrderModal')" class="btn btn-success btn-sm">Request Re-Order</button>
+            <button wire:click="$toggle('requestModal')" class="btn btn-dark btn-sm">Request new item</button>
+            <button wire:click="$toggle('reOrderModal')" class="btn btn-warning btn-sm">Request Re-Order</button>
            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
-            <li class="nav-item mr-2" role="presentation">
+            <li class="nav-item mr-2" role="presentation" wire:ignore>
                 <button class="nav-link active" id="recieved-tab" data-bs-toggle="tab" data-bs-target="#recieved" type="button"
                     role="tab" aria-controls="recieved" aria-selected="false">Recieved</button>
             </li>
@@ -19,31 +19,37 @@
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="recieved" role="tabpanel" aria-labelledby="recieved-tab">
+            <div class="tab-pane fade show active" id="recieved" role="tabpanel" aria-labelledby="recieved-tab" wire:ignore.self>
                 <div class="card">
                     <div class="card-body">
+                        
                         <x-table head="Request List Table">
                             <thead class="bg-info">
-                                <th>No.</th>
-                                <th>Origin</th>
-                                <th>Content</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center align-middle">No.</th>
+                                <th class="text-center align-middle">Origin</th>
+                                <th class="text-center align-middle">Content</th>
+                                <th class="text-center align-middle">Date</th>
+                                <th class="text-center align-middle">Status</th>
+                                <th class="text-center align-middle">Action</th>
                             </thead>
                             <tbody>
-                                @forelse ($requests as $request)
+                                @forelse ($requests as $key => $request)
                                 <tr>
-                                    <td>{{$request->id}}</td>
-                                    <td>{{$request->origin}}</td>
-                                    <td>{{$request->content}}</td>
-                                    <td>{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
-                                    <td>{{$request->status}}</td>
+                                    <td class="text-center">{{$key+1}}</td>
+                                    <td class="text-center align-middle">{{$request->origin}}</td>
+                                    <td class="text-center align-middle">{{$request->content}}</td>
+                                    <td class="text-center">{{Carbon\Carbon::parse($request->created_at)->toFormattedDateString()}}</td>
+                                    <td class="text-center">{{$request->status}}</td>
                                     <td class="text-center">
                                         @if ($request->status == 'Pending')
                                             <button wire:click="confirm({{$request->id}})" class="btn btn-primary btn-sm">Confirm</button>
                                         @else
-                                            <button wire:click="dispatch({{$request->id}})" class="btn btn-success btn-sm">Dispatch</button>
+                                            @if ($request->status == 'Dispatched')
+                                                <button wire:click="dispatch({{$request->id}})" class="btn btn-secondary btn-sm" disabled>Dispatch</button>
+                                            @else
+                                                <button wire:click="dispatch({{$request->id}})" class="btn btn-success btn-sm">Dispatch</button>
+                                            @endif
+                                            
                                         @endif
                                         
                                         
@@ -57,36 +63,44 @@
                                 @endforelse
                             </tbody>
                         </x-table>
+                        <div class="mt-3 float-right">
+                            {{$requests->links()}}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">
+            <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab" wire:ignore.self>
                 <div class="card">
                     <div class="card-body">
                         <x-table head="Sent Request">
                             <thead class="bg-info">
-                                <th>No.</th>
-                                <th>Category.</th>
-                                <th>Destination.</th>
-                                <th>Content.</th>
-                                <th>Status.</th>
+                                <th class="text-center align-middle">No.</th>
+                                <th class="text-center align-middle">Category</th>
+                                <th class="text-center align-middle">Destination</th>
+                                <th class="text-center align-middle">Description</th>
+                                <th class="text-center align-middle">Date</th>
+                                <th class="text-center align-middle">Status</th>
                             </thead>
                             <tbody>
-                                @forelse ($sents as $sent)
+                                @forelse ($sents as $key => $sent)
                                     <tr>
-                                        <td>{{$sent->id}}</td>
-                                        <td>{{$sent->category}}</td>
-                                        <td>{{$sent->destination}}</td>
-                                        <td>{{$sent->content}}</td>
-                                        <td>{{$sent->status}}</td>
+                                        <td class="text-center">{{$key+1}}</td>
+                                        <td class="text-center align-middle">{{$sent->category}}</td>
+                                        <td class="text-center align-middle">Procurement</td>
+                                        <td class="text-center align-middle">{{$sent->content}}</td>
+                                        <td class="text-center">{{Carbon\Carbon::parse($sent->created_at)->toFormattedDateString()}}</td>
+                                        <td class="text-center">{{$sent->status}}</td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center" colspan="5">No Record Found!</td>
+                                        <td class="text-center" colspan="6">No Record Found!</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </x-table>
+                        <div class="mt-3 float-right">
+                            {{$sents->links()}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,7 +114,11 @@
     </x-slot>
     <x-slot name="content">
         <div class="form-group">
-            <label>Content</label>
+            <label>Item Name</label>
+            <input wire:model="item_name" class="form-control" type="text">
+            <label>Stock Quantity</label>
+            <input wire:model="item_qty" class="form-control" type="number">
+            <label>Description</label>
             <textarea wire:model="content" class="form-control" rows="3"></textarea>
         </div>
     </x-slot>
@@ -143,7 +161,7 @@
                 </select>
                 <label>Quantity</label>
                 <input wire:model="quantity" type="text" class="form-control">
-                <label>Content</label>
+                <label>Description (Optional)</label>
                 <textarea wire:model="content" class="form-control" rows="3"></textarea>
             </div>
         </x-slot>
@@ -203,3 +221,4 @@
         </script>
     @endpush
 </div>
+ 
