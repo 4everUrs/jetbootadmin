@@ -140,7 +140,6 @@
                                 <th>No.</th>
                                 <th>Date</th>
                                 <th>Description</th>
-                                <th>Sub-Description</th>
                                 <th>Debit</th>
                                 <th>Credit</th>
                                 <th>Encoded By</th>
@@ -151,50 +150,25 @@
                             <tbody>
                             @foreach ($journal_entries as $entry)
                                 <tr>
-                                    <td>{{$entry->id}}</td>
-                                    <td>{{Carbon\Carbon::parse($entry->created_at)->toFormattedDateString()}}</td>
-                                    <td>
-                                    <table class="table">
-                                            @foreach ($entry->subjournal as $subjournal)
-                                                <tr>
-                                                    <td>{{$subjournal->jdescription}}</td>
-                                                </tr>
-                                            @endforeach
-                                    </table>
+                                    <td class="text-center align-middle">{{$entry->id}}</td>
+                                    <td class="text-center align-middle">{{Carbon\Carbon::parse($entry->created_at)->toFormattedDateString()}}</td>
+                                    <td class="">{{$entry->jdescription}}
+                                        @foreach ($entry->subjournal as $sub)
+                                            <ul>{{$sub->jsubdescription}}</ul>
+                                        @endforeach
                                     </td>
-                                    <td>
-                                    <table class="table">
-                                            @foreach ($entry->subjournal as $subjournal)
-                                                <tr>
-                                                    <td>{{$subjournal->jsubdescription}}</td>
-                                                </tr>
-                                            @endforeach
-                                    </table>
+                                    <td class="">{{$entry->jdebit}}
+                                        @foreach ($entry->subjournal as $sub)
+                                        <br>{{$sub->jdebit}}
+                                        @endforeach
                                     </td>
-                                
-                                    <td>
-                                    <table class="table">
-                                            @foreach ($entry->subjournal as $subjournal)
-                                                <tr>
-                                                    <td>{{$subjournal->jdebit}}</td>
-                                                </tr>
-                                            @endforeach
-                                    </table>
+                                    <td class="">{{$entry->jcredit}}
+                                        @foreach ($entry->subjournal as $sub)
+                                        <br>{{$sub->jcredit}}
+                                        @endforeach
                                     </td>
-                                    <td>
-                                    <table class="table">
-                                            @foreach ($entry->subjournal as $subjournal)
-                                                <tr>
-                                                    <td>{{$subjournal->jcredit}}</td>
-                                                </tr>
-                                            @endforeach
-                                    </table>
-                                    </td>
-                                    <td>{{$entry->jencoded}}</td>
-                                    {{--<td>{{$entry->jstatus}}</td>--}}
-
-                                
-                                    <td>
+                                    <td class="text-center align-middle">{{$entry->jencoded}}</td>
+                                    <td class="text-center align-middle">
                                         <button wire:click="viewModal({{$entry->id}})" class="btn btn-primary btn-sm">View</button>
                                         <button wire:click="updateLiability({{$entry->id}})" class="btn btn-success btn-sm">Edit</button>
                                         <button wire:click="deleteliabilities({{$entry->id}})" class="btn btn-warning btn-sm">Delete</button>
@@ -289,7 +263,7 @@
 
 {{---------------------------------------- JOURNAL ENTRY MODAL------------------------------------------------------------------------------------}}       
             
-    <x-jet-dialog-modal wire:model="addLiability" maxWidth="xl">
+    <x-jet-dialog-modal wire:model="addLiability" maxWidth="lg">
         <x-slot name="title">
             {{ __('Journal Entries') }}
         </x-slot>
@@ -327,19 +301,19 @@
                <div class="row">
                     <div class="col">
                         <label>Sub-Description</label>
-                        <input wire:model="subdata[{{$key}}][desc]" type="text" class="form-control">
+                        <input wire:model.defer="subdata.{{$key}}.desc" type="text" class="form-control">
                     </div>
                     <div class="col">
                         <label>Debit</label>
-                        <input wire:model="subdata[{{$key}}][debit]" type="text" class="form-control">
+                        <input wire:model.defer="subdata.{{$key}}.debit"  type="text" class="form-control">
                     </div>
                     <div class="col">
                         <label>Credit</label>
-                        <input wire:model="subdata[{{$key}}][credit]" type="text" class="form-control">
-                    </div>
-                    <div class="col-1">
+                        <div class="input-group">
+                            <input wire:model.defer="subdata.{{$key}}.credit" type="text" class="form-control mr-2">
+                            <button wire:click="removeRow({{$key}})" class="btn btn-danger btn-sm">Remove</button>
+                        </div>
                         
-                        <button wire:click="removeRow({{$key}})" class="btn btn-danger btn-sm">Remove</button>
                     </div>
                 </div>
                @endforeach
@@ -349,30 +323,39 @@
                 <table class="table table-hovered mt-4">
                     <thead>
                     
-                        <th>Description</th>
-                        <th>Sub-Description</th>
-                        <th>Debit</th>
-                        <th>Credit</th>
-                        <th class="text-center">Action</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Debit</th>
+                        <th class="text-center">Credit</th>
                     </thead>
                     <tbody>
-                        @foreach ($preview as $index => $prev)
-                            <tr>
-                                <td>{{$prev['jdescription']}}</td>
-                                <td>{{$prev['jsubdescription']}}</td>
-                                <td>{{$prev['jdebit']}}</td>
-                                <td>{{$prev['jcredit']}}</td>
-
-                                <td class="text-center">
-                                    <button wire:click="removebtn" class="btn btn-danger btn-sm">Remove</button>
-                                </td>
-                            </tr>
-                        @endforeach
+                        <tr>
+                            <td>{{$jdescription}}
+                                @foreach ($preview as $prev)
+                                    <ul>{{$prev['desc']}}</ul>
+                                @endforeach
+                            </td>
+                            <td class="text-center">@money($jdebit)
+                                @foreach ($preview as $prev)
+                                <br>@money($prev['debit'])
+                                @endforeach
+                            </td>
+                            <td class="text-center">@money($jcredit)
+                                @foreach ($preview as $prev)
+                                <br>@money($prev['credit'])
+                                @endforeach
+                            </td>
+                        </tr>
+                        
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="2">Total:</td>
-                            <td >{{$grandtotal}}</td>
+                            <td >Total:</td>
+                            <td class="text-center">@money($granddebit)</td>
+                            <td class="text-center">@money($grandcredit)</td>
+                        </tr>
+                        <tr>
+                            <td>Grand Total</td>
+                            <td class="text-center" colspan="2">@money($grandtotal)</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -383,12 +366,12 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
             {{--wire:click function dito sa button hindi match sa function sa class--}}
-            @if (!empty($subdata))
-            <x-jet-button class="ms-2" wire:click="addLiabilities" wire:loading.attr="disabled">
+            @if (!empty($preview))
+            <x-jet-button class="ms-2" wire:click="addRecords" wire:loading.attr="disabled">
                 {{ __('Add Records') }}
             </x-jet-button>
             @else
-            <x-jet-button class="ms-2" wire:click="preview" wire:loading.attr="disabled">
+            <x-jet-button class="ms-2" wire:click="prev" wire:loading.attr="disabled">
                 {{ __('Preview') }}
             </x-jet-button>
             @endif

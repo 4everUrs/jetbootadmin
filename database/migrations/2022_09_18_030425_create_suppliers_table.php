@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('user_id');
             $table->string('name');
             $table->string('address');
             $table->string('phone');
             $table->string('email');
             $table->string('status');
+            $table->string('start');
+            $table->string('end');
             $table->timestamps();
         });
     }

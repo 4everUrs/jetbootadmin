@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('local_placements', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedInteger('listing_id');
             $table->string('phone');
             $table->string('email');
             $table->string('company_name');
             $table->string('company_location');
             $table->string('position');
-            $table->string('placement');
+            $table->string('placement')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

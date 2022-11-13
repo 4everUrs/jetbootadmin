@@ -53,6 +53,7 @@ class UsersList extends Component
         $user->password = Hash::make($this->password);
         $user->role_id = $this->role_id;
         $user->type = 'Employee';
+        $user->status = 'Active';
         $user->save();
 
         $this->attachTeam($user);

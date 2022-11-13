@@ -9,6 +9,7 @@ class listingpayable extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'lpname', 'lpattachment','lpremarks','lpstatus'
-    ]; 
+
+        'lpname', 'lpattachment', 'lpremarks', 'lpstatus'
+    ];
 }

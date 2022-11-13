@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PurchaseOrder extends Model
 {
     use HasFactory;
-    protected $fillable = ['supplier_id','po_id','supplier_name'];
+    protected $fillable = ['supplier_id', 'po_id', 'supplier_name'];
     function getItem()
     {
         return $this->hasMany('App\Models\PoItem');
     }
-  
 }

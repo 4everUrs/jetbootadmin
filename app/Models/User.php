@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Yungts97\LaravelUserActivityLog\Traits\Loggable;
 
 class User extends Authenticatable
 {
@@ -18,15 +19,15 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use HasTeams;
     use Notifiable;
+    use Loggable;
     use TwoFactorAuthenticatable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username'
+        'name', 'email', 'password', 'username', 'status'
     ];
 
     /**
@@ -62,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Time::class);
     }
+    public function Qualification()
+    {
+        return $this->hasOne(Qualification::class);
+    }
+
 }

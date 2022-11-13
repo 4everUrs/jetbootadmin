@@ -16,13 +16,17 @@ return new class extends Migration
         Schema::create('onboards', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('age');
-            $table->string('gender');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('age')->nullable();
+            $table->string('gender')->nullable();
             $table->string('company_name');
             $table->string('position');
-            $table->string('contract');
-            $table->string('status');
+            $table->string('contract')->nullable();
+            $table->string('endo')->nullable();
+            $table->string('status')->nullable();
             $table->string('resume_file');
+            $table->unsignedInteger('listing_id');
             $table->timestamps();
         });
     }

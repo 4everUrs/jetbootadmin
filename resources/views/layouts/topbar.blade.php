@@ -24,7 +24,7 @@
                 </svg>
             </x-slot>
         
-            <x-slot name="content">
+            {{-- <x-slot name="content">
                <x-jet-dropdown-link href="{{route('timein')}}">
                 {{ __('Time-in') }}
                 
@@ -35,11 +35,11 @@
                <x-jet-dropdown-link href="#">
                 {{ __('Break-in') }}
             </x-jet-dropdown-link>
-               <x-jet-dropdown-link href="#">
+               <x-jet-dropdown-link href="{{route('breakin')}}">
                 {{ __('Break-out') }}
             </x-jet-dropdown-link>
             </x-slot>
-        </x-jet-dropdown>
+        </x-jet-dropdown> --}}
         
        
         <!-- Navbar Search -->
@@ -107,6 +107,7 @@
                 <i class="far fa-bell"></i>
                 
             </a>
+            
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">Notifications</span>
                 <div class="dropdown-divider"></div>

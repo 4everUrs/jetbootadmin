@@ -9,9 +9,14 @@ use App\Models\ProcurementRequest;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Reorder;
+use App\Models\RequestNotification;
 use App\Models\Stock;
 use App\Models\Supplier;
 use App\Models\WarehouseSent;
+use App\Notifications\RequestNotification as NotificationsRequestNotification;
+
+use Illuminate\Support\Facades\Auth;
+use Notification;
 
 class Requestslist extends Component
 {
@@ -20,8 +25,10 @@ class Requestslist extends Component
     public $reOrderModal = false;
     public $dispatchModal = false;
     public $category, $quantity, $supplier, $item, $stock_id, $qty, $selected_id;
+    public $item_name, $item_qty;
     use WithPagination;
     use WithFileUploads;
+
     protected $paginationTheme = 'bootstrap';
 
     public function render()
@@ -30,29 +37,34 @@ class Requestslist extends Component
             $this->dispatchBrowserEvent('show-supplier');
         }
         return view('livewire.logistics.warehouse.requestslist', [
-            'requests' => RequestList::get(),
-            'suppliers' => Supplier::all(),
-            'sents' => WarehouseSent::all(),
+            'requests' => RequestList::orderBy('id', 'desc')->paginate(5),
+            'suppliers' => Supplier::where('status', '!=', 'Terminated')->get(),
+            'sents' => ProcurementRequest::where('origin', '=', $this->origin)
+                ->orderBy('id', 'desc')->paginate(5),
             'items' => Stock::where('supplier_id', '=', $this->supplier)->where('status', '=', 'LOW')->get(),
             'inventories' => Stock::all(),
         ]);
     }
-
     public function saveRequest()
     {
-        $this->validate(['content' => 'required|string|min:5']);
         ProcurementRequest::create([
             'origin' => $this->origin,
+            'type' => 'New',
+            'item_name' => $this->item_name,
+            'item_qty' => $this->item_qty,
+            'requestor' => Auth::user()->name,
             'content' => $this->content,
             'status' => $this->status,
             'category' => 'Supplier'
         ]);
-        WarehouseSent::create([
-            'destination' => 'Procurement',
-            'content' => $this->content,
-            'status' => $this->status,
-            'category' => 'Supplier'
-        ]);
+        // RequestNotification::create([
+        //     'user_id' => Auth::user()->id,
+        //     'sender' =>  Auth::user()->currentTeam->name,
+        //     'reciever' => 'Procurement',
+        //     'department' => 'Logistics',
+        //     'request_content' => 'Sent you a request',
+        //     'routes' => 'requests'
+        // ]);
         toastr()->addSuccess('Request Sent Successfully');
         $this->requestModal = false;
         $this->reset();
@@ -68,13 +80,26 @@ class Requestslist extends Component
         ]);
         Reorder::create([
             'supplier_id' => $this->supplier,
+            'stock_id' => $temp->id,
             'quantity' => $this->quantity,
             'price' => $temp->cost_per_item,
             'description' => $this->content,
             'status' => $this->status
         ]);
-        WarehouseSent::create([
-            'destination' => 'Procurement',
+        RequestNotification::create([
+            'user_id' => Auth::user()->id,
+            'sender' =>  Auth::user()->currentTeam->name,
+            'reciever' => 'Procurement',
+            'department' => 'Logistics',
+            'request_content' => 'Sent you a request',
+            'routes' => 'reorders'
+        ]);
+        ProcurementRequest::create([
+            'origin' => $this->origin,
+            'type' => 'Re-Order',
+            'item_name' => $temp->name,
+            'item_qty' => $this->quantity,
+            'requestor' => Auth::user()->name,
             'content' => $this->content,
             'status' => $this->status,
             'category' => 'Re-Order'
@@ -89,6 +114,14 @@ class Requestslist extends Component
         $temp->status = 'Confirmed';
         $temp->save();
         toastr()->addSuccess('Operation Success');
+        // RequestNotification::create([
+        //     'user_id' => Auth::user()->id,
+        //     'sender' =>  Auth::user()->currentTeam->name,
+        //     'department' => 'Logistics',
+        //     'reciever' => 'MRO',
+        //     'request_content' => 'Aprove your request',
+        //     'routes' => 'requestlists'
+        // ]);
     }
     public function dispatch($id)
     {
@@ -129,5 +162,8 @@ class Requestslist extends Component
         $this->amount = null;
         $this->file_name = null;
         $this->status = null;
+    }
+    public function test()
+    {
     }
 }

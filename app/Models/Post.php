@@ -10,8 +10,8 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'type', 'description','recieved_id','origin','start','end','location','post_id'
-       
+        'type', 'description', 'recieved_id', 'origin', 'start', 'end', 'location', 'post_id', 'item_name', 'quantity'
+
     ];
     function getRequirements()
     {

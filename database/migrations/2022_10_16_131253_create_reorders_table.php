@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('reorders', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('supplier_id');
+            $table->unsignedInteger('stock_id');
             $table->integer('quantity');
             $table->bigInteger('price');
             $table->string('description');

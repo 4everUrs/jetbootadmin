@@ -9,6 +9,6 @@ class ListRequested extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'proposalname', 'requestor', 'proposedamount','approvedate','approvedamount','rstatus','remarks','origin','attachment'
-    ]; 
+        'proposalname', 'requestor', 'proposedamount', 'approvedate', 'approvedamount', 'rstatus', 'remarks', 'origin', 'attachment'
+    ];
 }

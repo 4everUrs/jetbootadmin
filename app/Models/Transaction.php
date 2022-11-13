@@ -9,6 +9,6 @@ class Transaction extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'originated', 'category', 'amount','account', 'description', 'status'
+        'originated', 'category', 'amount', 'account', 'description', 'status', 'list_requested_id'
     ];
 }

@@ -10,6 +10,8 @@ class Timesheet extends Model
     use HasFactory;
    
     protected $fillable =[
-        'name', 'position', 'datefrom', 'dateto', 'totalhours',
+      'name', 'position', 'datefrom', 'dateto', 'totalhours',
     ];
+  
+    
 }

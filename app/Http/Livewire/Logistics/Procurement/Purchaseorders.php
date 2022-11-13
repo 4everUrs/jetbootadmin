@@ -36,7 +36,7 @@ class Purchaseorders extends Component
         return view('livewire.logistics.procurement.purchaseorders', [
             'puchase_orders' => PurchaseOrder::orderBy('id', 'desc')
                 ->paginate(5),
-            'suppliers' => Supplier::all(),
+            'suppliers' => Supplier::where('status', '!=', 'Terminated')->get(),
         ]);
     }
     public function addRow()

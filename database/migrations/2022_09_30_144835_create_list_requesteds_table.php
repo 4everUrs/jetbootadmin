@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('approvedate')->nullable();
             $table->string('approvedamount')->nullable();
             $table->string('attachment')->nullable();
-            $table->string('rstatus'); 
-            $table->string('remarks'); 
+            $table->string('rstatus');
+            $table->string('remarks');
             $table->timestamps();
         });
     }
