@@ -46,7 +46,7 @@
 
 
 {{-------------------------------------------- COLLECTION MODAL------------------------------------------------------------------------}} 
-        <x-jet-dialog-modal wire:model="addCollection" maxWidth="xl">
+    <x-jet-dialog-modal wire:model="addCollection" maxWidth="xl">
             <x-slot name="title">
                 {{ __('Add Collection ') }}
             </x-slot>
@@ -63,7 +63,6 @@
 
                         <label>Remarks</label>
                         <textarea wire:model="cremarks" placeholder="✎ 𝓘𝓷𝓹𝓾𝓽 𝓝𝓸𝓽𝓮𝓼..." class="form-control"></textarea>
-
                     </div>
 
                     <div class="col">
@@ -80,10 +79,11 @@
                             <option>Cash</option>
                             <option>Bank</option>
                             <option>Cheque</option>
+                        </select>
                     </div>      
                 </div>
             </div>
-        </x-slot>===
+        </x-slot>
 
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('addCollection')" wire:loading.attr="disabled">
@@ -94,7 +94,8 @@
                 {{ __('Add Collection') }}
             </x-jet-button>
         </x-slot>
-</x-jet-dialog-modal>
+
+    </x-jet-dialog-modal>
 {{--------------------------------------------END COLLECTION MODAL ------------------------------------------------------------------------}} 
 
 
