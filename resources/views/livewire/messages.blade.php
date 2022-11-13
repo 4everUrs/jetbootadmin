@@ -5,4 +5,5 @@
         </h2>
     </x-slot>
    <h1 class="text-center align-middle">UNDER DEVELOPMENT</h1>
+   
 </div>

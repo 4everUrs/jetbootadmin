@@ -9,6 +9,6 @@ class MaintenanceRequest extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'subject', 'description', 'completion_date', 'category', 'status', 'origin'
+        'subject', 'description', 'completion_date', 'category', 'status', 'origin', 'vehicle_id'
     ];
 }

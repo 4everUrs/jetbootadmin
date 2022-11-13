@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('origin');
             $table->string('type');
             $table->string('item_name');
-            $table->integer('quantity');
+            $table->integer('quantity')->nullable();
             $table->string('description');
             $table->integer('start');
             $table->integer('end');
