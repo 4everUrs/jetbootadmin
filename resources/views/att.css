@@ -1,0 +1,24 @@
+.button {
+    background-color: white;
+    border: none;
+    color:white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    position: center;
+     
+}
+
+.input{
+ background-color: transparent;
+ border:50px;
+}
+
+.container{
+    border:100px;
+}
+
+.input{
+    padding: auto;
