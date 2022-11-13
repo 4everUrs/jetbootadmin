@@ -309,11 +309,11 @@
                     </div>
                     <div class="col">
                         <label>Credit</label>
-                        <input wire:model.defer="subdata.{{$key}}.credit" type="text" class="form-control">
-                    </div>
-                    <div class="col-1">
+                        <div class="input-group">
+                            <input wire:model.defer="subdata.{{$key}}.credit" type="text" class="form-control mr-2">
+                            <button wire:click="removeRow({{$key}})" class="btn btn-danger btn-sm">Remove</button>
+                        </div>
                         
-                        <button wire:click="removeRow({{$key}})" class="btn btn-danger btn-sm">Remove</button>
                     </div>
                 </div>
                @endforeach
@@ -323,9 +323,9 @@
                 <table class="table table-hovered mt-4">
                     <thead>
                     
-                        <th>Description</th>
-                        <th>Debit</th>
-                        <th>Credit</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Debit</th>
+                        <th class="text-center">Credit</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -334,14 +334,14 @@
                                     <ul>{{$prev['desc']}}</ul>
                                 @endforeach
                             </td>
-                            <td>{{$jdebit}}
+                            <td class="text-center">@money($jdebit)
                                 @foreach ($preview as $prev)
-                                <br>{{$prev['debit']}}
+                                <br>@money($prev['debit'])
                                 @endforeach
                             </td>
-                            <td>{{$jcredit}}
+                            <td class="text-center">@money($jcredit)
                                 @foreach ($preview as $prev)
-                                <br>{{$prev['credit']}}
+                                <br>@money($prev['credit'])
                                 @endforeach
                             </td>
                         </tr>
@@ -350,12 +350,12 @@
                     <tfoot>
                         <tr>
                             <td >Total:</td>
-                            <td >{{$granddebit}}</td>
-                            <td >{{$grandcredit}}</td>
+                            <td class="text-center">@money($granddebit)</td>
+                            <td class="text-center">@money($grandcredit)</td>
                         </tr>
                         <tr>
                             <td>Grand Total</td>
-                            <td class="text-center" colspan="2">{{$grandtotal}}</td>
+                            <td class="text-center" colspan="2">@money($grandtotal)</td>
                         </tr>
                     </tfoot>
                 </table>

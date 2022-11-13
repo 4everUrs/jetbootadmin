@@ -338,6 +338,8 @@ class Journals extends Component
     public function addRow()
     {
         $this->subdata[] = ['desc', 'debit', 'credit'];
+        $this->grandcredit = null;
+        $this->granddebit = null;
         $this->grandcredit += $this->jcredit;
         $this->granddebit += $this->jdebit;
         // dd($this->subdata[0]);
