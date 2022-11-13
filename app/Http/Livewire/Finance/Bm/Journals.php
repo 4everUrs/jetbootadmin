@@ -19,7 +19,7 @@ class Journals extends Component
     public $rname, $noinvoice, $rdate, $rinvoiceamount, $ramountreceived, $rdatereceived, $rduedate, $routstanding, $rremarks;
     public $gen_leds;
 
-    public $grandtotal;
+    public $grandtotal, $grandcredit, $granddebit;
     public $childData = [];
     public $addLiability = false;
     public $addPayables = false;
@@ -338,7 +338,8 @@ class Journals extends Component
     public function addRow()
     {
         $this->subdata[] = ['desc', 'debit', 'credit'];
-
+        $this->grandcredit += $this->jcredit;
+        $this->granddebit += $this->jdebit;
         // dd($this->subdata[0]);
     }
     public function removeRow($key)
@@ -349,9 +350,31 @@ class Journals extends Component
     {
         foreach ($this->subdata as $sub) {
             $this->preview[] = ['desc' => $sub['desc'], 'debit' => $sub['debit'], 'credit' => $sub['credit']];
-            $this->grandtotal += $sub['debit'];
+            $this->grandcredit += $sub['credit'];
+            $this->granddebit += $sub['debit'];
         }
         // dd($this->preview);
+        $this->grandtotal = $this->grandcredit - $this->granddebit;
+    }
+    public function addRecords()
+    {
+        JournalEntry::create([
+            'jdescription' => $this->jdescription,
+            'jdebit' => $this->jdebit,
+            'jcredit' => $this->jcredit,
+            'jencoded' => Auth::user()->name,
+        ]);
+        $temp = JournalEntry::latest()->first();
+        foreach ($this->preview as $prev) {
+            SubJournal::create([
+                'journal_entry_id' => $temp->id,
+                'jsubdescription' => $prev['desc'],
+                'jcredit' => $prev['credit'],
+                'jdebit' => $prev['debit'],
+            ]);
+        }
+        toastr()->addSuccess('Add Record Successfully');
+        $this->addLiability = false;
     }
 
 

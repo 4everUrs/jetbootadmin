@@ -140,7 +140,6 @@
                                 <th>No.</th>
                                 <th>Date</th>
                                 <th>Description</th>
-                                <th>Sub-Description</th>
                                 <th>Debit</th>
                                 <th>Credit</th>
                                 <th>Encoded By</th>
@@ -151,50 +150,25 @@
                             <tbody>
                             @foreach ($journal_entries as $entry)
                                 <tr>
-                                    <td>{{$entry->id}}</td>
-                                    <td>{{Carbon\Carbon::parse($entry->created_at)->toFormattedDateString()}}</td>
-                                    <td>
-                                    <table class="table">
-                                            @foreach ($entry->subjournal as $subjournal)
-                                                <tr>
-                                                    <td>{{$subjournal->jdescription}}</td>
-                                                </tr>
-                                            @endforeach
-                                    </table>
+                                    <td class="text-center align-middle">{{$entry->id}}</td>
+                                    <td class="text-center align-middle">{{Carbon\Carbon::parse($entry->created_at)->toFormattedDateString()}}</td>
+                                    <td class="">{{$entry->jdescription}}
+                                        @foreach ($entry->subjournal as $sub)
+                                            <ul>{{$sub->jsubdescription}}</ul>
+                                        @endforeach
                                     </td>
-                                    <td>
-                                    <table class="table">
-                                            @foreach ($entry->subjournal as $subjournal)
-                                                <tr>
-                                                    <td>{{$subjournal->jsubdescription}}</td>
-                                                </tr>
-                                            @endforeach
-                                    </table>
+                                    <td class="">{{$entry->jdebit}}
+                                        @foreach ($entry->subjournal as $sub)
+                                        <br>{{$sub->jdebit}}
+                                        @endforeach
                                     </td>
-                                
-                                    <td>
-                                    <table class="table">
-                                            @foreach ($entry->subjournal as $subjournal)
-                                                <tr>
-                                                    <td>{{$subjournal->jdebit}}</td>
-                                                </tr>
-                                            @endforeach
-                                    </table>
+                                    <td class="">{{$entry->jcredit}}
+                                        @foreach ($entry->subjournal as $sub)
+                                        <br>{{$sub->jcredit}}
+                                        @endforeach
                                     </td>
-                                    <td>
-                                    <table class="table">
-                                            @foreach ($entry->subjournal as $subjournal)
-                                                <tr>
-                                                    <td>{{$subjournal->jcredit}}</td>
-                                                </tr>
-                                            @endforeach
-                                    </table>
-                                    </td>
-                                    <td>{{$entry->jencoded}}</td>
-                                    {{--<td>{{$entry->jstatus}}</td>--}}
-
-                                
-                                    <td>
+                                    <td class="text-center align-middle">{{$entry->jencoded}}</td>
+                                    <td class="text-center align-middle">
                                         <button wire:click="viewModal({{$entry->id}})" class="btn btn-primary btn-sm">View</button>
                                         <button wire:click="updateLiability({{$entry->id}})" class="btn btn-success btn-sm">Edit</button>
                                         <button wire:click="deleteliabilities({{$entry->id}})" class="btn btn-warning btn-sm">Delete</button>
@@ -376,7 +350,12 @@
                     <tfoot>
                         <tr>
                             <td >Total:</td>
-                            <td >{{$grandtotal}}</td>
+                            <td >{{$granddebit}}</td>
+                            <td >{{$grandcredit}}</td>
+                        </tr>
+                        <tr>
+                            <td>Grand Total</td>
+                            <td class="text-center" colspan="2">{{$grandtotal}}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -387,8 +366,8 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
             {{--wire:click function dito sa button hindi match sa function sa class--}}
-            @if (!empty($subdata))
-            <x-jet-button class="ms-2" wire:click="prev" wire:loading.attr="disabled">
+            @if (!empty($preview))
+            <x-jet-button class="ms-2" wire:click="addRecords" wire:loading.attr="disabled">
                 {{ __('Add Records') }}
             </x-jet-button>
             @else
