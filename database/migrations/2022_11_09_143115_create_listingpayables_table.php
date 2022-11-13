@@ -16,12 +16,10 @@ return new class extends Migration
         Schema::create('listingpayables', function (Blueprint $table) {
             $table->id();
             $table->string('lpname');
-            $table->string('lppaymade');
-            $table->bigInteger('lptotalamount');
-            $table->string('lpduedate');
             $table->string('lpattachment');
-            $table->string('lpremarks');
-               $table->timestamps();
+            $table->string('lpremarks')->nullable();
+            $table->string('lpstatus');
+            $table->timestamps();
         });
     }
 
@@ -35,3 +33,8 @@ return new class extends Migration
         Schema::dropIfExists('listingpayables');
     }
 };
+
+
+
+
+

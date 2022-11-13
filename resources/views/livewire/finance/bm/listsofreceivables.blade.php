@@ -13,18 +13,18 @@
                 <thead class="bg-secondary table-sm">
                     <th>Date</th>
                     <th>Name</th>
-                    <th>Received Amount</th>
                     <th>Attachment</th>    
                     <th>Remarks</th>
+                    <th>Status</th>
                 </thead>
                 <tbody>
                     @forelse($receivable as $receivables)
                     <tr>
                         <td>{{$receivables->created_at}}</td>
                         <td>{{$receivables->lrname}}</td>
-                        <td>{{$receivables->lrpayamount}}</td>
                         <td>{{$receivables->lrattachment}}</td>
                         <td>{{$receivables->lrremarks}}</td>
+                        <td>{{$receivables->lrstatus}}</td>
                     </tr>
                     @empty
                     <tr>
