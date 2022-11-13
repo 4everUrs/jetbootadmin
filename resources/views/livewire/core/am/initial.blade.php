@@ -53,6 +53,33 @@
             </tbody>
            </x-table>
         </div>
-        
     </div>
+    <x-jet-dialog-modal wire:model="initialModal">
+        <x-slot name="title">
+            {{ __('Schedule for Final Interview') }}
+            
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label for="">Scheduled Time</label>
+                <input wire:model="time"class="form-control" type="time">
+                @error('time') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
+                <label for="">Scheduled Date</label>
+                <input wire:model="date"class="form-control" type="date">
+                @error('date') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
+                
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('initialModal')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="approved" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+                {{ __('Approved') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>
