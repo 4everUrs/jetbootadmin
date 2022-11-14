@@ -232,7 +232,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('asset/maintenance', MaintenanceRequests::class)->name('assetmaintenance');
     Route::get('projectmanagement/reports', Reports::class)->name('pmreports');
     Route::get('warehouse/invoices', WarehouseInvoices::class)->name('warehouseInvoice');
-    Route::get('audit/dashboard', AuditReports::class)->name('audits');
+    Route::get('audit/dashboard', AuditReports::class)->name('auditsdashboard');
     Route::get('audit/reports', AuditManagementReports::class)->name('auditReports');
     Route::get('audit/records', Records::class)->name('auditRecords');
     Route::get('warehouse/inventory/export', [Exportinventory::class, 'export'])->name('exportInventory');

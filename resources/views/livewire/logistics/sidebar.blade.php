@@ -103,7 +103,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('audits')}}" class="nav-link">Audit Dashboard</a>
+                        <a href="{{route('auditsdashboard')}}" class="nav-link">Audit Dashboard</a>
                         <a href="{{route('auditReports')}}" class="nav-link">Audit Reports</a>
                         <a href="{{route('auditRecords')}}" class="nav-link">Audit Records</a>
                     </li>
