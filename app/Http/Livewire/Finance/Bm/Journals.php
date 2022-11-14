@@ -111,7 +111,7 @@ class Journals extends Component
     public function removebtn()
     {
         $this->subdata[] = [
-            'desc' => $this->sub_
+            //'desc' => $this->;
         ];
     }
     public function preview()

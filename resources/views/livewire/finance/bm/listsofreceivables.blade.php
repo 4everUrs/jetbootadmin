@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{$receivables->created_at}}</td>
                         <td>{{$receivables->lrname}}</td>
-                        <td>{{$receivables->lrattachment}}</td>
+                        <td><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$receivables->lrname}}" target="_blank" rel="noopener noreferrer">{{$receivables->lrname}}</a></td>
                         <td>{{$receivables->lrremarks}}</td>
                         <td>{{$receivables->lrstatus}}</td>
                     </tr>

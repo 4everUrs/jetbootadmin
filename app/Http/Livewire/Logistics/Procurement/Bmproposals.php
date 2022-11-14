@@ -46,7 +46,7 @@ class Bmproposals extends Component
                 'remarks' => $temp->description,
                 'origin' => 'Logistics-Procurement'
             ]);
-            toastr()->addSuccess('Trasnfer Successfully');
+            toastr()->addSuccess('Transfer Successfully');
             BmProposal::find($id)->update(['rstatus' => 'Reviewing']);
         } else {
             toastr()->addWarning('Operation Failed');

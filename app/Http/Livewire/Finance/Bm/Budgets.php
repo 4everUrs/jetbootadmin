@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 
 class Budgets extends Component
 {
-    public $originated, $category, $amount, $account, $description, $status = 'Ongoing', $transaction_id;
+    public $borigin, $bproposalname, $brequestor, $bproposedamount, $bapprovedate, $brstatus = 'Ongoing',$bremarks, $transaction_id;
     public $grandtotals, $requests;
     public $addBudget = false;
     public $updateItem = false;

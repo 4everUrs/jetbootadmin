@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ListRequested extends Model
+class ReleaseBudget extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'proposalname', 'requestor', 'proposedamount', 'approvedate', 'rstatus', 'remarks', 'origin', 'attachment'
+        'rorigin', 'rcategory', 'ramount', 'raccount', 'rstatus'
     ];
 }

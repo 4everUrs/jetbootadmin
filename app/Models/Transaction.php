@@ -9,6 +9,10 @@ class Transaction extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'originated', 'category', 'amount', 'account', 'description', 'status', 'list_requested_id'
+        'list_requested_id','status'
     ];
+    public function ListRequested()
+    {
+        return $this->belongsTo(ListRequested::class);
+    }
 }
