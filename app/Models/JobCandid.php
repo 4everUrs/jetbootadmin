@@ -9,6 +9,10 @@ class JobCandid extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'position', 'email', 'phone', 'address', 'resume_file', 'status'
+        'iinterview_id', 'status'
     ];
+    public function Iinterview()
+    {
+        return $this->belongsTo(Iinterview::class);
+    }
 }

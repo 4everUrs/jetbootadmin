@@ -50,7 +50,7 @@
                                 <button wire:click="approve({{$job->id}})" class="btn btn-primary"><i class='fa fa-check'></i> Qualified</button>
                                 <button wire:click="disapprove({{$job->id}})" class="btn btn-danger"><i class='fa fa-times'></i> Not Qualified</button>
                                 @endif
-                               
+                                <button wire:click="deleteJob({{$job->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                             </td>
                           </tr>
                       @empty
@@ -93,6 +93,14 @@
                             <td class="text-center">{{$job->location}}</td>
                             <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$job->resume_file}}" target="__blank">Resume</a></td>
                             <td class="text-center">{{$job->status}}</td>
+                            <td class="text-center">
+                              @if ($job->status == 'Not Qualified')
+                              <button wire:click="approve({{$job->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Not Qualified</button>
+                              @else
+                              <button wire:click="approve({{$job->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-check'></i> Not Qualified</button>
+                              @endif
+                              <button wire:click="deleteJob({{$job->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
+                          </td>
                           </tr>
                       @empty
                         <tr>
@@ -105,5 +113,23 @@
             </div>    
         </div>
       </div>
+      <x-jet-dialog-modal wire:model="deleteModal">
+        <x-slot name="title">
+            {{ __('Delete Applicant') }}
+            
+        </x-slot>
+        <x-slot name="content">
+            
+            <p class="h4 text-center">Are you sure, you want to delete this applicant?</p><br>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('deleteModal')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
     
+            <x-jet-button class="ms-2" wire:click="deleteData" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+                {{ __('Yes! Delete') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>

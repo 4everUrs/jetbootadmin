@@ -37,6 +37,7 @@
                         @else
                         <button wire:click="approve({{$job->id}})" class="btn btn-primary"><i class='fa fa-check'></i> For Deployment</button>
                         @endif
+                        <button wire:click="deleteJob({{$job->id}})" class="btn btn-danger"><i class='fa fa-trash'></i> Delete</button>
                     </td>
                     
                   </tr>
@@ -49,4 +50,23 @@
            </x-table>
         </div>
     </div>
+    <x-jet-dialog-modal wire:model="deleteModal">
+        <x-slot name="title">
+            {{ __('Delete Job Candidate') }}
+            
+        </x-slot>
+        <x-slot name="content">
+            
+            <p class="h4 text-center">Are you sure, you want to delete this job candidate?</p><br>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('deleteModal')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="deleteData" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+                {{ __('Yes! Delete') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>

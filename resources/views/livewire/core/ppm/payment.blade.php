@@ -102,8 +102,12 @@
         <x-slot name="content">
             <div class="form-group">
                 <label for="">Upload Payment</label>
-                <input wire:model="upload" class="form-control" type="file">
-                @error('upload') <span class="text-danger">{{$message}}</span> @enderror
+                <input wire:model="payment_file" class="form-control" type="file">
+                @error('lpattachment') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
+                <label for="">Remarks</label>
+                <input wire:model="remarks" class="form-control" type="text">
+                @error('remarks') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 
             </div>

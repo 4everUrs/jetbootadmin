@@ -51,12 +51,12 @@
                        
                         <td class="text-center">{{$client->status}}</td>
                         <td class="text-center">
-                            @if ($client->status == 'Open')
+                            @if ($client->status != 'Open')
                             <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-check'></i> Approve</button>
                             @else
                             <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Approve</button>
-                            <button wire:click="deleteJob({{$client->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                             @endif
+                            <button wire:click="deleteJob({{$client->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                         </td>
                     </tr>
                     @empty

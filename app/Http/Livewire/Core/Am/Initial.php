@@ -15,7 +15,7 @@ use Mail;
 
 class Initial extends Component
 {
-    public $initialModal = false;
+    public $initialModal = false, $deleteModal = false;
     public $search = '', $time, $date, $selected_id;
     public function render()
     {
@@ -26,9 +26,11 @@ class Initial extends Component
     }
     public function approved()
     {
+        
         ApplicantList::find($this->selected_id)->update([
             'time' => Carbon::createFromFormat('H:i', $this->time)->format('g:i A'),
             'date' => Carbon::parse($this->date)->toFormattedDateString(),
+            'status' => 'Qualified',
         ]);
   
         
@@ -36,12 +38,7 @@ class Initial extends Component
         $job = ApplicantList::find($this->selected_id);
       
         JobCandid::create([
-            'name' => $job->name,
-            'position' => $job->position,
-            'email' => $job->email,
-            'phone' => $job->phone,
-            'address' => $job->address,
-            'resume_file' => $job->resume_file,
+            'iinterview_id' => $job->id,
             'status' => 'Pending'
         ]);
         $applicantDetails =[
@@ -52,11 +49,10 @@ class Initial extends Component
             'date' => $job->date,
         ];
         Mail::to($job->email)->send(new FinalInterviewMail($applicantDetails));
-        $job->status = 'Qualified';
-        $job->save();
+        Iinterview::find($this->selected_id)->update(['status'=>'Qualified']);
         $this->initialModal = false;
     }
-    public function approve($id)
+    public function loadModal($id)
     {
         $this->selected_id = $id;
         $this->initialModal = true;
@@ -86,5 +82,16 @@ class Initial extends Component
         $data->save();
         flash()->addSuccess('Data Deleted Successfully');
 
+    }
+    public function deleteData()
+    {
+        Iinterview::find($this->name)->destroy($this->name);
+        flash()->addSuccess('Data deleted successfully');
+        $this->deleteModal = false;
+    }
+    public function deleteJob($id)
+    {
+        $this->name = $id;
+        $this->deleteModal = true;
     }
 }

@@ -15,7 +15,7 @@ use Mail;
 
 class Jobcandidate extends Component
 {
-    public $viewLetter = false;
+    public $viewLetter = false,$deleteModal = false;
     public $time,$date,$venue,$person;
     public $search = '';
     public $selected_id;
@@ -39,14 +39,7 @@ class Jobcandidate extends Component
         flash()->addSuccess('Data approved successfully');
         $job = ApplicantList::find($this->selected_id);
         Iinterview::create([
-            'name' => $job->name,
-            'position' => $job->position,
-            'email' => $job->email,
-            'resume_file' => $job->resume_file,
-            'time' => $job->time,
-            'date' => $job->date,
-            'venue' => $job->venue,
-            'person' => $job->person,
+            'applicant_list_id' => $job->id,
             'status' => 'Pending',
         ]);
         $applicantDetails =[
@@ -82,5 +75,16 @@ class Jobcandidate extends Component
         $data->save();
         flash()->addSuccess('Data Deleted Successfully');
 
+    }
+    public function deleteData()
+    {
+        ApplicantList::find($this->name)->destroy($this->name);
+        flash()->addSuccess('Data deleted successfully');
+        $this->deleteModal = false;
+    }
+    public function deleteJob($id)
+    {
+        $this->name = $id;
+        $this->deleteModal = true;
     }
 }

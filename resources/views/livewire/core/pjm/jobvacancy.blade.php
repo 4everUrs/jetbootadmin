@@ -28,10 +28,10 @@
                     <td class="text-center">{{$vacant->details}}</td>
                     <td class="text-center">{{$vacant->location}}</td>
                     <td class="text-center">
-                        @if ($vacant->status == 'Posted')
-                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-check'></i> Posted</button>
+                        @if ($vacant->status != 'Posted')
+                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Posted</button>
                         @else
-                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Post</button>
+                        <button wire:click="approve({{$vacant->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-check'></i> Post</button>
                         @endif
                     </td>
                 </tr>
