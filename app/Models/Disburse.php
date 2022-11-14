@@ -9,6 +9,6 @@ class Disburse extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'originated', 'category', 'amount','account', 'description', 'status'
+        'dorigin', 'drequestor', 'damount','dremarks','dstatus'
     ];
 }

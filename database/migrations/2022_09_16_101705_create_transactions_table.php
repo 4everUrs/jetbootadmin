@@ -15,12 +15,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('originated');
             $table->unsignedInteger('list_requested_id');
-            $table->string('category');
-            $table->integer('amount');
-            $table->string('account');
-            $table->string('description');
             $table->string('status');
             $table->timestamps();
         });

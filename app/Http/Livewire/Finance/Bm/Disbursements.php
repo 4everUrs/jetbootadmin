@@ -11,13 +11,14 @@ use Livewire\Component;
 
 class Disbursements extends Component
 {
-    public $originated, $category, $amount, $account, $description, $status = 'Ongoing', $transaction_id;
+    public $dorigin, $drequestor, $damount, $dremarks, $dstatus;
+    public $addRelease=false;
 
     public function render()
     {
 
-        return view('livewire.finance.bm.disbursements', [
-            'transactions' => Transaction::orderBy('id', 'desc')->paginate(5),
+        return view('livewire.finance.bm.disbursements',[
+            'disburses' => Disburse::all(),
         ]);
     }
     public function approvedBudget($id)
@@ -31,7 +32,7 @@ class Disbursements extends Component
         $request->approvedamount = $approved->amount;
         $request->approvedate = Carbon::parse(now())->toFormattedDateString();
         $request->remarks = $approved->description;
-        $request->rstatus = 'Approved';
+        $request->rstatus ='Approved';
         $request->save();
 
 
@@ -53,4 +54,11 @@ class Disbursements extends Component
 
         toastr()->addSuccess('Operation Successfull');
     }
+
+    public function tableApprovedBudget(){
+
+        $this->addRelease = true;
+    }
+
 }
+

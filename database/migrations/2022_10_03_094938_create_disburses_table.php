@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('disburses', function (Blueprint $table) {
             $table->id();
+            $table->string('dorigin');
+            $table->string('drequestor');
+            $table->string('dremarks');
+            $table->string('damount');
+            $table->string('dstatus');
             $table->timestamps();
         });
     }

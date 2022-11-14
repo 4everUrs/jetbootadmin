@@ -14,7 +14,7 @@
                 <th>Date</th>
                 <th>Received From</th>
                 <th>Address</th>
-                <th>Ammount Received</th>
+                <th>Amount Received</th>
                 <th>Receipt no.</th>
                 <th>Payment Type</th>
                 <th>Remarks</th>

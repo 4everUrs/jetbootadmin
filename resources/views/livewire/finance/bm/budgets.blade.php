@@ -6,40 +6,42 @@
         </x-slot>
 
 <div class="card">
-<div class="card-body">
-    <a wire:click="loadModalRequest" class="btn btn-success btn-sm">Add Requests</a>
-    
+<div class="card-body">    
     <x-table head="History of Budget Requests">
         <thead class="bg-secondary table-sm">
             <th>No.</th>
-            <th>Originated Dept</th>
-            <th>Category</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Account</th>
-            <th>Description</th>
-            <th>Status</th> 
-            <th class="text-center">Action</th>
+            <th>Origin</th>
+            <th>Proposal Name</th>
+            <th>Requestor</th>
+            <th>Requested Date</th>
+            <th>Proposed Amount</th>
+            <th>Process Date</th>
+            <th>Attachment</th>
+            <th>Status</th>
+            <th>Remarks</th>  
+            <th class="text-center">Action</th>   
         </thead>
         <tbody>
             @forelse($transactions as $transaction)
             <tr>
-                <td>{{$transaction->id}}</td>
-                <td>{{$transaction->originated}}</td>
-                <td>{{$transaction->category}}</td>
-                <td>{{Carbon\Carbon::parse($transaction->created_at)->toFormattedDateString()}}</td>
-                <td>{{$transaction->amount}}</td>
-                <td>{{$transaction->account}}</td>
-                <td>{{$transaction->description}}</td>
-                <td>{{$transaction->status}}</td>
-                <td class="text-center" >
-                    <button wire:click="updateItems({{$transaction->id}})"  class="btn btn-primary"> Edit </button>
-                    <button wire:click="delete({{$transaction->id}})"  class="btn btn-danger"> Delete </button>
+                <td>{{$transaction->ListRequested->id}}</td>
+                <td>{{$transaction->ListRequested->origin}}</td>
+                <td>{{$transaction->ListRequested->proposalname}}</td>
+                <td>{{$transaction->ListRequested->requestor}}</td>
+                <td>{{($transaction->ListRequested->created_at)->toFormattedDateString()}}</td>
+                <td>{{$transaction->ListRequested->proposedamount}}</td>
+                <td>{{$transaction->ListRequested->approvedate}}</td>
+                <td><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{($transaction->ListRequested->attachment)}}" target="_blank" rel="noopener noreferrer">{{($transaction->ListRequested->attachment)}}</a></td>
+                <td>{{$transaction->ListRequested->rstatus}}</td>
+                <td>{{$transaction->ListRequested->remarks}}</td>
+                <td class="text-center">
+                    <button wire:click="#"  class="btn btn-info btn-sm">Approved</button>
+                    <button wire:click="#"  class="btn btn-danger btn-sm">Deny</button>
                 </td>
             </tr>
             @empty
             <tr>
-                <td class="text-center" colspan="9">"Unlisted Records"</td>
+                <td class="text-center" colspan="11">"Unlisted Records"</td>
             </tr>
             @endforelse
 
@@ -72,16 +74,7 @@
     <x-slot name="content">
         <div class="row form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
             <div class="col">
-                    {{-- <label>Requests.</label>
-                    <select class="form-control" wire:model="requests">
-                        <option>Select Request</option>
-                        @forelse ($requestslist  as $req)
-                            <option value="{{$req->id}}">{{$req->proposalname}}</option>
-                        @empty
-                        <option>No Record Found </option>
-                        @endforelse
-                        
-                    </select> --}}
+                    
                 <label>Select Originated Dept.</label>
                 <select class="form-control" wire:model="originated">
                     <option value="">Select Option</option>

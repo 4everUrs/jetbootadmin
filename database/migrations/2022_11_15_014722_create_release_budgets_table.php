@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('list_requesteds', function (Blueprint $table) {
+        Schema::create('release_budgets', function (Blueprint $table) {
             $table->id();
-            $table->string('origin');
-            $table->string('proposalname');
-            $table->string('requestor');
-            $table->string('proposedamount');
-            $table->string('approvedate')->nullable();
-            $table->string('attachment')->nullable();
+            $table->string('rorigin');
+            $table->string('rcategory');
+            $table->string('ramount');
+            $table->string('raccount');
+            $table->string('rrelease');
             $table->string('rstatus');
-            $table->string('remarks');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('list_requesteds');
+        Schema::dropIfExists('release_budgets');
     }
 };

@@ -17,4 +17,13 @@ class Requestedlist extends Component
             'list_requesteds' => ListRequested::all(),
         ]);
     }
+    public function transfer($id)
+    {
+        $temp = ListRequested::find($id);
+        Transaction::create([
+            'list_requested_id' => $temp->id,
+            'status' => 'Pending'
+        ]);
+        toastr()->addSuccess('Transfer Successfully');
+    }
 }

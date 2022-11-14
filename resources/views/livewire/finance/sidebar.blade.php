@@ -36,7 +36,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('moneyTransaction')}}"class="nav-link"><i class="fas fa-chart-pie"></i>&nbsp;Budget Transaction</a>
+                        <a href="{{route('moneyTransaction')}}"class="nav-link"><i class="fas fa-chart-pie"></i>&nbsp;Disbursement Transaction</a>
                     </li>
                 </ul>
             </li>
