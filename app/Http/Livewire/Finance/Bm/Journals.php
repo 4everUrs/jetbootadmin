@@ -18,8 +18,8 @@ class Journals extends Component
     public $invoice, $idate, $pname, $invoiceamount, $pamount, $pduedate, $premarks, $paymade;
     public $rname, $noinvoice, $rdate, $rinvoiceamount, $ramountreceived, $rdatereceived, $rduedate, $routstanding, $rremarks;
     public $gen_leds;
-    public $preview = [];
-    public $grandtotal;
+
+    public $grandtotal, $grandcredit, $granddebit;
     public $childData = [];
     public $addLiability = false;
     public $addPayables = false;
@@ -35,11 +35,19 @@ class Journals extends Component
     public $subJournal;
     public $editSub_id;
     public $subjournals = 'd-none';
+    public $subs = [];
+    public $subdata = [];
+    public $sub_desc = [], $sub_debit = [], $sub_credit = [];
+    public $preview = [];
     // wire:model for delete modal no declare so i declare.
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-
+    protected $rules = [
+        'subdata.*.desc' => 'required|string',
+        'subdata.*.credit' => 'required|integer',
+        'subdata.*.debit' => 'required|integer',
+    ];
     public function mount()
     {
 
@@ -90,6 +98,7 @@ class Journals extends Component
     }
     public function saveRecord()
     {
+
         $this->preview[] = [
             'jdescription' => $this->jdescription,
             'jdebit' => $this->jdebit,
@@ -99,22 +108,39 @@ class Journals extends Component
         $this->grandtotal -= $this->jdebit - $this->jcredit;
         $this->resetLiability();
     }
-
+    public function removebtn()
+    {
+        $this->subdata[] = [
+            'desc' => $this->sub_
+        ];
+    }
+    public function preview()
+    {
+        $this->subdata = null;
+        foreach ($this->subs as $key => $sub) {
+            $this->subdata[] = [
+                'desc' => $this->sub_desc[$key],
+                'credit' => $this->sub_credit[$key],
+                'debit' => $this->sub_debit[$key]
+            ];
+        }
+    }
     public function addLiabilities()
     {
 
         JournalEntry::create([
             'jencoded' => Auth::user()->name,
+            'jdescription' => $this->jdescription,
+            'jcredit' => $this->jcredit,
+            'jdebit' => $this->jdebit,
         ]);
 
         $temp = JournalEntry::latest('id')->first();
         foreach ($this->preview as $index => $prev) {
             SubJournal::create([
-                'jdescription' => $prev['jdescription'],
                 'jsubdescription' => $this->jsubdescription,
                 'jdebit' => $prev['jdebit'],
                 'jcredit' => $prev['jcredit'],
-                //'jstatus' => $prev['jstatus'],
                 'journal_entry_id' => $temp->id,
             ]);
         }
@@ -192,7 +218,6 @@ class Journals extends Component
     public function resetLiability()
     {
         $this->journal_id = null;
-        $this->jdescription = null;
         $this->jcredit = null;
         $this->jdebit = null;
         $this->jencoded = 'ADMIN';
@@ -309,6 +334,49 @@ class Journals extends Component
         $this->ramountreceived = null;
         $this->rduedate = null;
         $this->rremarks = null;
+    }
+    public function addRow()
+    {
+        $this->subdata[] = ['desc', 'debit', 'credit'];
+        $this->grandcredit = null;
+        $this->granddebit = null;
+        $this->grandcredit += $this->jcredit;
+        $this->granddebit += $this->jdebit;
+        // dd($this->subdata[0]);
+    }
+    public function removeRow($key)
+    {
+        unset($this->subdata[$key]);
+    }
+    public function prev()
+    {
+        foreach ($this->subdata as $sub) {
+            $this->preview[] = ['desc' => $sub['desc'], 'debit' => $sub['debit'], 'credit' => $sub['credit']];
+            $this->grandcredit += $sub['credit'];
+            $this->granddebit += $sub['debit'];
+        }
+        // dd($this->preview);
+        $this->grandtotal = $this->grandcredit - $this->granddebit;
+    }
+    public function addRecords()
+    {
+        JournalEntry::create([
+            'jdescription' => $this->jdescription,
+            'jdebit' => $this->jdebit,
+            'jcredit' => $this->jcredit,
+            'jencoded' => Auth::user()->name,
+        ]);
+        $temp = JournalEntry::latest()->first();
+        foreach ($this->preview as $prev) {
+            SubJournal::create([
+                'journal_entry_id' => $temp->id,
+                'jsubdescription' => $prev['desc'],
+                'jcredit' => $prev['credit'],
+                'jdebit' => $prev['debit'],
+            ]);
+        }
+        toastr()->addSuccess('Add Record Successfully');
+        $this->addLiability = false;
     }
 
 

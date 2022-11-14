@@ -15,7 +15,7 @@
     </div>
     
     <div class="card-body p-0 table-responsive" style="overflow-x: auto">
-        <table class="table table-striped text-wrap table-hover table-bordered" id="dtBasicExample">
+        <table class="table table-striped text-wrap table-hover table-bordered table-sm" id="dtBasicExample">
            {{$slot}}
         </table>
     </div>

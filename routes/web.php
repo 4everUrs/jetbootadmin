@@ -66,6 +66,8 @@ use App\Http\Livewire\Logistics\Vendorportal\Bidders;
 use App\Http\Livewire\Logistics\Vendorportal\Buyers;
 use App\Http\Livewire\Finance\Bm\Requestedlist;
 use App\Http\Livewire\Finance\Bm\Journals;
+use App\Http\Livewire\Finance\Bm\Listsofpayables;
+use App\Http\Livewire\Finance\Bm\Listsofreceivables;
 use App\Http\Livewire\Logistics\Projectmanagement\Projectslists;
 use App\Http\Livewire\Finance\Bm\Disbursements;
 use App\Http\Livewire\Finance\Bm\Generalledgers;
@@ -100,11 +102,13 @@ use App\Http\Livewire\Logistics\Projectmanagement\Createnewproject;
 use App\Http\Livewire\Logistics\Projectmanagement\Proposal;
 use App\Http\Livewire\Logistics\Fleet\Activity;
 use App\Http\Livewire\Logistics\Fleet\DeliveryList;
+use App\Http\Livewire\Logistics\Fleet\Dispatching;
 use App\Http\Livewire\Logistics\Fleet\Maps;
 use App\Http\Livewire\Logistics\Fleet\Reservation;
 use App\Http\Livewire\Logistics\Fleet\Rominventory;
 use App\Http\Livewire\Logistics\Fleet\Romrequest;
 use App\Http\Livewire\Logistics\Fleet\Romrequestlist;
+use App\Http\Livewire\Logistics\Fleet\VehicleRequest;
 use App\Http\Livewire\Logistics\Fleet\Vinfo;
 use App\Http\Livewire\Logistics\Fleet\Vlists;
 use App\Http\Livewire\Logistics\Procurement\Bmproposals;
@@ -116,6 +120,7 @@ use App\Http\Livewire\Logistics\Users;
 use App\Http\Livewire\Logistics\Vendorportal\Workshops;
 use App\Http\Livewire\Logistics\Warehouse\Invoices as WarehouseInvoices;
 use App\Http\Livewire\Logistics\Warehouse\PurchaseOrders as WarehousePurchaseOrders;
+use App\Http\Livewire\Messages;
 use App\Models\WhInvoice;
 use App\Models\Claiming;
 
@@ -156,12 +161,9 @@ Route::get('/', function () {
 Route::get('/testfile', [PDFController::class, 'testDownload']);
 
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/timein', [AttendanceController::class, 'timein'])->name('timein');
-//     Route::get('/breakin', [AttendanceController::class, 'breakin'])->name('breakin');
-//     Route::get('/breakout', [AttendanceController::class, 'breakout'])->name('breakout');
-//     Route::get('/timeout', [AttendanceController::class, 'timeout'])->name('timeout');
-// });
+Route::middleware('auth')->group(function () {
+    Route::get('/messages', Messages::class)->name('messaging');
+});
 
 //Login Routes
 Route::get('/redirects', [LoginController::class, 'login'])->name('home');
@@ -214,6 +216,8 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('fleet/delivery', DeliveryList::class,)->name('deliverylist');
     Route::get('fleet/romrequest', Romrequest::class)->name('repairs');
     Route::get('fleet/reservation', Reservation::class)->name('reserve');
+    Route::get('fleet/dispatching', Dispatching::class)->name('dispatching');
+    Route::get('fleet/request', VehicleRequest::class)->name('vehiclerequest');
     Route::get('fleet/romrequestlist', Romrequestlist::class)->name('romlist');
     Route::get('fleet/rominventory', Rominventory::class)->name('rominventory');
     Route::get('fleet/lists', Vlists::class)->name('vlists');
@@ -235,6 +239,8 @@ Route::prefix('finance')->middleware('auth', 'isFinance')->group(function () {
     Route::get('collections', Collections::class)->name('collects');
     Route::get('allocates', Allocates::class)->name('allocatebudget');
     Route::get('balancesheets', Balancesheets::class)->name('bsheets');
+    Route::get('listsofpayables', Listsofpayables::class)->name('listspayables');
+    Route::get('listsofreceivables', Listsofreceivables::class)->name('listsreceivable');
     Route::get('loaddisburse', [DisbursementController::class, 'downloadPdf'])->name('export');
     Route::get('genledgerreport', [GeneralLedgerController::class, 'downloadPdf'])->name('generalreports');
 });

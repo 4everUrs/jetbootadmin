@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Logistics\Warehouse;
 
 use App\Models\Invoice;
+use App\Models\WhInvoice;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
@@ -11,7 +12,7 @@ class Invoices extends Component
     public function render()
     {
         return view('livewire.logistics.warehouse.invoices', [
-            'invoices' => Invoice::all(),
+            'invoices' => WhInvoice::all(),
         ]);
     }
     public function download($id)

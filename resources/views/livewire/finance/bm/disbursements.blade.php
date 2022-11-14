@@ -25,7 +25,7 @@
     </html>
 
             <x-table head="History of Disbursement Transactions">
-                <thead >
+                <thead class="bg-secondary table-sm">
                     <th>No.</th>
                     <th>Originated Dept</th>
                     <th>Category</th>

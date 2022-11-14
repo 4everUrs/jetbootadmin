@@ -7,10 +7,10 @@
 
 <div class="card">
 <div class="card-body">
-    <a wire:click="loadModalRequest" class="btn btn-success">Add Requests</a>
+    <a wire:click="loadModalRequest" class="btn btn-success btn-sm">Add Requests</a>
     
     <x-table head="History of Budget Requests">
-        <thead >
+        <thead class="bg-secondary table-sm">
             <th>No.</th>
             <th>Originated Dept</th>
             <th>Category</th>
@@ -47,7 +47,7 @@
         </tbody>
     </x-table><br><br>
 
-    <button wire:click="sumRecords" class="btn btn-outline-danger ">Sum</button>
+    <button wire:click="sumRecords" class="btn btn-outline-danger btn-sm">Sum</button>
     
     <label>The Sum of all transaction:&emsp;</label>
     <label>{{$grandtotals}}</label><br><br>

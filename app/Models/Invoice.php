@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     use HasFactory;
+
+    public function Bidder()
+    {
+        return $this->belongsTo(Bidder::class);
+    }
 }

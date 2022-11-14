@@ -20,8 +20,8 @@ class Invoices extends Component
         $data = Invoice::find($id);
         WhInvoice::create([
             'procurement_invoice_id' => $data->id,
-            'invoice_id' => $data->invoice_id,
-            'company_name' => $data->company_name,
+            'post_id' => $data->post_id,
+            'bidder_id' => $data->bidder_id,
             'file_name' => $data->file_name,
             'status' => 'Recieved',
         ]);

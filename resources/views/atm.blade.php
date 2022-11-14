@@ -1,61 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+<Style>
+button {
+  background-color:blue;
+  color: white;
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 25%;
+  position: fixed;
+  }
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  }
+  </style>
 <head>
+    <a href = "AtmController.php"></a>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Profile Attendance</title>
 </head>
 <body>
+
+    
 <div class="card">
     <div class="card-body">
 
     <form  action="{{route('timein')}}" method="POST">
-    @csrf
-    enter Employee number 
+    
+    Employee Name 
     <input type = "text" name="employee_id" class="btn btn-success"><i class='fa fa-edit'></i></button>
-    <br>
-    time in
-    <button type = "submit" name="timein" class="btn btn-success"><i class='fa fa-edit'>Time in</i></button>
-    <br>
+  
+
+ 
     </form>
 
     <form  action="{{route('breakin')}}" method="POST">
-    @csrf
-    enter Employee number 
+    
+    Employee Number 
     <input type = "text" name="employee_id" class="btn btn-success"><i class='fa fa-edit'></i></button>
-    <br>
-    break in
-    <button type = "submit" name="breakin" class="btn btn-success"><i class='fa fa-edit'>break in</i></button>
-    <br>
-    </form>
+    
+
+  
 
     <form  action="{{route('breakout')}}" method="POST">
-    @csrf
-    enter Employee number 
-    <input type = "text" name="employee_id" class="btn btn-success"><i class='fa fa-edit'></i></button>
-    <br>
-    break out
-    <button type = "submit" name="breakout"  class="btn btn-success"><i class='fa fa-edit'>break out</i></button>
-    <br>
-    </form>
+       Employee Time In 
+      <label for="appt"></label>
+  <input type="time" id="appt" name="appt">
+       </form>
 
     <form  action="{{route('timeout')}}" method="POST">
-    @csrf
-    enter Employee number 
-    <input type = "text" name="employee_id" class="btn btn-success"><i class='fa fa-edit'></i></button>
-    <br>
-    timeout
-    <button type = "submit" name="timeout"  class="btn btn-success"><i class='fa fa-edit'>time out</i></button>
+    Employee Time Out 
+      <label for="appt"></label>
+  <input type="time" id="appt" name="appt">
     </div>
 </form>
 </div>
 
-<a href="{{route('uleave')}}">apply for leave</a>
-<a href="{{route('uclaims')}}">apply for claim</a>
-<button>apply for change shift</button>
+<br> 
+<center> <button>Submit</button> </center>
 
 
-    
 </body>
 </html>

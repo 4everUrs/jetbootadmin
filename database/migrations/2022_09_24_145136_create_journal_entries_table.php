@@ -19,6 +19,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('jencoded');
+            $table->string('jdescription');
+            $table->string('jcredit');
+            $table->string('jdebit');
             //$table->string('jstatus');
             
             });

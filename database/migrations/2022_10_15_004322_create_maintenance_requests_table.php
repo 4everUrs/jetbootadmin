@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('origin');
             $table->string('category');
             $table->string('description');
+            $table->unsignedInteger('vehicle_id');
             $table->string('completion_date')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('sub_journals', function (Blueprint $table) {
             $table->id();
-            $table->string('jdescription');
             $table->string('jsubdescription');
             $table->integer('jcredit');
             $table->integer('jdebit');

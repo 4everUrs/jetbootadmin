@@ -17,4 +17,8 @@ class Buyer extends Model
     {
         return $this->belongsTo(OrderItem::class);
     }
+    public function ReservedVehicle()
+    {
+        return $this->hasOne(ReservedVehicle::class);
+    }
 }

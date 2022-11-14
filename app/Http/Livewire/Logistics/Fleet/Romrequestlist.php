@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Logistics\Fleet;
 use App\Models\MaintenanceRequest;
 use App\Models\Repair;
 use App\Models\RomRequestList as ModelsRomRequestList;
+use App\Models\Vehicle;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -28,6 +29,7 @@ class Romrequestlist extends Component
             $x->status = 'Completed';
             $x->save();
             toastr()->addSuccess('Operation Successful');
+            Vehicle::find($temp->vehicle_id)->update(['status' => 'Available']);
         } else {
             toastr()->addWarning('Already Completed');
         }

@@ -6,8 +6,17 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <button wire:click="$toggle('requestModal')" class="btn btn-dark btn-sm">Request new item</button>
-            <button wire:click="$toggle('reOrderModal')" class="btn btn-warning btn-sm">Request Re-Order</button>
+            <div class="dropdown">
+                <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Request
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                   <button wire:click="$toggle('requestModal')" class="dropdown-item">Request new item</button>
+                <button wire:click="$toggle('reOrderModal')" class="dropdown-item">Request Re-Order</button>
+                </div>
+            </div>
+            
            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
             <li class="nav-item mr-2" role="presentation" wire:ignore>
                 <button class="nav-link active" id="recieved-tab" data-bs-toggle="tab" data-bs-target="#recieved" type="button"

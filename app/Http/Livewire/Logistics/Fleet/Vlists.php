@@ -13,6 +13,7 @@ class Vlists extends Component
         return view('livewire.logistics.fleet.vlists', [
             'available' => Vehicle::where('status', '=', 'Available')->get(),
             'repairing' => Vehicle::where('status', '=', 'Repairing')->get(),
+            'reserved' => Vehicle::where('status', '=', 'Reserved')->get(),
         ]);
     }
     public function changeStatus($id)

@@ -46,6 +46,7 @@ class Vinfo extends Component
             'category' => $this->category,
             'description' => $this->description,
             'status' => $this->status,
+            'vehicle_id' => $temp->id,
         ]);
         $temp->status = 'Maintenance';
         $temp->save();

@@ -17,8 +17,8 @@
                 <tbody>
                     @forelse ($invoices as $invoice)
                         <tr>
-                            <td class="text-center align-middle">{{$invoice->invoice_id}}</td>
-                            <td class="text-center align-middle">{{$invoice->company_name}}</td>
+                            <td class="text-center align-middle">{{$invoice->id}}</td>
+                            <td class="text-center align-middle">{{$invoice->bidder->name}}</td>
                             <td class="text-center align-middle"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$invoice->file_name}}" target="__blank">{{$invoice->file_name}}</a></td>
                             <td class="text-center align-middle">@date($invoice->created_at)</td>
                             <td class="text-center align-middle">

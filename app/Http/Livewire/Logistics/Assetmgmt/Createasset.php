@@ -53,6 +53,7 @@ class Createasset extends Component
             'cost' => 'required|integer',
         ]);
         $validatedData['type'] = $this->vehicleType;
+        $validatedData['status'] = 'Available';
         Vehicle::create($validatedData);
         toastr()->addSuccess('New vehicle created');
         $this->reset();
