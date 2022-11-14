@@ -97,7 +97,7 @@
                     <td class="text-center">@date($client->endo)</td>
                     <td class="text-center">{{$client->status}}</td>
                     <td class="text-center">
-                        <button wire:click="renew({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Renewal</button>
+                        <button wire:click="renew({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-pen-nib'></i> Renewal</button>
                         <button wire:click="deleteClient({{$client->id}})" class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                     </td>
                 </tr>

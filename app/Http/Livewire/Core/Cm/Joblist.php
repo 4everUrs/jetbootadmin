@@ -12,7 +12,8 @@ use App\Models\Vacant;
 class Joblist extends Component
 {
     public $showModal = false;
-    public $search = '';
+    public $search = '', $deleteModal = false;
+    public $selected_id;
     public $name,$position,$salary,$details,$location,$applicants;
    
     public function render()
@@ -60,17 +61,15 @@ class Joblist extends Component
         flash()->addSuccess('Data approved successfully');
        
     }
-    public function delete($id)
+    public function deleteData()
     {
-        $client = Job::where('id',$id)->first();
-        if($client->showModal){
-            flash()->addWarning('Data is already deleted');
-        }
-        else{
-            $client->showModal;
-            $client->delete();
-            flash()->addSuccess('Data deleted successfully');
-        }
-        
+        CreateJob::find($this->name)->destroy($this->name);
+        flash()->addSuccess('Data deleted successfully');
+        $this->deleteModal = false;
+    }
+    public function deleteJob($id)
+    {
+        $this->name = $id;
+        $this->deleteModal = true;
     }
 }

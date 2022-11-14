@@ -10,7 +10,7 @@ use PDF;
 
 class Payment extends Component
 {
-    public $search = '', $paymentModal = false;
+    public $search = '', $paymentModal = false, $showPayment = false;
     public $employees;
     public $total;
     public function render()
@@ -41,5 +41,13 @@ class Payment extends Component
             fn () => print($pdf),
             'payment.pdf'
         );
+    }
+    public function sendPayment()
+    {
+        $this->showPayment = false;
+    }
+    public function loadPayment()
+    {
+        $this->showPayment = true;
     }
 }
