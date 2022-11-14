@@ -4,7 +4,9 @@ namespace App\Http\Livewire\Logistics\Procurement;
 
 
 use App\Models\Invoice;
+use App\Models\listingpayable;
 use App\Models\WhInvoice;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Invoices extends Component
@@ -24,6 +26,12 @@ class Invoices extends Component
             'bidder_id' => $data->bidder_id,
             'file_name' => $data->file_name,
             'status' => 'Recieved',
+        ]);
+        listingpayable::create([
+            'lpname' => 'Logistics-Procurement',
+            'lpattachment' => $data->file_name,
+            'lpremarks' => 'N/A',
+            'lpstatus' => 'Pending',
         ]);
         $data->status = 'Sent';
         $data->save();

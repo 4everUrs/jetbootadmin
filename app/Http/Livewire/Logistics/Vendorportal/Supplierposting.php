@@ -45,4 +45,9 @@ class Supplierposting extends Component
         $this->title = null;
         $this->requirements = null;
     }
+    public function removePost($id)
+    {
+        Post::find($id)->delete();
+        toastr()->addSuccess('Post Deleted');
+    }
 }

@@ -7,6 +7,7 @@
     <div class="card">
         <div class="card-body">
             <button wire:click="$toggle('createInvoice')" class="btn btn-dark btn-sm">+Create Invoice</button>
+            <button wire:click="$toggle('sendInvoice')" class="btn btn-warning btn-sm">Send Invoice</button>
             <x-table head="Invoice">
                 <thead class="bg-info">
                     <th class="text-center align-middle">Invoice ID</th>
@@ -76,4 +77,27 @@
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
+
+    <x-jet-dialog-modal wire:model="sendInvoice">
+        <x-slot name="title">
+            {{ __('Create Invoice') }}
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label>Invoice File</label>
+                <input wire:model="invoice_file" type="file" class="form-control">
+            </div>
+        </x-slot>
+    
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('sendInvoice')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="sendInvoice" wire:loading.attr="disabled">
+                {{ __('Create') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+
 </div>

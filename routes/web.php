@@ -88,6 +88,7 @@ use App\Http\Livewire\Hr\Timeaattendance\Monthlydata;
 use App\Http\Livewire\Hr\Timeaattendance\Onemonthlydata;
 use App\Http\Livewire\Hr\Timeaattendance\Oneweeklydata;
 use App\Http\Livewire\Hr\Timeaattendance\Weeklydata;
+use App\Http\Livewire\Logistics\Assetmgmt\AssetAuditExport;
 use App\Http\Livewire\Logistics\Assetmgmt\Assetslist;
 use App\Http\Livewire\Logistics\Assetmgmt\Createasset;
 use App\Http\Livewire\Logistics\Assetmgmt\Delivery;
@@ -96,6 +97,9 @@ use App\Http\Livewire\Logistics\Assetmgmt\Invoices as AssetmgmtInvoices;
 use App\Http\Livewire\Logistics\Assetmgmt\MaintenanceRequests;
 use App\Http\Livewire\Logistics\Assetmgmt\Orderlist;
 use App\Http\Livewire\Logistics\Assetmgmt\Reportst;
+use App\Http\Livewire\Logistics\AuditManagement\AuditReports;
+use App\Http\Livewire\Logistics\AuditManagement\Records;
+use App\Http\Livewire\Logistics\AuditManagement\Reports as AuditManagementReports;
 use App\Http\Livewire\Logistics\Daksboard;
 use App\Http\Livewire\Logistics\Dashboard;
 use App\Http\Livewire\Logistics\Projectmanagement\Createnewproject;
@@ -118,6 +122,7 @@ use App\Http\Livewire\Logistics\Projectmanagement\Pmrequests;
 use App\Http\Livewire\Logistics\Projectmanagement\Reports;
 use App\Http\Livewire\Logistics\Users;
 use App\Http\Livewire\Logistics\Vendorportal\Workshops;
+use App\Http\Livewire\Logistics\Warehouse\Exportinventory;
 use App\Http\Livewire\Logistics\Warehouse\Invoices as WarehouseInvoices;
 use App\Http\Livewire\Logistics\Warehouse\PurchaseOrders as WarehousePurchaseOrders;
 use App\Http\Livewire\Messages;
@@ -205,6 +210,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('assets/lists', Assetslist::class)->name('assets');
     Route::get('assets/new', Createasset::class)->name('newasset');
     Route::get('assets/orders', Orderlist::class)->name('assetorders');
+    Route::get('assets/lists/export', [AssetAuditExport::class, 'export'])->name('auditExport');
     Route::get('assets/delivery', Delivery::class)->name('delivery-request');
     Route::get('assets/invoices', AssetmgmtInvoices::class)->name('assetinvoice');
     Route::get('project/new', Createnewproject::class)->name('newproject');
@@ -226,6 +232,10 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('asset/maintenance', MaintenanceRequests::class)->name('assetmaintenance');
     Route::get('projectmanagement/reports', Reports::class)->name('pmreports');
     Route::get('warehouse/invoices', WarehouseInvoices::class)->name('warehouseInvoice');
+    Route::get('audit/dashboard', AuditReports::class)->name('audits');
+    Route::get('audit/reports', AuditManagementReports::class)->name('auditReports');
+    Route::get('audit/records', Records::class)->name('auditRecords');
+    Route::get('warehouse/inventory/export', [Exportinventory::class, 'export'])->name('exportInventory');
 });
 
 //Finance Routes

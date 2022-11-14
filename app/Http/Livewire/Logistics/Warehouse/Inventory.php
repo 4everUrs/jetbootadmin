@@ -2,14 +2,17 @@
 
 namespace App\Http\Livewire\Logistics\Warehouse;
 
+use App\Models\AuditReports;
 use Livewire\Component;
 use App\Models\Stock;
 use App\Models\Supplier;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class Inventory extends Component
 {
     use WithPagination;
+    use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $item_no, $description, $status = 'OK', $item_id, $remarks = "No";
     public $stock_value, $cost_per_item, $reorder_level, $stock_quantity, $name, $manufacturer, $supplier_id;
@@ -19,7 +22,8 @@ class Inventory extends Component
     public $restockModal = false;
     public $updateModal = false;
     public $table = false;
-    public $selected_id, $qty, $add, $sub;
+    public $selected_id, $qty, $add, $sub, $sendAudit;
+    public $audit_file;
     public function render()
     {
 
@@ -42,6 +46,10 @@ class Inventory extends Component
         }
     }
 
+    public function exportExcel()
+    {
+        return redirect()->route('exportInventory');
+    }
     public function update($id)
     {
         $this->selected_id = $id;
@@ -99,5 +107,17 @@ class Inventory extends Component
     public function loadModal()
     {
         $this->addItem = true;
+    }
+    public function sendAuditReport()
+    {
+        $this->validate([
+            'audit_file' => 'required'
+        ]);
+        $file_name = $this->audit_file->getClientOriginalName();
+        AuditReports::create([
+            'audit_file' => $this->audit_file->storeAs('audit_files', $file_name, 'do'),
+            'origin' => 'Warehouse'
+        ]);
+        toastr()->addSuccess('Sent Successfully');
     }
 }

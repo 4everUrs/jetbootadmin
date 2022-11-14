@@ -67,7 +67,7 @@ class Pmrequests extends Component
         ]);
         toastr()->addSuccess('Data update successfully');
         $this->resetInput();
-        $this->requestContractor = false;
+        $this->requestModal = false;
     }
     public function resetInput()
     {

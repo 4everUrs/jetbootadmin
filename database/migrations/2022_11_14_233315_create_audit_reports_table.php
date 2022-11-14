@@ -13,18 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('audit_reports', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('recieved_id');
-            $table->string('type');
+            $table->string('audit_file');
             $table->string('origin');
-            $table->string('item_name');
-            $table->integer('quantity')->nullable();
-            $table->string('description');
-            $table->integer('start');
-            $table->integer('end');
-            $table->string('location');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -36,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('audit_reports');
     }
 };

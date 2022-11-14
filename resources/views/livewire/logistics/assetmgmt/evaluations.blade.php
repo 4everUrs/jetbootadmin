@@ -68,6 +68,7 @@
                                 <th class="text-center align-middle">Price</th>
                                 <th class="text-center align-middle">Quantity</th>
                                 <th class="text-center align-middle">Sold</th>
+                                <th class="text-center align-middle">Remaining</th>
                                 <th class="text-center align-middle">Action</th>
                             
                             </thead>
@@ -82,13 +83,14 @@
                                     <td class="text-center align-middle">@money($item->amount)</td>
                                     <td class="text-center align-middle">{{$item->quantity}}</td>
                                     <td class="text-center align-middle">{{$item->sold}}</td>
+                                    <td class="text-center align-middle">{{$item->quantity - $item->sold}}</td>
                                     <td class="text-center align-middle">
                                         <button class="btn btn-primary btn-sm">Update</button>
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td class="text-center" colspan="9">No Record Found</td>
+                                    <td class="text-center" colspan="10">No Record Found</td>
                                 </tr>
                                 @endforelse
                             </tbody>

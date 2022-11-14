@@ -6,7 +6,9 @@
         </x-slot>
         <div class="card">
             <div class="card-body">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <button wire:click="exportAsset" class="btn btn-dark btn-sm">EXPORT</button>
+                <button wire:click="$toggle('assetAudit')" class="btn btn-secondary btn-sm">SEND AUDIT</button>
+                <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
                     <li class="nav-item mr-2" role="presentation">
                         <button class="nav-link active" id="workforce-tab" data-toggle="tab" data-target="#workforce" type="button" role="tab"
                             aria-controls="workforce" aria-selected="true">Work Force</button>
@@ -224,4 +226,27 @@
                 </div>
             </div>
         </div>
+        <x-jet-dialog-modal wire:model="assetAudit">
+            <x-slot name="title">
+                {{__('Disposal Request')}}
+            </x-slot>
+            <x-slot name="content">
+                <div class="form-group">
+                    <label for="">Audit File</label>
+                    <input wire:model="audit_file" type="file" class="form-control">
+                </div>
+            </x-slot>
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('assetAudit')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+        
+                <x-jet-button class="ms-2" id="sendAudit" wire:click="sendAudit" wire:loading.attr="disabled">
+        
+                    {{ __('Send') }}
+                </x-jet-button>
+        
+        
+            </x-slot>
+        </x-jet-dialog-modal>
 </div>

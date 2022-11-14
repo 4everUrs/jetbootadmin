@@ -27,7 +27,7 @@
                         <td class="text-center align-middle">{{$post->description}}</td>
                         <td class="text-center">{{Carbon\Carbon::parse($post->created_at)->toFormattedDateString()}}</td>
                         <td class="text-center">
-                            <button class="btn btn-danger">Remove</button>
+                            <button wire:click="removePost({{$post->id}})" class="btn btn-danger">Remove</button>
                         </td>
                     </tr>
                     @empty

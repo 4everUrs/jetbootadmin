@@ -15,12 +15,11 @@
         "laravel/tinker": "^2.7",
         "league/flysystem-aws-s3-v3": "^3.5",
         "livewire/livewire": "^2.5",
-        "munafio/chatify": "^1.5",
-        "owen-it/laravel-auditing": "^13.0",
+        
+     
         "php-flasher/flasher": "^1.7",
         "php-flasher/flasher-laravel": "^1.7",
         "php-flasher/flasher-toastr-laravel": "^1.7",
-        "spatie/laravel-activitylog": "^4.6",
         "webklex/laravel-imap": "^4.0",
         "yungts97/laravel-user-activity-log": "^1.4"
     },

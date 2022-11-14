@@ -4,14 +4,17 @@ namespace App\Http\Livewire\Logistics\Assetmgmt;
 
 use App\Models\AssetInvoice;
 use App\Models\Buyer;
+use App\Models\listingpayable;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Invoices extends Component
 {
-    public $createInvoice, $order_id, $invoiceModal;
-    public $selected_id;
+    public $createInvoice, $order_id, $invoiceModal, $sendInvoice;
+    public $selected_id, $invoice_file;
+    use WithFileUploads;
     public function render()
     {
         return view('livewire.logistics.assetmgmt.invoices', [
@@ -42,5 +45,20 @@ class Invoices extends Component
     public function download()
     {
         $this->emit('downloadInvoice');
+    }
+    public function sendInvoice()
+    {
+        $filename = $this->invoice_file->getClientOriginalName();
+        $this->validate([
+            'invoice_file' => 'required|mimes:docx,pdf'
+        ]);
+        listingpayable::create([
+            'lpname' => 'Logistics-Procurement',
+            'lpattachment' => $this->invoice_file->storeAs('invoice', $filename, 'do'),
+            'lpremarks' => 'N/A',
+            'lpstatus' => 'Pending',
+        ]);
+        $this->sendInvoice = false;
+        toastr()->addSuccess('Invoice Sent');
     }
 }

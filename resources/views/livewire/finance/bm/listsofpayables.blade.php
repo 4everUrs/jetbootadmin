@@ -14,9 +14,9 @@
                 <thead class="bg-secondary table-sm">
                     <th>Date</th>
                     <th>Name</th>
-                    <th>Payable Amount</th>
                     <th>Attachment</th>    
                     <th>Remarks</th>
+                    <th>Status</th>
                 </thead>
 
                 <tbody>
@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{($paids->created_at)->toFormattedDateString()}}</td>
                         <td>{{$paids->lpname}}</td>
-                        <td>{{$paids->lpattachment}}</td>
+                        <td><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$paids->lpattachment}}" target="_blank" rel="noopener noreferrer">{{$paids->lpattachment}}</a></td>
                         <td>{{$paids->lpremarks}}</td>
                         <td>{{$paids->lpstatus}}</td>
                         

@@ -95,6 +95,20 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-hand-holding-usd"></i>
+                    <p>Audit Management</p>
+                    <i class="right fas fa-angle-left"></i>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('audits')}}" class="nav-link">Audit Dashboard</a>
+                        <a href="{{route('auditReports')}}" class="nav-link">Audit Reports</a>
+                        <a href="{{route('auditRecords')}}" class="nav-link">Audit Records</a>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-file"></i>

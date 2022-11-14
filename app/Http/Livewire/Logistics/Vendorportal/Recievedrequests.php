@@ -75,10 +75,7 @@ class Recievedrequests extends Component
                 'request_content' => 'Aprove your request',
                 'routes' => 'requests'
             ]);
-            $x = ProcurementSentRequest::find($this->selected_id);
-            $x->status = 'Approved';
-            $x->approval_date = Carbon::parse(now())->toFormattedDateString();
-            $x->save();
+
             $this->postModal = false;
         } else {
             toastr()->addWarning('Already Posted');

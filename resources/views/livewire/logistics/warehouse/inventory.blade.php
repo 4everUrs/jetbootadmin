@@ -9,6 +9,10 @@
             {{--show modal--}}
             <a wire:click="loadModal" class="btn btn-dark btn-sm">Add new item
             </a>
+            <a wire:click="exportExcel" class="btn btn-warning btn-sm">EXPORT
+            </a>
+            <a wire:click="$toggle('sendAudit')" class="btn btn-secondary btn-sm">Send Audit
+            </a>
             
             <x-table head="Inventory" >
                 <tr class="bg-info">
@@ -180,4 +184,27 @@
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
+
+    <x-jet-dialog-modal wire:model="sendAudit">
+        <x-slot name="title">
+            {{ __('Send Audit Report') }}
+        </x-slot>
+        <x-slot name="content">
+           <div class="form-group">
+                <label for="">Audit File</label>
+                <input wire:model="audit_file" type="file" class="form-control">
+           </div>
+        </x-slot>
+    
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('sendAudit')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="sendAuditReport" wire:loading.attr="disabled">
+                {{ __('Send') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+    
 </div>
