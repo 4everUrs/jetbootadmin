@@ -9,6 +9,10 @@ class Iinterview extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'name','position','email','resume_file','time','date','venue','person','status'
+        'applicant_list_id','status'
     ];
+    public function ApplicantList()
+    {
+        return $this->belongsTo(ApplicantList::class);
+    }
 }

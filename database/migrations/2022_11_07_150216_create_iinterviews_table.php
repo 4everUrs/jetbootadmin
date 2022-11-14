@@ -15,15 +15,8 @@ return new class extends Migration
     {
         Schema::create('iinterviews', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('position');
-            $table->string('email');
-            $table->string('resume_file');
-            $table->string('time');
-            $table->string('date');
-            $table->string('venue');
-            $table->string('person');
-            $table->string('status')->nullable();
+            $table->unsignedInteger('applicant_list_id');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -6,7 +6,9 @@
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <x-table head="List of Payment">
+            <h2 style="float:left;"><strong>List of Payment </strong></h2>
+            <button wire:click="loadPayment" type="create" class="btn btn-success" style="float:right;"> Send Payment</button><br><br>
+            <x-table head="">
                 <thead class="bg-info">
                     <th class="text-center">No.</th>
                     <th class="text-center">Payroll Name</th>
@@ -91,5 +93,33 @@
             </x-jet-button>
         </x-slot>
 
+    </x-jet-dialog-modal>
+    <x-jet-dialog-modal wire:model="showPayment">
+        <x-slot name="title">
+            {{ __('Send Payment') }}
+            
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label for="">Upload Payment</label>
+                <input wire:model="payment_file" class="form-control" type="file">
+                @error('lpattachment') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
+                <label for="">Remarks</label>
+                <input wire:model="remarks" class="form-control" type="text">
+                @error('remarks') <span class="text-danger">{{$message}}</span> @enderror
+                <br>
+                
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('showPayment')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="sendPayment" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+                {{ __('Confirm') }}
+            </x-jet-button>
+        </x-slot>
     </x-jet-dialog-modal>
 </div>

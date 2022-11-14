@@ -33,9 +33,10 @@
                         <td class="text-center">{{$job->status}}</td>
                         <td class="text-center">
                             @if ($job->status == 'Deployed')
-                            <button wire:click="deploy({{$job->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-car'></i> Change Status</button>
+                            <button wire:click="deploy({{$job->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-car'></i> Deployment</button>
                             @else
-                            <button wire:click="deploy({{$job->id}})" class="btn btn-sm btn-primary"><i class='fa fa-car'></i> Change Status</button>
+                            <button wire:click="deploy({{$job->id}})" class="btn btn-sm btn-primary"><i class='fa fa-car'></i> Deployment</button>
+                            <button wire:click="editPlacement({{$job->id}})" class="btn btn-sm btn-dark"><i class='fa fa-edit'></i> Edit</button>
                             @endif
                         </td>
                         
@@ -57,26 +58,13 @@
         <x-slot name="content">
             <div class="form-group">
                 
-                <label for="">Employee Name</label>
-                <select wire:model="name"class="form-control" type="text">
-                    <option value="">Select Name</option>
-                    @foreach ($jobs as $job)
-                    <option value="{{$job->id}}">{{$job->name}}</option>
-                    @endforeach
-                </select>
-                @error('name') <span class="text-danger">{{$message}}</span> @enderror
+                <label for="">Company Name</label>
+                <input wire:model="company_name"class="form-control" type="text">
+                @error('company_name') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
-                <label for="">Placement Fee</label>
-                <input wire:model="placement"class="form-control" type="number">
-                @error('placement') <span class="text-danger">{{$message}}</span> @enderror
-                <br>
-                <label for="">Status</label>
-                <select wire:model="status"class="form-control" type="text">
-                    <option value="">Select Status</option>
-                    <option value="Deploy">Deploy</option>
-                    <option value="Pending">Pending</option>
-                </select>
-                @error('status') <span class="text-danger">{{$message}}</span> @enderror
+                <label for="">Location</label>
+                <input wire:model="company_location"class="form-control" type="text">
+                @error('company_location') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
             
                 

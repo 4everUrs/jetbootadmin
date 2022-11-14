@@ -31,7 +31,7 @@ class Jobvacancy extends Component
     {
         $searchfields = '%' . $this->search . '%';
         return view('livewire.core.pjm.jobvacancy',[
-            'vacants' => CreateJob::where('status','=','Open')
+            'vacants' => CreateJob::where('status','!=','Open')
             ->orWhere('status','=','Posted')->get(),
         ]);
     }

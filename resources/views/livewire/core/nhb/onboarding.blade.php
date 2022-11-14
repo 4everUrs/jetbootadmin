@@ -36,14 +36,24 @@
                         <td class="text-center">{{$onboard->position}}</td>
                         <td class="text-center">{{$onboard->contract}}</td>
                         <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$onboard->resume_file}}" target="__blank">Resume</a></td>
+                        @if(!empty($onboard->endo))
                         <td class="text-center">@date($onboard->created_at)</td>
                         <td class="text-center">@date($onboard->endo)</td>
+
+                        @else
+                        <td></td>
+                        <td></td>
+                        @endif
                         <td class="text-center">{{$onboard->status}}</td>
                         <td class="text-center">
-                            @if (!empty ($onboard->contract))
-                                <button wire:click="submit({{$onboard->id}})" class="btn btn-sm btn-primary"><i class='fa fa-share'></i> Send to Employee Mngt. </button>
+                            @if ($onboard->status == 'Hired')
+                                <button wire:click="submit({{$onboard->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-share'></i> Send to Employee Mngt. </button>
                             @else
-                                <button wire:click="showModal({{$onboard->id}})" class="btn btn-dark btn-sm">Add Contract</button>
+                                @if (!empty ($onboard->contract))
+                                    <button wire:click="submit({{$onboard->id}})" class="btn btn-sm btn-primary"><i class='fa fa-share'></i> Send to Employee Mngt. </button>
+                                @else
+                                    <button wire:click="showModal({{$onboard->id}})" class="btn btn-dark btn-sm">Add Contract</button>
+                                @endif
                             @endif
                         </td>
                       </tr>

@@ -51,12 +51,12 @@
                        
                         <td class="text-center">{{$client->status}}</td>
                         <td class="text-center">
-                            @if ($client->status == 'Open')
+                            @if ($client->status != 'Open')
                             <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-secondary" disabled><i class='fa fa-check'></i> Approve</button>
                             @else
                             <button wire:click="approve({{$client->id}})" class="btn btn-sm btn-primary"><i class='fa fa-check'></i> Approve</button>
-                            <button wire:click="delete({{$client->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                             @endif
+                            <button wire:click="deleteJob({{$client->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                         </td>
                     </tr>
                     @empty
@@ -114,6 +114,26 @@
     
             <x-jet-button class="ms-2" wire:click="saveRequest" wire:loading.attr="disabled"><i class='fa fa-check'></i>
                 {{ __('Confirm') }}
+            </x-jet-button>
+        </x-slot>
+    </x-jet-dialog-modal>
+
+    <x-jet-dialog-modal wire:model="deleteModal">
+        <x-slot name="title">
+            {{ __('Delete Job') }}
+            
+        </x-slot>
+        <x-slot name="content">
+            
+            <p class="h4 text-center">Are you sure, you want to delete this job?</p><br>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('deleteModal')" wire:loading.attr="disabled"><i class='fa fa-times'></i>
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button class="ms-2" wire:click="deleteData" wire:loading.attr="disabled"><i class='fa fa-check'></i>
+                {{ __('Yes! Delete') }}
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>

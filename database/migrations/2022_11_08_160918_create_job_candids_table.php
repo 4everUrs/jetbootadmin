@@ -15,12 +15,7 @@ return new class extends Migration
     {
         Schema::create('job_candids', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('position');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('resume_file');
+            $table->unsignedInteger('iinterview_id');
             $table->string('status')->nullable();
             $table->timestamps();
         });

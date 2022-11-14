@@ -11,7 +11,8 @@ class Placementfee extends Component
 {
     public $showPlacement = false;
     public $search = '';
-    public $name,$placement,$status;
+    public $company_name,$company_location;
+    public $selected_id;
     public function render()
     {
         $searchFields = '%' . $this->search . '%';
@@ -21,12 +22,12 @@ class Placementfee extends Component
     }
     public function savePlacement(){
         $validateddata = $this->validate([
-            'placement' => 'required|string',
-            'status' => 'required|string',
+            'company_name' => 'required|string',
+            'company_location' => 'required|string',
         ]);
-        $job = LocalPlacement::find($this->name);
-        $job->placement = $validateddata['placement'];
-        $job->status = $validateddata['status'];
+        $job = LocalPlacement::find($this->selected_id);
+        $job->company_name = $validateddata['company_name'];
+        $job->company_location = $validateddata['company_location'];
         $job->save();
         flash()->addSuccess('Data update successfully');
         $this->resetInput();
@@ -34,11 +35,12 @@ class Placementfee extends Component
     }
     public function resetInput()
     {
-        $this->name = '';  
-        $this->placement = '';    
-        $this->status = '';    
+        $this->company_name = '';  
+        $this->company_location = '';    
     }
-    public function loadPlacement(){
+    public function editPlacement($id)
+    {
+        $this->selected_id = $id;
         $this->showPlacement = true;
     }
 

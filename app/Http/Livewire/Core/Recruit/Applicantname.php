@@ -9,6 +9,7 @@ use Livewire\Component;
 
 class Applicantname extends Component
 {
+    public $deleteModal = false;
     public $name,$position,$email,$phone,$address,$resume;
     public $search = '';
     protected $rules = [
@@ -58,5 +59,16 @@ class Applicantname extends Component
         ApplicantForm::find($id)->update(['status'=> 'Not Qualified']);
        flash()->addSuccess('Data Deleted Successfully');
     
+    }
+    public function deleteData()
+    {
+        ApplicantForm::find($this->name)->destroy($this->name);
+        flash()->addSuccess('Data deleted successfully');
+        $this->deleteModal = false;
+    }
+    public function deleteJob($id)
+    {
+        $this->name = $id;
+        $this->deleteModal = true;
     }
 }
