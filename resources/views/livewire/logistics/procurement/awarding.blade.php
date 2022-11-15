@@ -15,7 +15,7 @@
                     CONTRACT AWARD LETTER</th>
                 <th style="vertical-align: top;" rowspan="3"><img width="200"
                         style="vertical-align:50%; display: block; margin-left: auto;"
-                        src="C:/Users/Argie/Downloads/LOGO.png" alt="LOGO"></th>
+                        src="{{asset('dist/img/AdminLTELogo.png')}}" alt="LOGO"></th>
             </tr>
             <tr>
                 <td style="padding: 0px;">&nbsp;</td>
@@ -25,7 +25,7 @@
                     &nbsp;</td>
             </tr>
             <tr>
-                <td style="padding: 0px; font-size: 20px;" colspan="2"><strong>Date:</strong></td>
+                <td style="padding: 0px; font-size: 20px;" colspan="2"><strong>Date: {{$data['date']}}</strong></td>
             </tr>
 
         </thead>
@@ -36,27 +36,27 @@
 
         <tbody>
             <tr>
-                <td style="border: none; padding: 3px 10px; font-size: 20px;">[Name of Contruct]</td>
+                <td style="border: none; padding: 3px 10px; font-size: 20px;">{{$data['name']}}</td>
                 <td></td>
-                <td style="border: none; padding: 3px 10px;font-size: 20px;">[Address]</td>
+                <td style="border: none; padding: 3px 10px;font-size: 20px;">Tech-Trendz Services</td>
             </tr>
 
             <tr>
-                <td style="border: none; padding: 3px 10px;font-size: 20px;">[Address]</td>
+                <td style="border: none; padding: 3px 10px;font-size: 20px;">{{$data['address']}}</td>
                 <td></td>
-                <td style="border: none; padding: 3px 10px;font-size: 20px;">[Email]</td>
+                <td style="border: none; padding: 3px 10px;font-size: 20px;">Millionaire’s Village, Novaliches Quezon City,</td>
             </tr>
 
             <tr>
-                <td style="border: none; padding: 3px 10px;font-size: 20px;">[Email]</td>
+                <td style="border: none; padding: 3px 10px;font-size: 20px;">{{$data['email']}}</td>
                 <td></td>
-                <td style="border: none; padding: 3px 10px;font-size: 20px;">[Phone#]</td>
+                <td style="border: none; padding: 3px 10px;font-size: 20px;">admin@techtrendzph.com</td>
             </tr>
 
             <tr>
-                <td style="border: none; padding: 3px 10px;font-size: 20px;">[Phone#]</td>
+                <td style="border: none; padding: 3px 10px;font-size: 20px;">{{$data['phone']}}</td>
                 <td></td>
-                <td style="border: none; padding: 3px 10px;"></td>
+                <td style="border: none; padding: 3px 10px;">76759-88298</td>
             </tr>
         </tbody>
     </table>
@@ -73,7 +73,7 @@
             </tr>
 
             <tr>
-                <td style="padding: 0px; font-size: 20px;">Dear:(_________)</td>
+                <td style="padding: 0px; font-size: 20px;">Dear:{{$data['name']}}</td>
                 <td style="padding: 0px;"></td>
                 <td
                     style="text-align: center;line-height: 1.2em;padding: 10px 0px; text-transform: uppercase; font-size: 30px;line-height: 1.1em; color: #3B4E87;">
@@ -82,25 +82,22 @@
 
             <tr>
                 <td style="padding: 0px; font-size: 20px;" colspan="2">
-                    <p>You are invited to attend the contract award ceremony for the Procurement of [Item Name]. The
+                    <p>You are invited to attend the contract award ceremony for the Procurement of {{$data['post']}}. The
                         time and venue for the ceremony are mentioned below:</p>
                 </td>
             </tr>
 
             <tr>
-                <td style="padding: 0px; font-size: 20px;" colspan="2">Date:</td>
+                <td style="padding: 0px; font-size: 20px;" colspan="2">Date: {{$data['date_awarding']}}</td>
             </tr>
 
             <tr>
-                <td style="padding: 0px; font-size: 20px;" colspan="2"><br>Venue:</br></td>
+                <td style="padding: 0px; font-size: 20px;" colspan="2"><br>Venue: {{$data['venue']}}</br></td>
             </tr>
 
-            <tr>
-                <td style="padding: 0px; font-size: 20px;" colspan="2"><br>Address:</br></td>
-            </tr>
 
             <tr>
-                <td style="padding: 0px; font-size: 20px;" colspan="2"><br>Time:</br></td>
+                <td style="padding: 0px; font-size: 20px;" colspan="2"><br>Time: {{$data['time']}}</br></td>
             </tr>
 
             <tr>
@@ -116,7 +113,7 @@
             </tr>
 
             <tr>
-                <td style="padding: 0px; font-size: 20px;" colspan="2"><br>[Your Name]</br></td>
+                <td style="padding: 0px; font-size: 20px;" colspan="2"><br>{{$data['author']}}</br></td>
             </tr>
         </tbody>
 

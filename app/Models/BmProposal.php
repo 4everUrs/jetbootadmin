@@ -11,6 +11,6 @@ class BmProposal extends Model
     use HasFactory;
     use Loggable;
     protected $fillable = [
-        'proposalname', 'requestor', 'proposedamount', 'approvedate', 'approvedamount', 'rstatus', 'remarks', 'description'
+        'proposalname', 'requestor', 'proposedamount', 'approvedate', 'approvedamount', 'rstatus', 'remarks', 'description', 'item_name', 'quantity', 'unit_cost', 'shipping_fee', 'tax', 'subtotal'
     ];
 }

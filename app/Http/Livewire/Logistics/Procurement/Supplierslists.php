@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Logistics\Procurement;
 
+use App\Mail\AwardingMail;
 use App\Mail\InvitationMail;
 use App\Models\Bidder;
 use Livewire\Component;
@@ -24,6 +25,8 @@ class Supplierslists extends Component
     public $invitationModal = false;
     public $selected_id, $file_name, $po_id, $time, $contract, $terms = 'months';
     public $venue, $date, $subject;
+    public $search;
+    public $renewModal = false;
     public function render()
     {
         return view('livewire.logistics.procurement.supplierslists', [
@@ -100,6 +103,21 @@ class Supplierslists extends Component
             'start' => now(),
             'end' => now(),
         ]);
+        $dt = Carbon::parse($this->date)->toFormattedDateString();
+        $times = Carbon::createFromFormat('H:i', $this->time)->format('g:i A');
+        $data = [
+            'name' => $supplier->name,
+            'email' => $supplier->email,
+            'phone' => $supplier->phone,
+            'address' => $supplier->address,
+            'date' => Carbon::parse(now())->toFormattedDateString(),
+            'post' => $supplier->Post->item_name,
+            'author' => Auth::user()->name,
+            'date_awarding' => $dt,
+            'venue' => $this->venue,
+            'time' => $times
+        ];
+        Mail::to($supplier->email)->send(new AwardingMail($data));
         $this->contractTerms();
         toastr()->addSuccess('Operation Successfull');
         $this->awardModal = false;
@@ -138,5 +156,25 @@ class Supplierslists extends Component
             'date_created' => Carbon::parse(now())->toFormattedDateString(),
         ];
         Mail::to($temp->email)->send(new InvitationMail($data));
+    }
+    public function loadRenewModal($id)
+    {
+        $this->renewModal = true;
+        $this->selected_id = $id;
+    }
+    public function renew()
+    {
+        $temp = Supplier::find($this->selected_id);
+        $endo = $temp->end;
+        if ($this->terms == 'months') {
+            $temp->end = Carbon::parse($endo)->addMonths($this->contract);
+            $temp->save();
+        } elseif ($this->terms == 'years') {
+            $temp->end = Carbon::parse($endo)->addYears($this->contract);
+            $temp->save();
+        }
+        toastr()->addSuccess('Renew Contract Successfully');
+        $this->renewModal = false;
+        $this->reset();
     }
 }

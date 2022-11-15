@@ -119,6 +119,7 @@ use App\Http\Livewire\Logistics\Fleet\Vinfo;
 use App\Http\Livewire\Logistics\Fleet\Vlists;
 use App\Http\Livewire\Logistics\Procurement\Bmproposals;
 use App\Http\Livewire\Logistics\Procurement\Invoices;
+use App\Http\Livewire\Logistics\Procurement\Proposalsview;
 use App\Http\Livewire\Logistics\Procurement\Reorders;
 use App\Http\Livewire\Logistics\Projectmanagement\Pmrequests;
 use App\Http\Livewire\Logistics\Projectmanagement\Reports;
@@ -170,6 +171,7 @@ Route::get('/testfile', [PDFController::class, 'testDownload']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/messages', Messages::class)->name('messaging');
+    Route::get('/downloads/{$id}', Proposalsview::class)->name('dlproposal');
 });
 
 //Login Routes

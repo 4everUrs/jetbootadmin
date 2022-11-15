@@ -51,9 +51,19 @@
                                         <td class="text-center align-middle">{{$supplier->status}}</td>
                                         @endif
                             
-                                        <td class="text-center">
-                                            <button wire:click="sendPO({{$supplier->id}})" class="btn btn-warning btn-sm">Send P.O</button>
-                                            <button wire:click="changeStatus({{$supplier->id}})" class="btn btn-danger btn-sm">Terminate</button>
+                                        <td class="text-center" style="width: 10%">
+                                            <div class="dropdown">
+                                                <button class="btn btn-dark btn-md dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    ...
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                    <button wire:click="sendPO({{$supplier->id}})" class="dropdown-item">Send P.O</button>
+                                                    <button wire:click="loadRenewModal({{$supplier->id}})" class="dropdown-item">Renew</button>
+                                                    <button wire:click="changeStatus({{$supplier->id}})" class="dropdown-item">Terminate</button>
+                                                </div>
+                                            </div>
+                                            
                                         </td>
                                     </tr>
                                     @empty
@@ -161,6 +171,33 @@
             </div>
         </div>
     </div>
+    <x-jet-dialog-modal wire:model="awardingModal">
+        <x-slot name="title">
+            {{__('Awarding Invitation')}}
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label for="">Venue</label>
+                <input wire:model="venue" type="text" class="form-control">
+                <label for="">Date</label>
+                <input wire:model="date" type="date" class="form-control">
+                <label for="">Time</label>
+                <input wire:model="time" type="time" class="form-control">
+                <label for="">Subject</label>
+                
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('awardingModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button wire:click="sendInvi" class="ms-2" id="createButton" wire:loading.attr="disabled">
+                {{ __('Yes') }}
+            </x-jet-button>
+    
+        </x-slot>
+    </x-jet-dialog-modal>
     <x-jet-dialog-modal wire:model="invitationModal">
         <x-slot name="title">
             {{__('Send Invitation')}}
@@ -210,6 +247,12 @@
                         </select>
                     </div>
                 </div>
+                <label for="">Venue</label>
+                <input wire:model="venue" type="text" class="form-control">
+                <label for="">Date</label>
+                <input wire:model="date" type="date" class="form-control">
+                <label for="">Time</label>
+                <input wire:model="time" type="time" class="form-control">
             </div>
         </x-slot>
         <x-slot name="footer">
@@ -223,7 +266,7 @@
     
         </x-slot>
     </x-jet-dialog-modal>
-    <x-jet-dialog-modal wire:model="awardModal">
+    {{-- <x-jet-dialog-modal wire:model="awardModal">
         <x-slot name="title">
             {{__('Award as Supplier')}}
         </x-slot>
@@ -240,7 +283,7 @@
             </x-jet-button>
     
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-jet-dialog-modal> --}}
     <x-jet-dialog-modal wire:model="poSend">
         <x-slot name="title">
             {{__('Send Purchase Order')}}
@@ -261,6 +304,38 @@
     
             <x-jet-button wire:click="send" class="ms-2" id="createButton" wire:loading.attr="disabled">
                 {{ __('Send') }}
+            </x-jet-button>
+    
+        </x-slot>
+    </x-jet-dialog-modal>
+
+    <x-jet-dialog-modal wire:model="renewModal">
+        <x-slot name="title">
+            {{__('Award as Supplier')}}
+        </x-slot>
+        <x-slot name="content">
+            <div class="form-group">
+                <label>Contract Terms</label>
+                <div class="row">
+                    <div class="col">
+                        <input wire:model="contract" class="form-control" type="number">
+                    </div>
+                    <div class="col">
+                        <select wire:model="terms" class="form-control">
+                            <option value="months">Months</option>
+                            <option value="years">Years</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('renewModal')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+    
+            <x-jet-button wire:click="renew" class="ms-2" id="createButton" wire:loading.attr="disabled">
+                {{ __('Ok') }}
             </x-jet-button>
     
         </x-slot>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('stock_id');
             $table->integer('quantity');
             $table->bigInteger('price');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('completion_date')->nullable();
             $table->string('status');
             $table->timestamps();

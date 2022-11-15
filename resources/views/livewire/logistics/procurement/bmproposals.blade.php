@@ -12,6 +12,7 @@
                     <th class="text-center align-middle">No.</th>
                     <th class="text-center align-middle">Proposal Name</th>
                     <th class="text-center align-middle">Description</th>
+                    <th class="text-center align-middle">Attachment</th>
                     <th class="text-center align-middle">Requestor</th>
                     <th class="text-center align-middle">Proposed Amount</th>
                     <th class="text-center align-middle">Approved Amount</th>
@@ -24,17 +25,18 @@
                 <tbody>
                    @forelse ($proposals as $key => $proposal)
                        <tr>
-                            <td>{{$key+1}}</td>
-                            <td>{{$proposal->proposalname}}</td>
+                            <td class="text-center align-middle">{{$key+1}}</t  d>
+                            <td class="text-center align-middle">{{$proposal->proposalname}}</td>
                             <td>{{$proposal->description}}</td>
-                            <td>{{$proposal->requestor}}</td>
-                            <td>@money($proposal->proposedamount)</td>
-                            <td>@money($proposal->approvedamount)</td>
-                            <td>@date($proposal->created_at)</td>   
-                            <td>{{$proposal->approvedate}}</td>
-                            <td>{{$proposal->rstatus}}</td>
-                            <td>{{$proposal->remarks}}</td>
-                            <td>
+                            <td class="text-center align-middle"><a href="{{route('dlproposal')}} target="_blank" rel="noopener noreferrer">View</a></td>
+                            <td class="text-center align-middle">{{$proposal->requestor}}</td>
+                            <td class="text-center align-middle">@money($proposal->proposedamount)</td>
+                            <td class="text-center align-middle">@money($proposal->approvedamount)</td>
+                            <td class="text-center align-middle">@date($proposal->created_at)</td>   
+                            <td class="text-center align-middle">{{$proposal->approvedate}}</td>
+                            <td class="text-center align-middle">{{$proposal->rstatus}}</td>
+                            <td class="text-center align-middle">{{$proposal->remarks}}</td>
+                            <td class="text-center align-middle">
                                 @if ($proposal->rstatus == 'Pending')
                                     <button wire:click="transfer({{$proposal->id}})" class="btn btn-sm btn-dark">Transfer</button>
                                 @else
@@ -59,12 +61,12 @@
     
         <x-slot name="content">
            <div class="form-group">
-            <label>Proposal Name</label>
-            <input wire:model="name" class="form-control" type="text">
-            <label>Proposed Amount</label>
-            <input wire:model="amount" class="form-control" type="number">
-            <label>Description</label>
-            <textarea wire:model="description" class="form-control" rows="4"></textarea>
+            <label>Item Name</label>
+            <input wire:model="item_name" class="form-control" type="text">
+            <label>Quantity</label>
+            <input wire:model="quantity" class="form-control" type="number">
+            <label>Cost per unit</label>
+            <input wire:model="unit_cost" class="form-control" type="number">
            </div>
         </x-slot>
     

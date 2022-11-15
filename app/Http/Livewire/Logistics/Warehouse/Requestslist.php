@@ -57,14 +57,14 @@ class Requestslist extends Component
             'status' => $this->status,
             'category' => 'Supplier'
         ]);
-        // RequestNotification::create([
-        //     'user_id' => Auth::user()->id,
-        //     'sender' =>  Auth::user()->currentTeam->name,
-        //     'reciever' => 'Procurement',
-        //     'department' => 'Logistics',
-        //     'request_content' => 'Sent you a request',
-        //     'routes' => 'requests'
-        // ]);
+        RequestNotification::create([
+            'user_id' => Auth::user()->id,
+            'sender' =>  Auth::user()->currentTeam->name,
+            'reciever' => 'Procurement',
+            'department' => 'Logistics',
+            'request_content' => 'Sent you a request',
+            'routes' => 'requests'
+        ]);
         toastr()->addSuccess('Request Sent Successfully');
         $this->requestModal = false;
         $this->reset();
@@ -76,7 +76,6 @@ class Requestslist extends Component
             'item' => 'required',
             'supplier' => 'required',
             'quantity' => 'required',
-            'content' => 'required',
         ]);
         Reorder::create([
             'supplier_id' => $this->supplier,
@@ -114,14 +113,14 @@ class Requestslist extends Component
         $temp->status = 'Confirmed';
         $temp->save();
         toastr()->addSuccess('Operation Success');
-        // RequestNotification::create([
-        //     'user_id' => Auth::user()->id,
-        //     'sender' =>  Auth::user()->currentTeam->name,
-        //     'department' => 'Logistics',
-        //     'reciever' => 'MRO',
-        //     'request_content' => 'Aprove your request',
-        //     'routes' => 'requestlists'
-        // ]);
+        RequestNotification::create([
+            'user_id' => Auth::user()->id,
+            'sender' =>  Auth::user()->currentTeam->name,
+            'department' => 'Logistics',
+            'reciever' => 'MRO',
+            'request_content' => 'Aprove your request',
+            'routes' => 'requestlists'
+        ]);
     }
     public function dispatch($id)
     {

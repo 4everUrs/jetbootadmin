@@ -44,7 +44,7 @@
             <tr>
                 <td style="border: none; padding: 3px 10px;font-size: 20px;">{{$data['address']}}</td>
                 <td></td>
-                <td style="border: none; padding: 3px 10px;font-size: 20px;">>Millionaire’s Village, Novaliches Quezon City,</td>
+                <td style="border: none; padding: 3px 10px;font-size: 20px;">Millionaire’s Village, Novaliches Quezon City,</td>
             </tr>
 
             <tr>

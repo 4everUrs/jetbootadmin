@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 class Bmproposals extends Component
 {
     public $budgetProposalModal = false;
-    public $name, $amount, $description;
+    public $item_name, $quantity, $unit_cost;
     use WithPagination;
     public function render()
     {
@@ -23,12 +23,22 @@ class Bmproposals extends Component
     }
     public function createBudgetProposal()
     {
+        $subtotal = $this->unit_cost * $this->quantity;
+        $shipping = $subtotal * 0.1;
+        $tax = $subtotal * 0.18;
+        $total = $subtotal + $shipping + $tax;
         BmProposal::create([
-            'proposalname' => $this->name,
+            'proposalname' => 'Procurement of ' . $this->item_name,
+            'item_name' => $this->item_name,
+            'quantity' => $this->quantity,
+            'unit_cost' => $this->unit_cost,
+            'shipping_fee' => $shipping,
+            'tax' => $tax,
+            'subtotal' => $subtotal,
             'requestor' => Auth::user()->name,
-            'proposedamount' => $this->amount,
+            'proposedamount' => $total,
             'rstatus' => 'Pending',
-            'description' => $this->description,
+            'description' => 'This budget proposal aims to acquire a budget for the acquisition of ' . $this->item_name,
         ]);
         toastr()->addSuccess('Budget Proposal Created');
         $this->reset();
