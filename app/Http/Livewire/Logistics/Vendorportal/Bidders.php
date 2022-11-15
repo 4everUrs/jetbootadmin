@@ -44,13 +44,7 @@ class Bidders extends Component
         $post = Post::find($temp->post_id);
         $postType = $post->type;
 
-        if ($postType == 'Buyer') {
-            dd('test Buyer');
-        } elseif ($postType == 'Supplier') {
-            Bidder::find($this->selected_id)->update(['status' => 'Sent']);
-            $this->viewBidderDetails = false;
-        } elseif ($postType == 'Contractor') {
-            dd('test Contractor');
-        }
+        Bidder::find($this->selected_id)->update(['status' => 'Sent']);
+        $this->viewBidderDetails = false;
     }
 }

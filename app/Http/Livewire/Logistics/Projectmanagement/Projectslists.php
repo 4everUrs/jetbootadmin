@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Logistics\Projectmanagement;
 
 use App\Models\Project;
+use App\Models\Supplier;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -15,6 +16,7 @@ class Projectslists extends Component
     public $contractor, $contractor_manager, $term, $terms, $description, $completion_date;
     public $selected_id;
     public $budgetProposal = false;
+    public $project;
     protected $listeners = ['saveValue' => 'save'];
     public function render()
     {
@@ -26,6 +28,7 @@ class Projectslists extends Component
     }
     public function viewRow($id)
     {
+        $this->project = Project::find($id);
         $this->selected_id = $id;
         $this->projectDetail = true;
         $projectDetails = Project::find($id);
@@ -45,6 +48,7 @@ class Projectslists extends Component
     }
     public function save()
     {
+        $temp = Project::find($this->selected_id)->Supplier;
         $dt = Carbon::parse($this->start_date)->toDateTimeString();
         $data = Project::find($this->selected_id);
         $data->title = $this->title;
@@ -53,8 +57,6 @@ class Projectslists extends Component
         $data->manager = $this->manager;
         $data->status = $this->status;
         $data->progress = $this->progress;
-        $data->contractor = $this->contractor;
-        $data->contractor_manager = $this->contractor_manager;
         $data->duration = $this->term . ' ' . $this->terms;
         $data->start_date = $dt;
         if ($this->terms == 'months') {
@@ -62,8 +64,12 @@ class Projectslists extends Component
         } elseif ($this->terms == 'years') {
             $data->completion_date = Carbon::parse($dt)->addYears($this->term);
         }
-
         $data->save();
+        Project::find($this->selected_id)->update([
+            'contractor' => $temp->name,
+            'contractor_manager' => $temp->User->name,
+        ]);
+
         $this->projectDetail = false;
         toastr()->addSuccess('Data update successfully');
         $this->resetInput();

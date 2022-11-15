@@ -17,6 +17,7 @@ use App\Http\Controllers\DownloadProposalController;
 use App\Http\Controllers\GeneralLedgerController;
 use App\Http\Controllers\InvoiceDownloadController;
 use App\Http\Controllers\PrintController;
+use App\Http\Controllers\ProposalDownloadController;
 use App\Http\Controllers\UclaimsController;
 use App\Http\Controllers\UleaveController;
 use App\Http\Livewire\Admin\AuditTrails;
@@ -121,7 +122,9 @@ use App\Http\Livewire\Logistics\Procurement\Bmproposals;
 use App\Http\Livewire\Logistics\Procurement\Invoices;
 use App\Http\Livewire\Logistics\Procurement\Proposalsview;
 use App\Http\Livewire\Logistics\Procurement\Reorders;
+use App\Http\Livewire\Logistics\Projectmanagement\Contractors;
 use App\Http\Livewire\Logistics\Projectmanagement\Pmrequests;
+use App\Http\Livewire\Logistics\Projectmanagement\Projectproposals;
 use App\Http\Livewire\Logistics\Projectmanagement\Reports;
 use App\Http\Livewire\Logistics\Users;
 use App\Http\Livewire\Logistics\Vendorportal\Workshops;
@@ -171,7 +174,8 @@ Route::get('/testfile', [PDFController::class, 'testDownload']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/messages', Messages::class)->name('messaging');
-    Route::get('/downloads/{$id}', Proposalsview::class)->name('dlproposal');
+    Route::get('proposal/download/{id}', [Proposalsview::class, 'downloadProposal'])->name('bmproposaldownload');
+    Route::get('project/download/{id}', [Projectproposals::class, 'downloadProposal'])->name('projectproposal');
 });
 
 //Login Routes
@@ -196,6 +200,7 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('warehouse/purchase-orders', WarehousePurchaseOrders::class)->name('warehousePO');
     Route::get('warehouse/requests', Requestslist::class)->name('requestlists');
     Route::get('procurement/suppliers', Supplierslists::class)->name('suppliers');
+    Route::get('projectmanagement/contractors', Supplierslists::class)->name('contractorspm');
     Route::get('procurement/proposals', Bmproposals::class)->name('bmproposal');
     Route::get('procurement/invoices', Invoices::class)->name('invoice');
     Route::get('procurement/purchaseorder', Purchaseorders::class)->name('po');

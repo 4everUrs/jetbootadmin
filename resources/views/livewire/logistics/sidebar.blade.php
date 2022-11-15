@@ -120,6 +120,7 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('pmrequests')}}" class="nav-link">Requests List</a>
+                        <a href="{{route('contractorspm')}}" class="nav-link">Contractor List</a>
                         <a href="{{route('projects')}}" class="nav-link">List of Project</a>
                         <a href="{{route('newproject')}}" class="nav-link">Creat new project</a>
                         <a href="{{route('proposal')}}" class="nav-link">Project Proposal</a>

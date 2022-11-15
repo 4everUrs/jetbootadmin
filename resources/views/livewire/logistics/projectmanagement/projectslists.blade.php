@@ -12,6 +12,7 @@
                 <thead class="bg-info">
                     <th class="text-center align-middle">Title</th>
                     <th class="text-center align-middle">Manager</th>
+                    <th class="text-center align-middle">Contractor</th>
                     <th class="text-center align-middle">Budget</th>
                     <th class="text-center align-middle">Duration</th>
                     <th class="text-center align-middle">Progress</th>
@@ -22,6 +23,7 @@
                         <tr wire:click='viewRow({{$project->id}})'>
                             <td class="text-center align-middle">{{$project->title}}</td>
                             <td class="text-center align-middle">{{$project->manager}}</td>
+                            <td class="text-center align-middle">{{$project->Supplier->name}}</td>
                             <td class="text-center align-middle">@money($project->budget)</td>
                             <td class="text-center align-middle">{{$project->duration}}</td>
                             <td>
@@ -105,13 +107,13 @@
                                         <tr>
                                             <td>Contractor Name</td>
                                             <td>
-                                                <input wire:model='contractor' class="form-control" type="text" >
+                                                <input class="form-control" type="text" value="{{$project->Supplier->name}}" >
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Contractor Manager</td>
                                             <td>
-                                                <input wire:model='contractor_manager' class="form-control" type="text" >
+                                                <input  class="form-control" type="text" value="{{$project->Supplier->User->name}}">
                                             </td>
                                         </tr>
                                         <tr>

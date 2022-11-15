@@ -1,7 +1,7 @@
 <div>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Suppliers') }}
+            {{ __('Contracts') }}
         </h2>
     </x-slot>
     <div class="card">
@@ -51,7 +51,7 @@
                                         <td class="text-center align-middle">{{$supplier->status}}</td>
                                         @endif
                             
-                                        <td class="text-center" style="width: 10%">
+                                        <td class="text-center">
                                             <div class="dropdown">
                                                 <button class="btn btn-dark btn-md dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">

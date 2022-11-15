@@ -9,6 +9,10 @@ class Project extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'manager', 'contractor', 'contractor_manager', 'start_date', 'completion_date', 'progress', 'status', 'description', 'budget', 'duration'
+        'title', 'manager', 'contractor', 'contractor_manager', 'start_date', 'completion_date', 'progress', 'status', 'description', 'budget', 'duration', 'supplier_id'
     ];
+    public function Supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
 }

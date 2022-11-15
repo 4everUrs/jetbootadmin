@@ -25,10 +25,10 @@
                 <tbody>
                    @forelse ($proposals as $key => $proposal)
                        <tr>
-                            <td class="text-center align-middle">{{$key+1}}</t  d>
+                            <td class="text-center align-middle">{{$key+1}}</td>
                             <td class="text-center align-middle">{{$proposal->proposalname}}</td>
                             <td>{{$proposal->description}}</td>
-                            <td class="text-center align-middle"><a href="{{route('dlproposal')}} target="_blank" rel="noopener noreferrer">View</a></td>
+                            <td class="text-center align-middle"><a href="{{route('bmproposaldownload',$proposal->id)}}" target="__blank">View</a></td>
                             <td class="text-center align-middle">{{$proposal->requestor}}</td>
                             <td class="text-center align-middle">@money($proposal->proposedamount)</td>
                             <td class="text-center align-middle">@money($proposal->approvedamount)</td>

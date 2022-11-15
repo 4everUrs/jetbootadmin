@@ -17,11 +17,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('user_id');
             $table->string('title');
+            $table->string('description');
             $table->string('duration');
             $table->string('budget');
-            $table->string('requested_by');
-            $table->string('status');
-            $table->timestamp('approval_date')->nullable();
+            $table->string('admin_status');
+            $table->string('finance_status');
+            $table->string('start_date');
+            $table->string('approval_date')->nullable();
             $table->timestamps();
         });
     }

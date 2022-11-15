@@ -51,7 +51,13 @@
                                             <option value="years">Year(s)</option>
                                         </select>
                                     </div>
-                                    
+                                    <label>Contractor</label>
+                                    <select wire:model="contractor" class="form-control">
+                                        <option value="">Choose..</option>
+                                        @foreach ($contractors as $contractor)
+                                            <option value="{{$contractor->id}}">{{$contractor->name}}</option>     
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <!-- /.card-body -->

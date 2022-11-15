@@ -8,7 +8,7 @@
         <div class="col">
             <div class="card" style="height: 429.38px">
                 <div class="card-body">
-                    <button class="btn btn-dark btn-sm">Request Audit Report</button>
+                    <button wire:click="$toggle('loadModal')" class="btn btn-dark btn-sm">Request Report</button>
                     <x-table head="Reports">
                         <thead class="bg-info">
                             <th class="text-center align-middle">No</th>
@@ -30,6 +30,36 @@
                             @endforeach
                         </tbody>
                     </x-table>
+                    <x-jet-dialog-modal wire:model="loadModal" maxWidth="md">
+                        <x-slot name="title">
+                            {{ __('Delivery Request Form') }}
+                        </x-slot>
+                    
+                        <x-slot name="content">
+                            <div class="form-group">
+                                <label>Department</label>
+                                <select wire:model="department" class="form-control">
+                                    <option value="asset">Asset Management</option>
+                                    <option value="warehouse">Warehouse</option>
+                                    <option value="general">General</option>
+                                </select>
+                                <label>Department</label>
+                                <textarea wire:model="content" class="form-control" rows="4"></textarea>
+
+                            </div>
+                        </x-slot>
+                    
+                        <x-slot name="footer">
+                            <x-jet-secondary-button wire:click="$toggle('loadModal')" wire:loading.attr="disabled">
+                                {{ __('Cancel') }}
+                            </x-jet-secondary-button>
+                    
+                            <x-jet-button class="ms-2" wire:click="send" wire:loading.attr="disabled">
+                                {{ __('Send Request') }}
+                            </x-jet-button>
+                        </x-slot>
+                    
+                    </x-jet-dialog-modal>
                 </div>
             </div>
         </div>
@@ -134,4 +164,5 @@
             });
         </script>
     @endpush
+    
 </div>
