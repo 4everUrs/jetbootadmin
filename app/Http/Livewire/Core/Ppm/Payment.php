@@ -56,7 +56,7 @@ class Payment extends Component
             'lpremarks'=> $this->remarks, 
             'lpstatus' => 'Pending'
         ]);
-        toastr()->addSuccess('Send Successfully');
+        flash()->addSuccess('Send Successfully');
         $this->showPayment = false;
     }
     public function loadPayment()

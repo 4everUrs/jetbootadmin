@@ -38,9 +38,9 @@
                     <td class="text-center">
                         @if ($job->status == 'Pending')
                         <button wire:click="loadModal({{$job->id}})" class="btn btn-primary"><i class='fa fa-check'></i> Qualified</button>
+                        <button wire:click="denied({{$job->id}})" class="btn btn-danger"><i class='fa fa-check'></i> Not Qualified</button>
                         @else
                         <button wire:click="approved({{$job->id}})" class="btn btn-secondary" disabled><i class='fa fa-check'></i> Qualified</button>
-                        <button wire:click="denied({{$job->id}})" class="btn btn-danger"><i class='fa fa-check'></i> Not Qualified</button>
                         @endif
                         <button wire:click="deleteJob({{$job->id}})"class="btn btn-sm btn-danger"><i class='fa fa-trash'></i> Delete</button>
                     </td>

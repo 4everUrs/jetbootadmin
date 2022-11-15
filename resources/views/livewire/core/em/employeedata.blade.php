@@ -44,7 +44,7 @@
                             <td class="text-center">{{$onboard->bank_account}}</td>
      
                             <td class="text-center">
-                                <button wire:click="employee({{$onboard->id}})" class="btn btn-sm btn-primary"><i class='fa fa-share'></i> Edit</button>
+                                <button wire:click="employee({{$onboard->id}})" class="btn btn-sm btn-primary"><i class='fa fa-edit'></i> Edit</button>
                             </td>
                           </tr>
                         @empty
@@ -75,24 +75,24 @@
                 <div class="d-none" id="payout">
                     <br>
                     <label for="">Bank Name.</label>
-                    <input wire:model="bank_name"class="form-control" type="string">
+                    <input wire:model="bank_name"class="form-control" type="text">
                     @error('bank_name') <span class="text-danger">{{$message}}</span> @enderror
                     <label for="">Bank Account.</label>
-                    <input wire:model="bank_account"class="form-control" type="string">
+                    <input wire:model="bank_account"class="form-control" type="number">
                     @error('bank_account') <span class="text-danger">{{$message}}</span> @enderror
                 </div>
              
                 <br>
                 <label for="">SSS No.</label>
-                <input wire:model="sss_no"class="form-control" type="string">
+                <input wire:model="sss_no"class="form-control" type="number">
                 @error('sss_no') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Philhealth No.</label>
-                <input wire:model="philhealth_no"class="form-control" type="string">
+                <input wire:model="philhealth_no"class="form-control" type="number">
                 @error('philhealth_no') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <label for="">Pag-Ibig No.</label>
-                <input wire:model="pagibig_no"class="form-control" type="string">
+                <input wire:model="pagibig_no"class="form-control" type="number">
                 @error('pagibig_no') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 
