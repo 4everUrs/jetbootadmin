@@ -10,6 +10,7 @@ class Collections extends Component
 {
     public $rfrom,$caddress,$cramount,$receiptno,$paytype,$cremarks;
     public $addCollection=false;
+    public $grandcollection;
 
 
     public function render()
@@ -51,9 +52,11 @@ class Collections extends Component
         $this->cremarks = null;
     }
 
-
-
-
-
-    
+    public function sumCollect()
+    {
+        $totals = Collectedincome::all();
+        foreach($totals as $total){
+        $this->grandcollection += $total->cramount;
+    }
+}
 }

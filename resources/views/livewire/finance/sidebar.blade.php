@@ -49,7 +49,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{route('journal')}}" class="nav-link"><i class="fas fa-file-import"></i>&nbsp;Records and Reports</a>
+                        <a href="{{route('journal')}}" class="nav-link"><i class="fas fa-file-import"></i>&nbsp;Records</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('listspayables')}}" class="nav-link"><i class="fas fa-receipt"></i>&nbsp;Lists of Payables</a>
