@@ -106,6 +106,8 @@
                         <a href="{{route('auditsdashboard')}}" class="nav-link">Audit Dashboard</a>
                         <a href="{{route('auditReports')}}" class="nav-link">Audit Reports</a>
                         <a href="{{route('auditRecords')}}" class="nav-link">Audit Records</a>
+                        <a class="nav-link">Audit Officer</a>
+                        <a class="nav-link">Audit Scheduling</a>
                     </li>
                 </ul>
             </li>
