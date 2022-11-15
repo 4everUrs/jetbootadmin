@@ -100,6 +100,8 @@ use App\Http\Livewire\Logistics\Assetmgmt\Reportst;
 use App\Http\Livewire\Logistics\AuditManagement\AuditReports;
 use App\Http\Livewire\Logistics\AuditManagement\Records;
 use App\Http\Livewire\Logistics\AuditManagement\Reports as AuditManagementReports;
+use App\Http\Livewire\Logistics\AuditManagement\Auditofficer;
+use App\Http\Livewire\Logistics\AuditManagement\Auditscheduling;
 use App\Http\Livewire\Logistics\Daksboard;
 use App\Http\Livewire\Logistics\Dashboard;
 use App\Http\Livewire\Logistics\Projectmanagement\Createnewproject;
@@ -235,6 +237,8 @@ Route::prefix('logistics')->middleware('auth', 'isLogistics')->group(function ()
     Route::get('audit/dashboard', AuditReports::class)->name('auditsdashboard');
     Route::get('audit/reports', AuditManagementReports::class)->name('auditReports');
     Route::get('audit/records', Records::class)->name('auditRecords');
+    Route::get('audit/auditofficer', Auditofficer::class)->name('auditofficer');
+    Route::get('audit/auditscheduling', Auditscheduling::class)->name('auditscheduling');
     Route::get('warehouse/inventory/export', [Exportinventory::class, 'export'])->name('exportInventory');
 });
 

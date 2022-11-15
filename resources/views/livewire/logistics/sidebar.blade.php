@@ -104,9 +104,9 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('auditsdashboard')}}" class="nav-link">Audit Dashboard</a>
-                        <a class="nav-link">Audit Officer</a>
+                        <a href="{{route('auditofficer')}}" class="nav-link">Audit Officer</a>
                         <a href="{{route('auditReports')}}" class="nav-link">Request Reports</a>
-                        <a class="nav-link">Audit Scheduling</a>
+                        <a href="{{route('auditscheduling')}}"class="nav-link">Audit Scheduling</a>
                         <a href="{{route('auditRecords')}}" class="nav-link">Audit Records</a>
                     </li>
                 </ul>
