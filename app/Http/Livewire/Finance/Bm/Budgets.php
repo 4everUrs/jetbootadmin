@@ -29,18 +29,44 @@ class Budgets extends Component
             'requestsLists' => ListRequested::where('rstatus', '=', 'Pending')->get(),
         ]);
     }
+    public function approvedBudget($id)
+    {
+
+        $approved = Transaction::find($id);
+        $approved->status = 'Approved';
+        $approved->save();
+
+        $request = ListRequested::find($approved->list_requested_id);
+        $request->approvedamount = $approved->amount;
+        //$request->approvedate = Carbon::parse(now())->toFormattedDateString();
+        $request->remarks = $approved->description;
+        $request->rstatus ='Approved';
+        $request->save();
+
+
+        toastr()->addSuccess('Operation Successfull');
+    }
+
+    public function denyBudget($id)
+    {
+        $deny = Transaction::find($id);
+        $deny->status = 'Denied';
+        $deny->save();
+
+        $request = ListRequested::find($deny->list_requested_id);
+        $request->approvedamount = $deny->amount;
+        //$request->approvedate = Carbon::parse(now())->toFormattedDateString();
+        $request->remarks = $deny->description;
+        $request->rstatus = 'Denied';
+        $request->save();
+
+        toastr()->addSuccess('Operation Successfull');
+    }
+  
 
     public function loadModalRequest()
     {
         $this->addBudget = true;
-    }
-
-    public function sumRecords()
-    {
-        $sum = Transaction::all();
-        foreach ($sum as $sums) {
-            $this->grandtotals += $sums->amount;
-        }
     }
 
     public function addBudgets()
