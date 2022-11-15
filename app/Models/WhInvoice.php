@@ -9,7 +9,7 @@ class WhInvoice extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'procurement_invoice_id', 'post_id', 'company_name', 'file_name', 'status', 'bidder_id'
+        'procurement_invoice_id', 'post_id', 'company_name', 'file_name', 'status', 'bidder_id', 'supplier_id', 'po_id'
     ];
     public function Bidder()
     {
@@ -18,5 +18,9 @@ class WhInvoice extends Model
     public function Post()
     {
         return $this->belongsTo(Post::class);
+    }
+    public function Supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }

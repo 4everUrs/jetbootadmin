@@ -168,11 +168,17 @@
         <x-slot name="content">
             <div class="form-group">
                 <label for="">Venue</label>
-                <input type="text" class="form-control">
+                <input wire:model="venue" type="text" class="form-control">
                 <label for="">Date</label>
-                <input type="date" class="form-control">
+                <input wire:model="date" type="date" class="form-control">
                 <label for="">Time</label>
                 <input wire:model="time" type="time" class="form-control">
+                <label for="">Subject</label>
+                <select wire:model="subject" class="form-control">
+                    <option value="">Choose...</option>
+                    <option value="Supplier">Supplier</option>
+                    <option value="Contractor">Contractor</option>
+                </select>
             </div>
         </x-slot>
         <x-slot name="footer">

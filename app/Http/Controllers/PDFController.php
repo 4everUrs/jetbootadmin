@@ -16,10 +16,10 @@ class PDFController extends Controller
     public $subtotal;
     public function __construct(Request $request)
     {
-        // $this->purchaseOrderId = $request->id;
-        // $supplier = PurchaseOrder::find($request->id);
-        // $this->supplier_id = $supplier->supplier_id;
-        // $this->po_id = $supplier->po_id;
+        $this->purchaseOrderId = $request->id;
+        $supplier = PurchaseOrder::find($request->id);
+        $this->supplier_id = $supplier->supplier_id;
+        $this->po_id = $supplier->po_id;
     }
     public function getData()
     {
@@ -66,6 +66,6 @@ class PDFController extends Controller
             'subtotal' => $this->subtotal,
         ];
         $pdf = PDF::loadView('purchase-order', $data);
-        return $pdf->download($this->filename);
+        return $pdf->stream($this->filename);
     }
 }

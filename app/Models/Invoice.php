@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     use HasFactory;
-
-    public function Bidder()
+    protected $fillable = [
+        'supplier_id', 'wh_invoice_id'
+    ];
+    public function Supplier()
     {
-        return $this->belongsTo(Bidder::class);
+        return $this->belongsTo(Supplier::class);
+    }
+    public function WhInvoice()
+    {
+        return $this->belongsTo(WhInvoice::class);
     }
 }

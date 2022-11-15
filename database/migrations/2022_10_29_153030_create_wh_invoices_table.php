@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('wh_invoices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('procurement_invoice_id');
-            $table->unsignedInteger('post_id');
-            $table->unsignedInteger('bidder_id');
-            $table->string('file_name');
+            $table->unsignedInteger('supplier_id');
+            $table->unsignedInteger('invoice_no')->nullable();
+            $table->string('invoice_file')->nullable();
             $table->string('status');
+            $table->integer('po_id');
+            $table->string('file_name');
             $table->timestamps();
         });
     }

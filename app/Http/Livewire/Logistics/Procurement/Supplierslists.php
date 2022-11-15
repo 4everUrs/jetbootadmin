@@ -2,16 +2,19 @@
 
 namespace App\Http\Livewire\Logistics\Procurement;
 
+use App\Mail\InvitationMail;
 use App\Models\Bidder;
 use Livewire\Component;
 use App\Models\Supplier;
 use App\Models\User;
 use App\Models\VendorPo;
+use App\Models\WhInvoice;
 use App\Notifications\SendPoNotification;
 use Carbon\Carbon;
 use Notification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
+use Mail;
 
 class Supplierslists extends Component
 {
@@ -20,6 +23,7 @@ class Supplierslists extends Component
     public $poSend = false;
     public $invitationModal = false;
     public $selected_id, $file_name, $po_id, $time, $contract, $terms = 'months';
+    public $venue, $date, $subject;
     public function render()
     {
         return view('livewire.logistics.procurement.supplierslists', [
@@ -60,13 +64,13 @@ class Supplierslists extends Component
         $file['file_name'] = $this->file_name->storeAs('po_file', $fileName, 'do');
         $file['user_id'] = $user->user_id;
         VendorPo::create($file);
-
-
-
-
-
-
-
+        $temp = VendorPo::latest()->first();
+        WhInvoice::Create([
+            'supplier_id' => $user->id,
+            'status' => 'Pending',
+            'po_id' => $this->po_id,
+            'file_name' => $temp->file_name,
+        ]);
         $client = User::find($user->user_id);
         $url = 'https://mnlph.nyc3.digitaloceanspaces.com/' . $file['file_name'];
         $data = [
@@ -112,20 +116,27 @@ class Supplierslists extends Component
             $temp->save();
         }
     }
-    public function sendInvitation()
+    public function sendInvitation($id)
     {
-
         $this->invitationModal = true;
+        $this->selected_id = $id;
     }
-    public function sendInvi($id)
+    public function sendInvi()
     {
-        $temp = Supplier::find($id);
+        $temp = Supplier::find($this->selected_id);
         $dt = Carbon::createFromFormat('H:i', $this->time)->format('g:i A');
         $data = [
             'name' => $temp->name,
             'date' => $this->date,
             'time' => $this->time,
-
+            'venue' => $this->venue,
+            'subject' => $this->subject,
+            'address' => $temp->address,
+            'phone' => $temp->phone,
+            'email' => $temp->email,
+            'author' => Auth::user()->name,
+            'date_created' => Carbon::parse(now())->toFormattedDateString(),
         ];
+        Mail::to($temp->email)->send(new InvitationMail($data));
     }
 }

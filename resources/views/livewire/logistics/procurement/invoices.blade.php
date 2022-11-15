@@ -10,24 +10,16 @@
                 <thead class="bg-info">
                     <th class="text-center align-middle">No</th>
                     <th class="text-center align-middle">Supplier Name</th>
-                    <th class="text-center align-middle">Invoice File</th>
+                    <th class="text-center align-middle">Invoice Number</th>
                     <th class="text-center align-middle">Date Recieved</th>
-                    <th class="text-center align-middle">Action</th>
                 </thead>
                 <tbody>
                     @forelse ($invoices as $invoice)
                         <tr>
                             <td class="text-center align-middle">{{$invoice->id}}</td>
-                            <td class="text-center align-middle">{{$invoice->bidder->name}}</td>
-                            <td class="text-center align-middle"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$invoice->file_name}}" target="__blank">{{$invoice->file_name}}</a></td>
+                            <td class="text-center align-middle">{{$invoice->Supplier->name}}</td>
+                            <td class="text-center align-middle"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$invoice->WhInvoice->file_name}}" target="_blank" rel="noopener noreferrer">{{$invoice->WhInvoice->invoice_no}}</a></td>
                             <td class="text-center align-middle">@date($invoice->created_at)</td>
-                            <td class="text-center align-middle">
-                               @if ($invoice->status != 'Sent')
-                                   <button wire:click="sendInvoice({{$invoice->id}})" class="btn btn-primary btn-sm">Send</button>
-                               @else
-                                   <button wire:click="sendInvoice({{$invoice->id}})" class="btn btn-secondary btn-sm" disabled>Sent</button>
-                               @endif
-                            </td>
                         </tr>
                     @empty
                         <tr>

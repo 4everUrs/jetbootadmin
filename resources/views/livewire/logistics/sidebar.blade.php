@@ -51,7 +51,7 @@
                         <a href="{{route('requestlists')}}" class="nav-link">Request List</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('warehousePO')}}" class="nav-link">Purchase Order</a>
+                        <a href="{{route('warehousePO')}}" class="nav-link">Invoices</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('warehouseInvoice')}}" class="nav-link">Receiving</a>
