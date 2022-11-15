@@ -66,17 +66,17 @@ class Onboarding extends Component
     }
     public function submit($id)
     {
-        $onboard = Onboard::find($id);
-        $onboard->status = 'Deployed';
-            LocalEmployee::create([
-            'create_job_id' => $onboard->listing_id,
-            'name' => $onboard->name,
-            'phone' => $onboard->phone,
-            'email' => $onboard->email,
-            'status' => 'Active',
-            ]);
-            $onboard->save();
-            flash()->addSuccess('Data approved successfully');
+        $onboard = LocalPlacement::find($id);
+        
+        LocalEmployee::create([
+        'create_job_id' => $onboard->listing_id,
+        'name' => $onboard->name,
+        'phone' => $onboard->phone,
+        'email' => $onboard->email,
+        'status' => 'Active',
+        ]);
+        $onboard->save();
+        flash()->addSuccess('Data approved successfully');
         
     }
 }
