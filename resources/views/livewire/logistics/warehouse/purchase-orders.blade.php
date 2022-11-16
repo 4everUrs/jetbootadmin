@@ -1,7 +1,7 @@
 <div>
    <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Purchase Orders') }}
+            {{ __('Invoice') }}
         </h2>
     </x-slot>
     <div class="card">
@@ -16,8 +16,8 @@
                 @forelse ($puchase_orders as $po)
                 <tr>
                     <td class="text-center">{{$po->id}}</td>
-                    <td class="text-center align-middle">{{$po->supplier_name}}</td>
-                    <td class="text-center align-middle"><a href="{{route('download',$po->id)}}" target="__blank">{{$po->po_id}}</a></td>
+                    <td class="text-center align-middle">{{$po->Supplier->name}}</td>
+                    <td class="text-center align-middle"><a href="{{route('download',$po->id)}}" target="__blank">{{$po->invoice_no}}</a></td>
                     <td class="text-center">
                        <a class="btn btn-primary btn-sm" href="{{route('download',$po->id)}}">Download</a>
                     </td>

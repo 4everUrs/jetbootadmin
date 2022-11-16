@@ -18,7 +18,7 @@
                         <tr>
                             <td class="text-center align-middle">{{$invoice->id}}</td>
                             <td class="text-center align-middle">{{$invoice->Supplier->name}}</td>
-                            <td class="text-center align-middle"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$invoice->WhInvoice->file_name}}" target="_blank" rel="noopener noreferrer">{{$invoice->WhInvoice->invoice_no}}</a></td>
+                            <td class="text-center align-middle"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$invoice->invoice_no}}" target="_blank" rel="noopener noreferrer">{{$invoice->invoice_no}}</a></td>
                             <td class="text-center align-middle">@date($invoice->created_at)</td>
                         </tr>
                     @empty

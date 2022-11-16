@@ -23,12 +23,12 @@
             <tbody>
                 @forelse ($jobs as $job)
                   <tr>
-                    <td class="text-center">{{$job->id}}</td>
-                    <td class="text-center">{{$job->name}}</td>
-                    <td class="text-center">{{$job->position}}</td>
-                    <td class="text-center">{{$job->email}}</td>
-                    <td class="text-center">{{$job->phone}}</td>
-                    <td class="text-center">{{$job->address}}</td>
+                    <td class="text-center">{{$job->Iinterview->ApplicantList->id}}</td>
+                    <td class="text-center">{{$job->Iinterview->ApplicantList->name}}</td>
+                    <td class="text-center">{{$job->Iinterview->ApplicantList->position}}</td>
+                    <td class="text-center">{{$job->Iinterview->ApplicantList->email}}</td>
+                    <td class="text-center">{{$job->Iinterview->ApplicantList->phone}}</td>
+                    <td class="text-center">{{$job->Iinterview->ApplicantList->address}}</td>
                     <td class="text-center"><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{$job->resume_file}}" target="__blank">Resume</a></td>
                     <td class="text-center">{{$job->status}}</td>
                     <td class="text-center">

@@ -14,7 +14,7 @@ class Invoices extends Component
     public function render()
     {
         return view('livewire.logistics.procurement.invoices', [
-            'invoices' => Invoice::orderBy('id', 'desc')->get(),
+            'invoices' => WhInvoice::orderBy('id', 'desc')->get(),
         ]);
     }
     public function sendInvoice($id)

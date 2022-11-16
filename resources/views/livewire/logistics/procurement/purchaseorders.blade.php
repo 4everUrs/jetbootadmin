@@ -19,7 +19,7 @@
                         <tr>
                             <td class="text-center">{{$po->id}}</td>
                             <td class="text-center align-middle">{{$po->supplier_name}}</td>
-                            <td class="text-center align-middle"><a href="#" wire:click="download({{$po->id}})">{{$po->po_id}}</a></td>
+                            <td class="text-center align-middle"><a href="{{route('download',$po->id)}}" target="__blank">{{$po->po_id}}</a></td>
                             <td class="text-center">
                                 <button wire:click='showPoView({{$po->id}})' class="btn btn-primary btn-sm">View</button>
                             </td>

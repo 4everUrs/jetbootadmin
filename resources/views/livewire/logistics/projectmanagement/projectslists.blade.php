@@ -19,25 +19,32 @@
                     <th class="text-center align-middle">Status</th>
                 </thead>
                 <tbody>
-                    @forelse ($projects as $project)
+                    @if (!empty($projects))
+                        @forelse ($projects as $project)
                         <tr wire:click='viewRow({{$project->id}})'>
                             <td class="text-center align-middle">{{$project->title}}</td>
                             <td class="text-center align-middle">{{$project->manager}}</td>
-                            <td class="text-center align-middle">{{$project->Supplier->name}}</td>
+                            @if (!empty($project->Supplier))
+                                <td class="text-center align-middle">{{$project->Supplier->name}}</td>
+                            @else
+                                <td></td>
+                            @endif
                             <td class="text-center align-middle">@money($project->budget)</td>
                             <td class="text-center align-middle">{{$project->duration}}</td>
                             <td>
                                 <div class="text-center align-middle progress">
-                                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{$project->progress}}%" aria-valuenow="{{$project->progress}}"
-                                        aria-valuemin="0" aria-valuemax="100">{{$project->progress}}%</div>
+                                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                                        style="width: {{$project->progress}}%" aria-valuenow="{{$project->progress}}" aria-valuemin="0"
+                                        aria-valuemax="100">{{$project->progress}}%</div>
                                 </div>
                             </td>
                             <td class="text-center">{{$project->status}}</td>
                         </tr>
                         
-                    @empty
+                        @empty
                         
-                    @endforelse
+                        @endforelse
+                    @endif
                 </tbody>
             </x-table>
         </div>
@@ -103,64 +110,67 @@
                         <div class="tab-pane fade" id="contractorDetails" role="tabpanel" aria-labelledby="contractorDetails-tab" wire:ignore.self>
                             <div class="card">
                                 <div class="card-body">
-                                    <table class="table table-bordered">
-                                        <tr>
-                                            <td>Contractor Name</td>
-                                            <td>
-                                                <input class="form-control" type="text" value="{{$project->Supplier->name}}" >
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Contractor Manager</td>
-                                            <td>
-                                                <input  class="form-control" type="text" value="{{$project->Supplier->User->name}}">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Start Date</td>
-                                            <td>
-                                              <div x-data x-init="new Pikaday({ field: $refs.dateInput, format: 'D/M/YYYY' })">
-                                               <input x-ref="dateInput" type="text" wire:model.lazy="start_date" class="form-control" autocomplete="off">
-                                            </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Project Duration</td>
-                                            <td>
-                                                <div class="input-group">
-                                                    <input wire:model='term' type="number" id="inputEstimatedDuration" class="form-control">
-                                                    <select wire:model='terms' class="form-control">
-                                                        <option value="">Select</option>
-                                                        <option value="months">Month(s)</option>
-                                                        <option value="years">Year(s)</option>
+                                    @if (!empty($project))
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td>Contractor Name</td>
+                                                <td>
+                                                    <input class="form-control" type="text" value="{{$project->Supplier->name}}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Contractor Manager</td>
+                                                <td>
+                                                    <input class="form-control" type="text" value="{{$project->Supplier->User->name}}">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Start Date</td>
+                                                <td>
+                                                    <div x-data x-init="new Pikaday({ field: $refs.dateInput, format: 'D/M/YYYY' })">
+                                                        <input x-ref="dateInput" type="text" wire:model.lazy="start_date" class="form-control"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Project Duration</td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input wire:model='term' type="number" id="inputEstimatedDuration" class="form-control">
+                                                        <select wire:model='terms' class="form-control">
+                                                            <option value="">Select</option>
+                                                            <option value="months">Month(s)</option>
+                                                            <option value="years">Year(s)</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Target Completion</td>
+                                                <td>
+                                                    <input wire:model='completion_date' class="form-control" type="text" disabled>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Status</td>
+                                                <td>
+                                                    <select wire:model='status' class="form-control">
+                                                        <option>Select Option</option>
+                                                        <option>On-Going</option>
+                                                        <option>Completed</option>
                                                     </select>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Target Completion</td>
-                                            <td>
-                                                <input wire:model='completion_date' class="form-control" type="text" disabled>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Status</td>
-                                            <td>
-                                                <select wire:model='status' class="form-control">
-                                                    <option>Select Option</option>
-                                                    <option>On-Going</option>
-                                                    <option>Completed</option>
-                                                </select>
-                                                
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Progress (Percentage)</td>
-                                            <td>
-                                                <input wire:model='progress' class="form-control" type="text">
-                                            </td>
-                                        </tr>
-                                    </table>
+                                        
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Progress (Percentage)</td>
+                                                <td>
+                                                    <input wire:model='progress' class="form-control" type="text">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    @endif
                                 </div>
                             </div>
                         </div>

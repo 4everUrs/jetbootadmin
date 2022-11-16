@@ -141,7 +141,7 @@ class Supplierslists extends Component
     }
     public function sendInvi()
     {
-        $temp = Supplier::find($this->selected_id);
+        $temp = Bidder::find($this->selected_id);
         $dt = Carbon::createFromFormat('H:i', $this->time)->format('g:i A');
         $data = [
             'name' => $temp->name,
@@ -156,6 +156,8 @@ class Supplierslists extends Component
             'date_created' => Carbon::parse(now())->toFormattedDateString(),
         ];
         Mail::to($temp->email)->send(new InvitationMail($data));
+        $this->invitationModal = false;
+        toastr()->addSuccess('Email Sent Successfully');
     }
     public function loadRenewModal($id)
     {

@@ -14,7 +14,7 @@ class Candidate extends Component
     public $search = '';
     public function render()
     {
-        return view('livewire.core.am.candidate',[
+        return view('livewire.core.am.candidate', [
             'jobs' => JobCandid::all(),
         ]);
     }
@@ -34,7 +34,7 @@ class Candidate extends Component
         $job->status = 'Deployment';
         $job->save();
         JobCandid::find($id)->update([
-            'status' => 'Deployed' 
+            'status' => 'Deployed'
         ]);
         flash()->addSuccess('Data approved successfully');
     }

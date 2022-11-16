@@ -24,6 +24,7 @@ class Projectslists extends Component
         $this->start_date;
         return view('livewire.logistics.projectmanagement.projectslists', [
             'projects' => Project::all(),
+            'project' => Project::find($this->selected_id),
         ]);
     }
     public function viewRow($id)
