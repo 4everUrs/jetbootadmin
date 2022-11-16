@@ -9,7 +9,7 @@ class Transaction extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'list_requested_id','status'
+        'list_requested_id','rstatus'
     ];
     public function ListRequested()
     {

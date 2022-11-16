@@ -35,8 +35,8 @@
                 <td>{{$transaction->ListRequested->rstatus}}</td>
                 <td>{{$transaction->ListRequested->remarks}}</td>
                 <td class="text-center">
-                    <button wire:click="approvedBudget"  class="btn btn-info btn-sm">Approved</button>
-                    <button wire:click="denyBudget"  class="btn btn-danger btn-sm">Deny</button>
+                    <button class="btn btn-info btn-sm">Approved</button>
+                    <button class="btn btn-danger btn-sm">Deny</button>
                 </td>
             </tr>
             @empty

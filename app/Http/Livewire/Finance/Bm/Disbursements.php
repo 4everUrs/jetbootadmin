@@ -14,7 +14,7 @@ use Livewire\Component;
 class Disbursements extends Component
 {
     public $dorigin, $drequestor, $damount, $dremarks, $dstatus;
-    public $rorigin, $rcategory, $ramount, $raccount, $rstatus="Approved";
+    public $rorigin, $rcategory, $ramount, $raccount, $rstatus="Released";
     public $addRelease=false;
 
     public function render()
@@ -41,9 +41,18 @@ class Disbursements extends Component
                 'rstatus' => $this->rstatus,
             ]
         );
-        
-        toastr()->addSuccess('Add Budget Successfully');
+        $this->resetRelease();
+        toastr()->addSuccess('Release Budget Successfully');
         $this->addRelease = false; 
+        }
+
+        public function resetRelease()
+        {
+            $this->rorigin = null;
+            $this->rcategory = null;
+            $this->ramount = null;
+            $this->raccount = null;
+            $this->rstatus = 'Released';
         }
 
 }
