@@ -7,6 +7,7 @@ use App\Models\ProcurementRequest;
 use App\Models\Recieved;
 use App\Models\PostRequirement;
 use App\Models\ProcurementSentRequest;
+use App\Models\ProjectRequest;
 use App\Models\RequestNotification;
 use App\Models\WarehouseSent;
 use Livewire\WithPagination;
@@ -22,7 +23,16 @@ class Pmrequests extends Component
     public $name, $qty;
     public function render()
     {
-        return view('livewire.logistics.projectmanagement.pmrequests');
+        return view('livewire.logistics.projectmanagement.pmrequests', [
+            'requests' => ProjectRequest::all(),
+        ]);
+    }
+    public function approve($id)
+    {
+        ProjectRequest::find($id)->update([
+            'status' => 'Approved'
+        ]);
+        toastr()->addSuccess('Operation Successfull');
     }
     public function addRow()
     {

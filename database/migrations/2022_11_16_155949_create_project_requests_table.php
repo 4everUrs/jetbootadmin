@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('release_budgetssfincnec', function (Blueprint $table) {
+        Schema::create('project_requests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('list_requested_id');
-            $table->string('rcategory');
-            $table->string('raccount');
-            $table->string('rstatus');
+            $table->string('project_name');
+            $table->string('status');
+            $table->string('requestor');
+            $table->string('origin');
+            $table->string('content');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('release_budgets');
+        Schema::dropIfExists('project_requests');
     }
 };

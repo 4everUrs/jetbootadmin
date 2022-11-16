@@ -13,10 +13,27 @@
                     <th class="text-center align-middle">Origin</th>
                     <th class="text-center align-middle">Requestor</th>
                     <th class="text-center align-middle">Date</th>
+                    <th class="text-center align-middle">Project Name</th>
                     <th class="text-center align-middle">Content</th>
                     <th class="text-center align-middle">Status</th>
                     <th class="text-center align-middle">Action</th>
                 </thead>
+                <tbody>
+                    @foreach ($requests as $request)
+                        <tr>
+                            <td class="text-center align-middle">{{$request->id}}</td>
+                            <td class="text-center align-middle">{{$request->origin}}</td>
+                            <td class="text-center align-middle">{{$request->requestor}}</td>
+                            <td class="text-center align-middle">@date($request->created_at)</td>
+                            <td class="text-center align-middle">{{$request->project_name}}</td>
+                            <td class="text-center align-middle">{{$request->content}}</td>
+                            <td class="text-center align-middle">{{$request->status}}</td>
+                            <td class="text-center align-middle">
+                                <button wire:click="approve({{$request->id}})" class="btn btn-dark btn-sm">Approve</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
             </x-table>
         </div>
     </div>

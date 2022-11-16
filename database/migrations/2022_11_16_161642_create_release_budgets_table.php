@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('release_budgetssfincnec', function (Blueprint $table) {
+        Schema::create('release_budgets', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('list_requested_id');
             $table->string('rcategory');
