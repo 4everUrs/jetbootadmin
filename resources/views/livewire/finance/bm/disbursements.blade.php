@@ -36,12 +36,12 @@
                             @forelse($disburses as $released)
                             <tr>
                                 <td>{{$released->id}}</td>
-                                <td>{{$released->dorigin}}</td>
-                                <td>{{$released->drequestor}}</td>
-                                <td>{{$released->damount}}</td>
-                                <td>{{$released->dremarks}}</td>
+                                <td>{{$released->origin}}</td>
+                                <td>{{$released->requestor}}</td>
+                                <td>{{$released->proposedamount}}</td>
+                                <td>{{$released->remarks}}</td>
                                 <td>{{($released->created_at)->toFormattedDateString()}}</td>
-                                <td>{{$released->dstatus}}</td>
+                                <td>{{$released->rstatus}}</td>
                             </tr>
                             @empty
                             <tr>
@@ -77,14 +77,14 @@
                             @forelse($release as $released)
                             <tr>
                                 <td>{{$released->id}}</td>
-                                <td>{{$released->rorigin}}</td>
+                                <td>{{$released->ListRequested->origin}}</td>
                                 <td>{{$released->rcategory}}</td>
-                                <td>{{$released->ramount}}</td>
+                                <td>{{$released->ListRequested->proposedamount}}</td>
                                 <td>{{$released->raccount}}</td>
                                 <td>{{($released->created_at)->toFormattedDateString()}}</td>
                                 <td>{{$released->rstatus}}</td>
                                 <td class="text-center" >
-                                    <button  class="btn btn-info btn-sm">Release</button> 
+                                    <button wire:click="release({{$released->id}})"  class="btn btn-info btn-sm">Release</button> 
                                 </td>
                             </tr>
                             @empty
@@ -124,10 +124,9 @@
                         <label>Origin</label>
                         <select class="form-control" wire:model="rorigin">
                             <option>Select Origin</option>
-                            <option>Finance </option>
-                            <option>Core</option>
-                            <option>Hr</option>
-                            <option>Logistics</option>
+                            @foreach ($disburses as $disburse)
+                                <option value="{{$disburse->id}}">{{$disburse->origin}}</option>
+                            @endforeach
                         </select>
                         
 
@@ -144,7 +143,7 @@
                     </div>
                     <div class="col">
                         <label>Amount</label>
-                        <input type="number" class="form-control" wire:model="ramount">
+                        <input type="number" class="form-control" wire:model="ramount" disabled value="{{$rorigin}}">
                         
                         <label>Account</label>
                         <select class="form-control" wire:model="raccount">

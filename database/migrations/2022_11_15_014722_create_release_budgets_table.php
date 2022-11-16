@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('release_budgets', function (Blueprint $table) {
             $table->id();
-            $table->string('rorigin');
+            $table->unsignedInteger('list_requested_id');
             $table->string('rcategory');
-            $table->string('ramount');
             $table->string('raccount');
             $table->string('rstatus');
             $table->timestamps();

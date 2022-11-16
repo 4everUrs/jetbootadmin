@@ -2,16 +2,19 @@
 
 namespace App\Http\Livewire\Finance\Bm;
 
+use App\Models\BmProposal;
 use Livewire\Component;
 use App\Models\Transaction;
 use App\Models\Expenses;
 use App\Models\ListRequested;
 use Livewire\WithPagination;
 use App\Models\Disburse;
+use App\Models\ReleaseBudget;
+use Carbon\Carbon;
 
 class Budgets extends Component
 {
-    public $borigin, $bproposalname, $brequestor, $bproposedamount, $bapprovedate, $brstatus = 'Ongoing',$bremarks, $transaction_id;
+    public $borigin, $bproposalname, $brequestor, $bproposedamount, $bapprovedate, $brstatus = 'Ongoing', $bremarks, $transaction_id;
     public $rstatus;
     public $grandtotals, $requests;
     public $addBudget = false;
@@ -31,33 +34,47 @@ class Budgets extends Component
             'requestsLists' => ListRequested::where('rstatus', '=', 'Pending')->get(),
         ]);
     }
+    public function deny($id)
+    {
+        ListRequested::find($id)->update(['rstatus' => 'Denied']);
+        toastr()->addSuccess('Operation Successfull');
+    }
+    public function approve($id)
+    {
+
+        ListRequested::find($id)->update([
+            'approvedate' => Carbon::parse(now())->toFormattedDateString(),
+            'rstatus' => 'Approved'
+        ]);
+        toastr()->addSuccess('Approve Success');
+    }
     //public function approvedBudget()
-    
-        //$approved = Transaction::all();
-        //$approved->rstatus = 'Approved';
-        //$approved->save();
 
-        //$request = ListRequested::find($approved->list_requested_id);
-        //$request->approvedamount = $approved->amount;
-        //$request->approvedate = Carbon::parse(now())->toFormattedDateString();
-        //$request->remarks = $approved->description;
-        //$request->rstatus ='Approved';
-        //$request->save();
+    //$approved = Transaction::all();
+    //$approved->rstatus = 'Approved';
+    //$approved->save();
 
-        //toastr()->addSuccess('Operation Successfull');
-    
+    //$request = ListRequested::find($approved->list_requested_id);
+    //$request->approvedamount = $approved->amount;
+    //$request->approvedate = Carbon::parse(now())->toFormattedDateString();
+    //$request->remarks = $approved->description;
+    //$request->rstatus ='Approved';
+    //$request->save();
+
+    //toastr()->addSuccess('Operation Successfull');
+
     //public function denyBudget()
-    
-        //$deny = Transaction::all();
-        //$deny->rstatus = 'Denied';
-        //$deny->save();
 
-        //$request = ListRequested::find($deny->list_requested_id);
-        //$request->approvedamount = $deny->amount;
-        //$request->approvedate = Carbon::parse(now())->toFormattedDateString();
-        //$request->remarks = $deny->description;
-        //$request->rstatus = 'Denied';
-        //$request->save();
+    //$deny = Transaction::all();
+    //$deny->rstatus = 'Denied';
+    //$deny->save();
 
-        //toastr()->addSuccess('Operation Successfull'); 
+    //$request = ListRequested::find($deny->list_requested_id);
+    //$request->approvedamount = $deny->amount;
+    //$request->approvedate = Carbon::parse(now())->toFormattedDateString();
+    //$request->remarks = $deny->description;
+    //$request->rstatus = 'Denied';
+    //$request->save();
+
+    //toastr()->addSuccess('Operation Successfull'); 
 }

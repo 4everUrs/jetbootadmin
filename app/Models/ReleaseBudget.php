@@ -9,6 +9,10 @@ class ReleaseBudget extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'rorigin', 'rcategory', 'ramount', 'raccount', 'rstatus'
+        'rcategory', 'raccount', 'rstatus', 'list_requested_id'
     ];
+    public function ListRequested()
+    {
+        return $this->belongsTo(ListRequested::class);
+    }
 }

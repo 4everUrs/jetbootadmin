@@ -31,12 +31,12 @@
                 <td>{{($transaction->ListRequested->created_at)->toFormattedDateString()}}</td>
                 <td>{{$transaction->ListRequested->proposedamount}}</td>
                 <td>{{$transaction->ListRequested->approvedate}}</td>
-                <td><a href="https://mnlph.nyc3.digitaloceanspaces.com/{{($transaction->ListRequested->attachment)}}" target="_blank" rel="noopener noreferrer">{{($transaction->ListRequested->attachment)}}</a></td>
+                <td><a href="{{route('bmproposaldownload',$transaction->id)}}" target="__blank">View</a></td>
                 <td>{{$transaction->ListRequested->rstatus}}</td>
                 <td>{{$transaction->ListRequested->remarks}}</td>
                 <td class="text-center">
-                    <button class="btn btn-info btn-sm">Approved</button>
-                    <button class="btn btn-danger btn-sm">Deny</button>
+                    <button wire:click="approve({{$transaction->id}})" class="btn btn-info btn-sm">Approved</button>
+                    <button wire:click="deny({{$transaction->id}})" class="btn btn-danger btn-sm">Deny</button>
                 </td>
             </tr>
             @empty

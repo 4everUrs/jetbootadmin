@@ -14,46 +14,56 @@ use Livewire\Component;
 class Disbursements extends Component
 {
     public $dorigin, $drequestor, $damount, $dremarks, $dstatus;
-    public $rorigin, $rcategory, $ramount, $raccount, $rstatus="Released";
-    public $addRelease=false;
+    public $rorigin, $rcategory, $ramount, $raccount, $rstatus = "Pending";
+    public $addRelease = false;
 
     public function render()
     {
-
-        return view('livewire.finance.bm.disbursements',[
-            'disburses' => Disburse::all(),
+        if ($this->rorigin != null) {
+            $temp = ListRequested::find($this->rorigin);
+            $this->ramount = $temp->proposedamount;
+        }
+        return view('livewire.finance.bm.disbursements', [
+            'disburses' => ListRequested::where('rstatus', 'Approved')->get(),
             'release' => ReleaseBudget::all(),
         ]);
     }
-    
-    public function tableApprovedBudget(){
+
+    public function tableApprovedBudget()
+    {
 
         $this->addRelease = true;
     }
 
-    public function addReleases(){
+    public function release($id)
+    {
+        ReleaseBudget::find($id)->update([
+            'rstatus' => 'Released',
+        ]);
+        toastr()->addSuccess('Budget Released');
+    }
+
+    public function addReleases()
+    {
         ReleaseBudget::create(
             [
-                'rorigin' => $this->rorigin,
+                'list_requested_id' => $this->rorigin,
                 'rcategory' => $this->rcategory,
-                'ramount' => $this->ramount,
                 'raccount' => $this->raccount,
                 'rstatus' => $this->rstatus,
             ]
         );
         $this->resetRelease();
         toastr()->addSuccess('Release Budget Successfully');
-        $this->addRelease = false; 
-        }
+        $this->addRelease = false;
+    }
 
-        public function resetRelease()
-        {
-            $this->rorigin = null;
-            $this->rcategory = null;
-            $this->ramount = null;
-            $this->raccount = null;
-            $this->rstatus = 'Released';
-        }
-
+    public function resetRelease()
+    {
+        $this->rorigin = null;
+        $this->rcategory = null;
+        $this->ramount = null;
+        $this->raccount = null;
+        $this->rstatus = 'Released';
+    }
 }
-
