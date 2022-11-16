@@ -97,8 +97,38 @@
                     </div>
                 </div>
             </div>
+            {{--Logistics Operating Budget--}}
+            <div class="card">
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <x-table head="Operating Budget">
+                                <thead class="bg-secondary table-sm">
+                                    <th>Actual Budget</th>
+                                    <th>Used Budget</th>
+                                    <th>Remaining Budget</th>
+                                </thead>
+                                <tbody>
+                                    {{--@forelse($obudgets as $obudget)
+                                    <tr>
+                                        <td>@money{{$obudget->actual}}</td>
+                                        <td>@money($obudget->used)</td>
+                                        <td>@money($obudget->remain)</td> 
+                                    </tr>
+                                    @empty
+                                <tr>
+                                    <td class="text-center" colspan="3">Unlisted Records</td>
+                                </tr>
+                                    @endforelse
+                                </tbody> --}}
+                            </x-table>
+            
+                         </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        {{--END table of LOGISTICS--}}
+        {{--end Logistics Operating Budget--}}
 
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">.......</div>
       </div>

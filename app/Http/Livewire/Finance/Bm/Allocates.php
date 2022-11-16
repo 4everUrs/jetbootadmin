@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Collect;
 use App\Models\Logisticannual;
 use App\Models\AnnualBudget;
+use App\Models\OperatingBudget;
 use Livewire\WithPagination;
 
 class Allocates extends Component
@@ -20,6 +21,7 @@ class Allocates extends Component
     {
         $this->bannuals = AnnualBudget::all();
         $this->lannuals = Logisticannual::all();
+        $this->obudgets = OperatingBudget::all();
 
         return view('livewire.finance.bm.allocates');
     }

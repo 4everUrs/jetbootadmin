@@ -33,15 +33,15 @@
                            
                         </thead>
                        <tbody>
-                            @forelse($disburses as $disbursed)
+                            @forelse($disburses as $released)
                             <tr>
-                                <td>{{$disbursed->id}}</td>
-                                <td>{{$disbursed->dorigin}}</td>
-                                <td>{{$disbursed->drequestor}}</td>
-                                <td>{{$disbursed->damount}}</td>
-                                <td>{{$disbursed->dremarks}}</td>
-                                <td>{{($disbursed->created_at)->toFormattedDateString()}}</td>
-                                <td>{{$disbursed->dstatus}}</td>
+                                <td>{{$released->id}}</td>
+                                <td>{{$released->dorigin}}</td>
+                                <td>{{$released->drequestor}}</td>
+                                <td>{{$released->damount}}</td>
+                                <td>{{$released->dremarks}}</td>
+                                <td>{{($released->created_at)->toFormattedDateString()}}</td>
+                                <td>{{$released->dstatus}}</td>
                             </tr>
                             @empty
                             <tr>
@@ -54,14 +54,14 @@
             </div>
         </div>
 
-        {{--Disbursed Budget--}}
+        {{--released Budget--}}
 
         <div wire:ignore.self class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="card">
                 <div class="card-body">
                     <a wire:click="tableApprovedBudget" class="btn btn-secondary btn-sm">Add Disburse</a>
                     
-                    <x-table head="History of Disbursements">
+                    <x-table head="History of Disburse Budget">
                         <thead class="bg-secondary table-sm">
                             <th>No.</th>
                             <th>Origin</th>
@@ -74,17 +74,17 @@
                            
                         </thead>
                        <tbody>
-                            @forelse($disburses as $disbursed)
+                            @forelse($release as $released)
                             <tr>
-                                <td>{{$disbursed->id}}</td>
-                                <td>{{$disbursed->rorigin}}</td>
-                                <td>{{$disbursed->rcategory}}</td>
-                                <td>{{$disbursed->ramount}}</td>
-                                <td>{{$disbursed->raccount}}</td>
-                                <td>{{$disbursed->rrelease}}</td>
-                                <td>{{$disbursed->rstatus}}</td>
+                                <td>{{$released->id}}</td>
+                                <td>{{$released->rorigin}}</td>
+                                <td>{{$released->rcategory}}</td>
+                                <td>{{$released->ramount}}</td>
+                                <td>{{$released->raccount}}</td>
+                                <td>{{($released->created_at)->toFormattedDateString()}}</td>
+                                <td>{{$released->rstatus}}</td>
                                 <td class="text-center" >
-                                    <button wire:click="#"  class="btn btn-secondary btn-sm">Release</button> 
+                                    <button  class="btn btn-info btn-sm">Release</button> 
                                 </td>
                             </tr>
                             @empty
@@ -97,77 +97,78 @@
                 </div>
             </div>
         </div>
-         {{--end Disbursed Budget--}}
+         {{--end released Budget--}}
 
 
          {{--Release Budget Modal--}}
          <x-jet-dialog-modal wire:model="addRelease" maxWidth="xl" >
-    <x-slot name="title">
-        {{ __('Disbursed Budget') }}
-    </x-slot>
-    
-    <x-slot name="content">
-        <div class="row form-group"> {{--sobra kalang ng divs pwede naman pagsamahin ung dalawa sa isang div--}}
-            <div class="col">
-                    
-             {{--<label>Select Originated Dept.</label>
-                <select class="form-control" wire:model="originated">
-                    <option value="">Select Option</option>
-                  @forelse ($requestsLists as $request)
-                      <option value="{{$request->id}}">{{$request->proposalname}}</option>
-                  @empty
-                      <option value="">No Request Available</option>
-                  @endforelse
-                </select>
-                @error('originated') <span class="alert text-danger">{{ $message }}<br /></span> @enderror--}}
-                <label>Origin</label>
-                <select class="form-control" wire:model="rorigin">
-                    <option>Select Origin</option>
-                    <option>Finance </option>
-                    <option>Core</option>
-                    <option>Hr</option>
-                    <option>Logistics</option>
-                </select>
-                @error('rcategory') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-
-                <label>Category</label>
-                <select class="form-control" wire:model="rcategory">
-                    <option>Select Category</option>
-                    <option>Operating budget</option>
-                    <option>Financial budget </option>
-                    <option>Cash Budget </option>
-                    <option>Labor Budget</option>
-                    <option>Strategic Plan</option>
-                </select>
-                @error('rcategory') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-            </div>
-            <div class="col">
-                <label>Amount</label>
-                <input type="number" class="form-control" wire:model="ramount">
-                @error('ramount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
+            <x-slot name="title">
+                {{ __('Released Budget') }}
+            </x-slot>
             
-                <label>Account</label>
-                <select class="form-control" wire:model="raccount">
-                    <option>CASH</option>
-                    <option>ACCOUNT </option>
-                    <option>CARD</option>
-                </select>
-                @error('raccount') <span class="alert text-danger">{{ $message }}<br /></span> @enderror
-            </div>
-        </div>
-        
-    </x-slot>
-    <x-slot name="footer">
-        <x-jet-secondary-button wire:click="$toggle('addRelease')" wire:loading.attr="disabled">
-            {{ __('Cancel') }}
-        </x-jet-secondary-button>
-        {{--wire:click function dito sa button hindi match sa function sa class--}}
-        <x-jet-button class="ms-2" wire:click="addReleases" wire:loading.attr="disabled">
-            {{ __('Add Disbursed') }}
-        </x-jet-button>
-    </x-slot>
+            <x-slot name="content">
+                <div class="row form-group"> 
+                    <div class="col">
+                            
+                    {{--<label>Select Originated Dept.</label>
+                        <select class="form-control" wire:model="originated">
+                            <option value="">Select Option</option>
+                        @forelse ($requestsLists as $request)
+                            <option value="{{$request->id}}">{{$request->proposalname}}</option>
+                        @empty
+                            <option value="">No Request Available</option>
+                        @endforelse
+                        </select>
+                        @error('originated') <span class="alert text-danger">{{ $message }}<br /></span> @enderror--}}
+                        
+                        <label>Origin</label>
+                        <select class="form-control" wire:model="rorigin">
+                            <option>Select Origin</option>
+                            <option>Finance </option>
+                            <option>Core</option>
+                            <option>Hr</option>
+                            <option>Logistics</option>
+                        </select>
+                        
 
-</x-jet-dialog-modal>
+                        <label>Category</label>
+                        <select class="form-control" wire:model="rcategory">
+                            <option>Select Category</option>
+                            <option>Operating budget</option>
+                            <option>Financial budget </option>
+                            <option>Cash Budget </option>
+                            <option>Labor Budget</option>
+                            <option>Strategic Plan</option>
+                        </select>
+                        
+                    </div>
+                    <div class="col">
+                        <label>Amount</label>
+                        <input type="number" class="form-control" wire:model="ramount">
+                        
+                        <label>Account</label>
+                        <select class="form-control" wire:model="raccount">
+                            <option>Select Account</option>
+                            <option>CASH</option>
+                            <option>ACCOUNT </option>
+                            <option>CARD</option>
+                        </select>
+                       
+                    </div>
+                </div>
+                
+            </x-slot>
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('addRelease')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+                {{--wire:click function dito sa button hindi match sa function sa class--}}
+                <x-jet-button class="ms-2" wire:click="addReleases" wire:loading.attr="disabled">
+                    {{ __('Add released') }}
+                </x-jet-button>
+            </x-slot>
+
+        </x-jet-dialog-modal>
          {{--end Release Budget Modal--}}
 
 

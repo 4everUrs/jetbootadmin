@@ -38,7 +38,11 @@
                     </tr>
                 @endforelse
            </tbody>
-        </x-table>
+        </x-table><br><br><br>
+
+        <button wire:click="sumCollect" class="btn btn-outline-warning btn-sm ">Sum</button>&nbsp;
+        <label>Sum of Collected Income : </label>
+        <label>{{$grandcollection}}</label><br>
 
     </div>
 </div>

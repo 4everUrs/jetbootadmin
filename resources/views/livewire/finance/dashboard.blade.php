@@ -8,9 +8,9 @@
         <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-wallet"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">CPU Traffic</span>
+                        <span class="info-box-text">Successful Budget</span>
                         <span class="info-box-number">
                             10
                             <small>%</small>
@@ -37,10 +37,10 @@
             <div class="clearfix hidden-md-up"></div>
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-coins"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Sales</span>
-                        <span class="info-box-number">760</span>
+                        <span class="info-box-text">Income</span>
+                        <span class="info-box-number">₱7,500,000.00</span>
                     </div>
         
                 </div>
@@ -91,7 +91,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <p class="text-center">
-                                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2022</strong>
                                 </p>
                                 <div class="chart">
                                     <div class="chartjs-size-monitor">
@@ -114,24 +114,24 @@
                                     <strong>Goal Completion</strong>
                                 </p>
                                 <div class="progress-group">
-                                    Add Products to Cart
-                                    <span class="float-right"><b>160</b>/200</span>
+                                    Add Budget to Company
+                                    <span class="float-right"><b>50</b>/300</span>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-primary" style="width: 80%"></div>
                                     </div>
                                 </div>
         
                                 <div class="progress-group">
-                                    Complete Purchase
-                                    <span class="float-right"><b>310</b>/400</span>
+                                    Complete Disburse Budget
+                                    <span class="float-right"><b>65</b>/200</span>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-danger" style="width: 75%"></div>
                                     </div>
                                 </div>
         
                                 <div class="progress-group">
-                                    <span class="progress-text">Visit Premium Page</span>
-                                    <span class="float-right"><b>480</b>/800</span>
+                                    <span class="progress-text">Successfull Budget Process</span>
+                                    <span class="float-right"><b>5</b>/100</span>
                                     <div class="progress progress-sm">
                                         <div class="progress-bar bg-success" style="width: 60%"></div>
                                     </div>
@@ -164,8 +164,7 @@
         
                             <div class="col-sm-3 col-6">
                                 <div class="description-block border-right">
-                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i>
-                                        0%</span>
+                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 10%</span>
                                     <h5 class="description-header">$10,390.90</h5>
                                     <span class="description-text">TOTAL COST</span>
                                 </div>

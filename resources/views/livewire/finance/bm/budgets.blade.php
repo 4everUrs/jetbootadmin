@@ -35,24 +35,19 @@
                 <td>{{$transaction->ListRequested->rstatus}}</td>
                 <td>{{$transaction->ListRequested->remarks}}</td>
                 <td class="text-center">
-                    <button wire:click="#"  class="btn btn-info btn-sm">Approved</button>
-                    <button wire:click="#"  class="btn btn-danger btn-sm">Deny</button>
+                    <button class="btn btn-info btn-sm">Approved</button>
+                    <button class="btn btn-danger btn-sm">Deny</button>
                 </td>
             </tr>
             @empty
             <tr>
-                <td class="text-center" colspan="11">"Unlisted Records"</td>
+                <td class="text-center" colspan="11">"Unlisted Proposals"</td>
             </tr>
             @endforelse
 
             
         </tbody>
     </x-table><br><br>
-
-    <button wire:click="sumRecords" class="btn btn-outline-danger btn-sm">Sum</button>
-    
-    <label>The Sum of all transaction:&emsp;</label>
-    <label>{{$grandtotals}}</label><br><br>
     
     <div class="mt-3 float-right">
         {{$transactions->links()}}

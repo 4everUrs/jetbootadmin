@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('release_budgets', function (Blueprint $table) {
+        Schema::create('operating_budgets', function (Blueprint $table) {
             $table->id();
-            $table->string('rorigin');
-            $table->string('rcategory');
-            $table->string('ramount');
-            $table->string('raccount');
-            $table->string('rstatus');
+            $table->bigInteger('actual');
+            $table->bigInteger('used');
+            $table->bigInteger('remain');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('release_budgets');
+        Schema::dropIfExists('operating_budgets');
     }
 };

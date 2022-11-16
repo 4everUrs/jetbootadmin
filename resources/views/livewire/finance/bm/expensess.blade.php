@@ -39,13 +39,13 @@
                 @endforelse
             </tbody>
         </x-table><br><br>
-        <button wire:click="sumExpenses" class="btn btn-outline-warning btn-sm ">Sum</button>
+        {{--<button wire:click="sumExpenses" class="btn btn-outline-warning btn-sm ">Sum</button>
         <label>Total Expenses : </label>
         <label>{{$grandexpenses}}</label><br><br>
         
         <div class="mt-3 float-right">
             {{$expenses->links()}}
-        </div>
+        </div>--}}
     </div>
 
 </div>
