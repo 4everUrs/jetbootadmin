@@ -14,7 +14,7 @@ use Livewire\Component;
 class Disbursements extends Component
 {
     public $dorigin, $drequestor, $damount, $dremarks, $dstatus;
-    public $rorigin, $rcategory, $ramount, $raccount, $rstatus = "Pending";
+    public $rorigin, $rdescription, $ramount, $raccount,$rpaymenttype,$rrequestor, $rstatus = "Pending";
     public $addRelease = false;
 
     public function render()

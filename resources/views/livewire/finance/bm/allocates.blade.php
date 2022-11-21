@@ -9,11 +9,9 @@
           <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Annual Budget</button>
         </li>
         <li wire:ignore class="nav-item" role="presentation">
-          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Logistics</button>
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Budget Allocation</button>
         </li>
-        <li wire:ignore class="nav-item" role="presentation">
-          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Finance</button>
-        </li>
+        
 
       </ul>
       <div class="tab-content" id="myTabContent">
@@ -59,79 +57,74 @@
       {{--table of LOGISTICS--}}
         
         <div wire:ignore.self class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="card">
-                <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-                            <a wire:click="loadLogisticBudget" class="btn btn-info btn-sm">Add Annual Budget</a>
-                            <x-table head="Logistics">
+                            <x-table head="Viewing Annual Budget" class="text-center">
+            
                                 <thead class="bg-secondary table-sm">
                                     <th>Year</th>
-                                    <th>Department Amount Budget</th>
-                                    <th>Operating Budget 30 %</th>
-                                    <th>Financial Budget 15 %</th>
-                                    <th>Cash Budget 10%</th>
-                                    <th>Labor Budget 15%</th>
-                                    <th>Strategic Plan Budget 30%</th>
+                                    <th>Budget</th>
+                                    <th>Logistics 20 %</th>
+                                    <th>Core 30%</th>
+                                    <th>HR 30%</th>
+                                    <th>Finance20%</th>
                                 </thead>
                                 <tbody>
-                                    @forelse($lannuals as $lannual)
+                                    @forelse($bannuals as $bannual)
                                     <tr>
-                                        <td>{{$lannual->lyear}}</td>
-                                        <td>@money($lannual->ldeptbudget)</td>
-                                        <td>@money($lannual->lobudget)</td> 
-                                        <td>@money($lannual->lfbudget)</td>
-                                        <td>@money($lannual->lcbudget)</td>
-                                        <td>@money($lannual->llbudget)</td>   
-                                        <td>@money($lannual->lsbudget)</td>   
+                                        <td>{{$bannual->year}}</td>
+                                        <td>@money($bannual->budgetannual)</td>
+                                        <td>@money($bannual->blogistics)</td>
+                                        <td>@money($bannual->bcore)</td>
+                                        <td>@money($bannual->bhr)</td>
+                                        <td>@money($bannual->bfinance)</td>
                                     </tr>
                                     @empty
                                 <tr>
-                                    <td class="text-center" colspan="7">Unlisted Records</td>
+                                    <td class="text-center" colspan="6">Unlisted Records</td>
                                 </tr>
                                     @endforelse
-                                </tbody> 
+                            </tbody>
                             </x-table>
             
-                         </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            {{--Logistics Operating Budget--}}
-            <div class="card">
-                <div class="card-body">
+
                     <div class="card">
                         <div class="card-body">
-                            <x-table head="Operating Budget">
+                            <a wire:click="loadBudget" class="btn btn-info btn-sm">Allocate Budget</a>
+                            <x-table head="" class="text-center">
+                
                                 <thead class="bg-secondary table-sm">
-                                    <th>Actual Budget</th>
-                                    <th>Used Budget</th>
-                                    <th>Remaining Budget</th>
+                                    <th>Department</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Recurrence</th>
+                                    <th>Amount</th>
                                 </thead>
                                 <tbody>
-                                    {{--@forelse($obudgets as $obudget)
+                                    @forelse($allocates as $allocate)
                                     <tr>
-                                        <td>@money{{$obudget->actual}}</td>
-                                        <td>@money($obudget->used)</td>
-                                        <td>@money($obudget->remain)</td> 
+                                        <td>{{$allocate->department}}</td>
+                                        <td>{{$allocate->startdate}}</td>
+                                        <td>{{$allocate->enddate}}</td>
+                                        <td>{{$allocate->recurrence}}</td>
+                                        <td>@money($allocate->amounts)</td>
+                                        
                                     </tr>
                                     @empty
                                 <tr>
-                                    <td class="text-center" colspan="3">Unlisted Records</td>
+                                    <td class="text-center" colspan="5">Unlisted Records</td>
                                 </tr>
                                     @endforelse
-                                </tbody> --}}
+                            </tbody>
                             </x-table>
-            
-                         </div>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
-        {{--end Logistics Operating Budget--}}
-
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">.......</div>
-      </div>
+            
+        
 
 
 
@@ -152,9 +145,9 @@
                     <option>2026</option>
                 </select>
 
-            <label>Annual Budget</label>
-            <input wire:model="budgetannual" class="form-control" type="number">
-
+                <label>Annual Budget</label>
+                <input class="form-control" type="text" placeholder="₱ 0.00" wire:model="budgetannual">
+ 
         </x-slot>
         <x-slot name="footer">
             <x-jet-secondary-button wire:click="$toggle('addAnnualBudget')" wire:loading.attr="disabled">
@@ -168,41 +161,61 @@
 
     </x-jet-dialog-modal>
     {{--end ADD   MODAL ANNUAL BUDGET--}}
-          
-       
-    {{--ADD MODAL ANNUAL BUDGET LOGISTICS--}}
-    <x-jet-dialog-modal wire:model="addLogisticsBudget" maxWidth="xl">
+
+    {{--ADD MODAL ANNUAL BUDGET--}}
+    <x-jet-dialog-modal wire:model="addAnnuallyBudget" maxWidth="xl">
         <x-slot name="title">
-            {{ __('Logistics: Annual Budget Allocation') }}
+            {{ __('Annual Budget') }}
         </x-slot>
 
         <x-slot name="content">
-           <label>Year</label>
-                <select wire:model="lyear" class="form-control">
+           <label>Department</label>
+                <select wire:model="department" class="form-control">
                     <option>Select Option</option>
-                    <option>2022</option>
-                    <option>2023</option>
-                    <option>2024</option>
-                    <option>2025</option>
-                    <option>2026</option>
+                    <option>Finance</option>
+                    <option>Logistics</option>
+                    <option>Core</option>
+                    <option>HR</option>
                 </select>
-            <label>Annual Budget for Logistics Department</label>
-            <input wire:model="ldeptbudget" class="form-control" type="number">
+
+                <form action="/action_page.php">
+                    <label for="datemin">Start Date</label>
+                    <input type="date" class="form-control" id="datemin" name="datemin" min="2022-01-02" max="2030-12-31" wire:model="startdate">
+                  
+                    <label for="datemax">End Date</label>
+                    <input type="date" class="form-control" id="datemax" name="datemax" min="2022-01-02" max="2030-12-31"wire:model="enddate" >
+                  </form>
+
+                <label>Reccurrence</label>
+                <select wire:model="recurrence" class="form-control">
+                    <option>Select Option</option>
+                    <option>Monthly </option>
+                    <option>Yearly</option>
+                </select>
+
+                <label>Amount</label>
+                <input class="form-control" type="text" placeholder="₱ 0.00" wire:model="amounts">
+                
+            
+
+            
 
         </x-slot>
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('addLogisticsBudget')" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$toggle('addAnnuallyBudget')" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
             {{--wire:click function dito sa button hindi match sa function sa class--}}
-            <x-jet-button class="ms-2" wire:click="addLogisticsBudgets" wire:loading.attr="disabled">
-                {{ __('Add Budget') }}
+            <x-jet-button class="ms-2" wire:click="addAnnuallyBudgets" wire:loading.attr="disabled">
+                {{ __('Save Data') }}
             </x-jet-button>
         </x-slot>
 
     </x-jet-dialog-modal>
-    {{--end ADD MODAL ANNUAL BUDGET LOGISTICS--}}
+    {{--end ADD   MODAL ANNUAL BUDGET--}}
           
+       
+    
 
 
 

@@ -207,5 +207,5 @@
 <!--update modal-->
 {{-- @livewire("finance.bm.expensess") --}}
 
-<livewire:finance.bm.expensess>
+
 </div>

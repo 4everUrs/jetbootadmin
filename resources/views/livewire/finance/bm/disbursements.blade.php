@@ -63,11 +63,12 @@
                     
                     <x-table head="History of Disburse Budget">
                         <thead class="bg-secondary table-sm">
-                            <th>No.</th>
+                            <th>Trans no.</th>
                             <th>Origin</th>
-                            <th>Category</th>
+                            <th>Requestor</th>
+                            <th>Description</th>
                             <th>Amount</th>
-                            <th>Account</th>
+                            <th>Payment Type</th>
                             <th>Date Release</th>
                             <th>Status</th> 
                             <th class="text-center">Action</th> 
@@ -78,9 +79,10 @@
                             <tr>
                                 <td>{{$released->id}}</td>
                                 <td>{{$released->ListRequested->origin}}</td>
-                                <td>{{$released->rcategory}}</td>
+                                <td>{{$released->ListRequested->requestor}}</td>
+                                <td>{{$released->rdescription}}</td>
                                 <td>{{$released->ListRequested->proposedamount}}</td>
-                                <td>{{$released->raccount}}</td>
+                                <td>{{$released->rpaymenttype}}</td>
                                 <td>{{($released->created_at)->toFormattedDateString()}}</td>
                                 <td>{{$released->rstatus}}</td>
                                 <td class="text-center" >
@@ -89,7 +91,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td class="text-center" colspan="8">"Unlisted Records"</td>
+                                <td class="text-center" colspan="9">"Unlisted Records"</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -129,25 +131,21 @@
                             @endforeach
                         </select>
                         
-
-                        <label>Category</label>
-                        <select class="form-control" wire:model="rcategory">
-                            <option>Select Category</option>
-                            <option>Operating budget</option>
-                            <option>Financial budget </option>
-                            <option>Cash Budget </option>
-                            <option>Labor Budget</option>
-                            <option>Strategic Plan</option>
-                        </select>
+                        <label>Requestor</label>
+                        <input type="text" class="form-control" wire:model="rrequestor">
                         
+
+                        <label>Description</label>
+                        <textarea class="form-control" wire:model="rdescription"></textarea>
+            
                     </div>
                     <div class="col">
                         <label>Amount</label>
                         <input type="number" class="form-control" wire:model="ramount" disabled value="{{$rorigin}}">
                         
-                        <label>Account</label>
+                        <label>Payment Type</label>
                         <select class="form-control" wire:model="raccount">
-                            <option>Select Account</option>
+                            <option>Select type of payment</option>
                             <option>CASH</option>
                             <option>ACCOUNT </option>
                             <option>CARD</option>

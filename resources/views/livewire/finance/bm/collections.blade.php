@@ -6,7 +6,6 @@
     </x-slot>
 <div class="card">
     <div class="card-body">
-        <a wire:click="tableReceivable" class="btn btn-secondary btn-sm">Add Records</a>
         <x-table head="History of Company Income">
 
             <thead class="bg-secondary table-sm">
@@ -40,9 +39,7 @@
            </tbody>
         </x-table><br><br><br>
 
-        <button wire:click="sumCollect" class="btn btn-outline-warning btn-sm ">Sum</button>&nbsp;
-        <label>Sum of Collected Income : </label>
-        <label>{{$grandcollection}}</label><br>
+        
 
     </div>
 </div>

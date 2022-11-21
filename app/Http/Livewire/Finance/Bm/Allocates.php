@@ -7,6 +7,7 @@ use App\Models\Collect;
 use App\Models\Logisticannual;
 use App\Models\AnnualBudget;
 use App\Models\OperatingBudget;
+use App\Models\AllocateBudgets;
 use Livewire\WithPagination;
 
 class Allocates extends Component
@@ -14,14 +15,18 @@ class Allocates extends Component
     public $bannuals;
     public $year,$budgetannual,$blogistics,$bcore,$bhr,$bfinance;
     public $lyear,$ldeptbudget,$lobudget,$lfbudget,$lcbudget,$llbudget,$lsbudget;
+    public $department,$startdate,$enddate,$recurrence,$amounts;
+    
+    
     public $addAnnualBudget = false;
     public $addLogisticsBudget = false;
-     
+    public $addAnnuallyBudget = false;
     public function render()
     {
         $this->bannuals = AnnualBudget::all();
         $this->lannuals = Logisticannual::all();
         $this->obudgets = OperatingBudget::all();
+        $this->allocates = AllocateBudgets::all();
 
         return view('livewire.finance.bm.allocates');
     }
@@ -80,6 +85,45 @@ class Allocates extends Component
         $this->lyear = null;
         $this->ldeptbudget =null;
     }
+
+    //Annual Budget
+
+    public function loadBudget()
+    {
+        $this-> addAnnuallyBudget=true;
+    }
+    public function addAnnuallyBudgets()
+    {
+        AllocateBudgets::create([
+            'department'=>$this->department,
+            'startdate'=>$this->startdate,
+             'enddate'=>$this->enddate,
+             'recurrence'=>$this->recurrence,
+             'amounts'=>$this->amounts,
+        ]);
+
+        $this->resetAnnualBudgets();
+        toastr()->addSuccess('Data Record Successfully');
+        $this->addAnnuallyBudget = false;
+        
+    }
+
+    public function resetAnnualBudgets()
+    {
+        $this->department = null;
+        $this->startdate =null;
+        $this->enddate =null;
+        $this->recurrence =null;
+        $this->amounts =null;
+    }
+    
+
+
+
+
+
+
+
     
 
 

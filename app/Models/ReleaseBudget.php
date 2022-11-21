@@ -9,7 +9,7 @@ class ReleaseBudget extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'rcategory', 'raccount', 'rstatus', 'list_requested_id'
+        'rdescription', 'rpaymenttype', 'rstatus', 'list_requested_id'
     ];
     public function ListRequested()
     {
