@@ -77,7 +77,9 @@ use App\Http\Livewire\Finance\Bm\Allocates;
 use App\Http\Livewire\Finance\Bm\Balancesheets;
 use App\Http\Livewire\Finance\Bm\BudgetReports;
 use App\Http\Livewire\Finance\Bm\ChartsofAccounts;
+use App\Http\Livewire\Finance\Bm\Collectionreports;
 use App\Http\Livewire\Finance\Bm\EntryJournals;
+use App\Http\Livewire\Finance\Bm\Incomestatements;
 use App\Http\Livewire\Finance\Bm\Payable;
 use App\Http\Livewire\Hr\Claimreimburse\Claimapprove;
 use App\Http\Livewire\Hr\Claimreimburse\Claimdis;
@@ -270,6 +272,8 @@ Route::prefix('finance')->middleware('auth', 'isFinance')->group(function () {
     Route::get('entryjournals', EntryJournals::class)->name('entryjournal');
     Route::get('budgetreports', BudgetReports::class)->name('budgetsreports');
     Route::get('payable', Payable::class)->name('payables');
+    Route::get('incomestatements', Incomestatements::class)->name('incomestates');
+    Route::get('collectionreports', Collectionreports::class)->name('creports');
     Route::get('loaddisburse', [DisbursementController::class, 'downloadPdf'])->name('export');
     Route::get('genledgerreport', [GeneralLedgerController::class, 'downloadPdf'])->name('generalreports');
 });

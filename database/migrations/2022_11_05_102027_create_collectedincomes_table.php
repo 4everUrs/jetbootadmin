@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('collectedincomes', function (Blueprint $table) {
             $table->id();
-            $table->string('rfrom');
-            $table->string('caddress');
-            $table->string('cramount');
-            $table->string('receiptno');
-            $table->string('paytype');
-            $table->string('cremarks');
+            $table->string('cname');
+            $table->integer('caccountno');
+            $table->string('cdescription');
+            $table->string('cparticular');
+            $table->string('creference');
+            $table->string('cdatereceive');
+            $table->string('cmodeofpayment');
+            $table->bigInteger('camount');
             $table->timestamps();
         });
     }

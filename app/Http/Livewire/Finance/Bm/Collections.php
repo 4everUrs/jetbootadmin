@@ -8,7 +8,7 @@ use App\Models\Collectedincome;
 
 class Collections extends Component
 {
-    public $rfrom,$caddress,$cramount,$receiptno,$paytype,$cremarks;
+    public $cname,$caccountno,$cdescription,$cparticular,$creference,$cdatereceive,$cmodeofpayment,$camount;
     public $addCollection=false;
     public $grandcollection;
 
@@ -20,7 +20,7 @@ class Collections extends Component
          
     }
 
-    public function tableReceivable()
+    public function tableCollection()
     {
         $this->addCollection = true;
     }
@@ -29,27 +29,30 @@ class Collections extends Component
     {
         Collectedincome::create(
         [
-            'rfrom' => $this->rfrom,
-            'caddress' => $this->caddress,
-            'cramount' => $this->cramount,
-            'receiptno' => $this->receiptno,
-            'paytype' => $this->paytype,
-            'cremarks' => $this->cremarks,
+            'cname' => $this->cname,
+            'caccountno' => $this->caccountno,
+            'cdescription' => $this->cdescription,
+            'cparticular' => $this->cparticular,
+            'creference' => $this->creference,
+            'cdatereceive' => $this->cdatereceive,
+            'cmodeofpayment' => $this->cmodeofpayment,
+            'camount' => $this->camount,
         ]
     );
     $this->resetCollection();
-    toastr()->addSuccess('Add Record successfully');
+    toastr()->addSuccess('Add Collection successfully');
     $this->addCollection = false; 
     }
 
     public function resetCollection()
     {
-        $this->rfrom = null;
-        $this->address = null;
-        $this->cramount = null;
-        $this->receiptno = null;
-        $this->paytype = null;
-        $this->cremarks = null;
+        $this->cname = null;
+        $this->caccountno = null;
+        $this->cdescription = null;
+        $this->cparticular = null;
+        $this->cdatereceive = null;
+        $this->cmodeofpayment = null;
+        $this->camount = null;
     }
 
     public function sumCollect()

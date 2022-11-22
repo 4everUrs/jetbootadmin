@@ -9,6 +9,6 @@ class Collectedincome extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'rfrom', 'caddress', 'cramount','receiptno', 'paytype', 'cremarks'
+        'cname', 'caccountno', 'cdescription','cparticular', 'creference', 'cdatereceive', 'cmodeofpayment', 'camount','grandcollection'
     ];
 }

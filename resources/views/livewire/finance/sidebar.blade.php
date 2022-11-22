@@ -84,10 +84,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        
                         <a href="{{route('collects')}}" class="nav-link"><i class="fas fa-coins"></i>Earnings</a>
-                    </li>
-                    
+                    </li>   
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('creports')}}" class="nav-link"><i class="fas fa-coins"></i>Report</a>
+                    </li>   
                 </ul>
             </li>
             <li class="nav-item">
@@ -105,7 +108,11 @@
                     <li class="nav-item">
                         <a href="{{route('coa')}}" class="nav-link"><i class="fas fa-chalkboard"></i>Chart of Accounts</a>
                     </li>
-                    
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('incomestates')}}" class="nav-link"><i class="fas fa-chalkboard"></i>Income Statement</a>
+                    </li>
                 </ul>
             </li>
            

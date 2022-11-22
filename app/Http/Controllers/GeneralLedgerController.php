@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\GenLed;
+use App\Models\Collectedincome;
 use PDF;
 use Illuminate\Http\Request;
 
@@ -12,10 +12,10 @@ public function downloadPdf(Request $request)
 {
   // making variable for storing all data gathared from database;
         $data =[
-            'journal_entries'=>JournalEntry::all(),
+            'collects'=>Collectedincome::all(),
         ];
          $pdf = PDF::loadView('genedreports',$data); // storing the view file with data in $pdf
-         return $pdf->download('general_reports.pdf'); //downloading function of dompdf
+         return $pdf->download('collection_reports.pdf'); //downloading function of dompdf
 }
 
 }

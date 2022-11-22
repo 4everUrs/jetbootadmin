@@ -1,73 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reports</title>
-</head>
-<body>
-    <x-table head="General Ledger Report">
-            
-        <thead>
-            <th>No.</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Debit</th>
-            <th>Credit</th>
-            <th>Encoded By</th>
-            <th class="text-center">Action</th>
-        </thead>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Collection Reports</title>
+    </head>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 50%;
+        }
+        
+        td, th {
+          border: 1px solid #f59904;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #f59904;
+        }
+    </style>
+    <div class="card">
+        <div class="card-body">
+            <h3>Collection Reports</h3>
+            <table class="table table-striped">
+                <thead class="bg-info">
+                    <th class="text-center align-middle">Name</th>
+                    <th class="text-center align-middle">Account No.</th>
+                    <th class="text-center align-middle">Description</th>
+                    <th class="text-center align-middle">Particular</th>
+                    <th class="text-center align-middle">Reference #</th>
+                    <th class="text-center align-middle">Date Receive</th>
+                    <th class="text-center align-middle">Mode of Payment</th>
+                    <th class="text-center align-middle">Amount</th>
+                </thead>
+                <tbody>
+                    @foreach($collects as $collect)
+                        <tr>
+                            <td class="text-center align-middle">{{$collect->cname}}</td>
+                            <td class="text-center align-middle">{{$collect->caccountno}}</td>
+                            <td class="text-center align-middle">{{$collect->cdescription}}</td>
+                            <td class="text-center align-middle">{{$collect->cparticular}}</td>
+                            <td class="text-center align-middle">{{$collect->creference}}</td>
+                            <td class="text-center align-middle">{{$collect->cdatereceive}}</td>
+                            <td class="text-center align-middle">{{$collect->cmodeofpayment}}</td>
+                            <td class="text-center align-middle">{{$collect->camount}}</td>
+                            
+                        </tr>
+                        
+                    @endforeach()
+                    <tr>
+                        {{--<td class="align-middle text-right" colspan="8">Total:</td>
+                            <td class="text-center align-middle">@print($grandcollection)</td>--}}
+                    </tr>
+
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
     
-        <tbody>
-            @forelse($journal_entries as +
-            $key => $journal_entry)
-            <tr>
-                <td>{{$journal_entry->id}}</td>
-                <td>{{$journal_entry->created_at}}</td>
-                <td>
-                    {{-- <table class="table table-striped">
-                       @foreach ($childData[$key] as $index => $sub)
-                           <tr>
-                                <td>{{$childData[$key][$index]->jdescription}}</td>
-                           </tr>
-                       @endforeach
-                    </table> --}}
-                </td>  
-                <td>
-                    {{-- <table class="table table-striped">
-                        @foreach ($childData[$key]  as $index => $sub)
-                           <tr>
-                                <td>{{$childData[$key][$index]->jdebit}}</td>
-                           </tr>
-                       @endforeach
-                     </table> --}}
-                </td>  
-                <td>
-                    {{-- <table class="table table-striped">
-                        @foreach ($childData[$key]  as $index => $sub)
-                           <tr>
-                                <td>{{$childData[$key][$index]->jcredit}}</td>
-                           </tr>
-                       @endforeach
-                     </table> --}}
-                </td>  
-                <td>{{$journal_entry->jencoded}}</td>
-    
-                <td class="text-center">
-    
-                    <button wire:click="updateLiabilities({{$journal_entry->id}})" class="btn btn-primary"> Edit
-                    </button>
-                    <button wire:click="delete({{$journal_entry->id}})" class="btn btn-danger"> Delete </button>
-    
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td class="text-center" colspan="7">"Unlisted Records"</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </x-table>
-</body>
 </html>
+
+
