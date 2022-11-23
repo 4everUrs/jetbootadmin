@@ -71,8 +71,12 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('listsreceivable')}}" class="nav-link"><i class="fas fa-list"></i>&nbsp;Lists of Receivable</a>
-                    </li>
-                    
+                    </li>   
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('receivabless')}}" class="nav-link"><i class="fas fa-list"></i>&nbsp;Receivables</a>
+                    </li>   
                 </ul>
             </li>
 

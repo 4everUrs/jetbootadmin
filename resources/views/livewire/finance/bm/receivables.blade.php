@@ -1,12 +1,11 @@
 <div>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Collection') }}
+            {{ __('Receivables') }}
         </h2>
     </x-slot>
     <div class="card">
         <div class="card-body">
-            <a class="btn btn-warning btn-sm"href="{{route('generalreports')}}"><i class="fas fa-print"></i>Download</a>
             <x-table head="History of Company Income">
 
                 <thead class="bg-secondary table-sm">
@@ -38,12 +37,8 @@
                         </tr>
                     @endforelse
             </tbody>
-            
-            </x-table>
+            </x-table><br>
             <p class="text-right">&nbsp;&nbsp;Total:&nbsp;&nbsp; <label>@money($grandcollection)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> </p>
-            
-
-            
 
         </div>
     </div>

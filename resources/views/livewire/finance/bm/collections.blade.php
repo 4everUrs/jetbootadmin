@@ -30,7 +30,7 @@
                             <td>{{$collect->creference}}</td>
                             <td>{{$collect->cdatereceive}}</td>
                             <td>{{$collect->cmodeofpayment}}</td>
-                            <td>{{$collect->camount}}</td>
+                            <td>@money($collect->camount)</td>
                         </tr>
                     @empty
                         <tr>
@@ -38,7 +38,8 @@
                         </tr>
                     @endforelse
             </tbody>
-            </x-table><br><br><br>
+            </x-table><br>
+            <p class="text-right">&nbsp;&nbsp;Total:&nbsp;&nbsp; <label>@money($grandcollection)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> </p>
 
             
 

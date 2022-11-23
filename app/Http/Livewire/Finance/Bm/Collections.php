@@ -16,6 +16,10 @@ class Collections extends Component
     public function render()
     {
         $this->collects = Collectedincome::all();
+        $totals = Collectedincome::all();
+        foreach($totals as $total){
+        $this->grandcollection += $total->camount;
+        }
         return view('livewire.finance.bm.collections');
          
     }
